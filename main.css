@@ -2,6 +2,9 @@ html{
 	background-color:#888;
 	color:#fff;
 }
+body{
+	font-size:14px;
+}
 div{
 	padding-top:6px;
 }
@@ -41,13 +44,14 @@ span.part{
 	width:48px;
 	position:relative;
 	background-color:#555;
-	margin-left:4px;
+	margin:1px;
+	padding:1px;
 }
 .status::before{
 	position:absolute;
 	left:0px;
 	top:0px;
-	font-size:4px;
+	font-size:8px;
 	padding:1px;
 }
 .status.atk::before{
@@ -170,20 +174,38 @@ div.submain{
 	display:inline-block;
 	position:relative;
 	background-color:#222;
+	height:90%;
+	max-width:90%;
+	margin:20px;
+}
+table{
 	height:100%;
+	width:100%;
+	overflow:auto;
+	display:block;
+}
+tr{
+	white-space:nowrap;
+}
+thead{
+	position:sticky;
+	top:0;
+	display:block;
+	z-index:100;
+	background-color:#111;
+}
+tbody th{
+position:sticky;
+	left:0;
+		 background-color:#111;
 }
 tr.filter span{
 	cursor:cell;
 	text-decoration:underline dotted ;
 	font-size:smaller;
 }
-table{
-	height:90%;
-}
 tbody{
 	position:relative;
-  	display:inline-block;
-	overflow-y: scroll;
 	font-size:smaller;
 	height:90%;
 }
@@ -191,7 +213,6 @@ table td{
 	margin-top :4px;
 }
 tr{
-display:block;
 }
 th,td{
 	min-width:40px;
@@ -204,9 +225,6 @@ table tbody tr:nth-child(odd) {
 	background: #333;
 }
 
-thead,tbody{
-	display:block;
-}
 tr .passive{
 	width:200px;
 }
@@ -221,7 +239,7 @@ td.rarelity,th.rarelity{
 }
 td.name,th.name{
 	width:200px;
-	font-size:medium;
+	font-size:14px;
 }
 td.atk,td.def,td.spd,td.lp,td.bst
 ,th.atk,th.def,th.spd,th.lp,th.bst{

@@ -188,18 +188,17 @@ var reCalc=function(){
 	values.individual= DATA.individuals[values.shinki.individual];
 
 	//武装
-	for(var i=1;i<DATA.part_cd.length;i++){
-		var part=DATA.part_cd[i];
+	DATA.part_cd.forEach(function(part){
+		if(part==="shinki")return;
 		var r = Number(values[part].rarelity);
 		var lv= values[part].lv;
 		var cd = values[part].cd;
 
 		var idx = DATA.armors.findIndex(function(elem){return elem.cd === cd;});
 		reset(values[part]);
-		values[part].biko = "";
-		if(idx<0){
-	 		continue;
-	  }
+
+		if(idx<0){ return; }
+
 		var armor = DATA.armors[idx];
 		if(armor.rarelity !== r){
 			var idx2 = idx + r -armor.rarelity;
@@ -230,6 +229,8 @@ var reCalc=function(){
 			}
 			add(values[part],bonus);
 		}
+
+		if(part === "weapon2"){return;}
 		var span_skill= document.querySelector("#"+part+" span.skill");
 		span_skill.innerHTML="";
 		if(armor.passive>0){
@@ -248,7 +249,7 @@ var reCalc=function(){
 			span.className = "active";
 			span_skill.appendChild(span);
 		}
-	}
+	});
 
 	//小計
 	reset(values.subtotal);
