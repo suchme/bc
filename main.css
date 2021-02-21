@@ -1,0 +1,252 @@
+html{
+	background-color:#888;
+	color:#fff;
+}
+div{
+	padding-top:6px;
+}
+
+button{
+	cursor:pointer;
+	appearance: none;
+    border: 0;
+    border-radius: 2px;
+margin:1px;
+}
+button.armor{
+	width:100%;
+}
+
+select{
+	border:none;
+}
+span{
+	display:inline-block;
+}
+span.part{
+	text-align:right;
+	width:100px;
+}
+.name{
+    text-overflow: ellipsis;
+	width:200px;
+	display:inline-block;
+	white-space: nowrap;
+    vertical-align: middle;
+
+}
+
+.status{
+	text-align:right;
+	width:48px;
+	position:relative;
+	background-color:#555;
+	margin-left:4px;
+}
+.status::before{
+	position:absolute;
+	left:0px;
+	top:0px;
+	font-size:4px;
+	padding:1px;
+}
+.status.atk::before{
+	color:#fcc;
+	content:'攻';
+}
+.status.def::before{
+	color:#cfc;
+	content:'防';
+}
+.status.spd::before{
+	color:#ff9;
+	content:'速';
+}
+.status.lp::before{
+	color:#ccc;
+	content:'体';
+}
+.status.bst::before{
+	color:#cff;
+	content:'ブ';
+}
+.N{
+	background-color:#eee;
+}
+.R{
+	background-color:#fc3;
+}
+.SR{
+	background-color:#ccf;
+}
+.UR{
+	background-color:#ff6;
+}
+td span.N{
+	background-color:inherit;
+	color:#eee;
+}
+td span.R{
+	background-color:inherit;
+	color:#fc3;
+}
+td span.SR{
+	background-color:inherit;
+	color:#ccf;
+}
+td span.UR{
+	background-color:inherit;
+	color:#ff6;
+}
+
+.rarelity{
+	width:40px;
+}
+.lv{
+	width:50px;
+}
+
+span.skill{
+	font-size:smaller;
+}
+span.weapon2 span.status{
+	opacity:0.25;
+}
+
+.biko{
+	font-size:smaller;
+}
+span.passive::before{
+	background-color:#555;
+	color:#fff;
+	content:"パ";
+	margin-right:1px;
+}
+span.active::before{
+	background-color:#c33;
+	content:"ア";
+	margin-right:1px;
+}
+span.passive{
+	margin-left:2px;
+}
+span.active{
+	margin-left:2px;
+}
+span.apt{
+	margin-left:2px;
+}
+span.minus{
+	color:#f00;
+}
+
+:not(th).part::before{
+	content:"【";
+}
+:not(th).part::after{
+	content:"】";
+}
+
+/*サブウィンド*/
+div.subwindow{
+	position:fixed;
+	z-index:100;
+	width:100%;
+	height:100%;
+	padding:0px;
+	left:0px;
+	top:0px;
+	text-align:center;
+}
+div.back{
+	position:absolute;
+	width:100%;
+	height:100%;
+	background-color:#000;
+	opacity:0.6;
+}
+div.submain{
+	text-align:left;
+	display:inline-block;
+	position:relative;
+	background-color:#222;
+	height:100%;
+}
+tr.filter span{
+	cursor:cell;
+	text-decoration:underline dotted ;
+	font-size:smaller;
+}
+table{
+	height:90%;
+}
+tbody{
+	position:relative;
+  	display:inline-block;
+	overflow-y: scroll;
+	font-size:smaller;
+	height:90%;
+}
+table td{
+	margin-top :4px;
+}
+th,td{
+	min-width:40px;
+	margin-left:8px ;
+	white-space: nowrap;
+	overflow:hidden;
+}
+table tbody tr:nth-child(odd) {
+	background: #333;
+}
+
+thead,tbody{
+	display:block;
+}
+tr .passive{
+	width:200px;
+}
+tr .category{
+	width:80px;
+}
+tr .active{
+	width:200px;
+}
+td.rarelity,th.rarelity{
+	min-width:40px;
+	max-width:40px;
+}
+td.name,th.name{
+	min-width:200px;
+	max-width:200px;
+	font-size:medium;
+}
+table .atk,table .def,table .spd,table .lp, table .bst{
+	width:48px;
+}
+.filtertarget{
+	cursor:cell;
+	text-decoration:underline dotted ;
+}
+td.category::before{
+	content:"[";
+}
+td.category::after{
+	content:"]";
+}
+td.class{
+	max-width:30px;
+}
+td span.status{
+	margin-top:2px;
+	margin-bottom:2px;
+}
+button.pick{
+	background-color:#c00;
+color:#fff;
+}
+tr.sort button{
+text-decoration: underline;
+    background: none;
+    color: #fff;
+}
