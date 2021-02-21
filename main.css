@@ -8,6 +8,10 @@ body{
 div{
 	padding-top:6px;
 }
+textarea{
+	white-space: nowrap;
+}
+	
 
 button{
 	cursor:pointer;

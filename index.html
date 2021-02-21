@@ -53,8 +53,8 @@
 	<br>
 	<div>
 		<span class="" style="width:100px;display:inline-block;"></span>
-		<span class="lv"></span>
-		<span class="rarelity"></span>
+		<span class="lv">総コスト</span>
+		<span class="rarelity" bind="total.cost"></span>
 		<span class="name" style="text-align:right;">ステータス計</span>
 		<span class="param" bind="subtotal"></span>
 		<span class="biko" bind="subtotal.biko" id="subbiko"></span>
@@ -76,7 +76,7 @@
 
 <div style="display:none;" id="template">
 
-	<span id="armor">
+	<span id="template_armor">
 		<span class="part"></span>
 		<select class="lv" bind=".lv">
 			<option value="1">Lv1</option>
@@ -131,6 +131,7 @@ var reCalc=function(){
 		if(!bind)continue;
 		Bind.setBindValue(bind,node.value);
 	}
+	values.total.cost=0;
 
 	//神姫
 	values.default_shinki_param = DATA.default_shinki_param;
@@ -230,6 +231,8 @@ var reCalc=function(){
 			add(values[part],bonus);
 		}
 
+		values.total.cost+=DATA.cost[values[part].rarelity];
+
 		if(part === "weapon2"){return;}
 		var span_skill= document.querySelector("#"+part+" span.skill");
 		span_skill.innerHTML="";
@@ -327,6 +330,7 @@ var reCalc=function(){
 
 
 var onloadfunc=function(){
+	DATA.cost=[10,20,50,140];
 
 	//部位ごとのフォーム作成
 	var parent = document.querySelector("#armor");
@@ -341,7 +345,7 @@ var onloadfunc=function(){
 	});
 
 	var targets= document.querySelectorAll(".template_part");
-	var template=document.querySelector("#template #armor");
+	var template=document.querySelector("#template_armor");
 	for(var i=0;i<targets.length;i++){
 		var target = targets[i];
 		var part_cd = target.id;
