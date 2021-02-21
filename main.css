@@ -190,11 +190,15 @@ tbody{
 table td{
 	margin-top :4px;
 }
+tr{
+display:block;
+}
 th,td{
 	min-width:40px;
-	margin-left:8px ;
+	margin-left:4px ;
 	white-space: nowrap;
 	overflow:hidden;
+	display:inline-block;
 }
 table tbody tr:nth-child(odd) {
 	background: #333;
@@ -213,16 +217,15 @@ tr .active{
 	width:200px;
 }
 td.rarelity,th.rarelity{
-	min-width:40px;
-	max-width:40px;
+	width:40px;
 }
 td.name,th.name{
-	min-width:200px;
-	max-width:200px;
+	width:200px;
 	font-size:medium;
 }
-table .atk,table .def,table .spd,table .lp, table .bst{
-	width:48px;
+td.atk,td.def,td.spd,td.lp,td.bst
+,th.atk,th.def,th.spd,th.lp,th.bst{
+	width:52px;
 }
 .filtertarget{
 	cursor:cell;
@@ -234,8 +237,11 @@ td.category::before{
 td.category::after{
 	content:"]";
 }
+td.part,th.part{
+width:60px;
+}
 td.class{
-	max-width:30px;
+	width:30px;
 }
 td span.status{
 	margin-top:2px;

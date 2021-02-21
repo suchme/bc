@@ -16,7 +16,7 @@
 <body onload="onloadfunc()">
 <div>※各種データ・計算式が正しいか分かりません。間違ってたら正しい値を教えてくれれば直します。</div>
 <div id="form">
-<div style="position:fixed;bottom:0px;right:0px;font-size:8pt;" bind="version">c20210215_d20210215</div>
+<div style="position:fixed;bottom:0px;right:0px;font-size:8pt;" bind="version"></div>
 
 <div  class="subwindow" id="subwindow" style="display:none;">
 	<div  class="back" onclick="closeSubWindow(null);">
@@ -55,7 +55,7 @@
 		<span class="" style="width:100px;display:inline-block;"></span>
 		<span class="lv"></span>
 		<span class="rarelity"></span>
-		<span class="name">小計</span>
+		<span class="name" style="text-align:right;">ステータス計</span>
 		<span class="param" bind="subtotal"></span>
 		<span class="biko" bind="subtotal.biko" id="subbiko"></span>
 	</div>
@@ -64,7 +64,7 @@
 		<span class="" style="width:100px;display:inline-block;"></span>
 		<span class="lv"></span>
 		<span class="rarelity"></span>
-		<span class="name">武器適正とパッシブ適用後</span>
+		<span class="name" style="text-align:right;">武器適正とパッシブ適用後</span>
 		<span class="param" bind="total"></span>
 	</div>
 
@@ -388,17 +388,14 @@ var onloadfunc=function(){
 						,disp:function(e){return DATA.class[e.class];}});
 					if(part_idx===6){
 						sub_cols.splice(4,0,{data:"category",label:"カテゴリ",filter:1,disp:function(e){
-							return DATA.categories[e.category].short_name;}}); 
+							return DATA.category_short[e.category];}}); 
 						sub_cols.push({data:"active",filter:1,disp:function(e){
-								if(DATA.actives[e.active]){
-									return DATA.actives[e.active].name + (e.effect?"["+DATA.effect[e.effect]+"]":"");}}}); 
+								return getSkillName(DATA.actives[e.active],e.active_effect); }}); 
 								
 
 					}else{
 						sub_cols.push({data:"passive",filter:1,disp:function(e){
-							if(e.passive>=0){
-
-								return DATA.passives[e.passive].name + (e.effect?"["+DATA.effect[e.effect]+"]":"");}}}); 
+								return getSkillName(DATA.passives[e.passive],e.effect); }}); 
 					}
 					if(part_idx===5){
 						sub_cols.push({data:"flying",label:"飛行",filter:1,disp:function(e){return DATA.flying[e.flying]}});
@@ -537,7 +534,7 @@ var onloadfunc=function(){
 
 	document.querySelector("span#shinki .lv").setAttribute("disabled","disabled");
 	var dt=new Date(DATA.date);
-	values.version="c20210219" + "d"+ dt.getFullYear()
+	values.version="c20210221" + "d"+ dt.getFullYear()
 		+("0"+(dt.getMonth()+1)).slice(-2)
 		+("0"+dt.getDate()).slice(-2);
 
