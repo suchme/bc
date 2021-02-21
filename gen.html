@@ -22,20 +22,21 @@ var conv=function(row,n){
 	var armor = {};
 
 	armor.part=n;
-	armor.set=row[0];
-	armor.class = row[1];
-	armor.name=row[2];
-	armor.rarelity=row[3];
-	armor.atk=row[4];
-	armor.def=row[5];
-	armor.spd=row[6];
-	armor.lp=row[7];
-	armor.bst=row[8];
-	armor.passive=row[9];
-	armor.effect=row[10];
-	armor.active=row[11];
-	armor.active_effect=row[12];
-	armor.biko=row[13];
+	armor.cd=row[0];
+	armor.set=row[1];
+	armor.class = row[2];
+	armor.name=row[3];
+	armor.rarelity=row[4];
+	armor.atk=row[5];
+	armor.def=row[6];
+	armor.spd=row[7];
+	armor.lp=row[8];
+	armor.bst=row[9];
+	armor.passive=row[10];
+	armor.effect=row[11];
+	armor.active=row[12];
+	armor.active_effect=row[13];
+	armor.biko=row[14];
 	if(armor.biko==="-")armor.biko="";
 	return armor;
 }
@@ -72,9 +73,8 @@ var prepareData=function(data){
 		var row = data.shinki[i];
 		var shinki= {};
 
-		shinki.cd="s"+i;
-		shinki.name=row[0];
-		shinki.rarelity=row[1];
+		shinki.cd=row[0];
+		shinki.name=row[1];
 		shinki.atk=row[2];
 		shinki.def=row[3];
 		shinki.spd=row[4];
@@ -105,11 +105,10 @@ var prepareData=function(data){
 		for(var i=0;i<part_data.length;i++){
 			var row = part_data[i];
 			var armor = conv(row,j);
-			armor.cd=part.substr(0,1)+i;
 			DATA.armors.push(armor);
 
 	  		if(j===5){
-	  			armor.flying=row[14];
+	  			armor.flying=row[15];
 				if(armor.flying !== 1)armor.flying=0;
 			}
 		}
@@ -121,8 +120,8 @@ var prepareData=function(data){
 		var row = part_data[i];
 		var armor = conv(row,6);
 		armor.cd="w"+i;
-		armor.category=row[14];
-		armor.range=row[15];
+		armor.category=row[15];
+		armor.range=row[16];
 		DATA.armors.push(armor);
 	}
 
@@ -174,16 +173,14 @@ var prepareData=function(data){
 
 	//初期値
 	DATA.default={};
-	DATA.default.shinki={cd:DATA.shinkis[0].cd,rarelity:0};
-
-	DATA.part_cd.forEach(function(e,idx){
-		if(idx===0)return;
-		var part_idx = idx;
-		DATA.default[e]={cd:0,rarelity:0};
-		if(part_idx=== 7){ part_idx=6;};
-		DATA.default[e].cd=DATA.armors.find(function(e){
-	  		return e.part===part_idx && e.name !=="-" && e.rarelity === 0}).cd;
-	});
+	DATA.default.shinki={cd:"s0",rarelity:0};
+	DATA.default.head={cd:"h1",rarelity:0};
+	DATA.default.body={cd:"b1",rarelity:0};
+	DATA.default.arm={cd:"a1",rarelity:0};
+	DATA.default.leg={cd:"l1",rarelity:0};
+	DATA.default.rear={cd:"r1",rarelity:0};
+	DATA.default.weapon={cd:"w1",rarelity:0};
+	DATA.default.weapon2={cd:"w1",rarelity:0};
 
 	DATA.date= Date.now();
 

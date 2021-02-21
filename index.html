@@ -539,7 +539,7 @@ var onloadfunc=function(){
 
 	document.querySelector("span#shinki .lv").setAttribute("disabled","disabled");
 	var dt=new Date(DATA.date);
-	values.version="c20210221" + "d"+ dt.getFullYear()
+	values.version="c20210222" + "d"+ dt.getFullYear()
 		+("0"+(dt.getMonth()+1)).slice(-2)
 		+("0"+dt.getDate()).slice(-2);
 
@@ -842,7 +842,7 @@ var getAptSpan=function(apt){
 	return span;
 }
 </script>
-<script type="text/javascript" src="./data.js"></script>
+<script type="text/javascript" src="./data.js?2"></script>
 </html>
 
 
