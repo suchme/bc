@@ -16,7 +16,7 @@
 <body onload="onloadfunc()">
 <div>※各種データ・計算式が正しいか分かりません。間違ってたら正しい値を教えてくれれば直します。</div>
 <div id="form">
-<div style="position:fixed;bottom:0px;right:0px;font-size:8pt;" bind="version"></div>
+<div style="position:fixed;bottom:2px;right:2px;font-size:8pt;" bind="version"></div>
 
 <div  class="subwindow" id="subwindow" style="display:none;">
 	<div  class="back" onclick="closeSubWindow(null);">
@@ -539,9 +539,11 @@ var onloadfunc=function(){
 
 	document.querySelector("span#shinki .lv").setAttribute("disabled","disabled");
 	var dt=new Date(DATA.date);
-	values.version="c20210222" + "d"+ dt.getFullYear()
+	values.version="c202102221942" + "d"+ dt.getFullYear()
 		+("0"+(dt.getMonth()+1)).slice(-2)
-		+("0"+dt.getDate()).slice(-2);
+		+("0"+dt.getDate()).slice(-2)
+		+("0"+dt.getHours()).slice(-2)
+		+("0"+dt.getMinutes()).slice(-2);
 
 	Bind.init();
 	Bind.refresh();
