@@ -220,7 +220,7 @@ var reCalc=function(){
 		if(lv==60){
 			var bonus;
 			if(armor.part===6){
-				if(part.range===0){
+				if(armor.range===0){
 					bonus= DATA.lv_bonus.weapon_short[r];
 				}else{
 					bonus= DATA.lv_bonus.weapon_long[r];
@@ -539,7 +539,7 @@ var onloadfunc=function(){
 
 	document.querySelector("span#shinki .lv").setAttribute("disabled","disabled");
 	var dt=new Date(DATA.date);
-	values.version="c202102221942" + "d"+ dt.getFullYear()
+	values.version="c202102230844" + "d"+ dt.getFullYear()
 		+("0"+(dt.getMonth()+1)).slice(-2)
 		+("0"+dt.getDate()).slice(-2)
 		+("0"+dt.getHours()).slice(-2)
