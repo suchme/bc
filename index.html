@@ -9,13 +9,14 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Cache-Control" content="no-cache" />
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>bcassembly</title>
 <link rel="stylesheet" href="main.css">
 </head>
 
 <body onload="onloadfunc()">
 <div>※各種データ・計算式が正しいか分かりません。間違ってたら正しい値を教えてくれれば直します。</div>
-<div id="form">
+<span id="form">
 <div style="position:fixed;bottom:2px;right:2px;font-size:8pt;" bind="version"></div>
 
 <div  class="subwindow" id="subwindow" style="display:none;">
@@ -29,70 +30,62 @@
 	</div>
 </div>
 
-	<div><span class="shinki template_part" id="shinki" ></span></span></div>
-	<div>武器適性<span bind="tekise" class="biko"></span></div>
-	<div>パッシブ 
-		<button id="add_extra_passive">追加</button>
-		<span id="extra_passive" class="biko"></span>
-	</div>
-	<div style="margin-bottom:10px;">
-		<span class="" style="width:100px;display:inline-block;"></span>
-		<span class="rarelity"></span>
-		<span class="lv"></span>
-		<span style="width:200px;text-align:right;">
+	<div><span class="shinki template_part" id="shinki" ></span></div>
+	<div>
+		<span class="setting">
 			<span>アイコン</span>
-			<select id="individual" style="width:100px" bind="shinki.individual">
+			<select id="individual"  bind="shinki.individual">
 			</select>
 		</span>
 		<span class="param" bind="individual">
 		</span>
 	</div>
-	<div id="armor">
+	<div>パッシブ 
+		<button id="add_extra_passive">追加</button>
+		<span id="extra_passive" class="biko"></span>
 	</div>
 
-	<br>
+	<div id="armor"></div>
+
 	<div>
-		<span class="" style="width:100px;display:inline-block;"></span>
-		<span class="lv">総コスト</span>
-		<span class="rarelity" bind="total.cost"></span>
-		<span class="name" style="text-align:right;">ステータス計</span>
-		<span class="param" bind="subtotal"></span>
-		<span class="biko" bind="subtotal.biko" id="subbiko"></span>
+		<span class="setting">
+			<span >総コスト</span><span bind="total.cost"></span>
+			<span class="name" style="text-align:right;">ステータス計</span>
+		</span>
+		<span class="param" bind="subtotal"></span><br>
 	</div>
-	<br>
 	<div>
-		<span class="" style="width:100px;display:inline-block;"></span>
-		<span class="lv"></span>
-		<span class="rarelity"></span>
-		<span class="name" style="text-align:right;">武器適正とパッシブ適用後</span>
+		<span class="setting">
+			<span class="name" style="text-align:right;">武器適正とパッシブ適用後</span>
+		</span>
 		<span class="param" bind="total"></span>
 	</div>
 
 <div>
-<div>export data</div>
-	<textarea style="width:600px;height:200px;" bind="export_text">aaa</textarea>
+	<div>export data</div>
+	<textarea rows="10" class="export" wrap="off" bind="export_text">aaa</textarea>
 </div>
-</div>
+</span>
 
 <div style="display:none;" id="template">
 
 	<span id="template_armor">
-		<span class="part"></span>
-		<select class="lv" bind=".lv">
-			<option value="1">Lv1</option>
-			<option value="60">Lv60</option>
-		</select>
-		<select  class="rarelity" bind=".rarelity">
-		</select>
-		<span class="name">
-			<button bind=".name" class="armor"></button>
+	<hr>
+		<span class="setting">
+				<span class="part"></span>
+				Lv<select class="lv" bind=".lv">
+					<option value="1">1</option>
+					<option value="60">60</option>
+				</select>
+				<select  class="rarelity" bind=".rarelity">
+				</select><br>
+				<button bind=".name" class="armor"></button>
 		</span>
-			
-		<span class="param" bind="">
+		<span class="detail">
+			<span class="param" bind=""></span><br>
+			<span class="skill" bind=".skill"></span><br>
+			<span class="biko" bind=".org.biko"></span>
 		</span>
-		<span class="skill" >
-		</span>
-		<span class="biko" bind=".org.biko"></span>
 	</span>
 
 	<select id="rarelity" class="rarelity" bind="rarelity"> </select>
@@ -109,15 +102,10 @@
 var values={total:{},subtotal:{},extra_passives:[]};
 
 var reset=function(a){
-	for(var i=0;i<DATA.param_cd.length;i++){
-		a[DATA.param_cd[i]]= 0;
-	}
+	DATA.param_cd.forEach(function(e){ a[e]= 0; });
 }
 var add=function(a,b){
-	for(var i=0;i<DATA.param_cd.length;i++){
-		var param_cd = DATA.param_cd[i];
-		a[param_cd] += b[param_cd];
-	}
+	DATA.param_cd.forEach(function(e){ a[e] += b[e]; });
 }
 
 var reCalc=function(){
@@ -134,26 +122,25 @@ var reCalc=function(){
 	values.total.cost=0;
 
 	//神姫
-	values.default_shinki_param = DATA.default_shinki_param;
-	var shinki= DATA.shinkis.find(function(elem){return elem.cd === values.shinki.cd});
-	values.shinki.org =shinki;
-	if(!shinki){return;}
+	values.shinki.org = DATA.shinkis.find(function(elem){return elem.cd === values.shinki.cd});
+	if(!values.shinki.org){return;}
 	reset(values.shinki);
-	add(values.shinki,shinki);
-	values.shinki.name=shinki.name;
+	add(values.shinki,values.shinki.org);
+	values.shinki.name=values.shinki.org.name;
 
 	//レアリティ
 	var rare = values.shinki.rarelity;
 	add(values.shinki,DATA.shinki_rarelity_bonus[rare]);
 
 	values.shinki.apts=[];
-	for(var i=0;i<shinki.apts.length;i++){
+	values.shinki.org.apts.forEach(function(effect,idx){
 		var apt={};
-		var effect= shinki.apts[i];
 		if(effect!==0){
-			apt.category = i;
+			apt.category = idx;
 			if(effect===100){
 				effect-=20*rare;
+			}else if(effect===-50){
+				effect+=10*rare;
 			}else if(effect<0){
 				effect+=5*rare;
 			}else{
@@ -162,11 +149,18 @@ var reCalc=function(){
 			apt.effect = effect;
 			values.shinki.apts.push(apt);
 		}
-	}
-	values.tekise= document.createElement("span");
-	values.shinki.apts.forEach(function(e){
-		values.tekise.appendChild(getAptSpan(e));
 	});
+	values.shinki.apts.sort(function(a,b){return b.effect - a.effect;});
+	var span= document.createElement("span");
+	var br=0;
+	values.shinki.apts.forEach(function(e){
+		if(!br && e.effect<0){
+			span.appendChild(document.createElement("br"));
+			br=1;
+		}
+		span.appendChild(getAptSpan(e));
+	});
+	values.shinki.skill= span;
 
 	//追加パッシブ
 	var parent_span= document.querySelector("#extra_passive");
@@ -188,6 +182,11 @@ var reCalc=function(){
 	//アイコン補正
 	values.individual= DATA.individuals[values.shinki.individual];
 
+	//lv
+	if(values.shinki.lv==="60"){
+		add(values.shinki,{atk:8,def:8,spd:3,lp:80,bst:30});
+	}
+
 	//武装
 	DATA.part_cd.forEach(function(part){
 		if(part==="shinki")return;
@@ -204,8 +203,8 @@ var reCalc=function(){
 		if(armor.rarelity !== r){
 			var idx2 = idx + r -armor.rarelity;
 			if(DATA.armors[idx2].name === armor.name){
-				values[part].cd = armor.cd;
 				armor = DATA.armors[idx2];
+				values[part].cd = armor.cd;
 			}else{
 				values[part].rarelity = armor.rarelity;
 			}
@@ -234,8 +233,7 @@ var reCalc=function(){
 		values.total.cost+=DATA.cost[values[part].rarelity];
 
 		if(part === "weapon2"){return;}
-		var span_skill= document.querySelector("#"+part+" span.skill");
-		span_skill.innerHTML="";
+		var span_skill= document.createElement("span");//document.querySelector("#"+part+" span.skill");
 		if(armor.passive>0){
 			var passive={};
 			passive.skill = DATA.passives[armor.passive];
@@ -252,6 +250,7 @@ var reCalc=function(){
 			span.className = "active";
 			span_skill.appendChild(span);
 		}
+		values[part].skill=span_skill;
 	});
 
 	//小計
@@ -274,12 +273,12 @@ var reCalc=function(){
 	values.shinki.apts.forEach(function(apt){
 		if(apt.category !== values.weapon.org.category)return;
 		values.total.atk += Math.trunc(values.subtotal.atk * apt.effect*0.01);
-		values.subtotal.biko.appendChild(getAptSpan(apt));
+		//values.subtotal.biko.appendChild(getAptSpan(apt));
 	});
 	//パッシブ補正
 	passives.forEach(function(passive){
-		var span = getPassiveSpan(passive);
-		values.subtotal.biko.appendChild(span);
+		//var span = getPassiveSpan(passive);
+		//values.subtotal.biko.appendChild(span);
 		if(passive.skill.func){
 			passive.skill.func(passive.effect);
 		}
@@ -313,14 +312,30 @@ var reCalc=function(){
 		
 		export_text_data +=  "\n";
 	});
-	var param=values.shinki.individual;
+	//var param=values.shinki.individual;
+	//DATA.part_cd.forEach(function(e,idx){
+	//	var obj = values[e];
+	//	param+=obj.cd+DATA.rarelity[obj.rarelity]+obj.lv;
+	//});
+
+	//param = btoa(encodeURIComponent(param));
+	var param = new Uint8Array(25);
+	var dv = new DataView(param.buffer);
 	DATA.part_cd.forEach(function(e,idx){
 		var obj = values[e];
-		param+=obj.cd+DATA.rarelity[obj.rarelity]+obj.lv;
+		if(idx===0){
+			dv.setUint8(0,obj.lv);
+			dv.setUint8(1,obj.rarelity);
+			dv.setUint8(2,parseInt(obj.cd.substr(1)));
+			dv.setUint8(3,obj.individual);
+		}else{
+			dv.setUint8(1+idx*3,obj.lv);
+			dv.setUint16(2+idx*3,parseInt(obj.cd.substr(1)));
+		}
 	});
+	var param = "0"+arrayToBase64(param);
 
-	param = btoa(encodeURIComponent(param));
-	export_text_data += location.protocol + "//"+location.host+location.pathname +"?v1" + param;
+	export_text_data += location.protocol + "//"+location.host+location.pathname +"?" + param;
 
 	values.export_text = export_text_data;
 
@@ -355,7 +370,7 @@ var onloadfunc=function(){
 		var clone = template.cloneNode(true);
 
 		clone.id = target.id;
-		clone.classList.add(target.id);
+		clone.classList.add(target.id,"armor");
 
 		var children = clone.querySelectorAll("[bind]");
 		for(var j=0;j<children.length;j++){
@@ -363,27 +378,47 @@ var onloadfunc=function(){
 		}
 		 clone.querySelector(".part").textContent = DATA.part_name[i];
  
-		var span = clone.querySelector(".name *");
+		var span = clone.querySelector("button.armor");
 		span.addEventListener("click" ,(function(part_cd,part_idx){
 			return function(e){
 				var rarelity = Number(values[part_cd].rarelity);
 
-				sub_cols=[{label:"name",data:"name",filter:1
-					,disp:function(e){ 
+				sub_cols=[
+					{label:"name",data:"name",filter:1
+						,disp:function(e){ 
 						if(e.parent === undefined){return e.name};
 						return (
-						(e.parent!=="-"?"*":"")
+						(e.parent!=="-"?"-":"")
 						+(e.set !==""?"+":"")
 						+e.name);}}
-					,{data:"atk",label:"攻",class:"status atk"}
-					,{data:"def",label:"防",class:"status def"}
-					,{data:"spd",label:"速",class:"status spd"}
-					,{data:"lp", label:"体",class:"status lp"}
-					,{data:"bst",label:"ブ",class:"status bst"}];
+					,{data:"atk",label:"攻",class:"status",sort:-1}
+					,{data:"def",label:"防",class:"status",sort:-1}
+					,{data:"spd",label:"速",class:"status",sort:-1}
+					,{data:"lp", label:"体",class:"status",sort:-1}
+					,{data:"bst",label:"ブ",class:"status",sort:-1}
+					,{data:"biko",label:"備考"}
+					];
 
 				if(part_idx===0){
 					values.filter={};
-					table_data = DATA.shinkis;
+					var datalist = [];
+					DATA.shinkis.forEach(function(e2){
+						var data={};
+						sub_cols.forEach(function(e){
+							data[e.data]=e2[e.data];
+						});
+						DATA.category_short.forEach(function(e,idx){
+							if(idx===0)return;
+							data["cat"+idx]=e2.apts[idx];
+						});
+						data.cd = e2.cd;
+						datalist.push(data);
+					});
+					table_data = datalist;
+					DATA.category_short.forEach(function(e,idx){
+						if(idx===0)return;
+						sub_cols.push({label:e,data:"cat"+idx,class:"cat",sort:-1})
+					});
 				}else{
 					sub_cols.splice(0,0,{data:"rarelity",filter:1
 						,disp:function(e){return DATA.rarelity[e.rarelity];}}); 
@@ -392,7 +427,24 @@ var onloadfunc=function(){
 					sub_cols.unshift({data:"class",label:"分類",filter:1
 						,disp:function(e){return DATA.class[e.class];}});
 					if(part_idx===6){
-						sub_cols.splice(4,0,{data:"category",label:"カテゴリ",filter:1,disp:function(e){
+						sub_cols.splice(4,0,{data:"range",filter:1,disp:function(e,parent){
+							if(e[this.data]===0){
+								parent.classList.add("short");
+							}else{
+								parent.classList.add("long");
+							}
+							return DATA.range[e[this.data]];
+						}});
+						sub_cols.splice(4,0,{data:"category",label:"カテゴリ",filter:1,disp:function(e,p){
+
+							if(e.category===15){
+								p.classList.add("bougu");
+							}else if(e.range===0){
+								p.classList.add("short");
+							}else{
+								p.classList.add("long");
+							}
+
 							return DATA.category_short[e.category];}}); 
 						sub_cols.push({data:"active",filter:1,disp:function(e){
 								return getSkillName(DATA.actives[e.active],e.active_effect); }}); 
@@ -482,29 +534,6 @@ var onloadfunc=function(){
 		org.parentNode.replaceChild(rare2,org);
 	});
 
-	//初期値セット
-	if(location.search===""){
-		DATA.part_cd.forEach(function(e){
-			values[e]={cd:DATA.default[e].cd,rarelity:DATA.default[e].rarelity,lv:"1"};
-		});
-		values.shinki.individual="0";
-	}else{
-		var param = location.search.substring(1);
-		var version = param.substring(0,2);
-		param = decodeURIComponent(atob(param.substring(2)));
-		var individual= param.match(/^(\d+)/)[1];
-		DATA.part_cd.forEach(function(e){
-			var initial = e.substr(0,1);
-			var regexp = new RegExp("("+ initial +"\\d+)([NRSU]+)(\\d+)");
-			var result = param.match(regexp);
-			values[e]={};
-			values[e].cd = result[1];
-			values[e].rarelity= ""+DATA.rarelity.indexOf(result[2]);
-			values[e].lv= result[3];
-			param=param.substr(result.index+result[0].length);
-		});
-		values.shinki.individual =individual;
-	}
 
 	var correctStatus=function(atk,def,spd,lp,bst){
 	   values.total.atk += Math.trunc(values.subtotal.atk * 0.01*atk);
@@ -537,13 +566,57 @@ var onloadfunc=function(){
 	});
 	
 
-	document.querySelector("span#shinki .lv").setAttribute("disabled","disabled");
+
 	var dt=new Date(DATA.date);
-	values.version="c202102230844" + "d"+ dt.getFullYear()
+	values.version="c202102231148" + "d"+ dt.getFullYear()
 		+("0"+(dt.getMonth()+1)).slice(-2)
 		+("0"+dt.getDate()).slice(-2)
 		+("0"+dt.getHours()).slice(-2)
 		+("0"+dt.getMinutes()).slice(-2);
+
+	//初期値セット
+	if(location.search===""){
+		DATA.part_cd.forEach(function(e){
+			values[e]={cd:DATA.default[e].cd,rarelity:DATA.default[e].rarelity,lv:"1"};
+		});
+		values.shinki.individual="0";
+	}else{
+		var param = location.search.substring(1);
+		var version = param.substring(0,1);
+		if(version==="v"){
+			param = decodeURIComponent(atob(param.substring(2)));
+			var individual= param.match(/^(\d+)/)[1];
+			DATA.part_cd.forEach(function(e){
+				var initial = e.substr(0,1);
+				var regexp = new RegExp("("+ initial +"\\d+)([NRSU]+)(\\d+)");
+				var result = param.match(regexp);
+				values[e]={};
+				values[e].cd = result[1];
+				values[e].rarelity= ""+DATA.rarelity.indexOf(result[2]);
+				values[e].lv= result[3];
+				param=param.substr(result.index+result[0].length);
+			});
+			values.shinki.individual =individual;
+		}else{
+			var param = base64ToArray(param.substr(1));
+			var dv = new DataView(param.buffer);
+			DATA.part_cd.forEach(function(e,idx){
+				values[e]={};;
+				var obj = values[e];
+				if(idx===0){
+					obj.lv = dv.getUint8(0);
+					obj.rarelity =dv.getUint8(1);
+					obj.cd=e.substr(0,1)+dv.getUint8(2);
+					obj.individual = dv.getUint8(3);
+				}else{
+					obj.lv =dv.getUint8(1+idx*3);
+					obj.cd = e.substr(0,1)+dv.getUint16(2+idx*3);
+					var armor = DATA.armors.find(function(elem){return elem.cd === obj.cd;});
+					obj.rarelity= armor.rarelity;
+				}
+			});
+		}
+	}
 
 	Bind.init();
 	Bind.refresh();
@@ -560,41 +633,48 @@ var sub_callback=null;
 var openSubWindow=function(callback){
 	  sub_callback=callback;
 	
-		values.sort=[];
+	values.sort=[];
 
-		//ヘッダ作る
-		var tr = document.createElement("tr");
-		tr.classList.add("sort");
-		var tr2 = document.createElement("tr");
-		tr2.classList.add("filter");
-		var th = document.createElement("th");
-	  	tr.appendChild(th);
-		th = document.createElement("th");
-	  	tr2.appendChild(th);
-		sub_cols.forEach(function(col){
-			var th = document.createElement("th");
+	//ヘッダ作る
+	var tr_sort = document.createElement("tr");
+	tr_sort.classList.add("sort");
+	var tr_filter = document.createElement("tr");
+	tr_filter.classList.add("filter");
 
-			th.classList.add(col.data);
-			tr2.appendChild(th);
+	var th = document.createElement("th");
+	th.className="pick";
+	tr_filter.appendChild(th);
+	th = document.createElement("th");
+	th.className="pick";
+	tr_sort.appendChild(th);
 
-			th = document.createElement("th");
-			var a= document.createElement("button");
-			a.textContent=col.label?col.label:col.data;
-			a.onclick=(function(cd){return function(e){setSort(cd);}})(col.data);
-			th.appendChild(a);
+	sub_cols.forEach(function(col){
+		var th_filter = document.createElement("th");
 
-			th.classList.add(col.data);
-			tr.appendChild(th);
-		});
-		var cols = document.querySelectorAll("#sub_head tr");
-		cols[0].parentNode.replaceChild(tr2,cols[0]);
-		cols[1].parentNode.replaceChild(tr,cols[1]);
+		var th_sort = document.createElement("th");
+		var a= document.createElement("button");
+		a.textContent=col.label?col.label:col.data;
+		a.onclick=(function(cd){return function(e){setSort(cd);}})(col);
+		th_sort.appendChild(a);
 
-	  	Bind.init();
+		th_filter.classList.add(col.data);
+		th_sort.classList.add(col.data);
+		if(col.class){
+			th_filter.classList.add(col.class);
+			th_sort.classList.add(col.class);
+		}
+		tr_filter.appendChild(th_filter);
+		tr_sort.appendChild(th_sort);
+	});
+	var cols = document.querySelectorAll("#sub_head tr");
+	cols[0].parentNode.replaceChild(tr_filter,cols[0]);
+	cols[1].parentNode.replaceChild(tr_sort,cols[1]);
 
-		createTable();
-		var subwindow= document.querySelector("#subwindow");
-		subwindow.style.display="block";
+	Bind.init();
+
+	createTable();
+	var subwindow= document.querySelector("#subwindow");
+	subwindow.style.display="block";
   }
 
 var closeSubWindow = function(e){
@@ -619,7 +699,8 @@ var setFilter=function(name,value){
 
 	createTable();
 }
-var setSort=function(data){
+var setSort=function(col){
+	var data=col.data;
 	//var filter_sort = JSON.parse(values.filter_sort);
 	var sort = values.sort;
 
@@ -632,7 +713,7 @@ var setSort=function(data){
 	if(idx>=0){
 		sort.splice(idx,1);
 	}else{
-		if(["atk","def","spd","lp","bst"].indexOf(data)>=0){
+		if(col.sort<0){
 			data = "!"+data;
 		}
 	}
@@ -665,7 +746,7 @@ var createTable=function(){
 				var button = document.createElement("button");
 				var obj={};
 				obj[cols.data]=e;
-				button.textContent=cols.disp?cols.disp(obj):e;
+				button.textContent=cols.disp?cols.disp(obj,button):e;
 				button.onclick=function(){
 					filter.splice(idx,1);
 					setFilter(cols.data,filter)
@@ -703,6 +784,7 @@ var createTable=function(){
 		tr = document.createElement("tr");
 
 		var th = document.createElement("th");
+		th.className="pick";
 		var span = document.createElement("button");
 		span.textContent = "選択";
 		span.className="pick";
@@ -711,16 +793,18 @@ var createTable=function(){
 		tr.appendChild(th);
 
 		sub_cols.forEach(function(col){
-			var content =  typeof col.disp == "function"?col.disp(rowdata):rowdata[col.data];
 			var td = document.createElement("td");
-			td.className =col.data;
-			var span = document.createElement("span");
-			span.textContent = content;
-			span.className = col.class;
-			td.appendChild(span);
-			if(col.data ==='name' || col.data ==='rarelity'){
-				if(rowdata.rarelity){
-					span.className =DATA.rarelity[rowdata.rarelity];
+			var content =  typeof col.disp == "function"?col.disp(rowdata,td):rowdata[col.data];
+			td.classList.add(col.data);
+			if(col.class){
+				td.classList.add(col.class);
+			}
+			var span = td;//document.createElement("span");
+			span.innerHTML= content;
+			//td.appendChild(span);
+			if( col.data ==='rarelity'){
+				if(rowdata.rarelity>=0){
+					span.classList.add(DATA.rarelity[rowdata.rarelity]);
 				}
 			}
 			if(col.filter){
@@ -842,6 +926,19 @@ var getAptSpan=function(apt){
 	span2.className= (apt.effect)<0?"minus":"";
 	 span.appendChild(span2);
 	return span;
+}
+
+var arrayToBase64=function(array){
+	return btoa(String.fromCharCode(...array));
+}
+var base64ToArray=function(base64){
+	var binary = atob(base64);
+	var len = binary.length;
+	var bytes = new Uint8Array(len);
+	for (var i = 0; i < len; i++)        {
+	  bytes[i] = binary.charCodeAt(i);
+	}
+	return bytes;
 }
 </script>
 <script type="text/javascript" src="./data.js?2"></script>

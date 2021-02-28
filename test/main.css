@@ -2,12 +2,10 @@ body{
 	background-color:#888;
 	color:#fff;
 	font-size:14px;
-	width:540px;
 }
-div{
+hr{
 margin:2px;
 }
-	
 
 button{
 	cursor:pointer;
@@ -18,8 +16,8 @@ button{
 	white-space:pre-wrap;
 }
 button.armor{
-	width:160px;
-	height:32px;
+	width:100%;
+	height:28px;
 	
 }
 select{
@@ -45,9 +43,15 @@ span.armor span{
 span{
 	display:inline-block;
 }
+span.armor{
+	white-space:nowrap;
+}
 span.setting{
-width:260px;
+	width:140px;
 	  text-align:right;
+}
+span.detail{
+	width:240px;
 }
 span.part{
 	text-align:right;
@@ -99,22 +103,6 @@ span.part{
 }
 .UR{
 	background-color:#ff6;
-}
-td span.N{
-	background-color:inherit;
-	color:#eee;
-}
-td span.R{
-	background-color:inherit;
-	color:#fc3;
-}
-td span.SR{
-	background-color:inherit;
-	color:#ccf;
-}
-td span.UR{
-	background-color:inherit;
-	color:#ff6;
 }
 
 
@@ -244,7 +232,7 @@ tr .passive{
 	width:200px;
 }
 tr .category{
-	width:80px;
+	width:60px;
 }
 tr .active{
 	width:200px;
@@ -300,6 +288,9 @@ text-decoration: underline;
 th.cat,td.cat{
 	width:20px;
 }
+td.rarelity{
+	width:20px;
+}
 td.cat{
 	text-align:right;
 }
@@ -314,4 +305,22 @@ th.pick{
 }
 tr:nth-child(odd) th.pick {
 	text-align:right;
+}
+td.N
+,td.R
+,td.SR
+,td.UR{
+color:#000;
+}
+tr .range{
+width:20px;
+}
+td.short{
+color:#f66;
+}
+td.long{
+color:#0cf;
+}
+td.bougu{
+color:#939;
 }

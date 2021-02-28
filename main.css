@@ -1,48 +1,65 @@
-html{
+body{
 	background-color:#888;
 	color:#fff;
-}
-body{
 	font-size:14px;
 }
-div{
-	padding-top:6px;
+hr{
+margin:2px;
 }
-	
 
 button{
 	cursor:pointer;
 	appearance: none;
     border: 0;
     border-radius: 2px;
-margin:1px;
+	margin:1px;
+	white-space:pre-wrap;
 }
 button.armor{
 	width:100%;
+	height:28px;
+	
+}
+select{
+	appearance: none;
+	border:none;
+	padding:1px;
+	margin:1px;
+}
+select.rarelity{
+	width:30px;
+}
+select.lv{
+	width:20px;
 }
 
-select{
-	border:none;
+textarea.export{
+	width:100%;
+
+}
+span.armor span{
+	vertical-align:top;
 }
 span{
 	display:inline-block;
 }
+span.armor{
+	white-space:nowrap;
+}
+span.setting{
+	width:140px;
+	  text-align:right;
+}
+span.detail{
+	width:240px;
+}
 span.part{
 	text-align:right;
-	width:100px;
-}
-.name{
-    text-overflow: ellipsis;
-	width:200px;
-	display:inline-block;
-	white-space: nowrap;
-    vertical-align: middle;
-
 }
 
 .status{
 	text-align:right;
-	width:48px;
+	width:44px;
 	position:relative;
 	background-color:#555;
 	margin:1px;
@@ -52,7 +69,7 @@ span.part{
 	position:absolute;
 	left:0px;
 	top:0px;
-	font-size:8px;
+	font-size:xx-small;
 	padding:1px;
 }
 .status.atk::before{
@@ -87,29 +104,7 @@ span.part{
 .UR{
 	background-color:#ff6;
 }
-td span.N{
-	background-color:inherit;
-	color:#eee;
-}
-td span.R{
-	background-color:inherit;
-	color:#fc3;
-}
-td span.SR{
-	background-color:inherit;
-	color:#ccf;
-}
-td span.UR{
-	background-color:inherit;
-	color:#ff6;
-}
 
-.rarelity{
-	width:40px;
-}
-.lv{
-	width:50px;
-}
 
 span.skill{
 	font-size:smaller;
@@ -184,26 +179,27 @@ table{
 	width:100%;
 	overflow:auto;
 	display:block;
+	text-align:left;
 }
-tr{
+tbody tr{
 	white-space:nowrap;
+	vertical-align:top;
+}
+tr td{
+	white-space:pre-wrap;
 }
 thead{
 	position:sticky;
+	display:table-caption;
 	top:0;
-	display:block;
 	z-index:100;
 	background-color:#111;
 }
 tbody th{
-position:sticky;
+	position:sticky;
 	left:0;
-		 background-color:#111;
-}
-tr.filter span{
-	cursor:cell;
-	text-decoration:underline dotted ;
-	font-size:smaller;
+	background-color:#111;
+	z-index:99;
 }
 tbody{
 	position:relative;
@@ -213,10 +209,16 @@ tbody{
 table td{
 	margin-top :4px;
 }
-tr{
+th{
+	vertical-align:bottom;
+	overflow:hidden;
+
+}
+th.cat{
+	text-align:center;
 }
 th,td{
-	min-width:40px;
+	width:40px;
 	margin-left:4px ;
 	white-space: nowrap;
 	overflow:hidden;
@@ -230,22 +232,32 @@ tr .passive{
 	width:200px;
 }
 tr .category{
-	width:80px;
+	width:60px;
 }
 tr .active{
 	width:200px;
 }
-td.rarelity,th.rarelity{
-	width:40px;
+tr .rarelity{
+	width:20px;
 }
-td.name,th.name{
-	width:200px;
-	font-size:14px;
+tr .biko{
+	width:100px;
 }
-td.atk,td.def,td.spd,td.lp,td.bst
-,th.atk,th.def,th.spd,th.lp,th.bst{
-	width:52px;
+tr .name{
+	width:140px;
 }
+th.status::before{
+	content:"" !important;
+}
+tr .status{
+	width:32px;
+	margin:1px;
+}
+tr .name{
+	white-space: normal;
+	width:140px;
+}
+
 .filtertarget{
 	cursor:cell;
 	text-decoration:underline dotted ;
@@ -259,19 +271,56 @@ td.category::after{
 td.part,th.part{
 width:60px;
 }
-td.class{
-	width:30px;
-}
-td span.status{
-	margin-top:2px;
-	margin-bottom:2px;
+tr .class{
+	width:60px;
 }
 button.pick{
 	background-color:#c00;
-color:#fff;
+	color:#fff;
+	width:30px;
+	height:32px;
 }
 tr.sort button{
 text-decoration: underline;
     background: none;
     color: #fff;
+}
+th.cat,td.cat{
+	width:20px;
+}
+td.rarelity{
+	width:20px;
+}
+td.cat{
+	text-align:right;
+}
+
+th.status{
+	text-align:inherit;
+	position:inherit;
+	background-color:inherit;
+}
+th.pick{
+	width:60px;
+}
+tr:nth-child(odd) th.pick {
+	text-align:right;
+}
+td.N
+,td.R
+,td.SR
+,td.UR{
+color:#000;
+}
+tr .range{
+width:20px;
+}
+td.short{
+color:#f66;
+}
+td.long{
+color:#0cf;
+}
+td.bougu{
+color:#939;
 }
