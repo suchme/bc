@@ -128,6 +128,7 @@ var reCalc=function(){
 	add(values.shinki,values.shinki.org);
 	values.shinki.name=values.shinki.org.name;
 
+
 	//レアリティ
 	var rare = values.shinki.rarelity;
 	add(values.shinki,DATA.shinki_rarelity_bonus[rare]);
@@ -160,6 +161,12 @@ var reCalc=function(){
 		}
 		span.appendChild(getAptSpan(e));
 	});
+
+	var passive={};
+	passive.skill = DATA.passives[values.shinki.org.exskill];
+	passive.effect= 0;
+	span.appendChild(document.createElement("br"));
+	span.appendChild(getPassiveSpan(passive));
 	values.shinki.skill= span;
 
 	//追加パッシブ
@@ -246,7 +253,7 @@ var reCalc=function(){
 			var skill={};
 			skill.skill = DATA.actives[armor.active];
 			skill.effect= armor.active_effect;
-			var span =getPassiveSpan(skill);
+			var span =getSkillSpan(skill);
 			span.className = "active";
 			span_skill.appendChild(span);
 		}
@@ -400,6 +407,11 @@ var onloadfunc=function(){
 					];
 
 				if(part_idx===0){
+					sub_cols.splice(6,0,{class:"status",data:"dash"});
+					sub_cols.splice(7,0,{class:"status",data:"jump"});
+					sub_cols.splice(8,0,{class:"status",data:"hover"});
+					sub_cols.splice(9,0,{class:"status",data:"guard"});
+					sub_cols.splice(10,0,{class:"status",data:"recover",sort:-1});
 					values.filter={};
 					var datalist = [];
 					DATA.shinkis.forEach(function(e2){
@@ -911,6 +923,14 @@ span.addEventListener("click",function(e){
 var getPassiveSpan=function(skill){
 	var span = document.createElement("span");
 	span.textContent = getSkillName(skill.skill,skill.effect);
+	span.title = skill.skill.biko;
+	span.className = "passive";
+	return span;
+}
+var getSkillSpan=function(skill){
+	var span = document.createElement("span");
+	span.textContent = getSkillName(skill.skill,skill.effect);
+	span.title = skill.skill.biko;
 	span.className = "passive";
 	return span;
 }

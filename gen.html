@@ -80,8 +80,14 @@ var prepareData=function(data){
 		shinki.spd=row[4];
 		shinki.lp=row[5];
 		shinki.bst=row[6];
-		shinki.biko=row[22];
-		shinki.apts=row.slice(7,7+15);
+		shinki.dash=row[7];
+		shinki.jump=row[8];
+		shinki.hover=row[9];
+		shinki.guard=row[10];
+		shinki.recover=row[11];
+		shinki.exskill=row[12];
+		shinki.biko=row[13];
+		shinki.apts=row.slice(14,14+15);
 		shinki.apts.unshift(0);
 		shinki.rarelity=0;
 		DATA.shinkis.push(shinki);
@@ -139,11 +145,11 @@ var prepareData=function(data){
 	});
 
 	//パッシブ
-	DATA.passives= data.passive.map(function(e){return {name:e[0],effect_type:e[1]};});
+	DATA.passives= data.passive.map(function(e){return {name:e[0],effect_type:e[1],biko:e[2]};});
 
 
 	//アクティブ
-	DATA.actives = data.active.map(function(e){return {name:e[0],effect_type:e[1]};});
+	DATA.actives = data.active.map(function(e){return {name:e[0],effect_type:e[1],biko:e[2]};});
 
 	//レベル増加値
 	DATA.lv_bonus={};
