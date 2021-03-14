@@ -319,13 +319,7 @@ var reCalc=function(){
 		
 		export_text_data +=  "\n";
 	});
-	//var param=values.shinki.individual;
-	//DATA.part_cd.forEach(function(e,idx){
-	//	var obj = values[e];
-	//	param+=obj.cd+DATA.rarelity[obj.rarelity]+obj.lv;
-	//});
 
-	//param = btoa(encodeURIComponent(param));
 	var param = new Uint8Array(25);
 	var dv = new DataView(param.buffer);
 	DATA.part_cd.forEach(function(e,idx){
