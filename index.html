@@ -99,7 +99,7 @@
 <script type="text/javascript">
 "use strict";
 
-var values={total:{},subtotal:{},extra_passives:[]};
+var values={total:{},subtotal:{},extra_passives:[],bonus:{}};
 
 var reset=function(a){
 	DATA.param_cd.forEach(function(e){ a[e]= 0; });
@@ -273,13 +273,15 @@ var reCalc=function(){
 	
 	//最終値
 	reset(values.total);
+	reset(values.bonus);
+	
 	add(values.total,values.subtotal);
 
 	values.subtotal.biko =document.createElement("span");
 	//適性補正
 	values.shinki.apts.forEach(function(apt){
 		if(apt.category !== values.weapon.org.category)return;
-		values.total.atk += Math.trunc(values.subtotal.atk * apt.effect*0.01);
+		values.bonus.atk += values.subtotal.atk * apt.effect*0.01;
 		//values.subtotal.biko.appendChild(getAptSpan(apt));
 	});
 	//パッシブ補正
@@ -290,6 +292,13 @@ var reCalc=function(){
 			passive.skill.func(passive.effect);
 		}
 	});
+
+	values.bonus.atk = Math.trunc(values.bonus.atk); 
+	values.bonus.def = Math.trunc(values.bonus.def); 
+	values.bonus.spd = Math.trunc(values.bonus.spd); 
+	values.bonus.lp  = Math.trunc(values.bonus.lp ); 
+	values.bonus.bst = Math.trunc(values.bonus.bst); 
+	add(values.total,values.bonus);
 
 
 	//レアリティ色
@@ -542,11 +551,11 @@ var onloadfunc=function(){
 
 
 	var correctStatus=function(atk,def,spd,lp,bst){
-	   values.total.atk += Math.trunc(values.subtotal.atk * 0.01*atk);
-	   values.total.def += Math.trunc(values.subtotal.def * 0.01*def);
-	   values.total.spd += Math.trunc(values.subtotal.spd * 0.01*spd);
-	   values.total.lp  += Math.trunc(values.subtotal.lp  * 0.01*lp);
-	   values.total.bst += Math.trunc(values.subtotal.bst * 0.01*bst);
+	   values.bonus.atk += values.subtotal.atk * 0.01*atk;
+	   values.bonus.def += values.subtotal.def * 0.01*def;
+	   values.bonus.spd += values.subtotal.spd * 0.01*spd;
+	   values.bonus.lp  += values.subtotal.lp  * 0.01*lp;
+	   values.bonus.bst += values.subtotal.bst * 0.01*bst;
 	}
 	DATA.passives[ 1].func=function(effect){ correctStatus(1+effect,0,0,0,0); }
 	DATA.passives[ 2].func=function(effect){ correctStatus(0,1+effect,0,0,0); }
