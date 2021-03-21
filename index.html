@@ -15,7 +15,9 @@
 </head>
 
 <body onload="onloadfunc()">
-<div>※各種データ・計算式が正しいか分かりません。間違ってたら正しい値を教えてくれれば直します。</div>
+<div class="info"><span>※最新版ぽくないときはスーパーリロードして</span>
+<span>※各種データ・計算式が正しいか分かりません。間違ってたら正しい値を教えてくれれば直します。</span>
+</div>
 <span id="form">
 <div style="position:fixed;bottom:2px;right:2px;font-size:8pt;" bind="version"></div>
 
@@ -84,7 +86,7 @@
 		<span class="detail">
 			<span class="param" bind=""></span><br>
 			<span class="skill" bind=".skill"></span><br>
-			<span class="biko" bind=".org.biko"></span>
+			<span class="biko" bind=".biko"></span>
 		</span>
 	</span>
 
@@ -107,6 +109,15 @@ var reset=function(a){
 var add=function(a,b){
 	DATA.param_cd.forEach(function(e){ a[e] += b[e]; });
 }
+var addBiko=function(label,value){
+	if(value>0){
+		return label+"+"+value+" ";
+	}
+	if(value<0){
+		return label+value+" ";
+	}
+	return "";
+}
 
 var reCalc=function(){
 	//計算処理
@@ -123,6 +134,7 @@ var reCalc=function(){
 
 	//神姫
 	values.shinki.org = DATA.shinkis.find(function(elem){return elem.cd === values.shinki.cd});
+	var shinki = values.shinki.org;
 	if(!values.shinki.org){return;}
 	reset(values.shinki);
 	add(values.shinki,values.shinki.org);
@@ -185,6 +197,19 @@ var reCalc=function(){
 
 		passives.push(e);
 	});
+	
+
+	var biko="";
+	if(armor.flying){
+		biko+="飛行 ";
+	}
+	biko+="ダッシュ速度" + shinki.dash+" ";
+	biko+="ダッシュ消費" + shinki.dash_cost+" ";
+	biko+="ジャンプ消費" + shinki.jump_cost+" ";
+	biko+="ホバリング消費" + shinki.hover_cost+" ";
+	biko+="防御消費" + shinki.guard_cost+" ";
+	biko+=shinki.biko;
+	values.shinki.biko=biko;
 	
 	//アイコン補正
 	values.individual= DATA.individuals[values.shinki.individual];
@@ -258,6 +283,19 @@ var reCalc=function(){
 			span_skill.appendChild(span);
 		}
 		values[part].skill=span_skill;
+
+		var biko="";
+		if(armor.flying){
+			biko+="飛行 ";
+		}
+		biko+=addBiko("回復",armor.recover);
+		biko+=addBiko("ダッシュ速度",armor.dash);
+		biko+=addBiko("ダッシュ消費",armor.dash_cost);
+		biko+=addBiko("ジャンプ消費",armor.jump_cost);
+		biko+=addBiko("ホバリング消費",armor.hover_cost);
+		biko+=addBiko("防御消費",armor.guard_cost);
+		biko+=armor.biko;
+		values[part].biko=biko;
 	});
 
 	//小計
@@ -406,15 +444,16 @@ var onloadfunc=function(){
 					,{data:"spd",label:"速",class:"status",sort:-1}
 					,{data:"lp", label:"体",class:"status",sort:-1}
 					,{data:"bst",label:"ブ",class:"status",sort:-1}
-					,{data:"biko",label:"備考"}
 					];
 
 				if(part_idx===0){
-					sub_cols.splice(6,0,{class:"status",data:"dash"});
-					sub_cols.splice(7,0,{class:"status",data:"jump"});
-					sub_cols.splice(8,0,{class:"status",data:"hover"});
-					sub_cols.splice(9,0,{class:"status",data:"guard"});
-					sub_cols.splice(10,0,{class:"status",data:"recover",sort:-1});
+					//神姫の場合
+					sub_cols.splice(6,0,{class:"status",label:"回復",data:"recover",sort:-1});
+					sub_cols.splice(7,0,{class:"status",label:"走速度",data:"dash",sort:-1});
+					sub_cols.splice(8,0,{class:"status",label:"走消費",data:"dash_cost"});
+					sub_cols.splice(9,0,{class:"status",label:"跳消費",data:"jump_cost"});
+					//sub_cols.splice(10,0,{class:"status",label:"浮消費",data:"hover_cost"});
+					sub_cols.splice(10,0,{class:"status",label:"防御消費",data:"guard_cost"});
 					values.filter={};
 					var datalist = [];
 					DATA.shinkis.forEach(function(e2){
@@ -435,14 +474,22 @@ var onloadfunc=function(){
 						sub_cols.push({label:e,data:"cat"+idx,class:"cat",sort:-1})
 					});
 				}else{
-					sub_cols.splice(0,0,{data:"rarelity",filter:1
-						,disp:function(e){return DATA.rarelity[e.rarelity];}}); 
-					sub_cols.unshift({data:"part",filter:1
-						,disp:function(e){return DATA.part_name[e.part]}});
-					sub_cols.unshift({data:"class",label:"分類",filter:1
-						,disp:function(e){return DATA.class[e.class];}});
+					//武装の場合
+
+					if(part_idx!==6){
+						sub_cols.push({class:"status",label:"回復",data:"recover",sort:-1});
+					}
+					sub_cols.push({class:"status",label:"走速度",data:"dash",sort:-1});
+					sub_cols.push({class:"status",label:"走消費",data:"dash_cost"});
+					//sub_cols.push({class:"status",label:"跳消費",data:"jump_cost"});
+					if(part_idx===5){
+						sub_cols.push({class:"status",label:"浮消費",data:"hover_cost"});
+					}
+
 					if(part_idx===6){
-						sub_cols.splice(4,0,{data:"range",filter:1,disp:function(e,parent){
+						//武器
+						sub_cols.push({class:"status",label:"防御消費",data:"guard_cost"});
+						sub_cols.splice(1,0,{data:"range",filter:1,disp:function(e,parent){
 							if(e[this.data]===0){
 								parent.classList.add("short");
 							}else{
@@ -450,7 +497,7 @@ var onloadfunc=function(){
 							}
 							return DATA.range[e[this.data]];
 						}});
-						sub_cols.splice(4,0,{data:"category",label:"カテゴリ",filter:1,disp:function(e,p){
+						sub_cols.splice(2,0,{data:"category",label:"カテゴリ",filter:1,disp:function(e,p){
 
 							if(e.category===15){
 								p.classList.add("bougu");
@@ -466,12 +513,21 @@ var onloadfunc=function(){
 								
 
 					}else{
+						//防具
 						sub_cols.push({data:"passive",filter:1,disp:function(e){
 								return getSkillName(DATA.passives[e.passive],e.effect); }}); 
 					}
 					if(part_idx===5){
 						sub_cols.push({data:"flying",label:"飛行",filter:1,disp:function(e){return DATA.flying[e.flying]}});
 					}
+
+					sub_cols.push({label:"備考",data:"biko"});
+					sub_cols.splice(0,0,{data:"rarelity",filter:1
+						,disp:function(e){return DATA.rarelity[e.rarelity];}}); 
+					sub_cols.unshift({data:"part",filter:1
+						,disp:function(e){return DATA.part_name[e.part]}});
+					sub_cols.unshift({data:"class",label:"分類",filter:1
+						,disp:function(e){return DATA.class[e.class];}});
 					values.filter={part:[part_idx],rarelity:[rarelity]};
 					table_data = DATA.armors;
 				}
@@ -583,11 +639,9 @@ var onloadfunc=function(){
 
 
 	var dt=new Date(DATA.date);
-	values.version="c202102281749" + "d"+ dt.getFullYear()
-		+("0"+(dt.getMonth()+1)).slice(-2)
-		+("0"+dt.getDate()).slice(-2)
-		+("0"+dt.getHours()).slice(-2)
-		+("0"+dt.getMinutes()).slice(-2);
+	values.version="code2021/03/21<br>"
+	   	+ "data"+ dt.getFullYear() +"/"+("0"+(dt.getMonth()+1)).slice(-2)
+		+"/" +("0"+dt.getDate()).slice(-2);
 
 	//初期値セット
 	if(location.search===""){
@@ -814,6 +868,12 @@ var createTable=function(){
 			if(col.class){
 				td.classList.add(col.class);
 			}
+			if(content===0){
+				td.classList.add("zero");
+			}
+			if(content<0){
+				td.classList.add("minus");
+			}
 			var span = td;//document.createElement("span");
 			span.innerHTML= content;
 			//td.appendChild(span);
@@ -964,7 +1024,7 @@ var base64ToArray=function(base64){
 	return bytes;
 }
 </script>
-<script type="text/javascript" src="./data.js?2"></script>
+<script type="text/javascript" src="./data.js?3"></script>
 </html>
 
 

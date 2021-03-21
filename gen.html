@@ -18,25 +18,22 @@
 "use strict";
 var DATA={shinkis:[],armors:[],individuals:[]};
 //データ整形ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+var mem=[ "cd","set","class","name","rarelity"
+	,"atk","def","spd","lp","bst"
+	,"recover","dash"
+	,"dash_cost","jump_cost","hover_cost","guard_cost"
+	,"passive","effect","active","active_effect"
+	,"biko"];
 var conv=function(row,n){
 	var armor = {};
 
+
 	armor.part=n;
-	armor.cd=row[0];
-	armor.set=row[1];
-	armor.class = row[2];
-	armor.name=row[3];
-	armor.rarelity=row[4];
-	armor.atk=row[5];
-	armor.def=row[6];
-	armor.spd=row[7];
-	armor.lp=row[8];
-	armor.bst=row[9];
-	armor.passive=row[10];
-	armor.effect=row[11];
-	armor.active=row[12];
-	armor.active_effect=row[13];
-	armor.biko=row[14];
+
+	mem.forEach(function(e,index){
+		armor[e]=row[index];
+	});
 	if(armor.biko==="-")armor.biko="";
 	return armor;
 }
@@ -69,29 +66,30 @@ var prepareData=function(data){
 	}
 
 	//神姫
+	var mem=[
+		"cd","name","atk","def","spd","lp","bst"
+		,"recover","dash"
+		,"dash_cost","jump_cost","hover_cost","guard_cost"
+		,"exskill","biko"];
 	for(var i=0;i<data.shinki.length;i++){
 		var row = data.shinki[i];
 		var shinki= {};
 
-		shinki.cd=row[0];
-		shinki.name=row[1];
-		shinki.atk=row[2];
-		shinki.def=row[3];
-		shinki.spd=row[4];
-		shinki.lp=row[5];
-		shinki.bst=row[6];
-		shinki.dash=row[7];
-		shinki.jump=row[8];
-		shinki.hover=row[9];
-		shinki.guard=row[10];
-		shinki.recover=row[11];
-		shinki.exskill=row[12];
-		shinki.biko=row[13];
-		shinki.apts=row.slice(14,14+15);
+		mem.forEach(function(e,index){
+			shinki[e]=row[index];
+
+		});
+		var idx = mem.length;
+		shinki.apts=row.slice(idx,idx+15);
 		shinki.apts.unshift(0);
 		shinki.rarelity=0;
+
+		if(shinki.biko==="-"){
+			shinki.biko="";
+		}
 		DATA.shinkis.push(shinki);
 	}
+
 	//アイコン補正
 	for(var i=0;i<data.individuals.length;i++){
 		var row = data.individuals[i];
@@ -115,7 +113,7 @@ var prepareData=function(data){
 			DATA.armors.push(armor);
 
 	  		if(j===5){
-	  			armor.flying=row[15];
+	  			armor.flying=row[21];
 				if(armor.flying !== 1)armor.flying=0;
 			}
 		}
@@ -126,9 +124,14 @@ var prepareData=function(data){
 	for(var i=0;i<part_data.length;i++){
 		var row = part_data[i];
 		var armor = conv(row,6);
-		armor.cd="w"+i;
-		armor.category=row[15];
-		armor.range=row[16];
+		armor.active=row[17];
+		armor.active_effect=row[18];
+		armor.biko=row[19];
+		if(armor.biko==="-"){
+			armor.biko="";
+		}
+		armor.category=row[20];
+		armor.range=row[21];
 		DATA.armors.push(armor);
 	}
 

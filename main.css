@@ -2,6 +2,14 @@ body{
 	background-color:#888;
 	color:#fff;
 	font-size:14px;
+width:320px;
+}
+div.info{
+	font-size:small;
+}
+span.biko
+,span.skill{
+	white-space:pre-wrap;
 }
 hr{
 margin:2px;
@@ -91,6 +99,29 @@ span.part{
 .status.bst::before{
 	color:#cff;
 	content:'ブ';
+}
+.status.dash::before{
+	color:#ff0;
+	content:'走';
+}
+.status.recover::before{
+	color:#0cc;
+	content:'回';
+}
+.zero{
+	color:#999;
+}
+.minus{
+	color:#f33;
+}
+.status.recover{
+	background-color:#66c;
+}
+.status.dash_cost
+,.status.jump_cost
+,.status.hover_cost
+,.status.guard_cost{
+	background-color:#611;
 }
 .N{
 	background-color:#eee;
@@ -185,6 +216,10 @@ tbody tr{
 	white-space:nowrap;
 	vertical-align:top;
 }
+tr{
+position:relative;
+		display:block;
+}
 tr td{
 	white-space:pre-wrap;
 }
@@ -202,7 +237,6 @@ tbody th{
 	z-index:99;
 }
 tbody{
-	position:relative;
 	font-size:smaller;
 	height:90%;
 }
@@ -243,6 +277,9 @@ tr .rarelity{
 tr .biko{
 	width:100px;
 }
+tr .biko{
+	;
+}
 tr .name{
 	width:140px;
 }
@@ -268,11 +305,28 @@ td.category::before{
 td.category::after{
 	content:"]";
 }
-td.part,th.part{
-width:60px;
+tr .part{
+	width:60px;
+	display:inline-block;
+}
+tr th.part{
+	margin-bottom:20px;
 }
 tr .class{
-	width:60px;
+	width:200px;
+	position:absolute;
+	left:70px;
+	bottom:0px;
+}
+tr th.category{
+	margin-bottom:20px;
+}
+
+tr .range{
+	width:100px;
+	position:absolute;
+	left:300px;
+	bottom:0px;
 }
 button.pick{
 	background-color:#c00;
@@ -285,6 +339,16 @@ text-decoration: underline;
     background: none;
     color: #fff;
 }
+tr .cat:nth-child(-n+20){
+	background-color:#311;
+}
+tr .cat:nth-child(+n+20){
+	background-color:#133;
+}
+tr .cat:nth-child(+n+27){
+	background-color:#313;
+}
+
 th.cat,td.cat{
 	width:20px;
 }
@@ -295,6 +359,9 @@ td.cat{
 	text-align:right;
 }
 
+tr .status.dash{
+width:35px;
+}
 th.status{
 	text-align:inherit;
 	position:inherit;
