@@ -203,11 +203,16 @@ var reCalc=function(){
 	if(armor.flying){
 		biko+="飛行 ";
 	}
-	biko+="ダッシュ速度" + shinki.dash+" ";
-	biko+="ダッシュ消費" + shinki.dash_cost+" ";
-	biko+="ジャンプ消費" + shinki.jump_cost+" ";
-	biko+="ホバリング消費" + shinki.hover_cost+" ";
-	biko+="防御消費" + shinki.guard_cost+" ";
+	values.shinki.dash			=90*rare + shinki.dash;
+	values.shinki.dash_cost		=20*rare+ shinki.dash_cost;
+	values.shinki.jump_cost		=20*rare+shinki.jump_cost;
+	values.shinki.hover_cost	=20*rare+shinki.hover_cost;
+	values.shinki.guard_cost	=20*rare  +shinki.guard_cost;
+	biko+="ダッシュ速度"		+ values.shinki.dash+" ";
+	biko+="ダッシュ消費"		+ values.shinki.dash_cost+" ";
+	biko+="ジャンプ消費"		+ values.shinki.jump_cost+" ";
+	biko+="ホバリング消費"		+ values.shinki.hover_cost+" ";
+	biko+="防御消費"			+ values.shinki.guard_cost+" ";
 	biko+=shinki.biko;
 	values.shinki.biko=biko;
 	
@@ -639,7 +644,7 @@ var onloadfunc=function(){
 
 
 	var dt=new Date(DATA.date);
-	values.version="code2021/03/21<br>"
+	values.version="code2021/03/22<br>"
 	   	+ "data"+ dt.getFullYear() +"/"+("0"+(dt.getMonth()+1)).slice(-2)
 		+"/" +("0"+dt.getDate()).slice(-2);
 
