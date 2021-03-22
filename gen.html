@@ -124,14 +124,14 @@ var prepareData=function(data){
 	for(var i=0;i<part_data.length;i++){
 		var row = part_data[i];
 		var armor = conv(row,6);
-		armor.active=row[17];
-		armor.active_effect=row[18];
-		armor.biko=row[19];
+		armor.active=row[16];
+		armor.active_effect=row[17];
+		armor.biko=row[18];
 		if(armor.biko==="-"){
 			armor.biko="";
 		}
-		armor.category=row[20];
-		armor.range=row[21];
+		armor.category=row[19];
+		armor.range=row[20];
 		DATA.armors.push(armor);
 	}
 
