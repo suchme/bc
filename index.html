@@ -437,7 +437,7 @@ var onloadfunc=function(){
 				var rarelity = Number(values[part_cd].rarelity);
 
 				sub_cols=[
-					{label:"name",data:"name",filter:1
+					{label:"name",data:"name",filter:1,class:"shinki"
 						,disp:function(e){ 
 						if(e.parent === undefined){return e.name};
 						return (
@@ -486,14 +486,14 @@ var onloadfunc=function(){
 					}
 					sub_cols.push({class:"status",label:"走速度",data:"dash",sort:-1});
 					sub_cols.push({class:"status",label:"走消費",data:"dash_cost"});
-					//sub_cols.push({class:"status",label:"跳消費",data:"jump_cost"});
+					//sub_cols.push({class:"status",label:"跳消費",class:"cost",data:"jump_cost"});
 					if(part_idx===5){
-						sub_cols.push({class:"status",label:"浮消費",data:"hover_cost"});
+						sub_cols.push({class:"status",label:"浮消費",class:"cost",data:"hover_cost"});
 					}
 
 					if(part_idx===6){
 						//武器
-						sub_cols.push({class:"status",label:"防御消費",data:"guard_cost"});
+						sub_cols.push({class:"status",label:"防御消費",class:"cost",data:"guard_cost"});
 						sub_cols.splice(1,0,{data:"range",filter:1,disp:function(e,parent){
 							if(e[this.data]===0){
 								parent.classList.add("short");
@@ -529,10 +529,10 @@ var onloadfunc=function(){
 					sub_cols.push({label:"備考",data:"biko"});
 					sub_cols.splice(0,0,{data:"rarelity",filter:1
 						,disp:function(e){return DATA.rarelity[e.rarelity];}}); 
-					sub_cols.unshift({data:"part",filter:1
-						,disp:function(e){return DATA.part_name[e.part]}});
 					sub_cols.unshift({data:"class",label:"分類",filter:1
 						,disp:function(e){return DATA.class[e.class];}});
+					sub_cols.unshift({data:"part",filter:1
+						,disp:function(e){return DATA.part_name[e.part]}});
 					values.filter={part:[part_idx],rarelity:[rarelity]};
 					table_data = DATA.armors;
 				}
