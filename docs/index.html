@@ -1,0 +1,105 @@
+<!-- ごくろうさまです -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="ja" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>bcassembly</title>
+<link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+<div class="info"><span>※最新版ぽくないときはスーパーリロードして</span>
+<span>※各種データ・計算式が正しいか分かりません。間違ってたら正しい値を教えてくれれば直します。</span>
+</div>
+<span id="form">
+<div style="position:fixed;bottom:2px;right:2px;font-size:8pt;" bind="version"></div>
+
+<div  class="subwindow" id="subwindow" style="display:none;">
+	<div  class="back" onclick="closeSubWindow(null);">
+	</div>
+	<div style="" class="submain">
+		<table>
+			<thead id="sub_head"> <tr> </tr> <tr> </tr> </thead>
+			<tbody id="sub_body"> <tr> </tr> </tbody>
+		</table>
+	</div>
+</div>
+
+	<div><span class="shinki template_part" id="shinki" ></span></div>
+	<div>
+		<span class="setting">
+			<span>アイコン</span>
+			<select id="individual"  bind="shinki.individual">
+			</select>
+		</span>
+		<span class="param" bind="individual">
+		</span>
+	</div>
+	<div>パッシブ 
+		<button id="add_extra_passive">追加</button>
+		<span id="extra_passive" class="biko"></span>
+	</div>
+
+	<div id="armor"></div>
+
+	<div>
+		<span class="setting">
+			<span >総コスト</span><span bind="total.cost"></span>
+			<span class="name" style="text-align:right;">ステータス計</span>
+		</span>
+		<span class="param" bind="subtotal"></span><br>
+	</div>
+	<div>
+		<span class="setting">
+			<span class="name" style="text-align:right;">武器適正とパッシブ適用後</span>
+		</span>
+		<span class="param" bind="total"></span>
+	</div>
+
+<div>
+	<div>export data</div>
+	<textarea rows="10" class="export" wrap="off" bind="export_text">aaa</textarea>
+</div>
+</span>
+
+<div style="display:none;" id="template">
+
+	<span id="template_armor">
+	<hr>
+		<span class="setting">
+				<span class="part"></span>
+				Lv<select class="lv" bind=".lv">
+					<option value="1">1</option>
+					<option value="60">60</option>
+				</select>
+				<select  class="rarelity" bind=".rarelity">
+				</select><br>
+				<button bind=".name" class="armor"></button>
+		</span>
+		<span class="detail">
+			<span class="param" bind=""></span><br>
+			<span class="skill" bind=".skill"></span><br>
+			<span class="biko" bind=".biko"></span>
+		</span>
+	</span>
+
+	<select id="rarelity" class="rarelity" bind="rarelity"> </select>
+
+	<span id="param">
+	</span>
+</div>
+
+</body>
+
+<script type="module" src="./main.js"></script>
+</html>
+
+
