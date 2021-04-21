@@ -2,7 +2,8 @@ body{
 	background-color:#888;
 	color:#fff;
 	font-size:14px;
-width:320px;
+	width:320px;
+	line-height:100%;
 }
 div.info{
 	font-size:small;
@@ -22,6 +23,7 @@ button{
     border-radius: 2px;
 	margin:1px;
 	white-space:pre-wrap;
+	line-height:90%;
 }
 button.armor{
 	width:100%;
@@ -117,10 +119,33 @@ span.part{
 .status.recover{
 	background-color:#66c;
 }
+
+
+.status.dash::before{
+	color:#ffc;
+	content:'走';
+}
+.status.dash_cost::before{
+	color:#fcc;
+	content:'走費';
+}
+.status.jump_cost::before{
+	color:#fcc;
+	content:'跳費';
+}
+.status.guard_cost::before{
+	color:#fcc;
+	content:'防費';
+}
+.status.hover_cost::before{
+	color:#fcc;
+	content:'浮費';
+}
 .status.dash_cost
 ,.status.jump_cost
 ,.status.hover_cost
-,.status.guard_cost{
+,.status.guard_cost
+,.status.cost{
 	background-color:#611;
 }
 .N{

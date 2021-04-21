@@ -22,16 +22,6 @@
 <span id="form">
 <div style="position:fixed;bottom:2px;right:2px;font-size:8pt;" bind="version"></div>
 
-<div  class="subwindow" id="subwindow" style="display:none;">
-	<div  class="back" onclick="closeSubWindow(null);">
-	</div>
-	<div style="" class="submain">
-		<table>
-			<thead id="sub_head"> <tr> </tr> <tr> </tr> </thead>
-			<tbody id="sub_body"> <tr> </tr> </tbody>
-		</table>
-	</div>
-</div>
 
 	<div><span class="shinki template_part" id="shinki" ></span></div>
 	<div>
@@ -40,33 +30,59 @@
 			<select id="individual"  bind="shinki.individual">
 			</select>
 		</span>
-		<span class="param" bind="individual">
-		</span>
-	</div>
-	<div>パッシブ 
+	パッシブ 
 		<button id="add_extra_passive">追加</button>
 		<span id="extra_passive" class="biko"></span>
+		<!--
+		<span class="param" bind="individual">
+		</span>
+		-->
 	</div>
 
 	<div id="armor"></div>
 
+	<!--
 	<div>
 		<span class="setting">
+			<span class="name" style="display:none;" style="text-align:right;">ステータス計</span>
+		</span>
+		<span class="param"  bind="subtotal"></span><br>
+	</div>
+	-->
+	<div style="display:flex;">
+		<div class="setting" style="width:160px;">
 			<span >総コスト</span><span bind="total.cost"></span>
-			<span class="name" style="text-align:right;">ステータス計</span>
-		</span>
-		<span class="param" bind="subtotal"></span><br>
+			<span class="name" style="display:none;" style="text-align:right;">武器適正とパッシブ適用後</span>
+		</div>
+		<div style="">
+			<div>
+			<span class="param" bind="total"></span>
+			</div>
+			<div>
+				<span class="status recover" bind="total.recover">
+				</span><span class="status dash" bind="total.dash">
+				</span>
+			</div>
+			<div>
+				<span class="status dash_cost" bind="total.dash_cost">
+				</span><span class="status jump_cost" bind="total.jump_cost">
+				</span><span class="status hover_cost" bind="total.hover_cost">
+				</span><span class="status guard_cost" bind="total.guard_cost">
+				</span>
+			</div>
+		</div>
 	</div>
-	<div>
-		<span class="setting">
-			<span class="name" style="text-align:right;">武器適正とパッシブ適用後</span>
-		</span>
-		<span class="param" bind="total"></span>
-	</div>
+	<button onclick="
+		 document.querySelector('#export_window').style.display='block';
+		 ">export</button>
 
-<div>
-	<div>export data</div>
-	<textarea rows="10" class="export" wrap="off" bind="export_text">aaa</textarea>
+<div class="subwindow" id="export_window" style="display:none;">
+	<div  class="back"  onclick="this.parentNode.style.display='none';">
+	</div>
+	<div style="width:400px;z-index:100; position:relative;text-align:left; " class="">
+		<div>export data</div>
+		<textarea rows="10" class="export" wrap="off" bind="export_text">aaa</textarea>
+	</div>
 </div>
 </span>
 
@@ -99,7 +115,7 @@
 
 </body>
 
-<script type="module" src="./main.js"></script>
+<script type="module" src="./index.js"></script>
 </html>
 
 
