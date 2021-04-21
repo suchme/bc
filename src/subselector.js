@@ -35,12 +35,6 @@ export default class Subselector{
 		var tr_filter = document.createElement("tr");
 		tr_filter.classList.add("filter");
 
-		var th = document.createElement("th");
-		th.className="pick";
-		tr_filter.appendChild(th);
-		th = document.createElement("th");
-		th.className="pick";
-		tr_sort.appendChild(th);
 
 		cols.forEach(function(col){
 			var th_filter = document.createElement("th");
@@ -60,6 +54,14 @@ export default class Subselector{
 			tr_filter.appendChild(th_filter);
 			tr_sort.appendChild(th_sort);
 		});
+
+		var th = document.createElement("th");
+		th.className="pick";
+		tr_filter.appendChild(th);
+		th = document.createElement("th");
+		th.className="pick";
+		tr_sort.appendChild(th);
+
 		var cols = document.querySelectorAll("#sub_head tr");
 		cols[0].parentNode.replaceChild(tr_filter,cols[0]);
 		cols[1].parentNode.replaceChild(tr_sort,cols[1]);

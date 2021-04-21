@@ -49,30 +49,11 @@ function getAptSpan(apt){
 	return span;
 }
 
-
-DATA.shinki_rarelity_bonus=[
-	{atk:0,def:0,spd:0,lp:0,bst:0,dash:0,dash_cost:0,jump_cost:0,guard_cost:0,hover_cost:0,recover:0}
-	,{atk:5,def:5,spd:10,lp:50,bst:20,dash:0,dash_cost:20,jump_cost:20,guard_cost:20,hover_cost:20,recover:0}
-	,{atk:10,def:10,spd:20,lp:100,bst:40,dash:0,dash_cost:40,jump_cost:40,guard_cost:40,hover_cost:40,recover:0}
-	,{atk:15,def:15,spd:30,lp:150,bst:60,dash:0,dash_cost:60,jump_cost:60,guard_cost:60,hover_cost:60,recover:0}
-];
-
-DATA.individuals.forEach((e)=>{
-	e.dash=0;
-	e.recover=0;
-	e.dash_cost=0;
-	e.jump_cost=0;
-	e.guard_cost=0;
-	e.hover_cost=0;
-});
-var param_cd=[
-	"atk","def","spd","lp","bst","recover","dash","dash_cost","jump_cost","guard_cost","hover_cost"
-]
 function reset(a){
-	param_cd.forEach(function(e){ a[e]= 0; });
+	DATA.param_cd.forEach(function(e){ a[e]= 0; });
 }
 function add(a,b){
-	param_cd.forEach(function(e){ a[e] += b[e]; });
+	DATA.param_cd.forEach(function(e){ a[e] += b[e]; });
 }
 function addBiko(label,value){
 	if(value>0){
@@ -155,7 +136,7 @@ class Main {
 			var span = getPassiveSpan(e);
 			var button = document.createElement("button");
 			button.appendChild(span);
-			button.onclick=function(){
+			button.onclick=(e)=>{
 				values.extra_passives.splice(idx,1);
 				this.reCalc();
 			};
@@ -452,12 +433,12 @@ class Main {
 						cols.push({class:"status",label:"走消費",data:"dash_cost"});
 						//cols.push({class:"status",label:"跳消費",class:"cost",data:"jump_cost"});
 						if(part_idx===5){
-							cols.push({class:"status",label:"浮消費",class:"cost",data:"hover_cost"});
+							cols.push({class:"status",label:"浮消費",data:"hover_cost"});
 						}
 
 						if(part_idx===6){
 							//武器
-							cols.push({class:"status",label:"防御消費",class:"cost",data:"guard_cost"});
+							cols.push({class:"status",label:"防御消費",data:"guard_cost"});
 							cols.splice(1,0,{data:"range",filter:1,disp:function(e,parent){
 								if(e[this.data]===0){
 									parent.classList.add("short");
@@ -541,6 +522,7 @@ class Main {
 		var nodes= document.querySelectorAll("span.param");
 		var param= document.getElementById("param");
 		DATA.param_cd.forEach(function(e,idx){
+			if(idx>=5)return false;
 			var span = document.createElement("span");
 			span.classList.add("status",e);
 			span.setAttribute("bind","."+e);

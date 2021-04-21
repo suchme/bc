@@ -100,6 +100,12 @@ var prepareData=function(data){
 		individual.spd=Number(row[3]);
 		individual.lp=Number(row[4]);
 		individual.bst=Number(row[5]);
+		individual.dash=0;
+		individual.recover=0;
+		individual.dash_cost=0;
+		individual.jump_cost=0;
+		individual.guard_cost=0;
+		individual.hover_cost=0;
 		DATA.individuals.push(individual);
 	}
 
@@ -183,28 +189,23 @@ var prepareData=function(data){
 		DATA.lv_bonus[part] = bonuses;
 	}
 
-	DATA.shinki_rarelity_bonus=[
-		{atk:0,def:0,spd:0,lp:0,bst:0}
-		,{atk:5,def:5,spd:10,lp:50,bst:20}
-		,{atk:10,def:10,spd:20,lp:100,bst:40}
-		,{atk:15,def:15,spd:30,lp:150,bst:60}
-	];
+	;
+	DATA.shinki_default_status={};
+	DATA.shinki_rarelity_bonus=[{},{},{},{}];
+	DATA.param_cd.forEach(function(e,idx){
+		DATA.shinki_default_status[e] = Number(data.rarelity_bonus[0][idx]);
+		DATA.shinki_rarelity_bonus[0][e] = 0;
+		DATA.shinki_rarelity_bonus[1][e] = Number(data.rarelity_bonus[1][idx]);
+		for(var i=0;i<2;i++){
+			DATA.shinki_rarelity_bonus[i+2][e] = DATA.shinki_rarelity_bonus[1]*(i+2);
+		}
+	});
 
-	//初期値
-	DATA.default={};
-	DATA.default.shinki={cd:"s0",rarelity:0};
-	DATA.default.head={cd:"h1",rarelity:0};
-	DATA.default.body={cd:"b1",rarelity:0};
-	DATA.default.arm={cd:"a1",rarelity:0};
-	DATA.default.leg={cd:"l1",rarelity:0};
-	DATA.default.rear={cd:"r1",rarelity:0};
-	DATA.default.weapon={cd:"w1",rarelity:0};
-	DATA.default.weapon2={cd:"w1",rarelity:0};
 
 	DATA.date= Date.now();
 
 
-    let blob = new Blob(["var DATA=",JSON.stringify(DATA),";"],{type:"text/plan"});
+    let blob = new Blob(["const DATA=",JSON.stringify(DATA),";export default DATA;"],{type:"text/plan"});
 	var a =document.createElement('a');
 	a.href=URL.createObjectURL(blob);
 	a.innerText="data.js";

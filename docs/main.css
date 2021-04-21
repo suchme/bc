@@ -69,11 +69,13 @@ span.part{
 
 .status{
 	text-align:right;
-	width:44px;
+	width:40px;
 	position:relative;
 	background-color:#555;
 	margin:1px;
 	padding:1px;
+	z-index:1;
+	font-weight:bold;
 }
 .status::before{
 	position:absolute;
@@ -81,6 +83,9 @@ span.part{
 	top:0px;
 	font-size:xx-small;
 	padding:1px;
+	z-index:-1;
+	font-weight:normal;
+opacity:40%;
 }
 .status.atk::before{
 	color:#fcc;
@@ -112,6 +117,7 @@ span.part{
 }
 .zero{
 	color:#999;
+	font-weight:normal;
 }
 .minus{
 	color:#f33;
@@ -312,7 +318,7 @@ th.status::before{
 	content:"" !important;
 }
 tr .status{
-	width:32px;
+	width:30px;
 	margin:1px;
 }
 tr .name{
@@ -371,26 +377,24 @@ tr .cat:nth-child(+n+28){
 	background-color:#313;
 }
 
-tr .cat
-,tr .cost{
+tr .cat{
 	width:20px;
 }
 td.cat{
 	text-align:right;
 }
 
-tr .status.dash{
-width:35px;
-}
 tr .shinki{
 width:140px !important;
 }
-tr .dash_cost
+tr .recover
+,tr .dash
+,tr .dash_cost
 ,tr .jump_cost
 ,tr .guard_cost
 ,tr .hover_cost
 {
-	width:20px !important;
+	width:30px !important;
 }
 th.status{
 	text-align:inherit;
