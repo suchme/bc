@@ -197,7 +197,7 @@ var prepareData=function(data){
 		DATA.shinki_rarelity_bonus[0][e] = 0;
 		DATA.shinki_rarelity_bonus[1][e] = Number(data.rarelity_bonus[1][idx]);
 		for(var i=0;i<2;i++){
-			DATA.shinki_rarelity_bonus[i+2][e] = DATA.shinki_rarelity_bonus[1]*(i+2);
+			DATA.shinki_rarelity_bonus[i+2][e] = DATA.shinki_rarelity_bonus[1][e]*(i+2);
 		}
 	});
 

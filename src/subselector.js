@@ -35,6 +35,13 @@ export default class Subselector{
 		var tr_filter = document.createElement("tr");
 		tr_filter.classList.add("filter");
 
+		var th = document.createElement("th");
+		th.className="pick";
+		tr_filter.appendChild(th);
+		th = document.createElement("th");
+		th.className="pick";
+		tr_sort.appendChild(th);
+
 
 		cols.forEach(function(col){
 			var th_filter = document.createElement("th");
@@ -55,12 +62,6 @@ export default class Subselector{
 			tr_sort.appendChild(th_sort);
 		});
 
-		var th = document.createElement("th");
-		th.className="pick";
-		tr_filter.appendChild(th);
-		th = document.createElement("th");
-		th.className="pick";
-		tr_sort.appendChild(th);
 
 		var cols = document.querySelectorAll("#sub_head tr");
 		cols[0].parentNode.replaceChild(tr_filter,cols[0]);
@@ -144,11 +145,20 @@ export default class Subselector{
 	//ボディ作る
 		var tbody = document.querySelector("#sub_body");
 		tbody.innerHTML="";
+
 		for(var i=0;i<data.length;i++){
 			var rowdata = data[i];
 			var tr;
 			tr = document.createElement("tr");
 
+			var th = document.createElement("th");
+			th.className="pick";
+			var span = document.createElement("button");
+			span.textContent = "選択";
+			span.className="pick";
+			span.onclick=(function(r){return function(e){tmp.close(r);}})(rowdata);
+			th.appendChild(span);
+			tr.appendChild(th);
 
 			cols.forEach(function(col){
 				var td = document.createElement("td");
@@ -173,14 +183,6 @@ export default class Subselector{
 				tr.appendChild(td);
 			});
 
-			var th = document.createElement("th");
-			th.className="pick";
-			var span = document.createElement("button");
-			span.textContent = "選択";
-			span.className="pick";
-			span.onclick=(function(r){return function(e){tmp.close(r);}})(rowdata);
-			th.appendChild(span);
-			tr.appendChild(th);
 
 			tbody.appendChild(tr);
 		}
