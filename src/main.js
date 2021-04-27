@@ -462,6 +462,26 @@ class Main {
 									return getSkillName(DATA.actives[e.active],e.active_effect); }}); 
 									
 
+		subselector.rowhtml =`
+	<th class="pick"></th>
+	<th class="part"></th>
+	<th class="class"></th>
+	<th class="rarelity"></th>
+	<th class="name shinki"></th>
+	<th class="distance"></th>
+	<th class="category"></th>
+	<th class="atk status"></th>
+	<th class="def status"></th>
+	<th class="spd status"></th>
+	<th class="lp status"></th>
+	<th class="bst status"></th>
+	<th class="dash status"></th>
+	<th class="dash_cost status"></th>
+	<th class="guard_cost status"></th>
+	<th class="active"></th>
+	<th class="biko"></th>
+		`;
+
 						}else{
 							//防具
 							cols.push({data:"passive",filter:1,disp:function(e){

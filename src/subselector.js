@@ -19,6 +19,7 @@ export default class Subselector{
 		this.close_callback=null;
 		this.sort=[];
 		this.filter=[];
+		this.rowhtml="";
 
 		document.body.insertAdjacentHTML('beforeend',html);
 		this.back = document.body.querySelector("#subwindow .back");
@@ -27,45 +28,76 @@ export default class Subselector{
 	open(callback){
 		this.close_callback=callback;
 		var cols = this.cols;
-	
+		var tmp = this;
 
+
+		this.rowhtml ="";
 		//ヘッダ作る
-		var tr_sort = document.createElement("tr");
-		tr_sort.classList.add("sort");
-		var tr_filter = document.createElement("tr");
-		tr_filter.classList.add("filter");
+		if(this.rowhtml !==""){
+			var tr_sort = document.createElement("tr");
+			tr_sort.classList.add("sort");
+			tr_sort.insertAdjacentHTML('beforeend',this.rowhtml);
+			var tr_filter = document.createElement("tr");
+			tr_filter.classList.add("filter");
+			tr_filter.insertAdjacentHTML('beforeend',this.rowhtml);
 
-		var th = document.createElement("th");
-		th.className="pick";
-		tr_filter.appendChild(th);
-		th = document.createElement("th");
-		th.className="pick";
-		tr_sort.appendChild(th);
+			var trs= document.querySelectorAll("#sub_head tr");
+			trs[0].parentNode.replaceChild(tr_filter,trs[0]);
+			trs[1].parentNode.replaceChild(tr_sort,trs[1]);
+
+			var sort= document.querySelector("#sub_head tr.sort");
+
+			cols.forEach(function(col){
+				var th_sort = sort.querySelector("th."+col.data);
+				var a= document.createElement("button");
+				a.textContent=col.label?col.label:col.data;
+				a.onclick=(function(cd){return function(e){tmp.setSort(cd);}})(col);
+				th_sort.appendChild(a);
+
+				th_sort.classList.add(col.data);
+				if(col.class){
+					th_sort.classList.add(col.class);
+				}
+			});
+
+		}else{
+			var tr_sort = document.createElement("tr");
+			tr_sort.classList.add("sort");
+			var tr_filter = document.createElement("tr");
+			tr_filter.classList.add("filter");
+
+			var th = document.createElement("th");
+			th.className="pick";
+			tr_filter.appendChild(th);
+			th = document.createElement("th");
+			th.className="pick";
+			tr_sort.appendChild(th);
 
 
-		cols.forEach(function(col){
-			var th_filter = document.createElement("th");
+			cols.forEach(function(col){
+				var th_filter = document.createElement("th");
 
-			var th_sort = document.createElement("th");
-			var a= document.createElement("button");
-			a.textContent=col.label?col.label:col.data;
-			a.onclick=(function(cd){return function(e){tmp.setSort(cd);}})(col);
-			th_sort.appendChild(a);
+				var th_sort = document.createElement("th");
+				var a= document.createElement("button");
+				a.textContent=col.label?col.label:col.data;
+				a.onclick=(function(cd){return function(e){tmp.setSort(cd);}})(col);
+				th_sort.appendChild(a);
 
-			th_filter.classList.add(col.data);
-			th_sort.classList.add(col.data);
-			if(col.class){
-				th_filter.classList.add(col.class);
-				th_sort.classList.add(col.class);
-			}
-			tr_filter.appendChild(th_filter);
-			tr_sort.appendChild(th_sort);
-		});
+				th_filter.classList.add(col.data);
+				th_sort.classList.add(col.data);
+				if(col.class){
+					th_filter.classList.add(col.class);
+					th_sort.classList.add(col.class);
+				}
+				tr_filter.appendChild(th_filter);
+				tr_sort.appendChild(th_sort);
+			});
+			var trs= document.querySelectorAll("#sub_head tr");
+			trs[0].parentNode.replaceChild(tr_filter,trs[0]);
+			trs[1].parentNode.replaceChild(tr_sort,trs[1]);
+		}
 
 
-		var cols = document.querySelectorAll("#sub_head tr");
-		cols[0].parentNode.replaceChild(tr_filter,cols[0]);
-		cols[1].parentNode.replaceChild(tr_sort,cols[1]);
 
 
 		this.createTable();
