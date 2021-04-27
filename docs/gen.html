@@ -135,20 +135,33 @@ var prepareData=function(data){
 
 	//武器
 	var part_data= data.weapon;
-	for(var i=0;i<part_data.length;i++){
-		var row = part_data[i];
-		var armor = conv(row,6);
-		armor.passive=0;
-		armor.active=row[16];
-		armor.active_effect=row[17];
-		armor.biko=row[18];
+	var mems=part_data[0];
+	part_data.forEach((row,idx)=>{
+		if(!idx)return;
+		var armor={part:6};
+		row.forEach((col,idx)=>{
+			armor[mems[idx]] = col;
+		});
 		if(armor.biko==="-"){
 			armor.biko="";
 		}
-		armor.category=row[19];
-		armor.range=row[20];
 		DATA.armors.push(armor);
-	}
+
+	});
+//	for(var i=0;i<part_data.length;i++){
+//		var row = part_data[i];
+//		var armor = conv(row,6);
+//		armor.passive=0;
+//		armor.active=row[16];
+//		armor.active_effect=row[17];
+//		armor.biko=row[18];
+//		if(armor.biko==="-"){
+//			armor.biko="";
+//		}
+//		armor.category=row[19];
+//		armor.range=row[20];
+//		DATA.armors.push(armor);
+//	}
 
 
 	DATA.armors.forEach(function(e){
@@ -172,17 +185,18 @@ var prepareData=function(data){
 	//レベル増加値
 	DATA.lv_bonus={};
 	var sheet_data = data.lv_bonus;
-	for(var i=0;i < sheet_data.length;){
+	var mems=sheet_data[0];
+	for(var i=1;i < sheet_data.length;){
 		var bonuses=[];
-		var part = sheet_data[i][0];
+		var row = sheet_data[i];
+		var part = row[0];
 		for(var j=0;j < 4;j++){
 			var bonus={};
-			var row = data.lv_bonus[i];
-			bonus.atk=row[3];
-			bonus.def=row[4];
-			bonus.spd=row[5];
-			bonus.lp =row[6];
-			bonus.bst=row[7];
+			var row = sheet_data[i];
+			row.forEach((a,idx)=>{
+				if(!idx)return;
+				bonus[mems[idx]]=a;
+			});
 			bonuses.push(bonus);
 			i++;
 		}

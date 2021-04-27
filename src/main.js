@@ -201,7 +201,7 @@ class Main {
 			if(lv==60){
 				var bonus;
 				if(armor.part===6){
-					if(armor.range===0){
+					if(armor.distance===0){
 						bonus= DATA.lv_bonus.weapon_short[r];
 					}else{
 						bonus= DATA.lv_bonus.weapon_long[r];
@@ -439,19 +439,19 @@ class Main {
 						if(part_idx===6){
 							//武器
 							cols.push({class:"status",label:"防御消費",data:"guard_cost"});
-							cols.splice(1,0,{data:"range",filter:1,disp:function(e,parent){
+							cols.splice(1,0,{data:"distance",label:"回収範囲",filter:1,disp:function(e,parent){
 								if(e[this.data]===0){
 									parent.classList.add("short");
 								}else{
 									parent.classList.add("long");
 								}
-								return DATA.range[e[this.data]];
+								return DATA.distance[e[this.data]];
 							}});
 							cols.splice(2,0,{data:"category",label:"カテゴリ",filter:1,disp:function(e,p){
 
 								if(e.category===15){
 									p.classList.add("bougu");
-								}else if(e.range===0){
+								}else if(e.distance===0){
 									p.classList.add("short");
 								}else{
 									p.classList.add("long");
@@ -591,7 +591,7 @@ class Main {
 
 
 		var dt=new Date(DATA.date);
-		values.version="code2021/03/22<br>"
+		values.version="code2021/04/28<br>"
 			+ "data"+ dt.getFullYear() +"/"+("0"+(dt.getMonth()+1)).slice(-2)
 			+"/" +("0"+dt.getDate()).slice(-2);
 

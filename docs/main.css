@@ -350,7 +350,7 @@ td.rarelity{
 	width:20px;
 }
 
-tr .range{
+tr .distance{
 	width:100px;
 	position:absolute;
 	left:300px;
@@ -413,8 +413,8 @@ td.N
 ,td.UR{
 color:#000;
 }
-tr .range{
-width:20px;
+tr .distance{
+width:80px;
 }
 td.short{
 color:#f66;
