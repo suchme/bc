@@ -382,22 +382,25 @@ class Main {
 					var cols;
 
 					cols=[
-						{label:"name",data:"name",filter:1,class:"shinki"
-							,disp:function(e){ 
-							if(e.parent === undefined){return e.name};
-							return (
-							(e.parent!=="-"?"-":"")
-							+(e.set !==""?"+":"")
-							+e.name);}}
-						,{data:"atk",label:"攻",class:"status",sort:-1}
+						{data:"atk",label:"攻",class:"status",sort:-1}
 						,{data:"def",label:"防",class:"status",sort:-1}
 						,{data:"spd",label:"速",class:"status",sort:-1}
 						,{data:"lp", label:"体",class:"status",sort:-1}
 						,{data:"bst",label:"ブ",class:"status",sort:-1}
 						];
 
+		subselector.rowhtml ="";
 					if(part_idx===0){
 						//神姫の場合
+
+						cols.splice(0,0, {label:"name",data:"name",filter:1,class:"shinki"
+							,disp:function(e){ 
+							if(e.parent === undefined){return e.name};
+							return (
+							(e.parent!=="-"?"-":"")
+							+(e.set !==""?"+":"")
+							+e.name);}}
+							);
 						cols.splice(6,0,{class:"status",label:"回復",data:"recover",sort:-1});
 						cols.splice(7,0,{class:"status",label:"走速度",data:"dash",sort:-1});
 						cols.splice(8,0,{class:"status",label:"走消費",data:"dash_cost"});
@@ -426,6 +429,14 @@ class Main {
 					}else{
 						//武装の場合
 
+						cols.splice(0,0, {label:"name",data:"name",filter:1
+							,disp:function(e){ 
+							if(e.parent === undefined){return e.name};
+							return (
+							(e.parent!=="-"?"-":"")
+							+(e.set !==""?"+":"")
+							+e.name);}}
+							);
 						if(part_idx!==6){
 							cols.push({class:"status",label:"回復",data:"recover",sort:-1});
 						}
@@ -463,23 +474,32 @@ class Main {
 									
 
 		subselector.rowhtml =`
-	<th class="pick"></th>
-	<th class="part"></th>
-	<th class="class"></th>
-	<th class="rarelity"></th>
-	<th class="name shinki"></th>
-	<th class="distance"></th>
-	<th class="category"></th>
-	<th class="atk status"></th>
-	<th class="def status"></th>
-	<th class="spd status"></th>
-	<th class="lp status"></th>
-	<th class="bst status"></th>
-	<th class="dash status"></th>
-	<th class="dash_cost status"></th>
-	<th class="guard_cost status"></th>
-	<th class="active"></th>
-	<th class="biko"></th>
+	<td>
+		<div class="name" column="name"></div>
+		<div style="margin-left:10px;">
+			<span class="part" column="part"></span>
+			<span class="rarelity">
+				<span  column="rarelity"></span>
+			</span>
+			<span class="class" column="class"></span>
+		</div>
+	</td>
+	<td style="width:60px;">
+		<div class="category" column="category"></div>
+		<div class="distance" column="distance"></div>
+	</td>
+	<td class="atk status" column="atk"></td>
+	<td class="def status" column="def"></td>
+	<td class="spd status" column="spd"></td>
+	<td class="lp status" column="lp"></td>
+	<td class="bst status" column="bst"></td>
+	<td class="dash status" column="dash"></td>
+	<td class="dash_cost status" column="dash_cost"></td>
+	<td class="guard_cost status" column="guard_cost"></td>
+	<td style="width:200px;">
+		<div class="active" column="active"></div>
+		<div class="biko" column="biko"></div>
+	</td>
 		`;
 
 						}else{
@@ -492,8 +512,11 @@ class Main {
 						}
 
 						cols.push({label:"備考",data:"biko"});
-						cols.splice(0,0,{data:"rarelity",filter:1
-							,disp:function(e){return DATA.rarelity[e.rarelity];}}); 
+						cols.splice(0,0,{data:"rarelity",filter:1,label:"レアリティ"
+							,disp:function(e,parent){
+								parent.classList.add(DATA.rarelity[e[this.data]]);
+								return DATA.rarelity[e[this.data]];
+							}});
 						cols.unshift({data:"class",label:"分類",filter:1
 							,disp:function(e){return DATA.class[e.class];}});
 						cols.unshift({data:"part",filter:1

@@ -6,7 +6,10 @@ var html = `
 		</div>
 		<div style="" class="submain">
 			<table>
-				<thead id="sub_head"> <tr> </tr> <tr> </tr> </thead>
+				<thead id="sub_head">
+					<tr class="header_filter"></tr>
+					<tr class="header_sort"></tr>
+				</thead>
 				<tbody id="sub_body"> <tr> </tr> </tbody>
 			</table>
 		</div>
@@ -23,6 +26,7 @@ export default class Subselector{
 
 		document.body.insertAdjacentHTML('beforeend',html);
 		this.back = document.body.querySelector("#subwindow .back");
+		this.dom = document.querySelector(".submain");
 	}
 
 	open(callback){
@@ -31,30 +35,33 @@ export default class Subselector{
 		var tmp = this;
 
 
-		this.rowhtml ="";
 		//ヘッダ作る
 		if(this.rowhtml !==""){
-			var tr_sort = document.createElement("tr");
-			tr_sort.classList.add("sort");
-			tr_sort.insertAdjacentHTML('beforeend',this.rowhtml);
-			var tr_filter = document.createElement("tr");
-			tr_filter.classList.add("filter");
-			tr_filter.insertAdjacentHTML('beforeend',this.rowhtml);
+			this.rowhtml  = this.rowhtml.replace(/>\s+?</g,"><");
+			console.log(this.rowhtml);
 
-			var trs= document.querySelectorAll("#sub_head tr");
-			trs[0].parentNode.replaceChild(tr_filter,trs[0]);
-			trs[1].parentNode.replaceChild(tr_sort,trs[1]);
+			document.querySelector(".header_filter").innerHTML="";
+			document.querySelector(".header_sort").innerHTML="";
+			var th = document.createElement("th");
+			th.className="pick";
+			document.querySelector(".header_filter").appendChild(th);
+			th = document.createElement("th");
+			th.className="pick";
+			document.querySelector(".header_sort").appendChild(th);
 
-			var sort= document.querySelector("#sub_head tr.sort");
+			document.querySelector(".header_filter").insertAdjacentHTML('beforeend',this.rowhtml.replace(/td/g,"th"));
+			document.querySelector(".header_sort").insertAdjacentHTML('beforeend',this.rowhtml.replace(/td/g,"th"));
 
+			var dom = this.dom;
 			cols.forEach(function(col){
-				var th_sort = sort.querySelector("th."+col.data);
+				var th_sort = dom.querySelector(".header_sort [column='"+col.data+"']");
+				if(!th_sort)return;
 				var a= document.createElement("button");
 				a.textContent=col.label?col.label:col.data;
 				a.onclick=(function(cd){return function(e){tmp.setSort(cd);}})(col);
 				th_sort.appendChild(a);
 
-				th_sort.classList.add(col.data);
+//				th_sort.classList.add(col.data);
 				if(col.class){
 					th_sort.classList.add(col.class);
 				}
@@ -62,9 +69,9 @@ export default class Subselector{
 
 		}else{
 			var tr_sort = document.createElement("tr");
-			tr_sort.classList.add("sort");
+			tr_sort.classList.add("header_sort");
 			var tr_filter = document.createElement("tr");
-			tr_filter.classList.add("filter");
+			tr_filter.classList.add("header_filter");
 
 			var th = document.createElement("th");
 			th.className="pick";
@@ -85,6 +92,8 @@ export default class Subselector{
 
 				th_filter.classList.add(col.data);
 				th_sort.classList.add(col.data);
+				th_filter.setAttribute("column",col.data);
+				th_sort.setAttribute("column",col.data);
 				if(col.class){
 					th_filter.classList.add(col.class);
 					th_sort.classList.add(col.class);
@@ -138,7 +147,7 @@ export default class Subselector{
 
 		cols.forEach(function(cols){
 			var filter= filters[cols.data];
-			var th = document.querySelector("tr.filter th."+cols.data);
+			var th = document.querySelector(".header_filter [column='"+cols.data+"']");
 			th.innerHTML="";
 			if(filter){
 				filter.forEach(function(e,idx){
@@ -178,45 +187,88 @@ export default class Subselector{
 		var tbody = document.querySelector("#sub_body");
 		tbody.innerHTML="";
 
-		for(var i=0;i<data.length;i++){
-			var rowdata = data[i];
-			var tr;
-			tr = document.createElement("tr");
+		if(this.rowhtml ===""){
 
-			var th = document.createElement("th");
-			th.className="pick";
-			var span = document.createElement("button");
-			span.textContent = "選択";
-			span.className="pick";
-			span.onclick=(function(r){return function(e){tmp.close(r);}})(rowdata);
-			th.appendChild(span);
-			tr.appendChild(th);
+			for(var i=0;i<data.length;i++){
+				var rowdata = data[i];
+				var tr;
+				tr = document.createElement("tr");
 
-			cols.forEach(function(col){
-				var td = document.createElement("td");
-				var content =  typeof col.disp == "function"?col.disp(rowdata,td):rowdata[col.data];
-				td.classList.add(col.data);
-				if(col.class){
-					td.classList.add(col.class);
-				}
-				if(content===0){
-					td.classList.add("zero");
-				}
-				if(content<0){
-					td.classList.add("minus");
-				}
-				var span = td;//document.createElement("span");
-				span.innerHTML= content;
-				//td.appendChild(span);
-				if(col.filter){
-					span.classList.add("filtertarget");
-					span.onclick=(function(cd,value){return function(e){tmp.setFilter(cd,[value]);}})(col.data,rowdata[col.data]);
-				}
-				tr.appendChild(td);
-			});
+				var th = document.createElement("th");
+				th.className="pick";
+				var span = document.createElement("button");
+				span.textContent = "選択";
+				span.className="pick";
+				span.onclick=(function(r){return function(e){tmp.close(r);}})(rowdata);
+				th.appendChild(span);
+				tr.appendChild(th);
+
+				cols.forEach(function(col){
+					var td = document.createElement("td");
+					var content =  typeof col.disp == "function"?col.disp(rowdata,td):rowdata[col.data];
+					td.classList.add(col.data);
+					if(col.class){
+						td.classList.add(col.class);
+					}
+					if(content===0){
+						td.classList.add("zero");
+					}
+					if(content<0){
+						td.classList.add("minus");
+					}
+					var span = td;//document.createElement("span");
+					span.innerHTML= content;
+					//td.appendChild(span);
+					if(col.filter){
+						span.classList.add("filtertarget");
+						span.onclick=(function(cd,value){return function(e){tmp.setFilter(cd,[value]);}})(col.data,rowdata[col.data]);
+					}
+					tr.appendChild(td);
+				});
 
 
-			tbody.appendChild(tr);
+				tbody.appendChild(tr);
+			}
+		}else{
+			for(var i=0;i<data.length;i++){
+				var rowdata = data[i];
+				tr = document.createElement("tr");
+
+				var th = document.createElement("th");
+				th.className="pick";
+				var span = document.createElement("button");
+				span.textContent = "選択";
+				span.className="pick";
+				span.onclick=(function(r){return function(e){tmp.close(r);}})(rowdata);
+				th.appendChild(span);
+				tr.appendChild(th);
+				tr.insertAdjacentHTML('beforeend',this.rowhtml);
+
+				cols.forEach(function(col){
+					var td = tr.querySelector("[column='"+col.data+"']");
+					var content =  typeof col.disp == "function"?col.disp(rowdata,td):rowdata[col.data];
+					//td.classList.add(col.data);
+					if(col.class){
+						td.classList.add(col.class);
+					}
+					if(content===0){
+						td.classList.add("zero");
+					}
+					if(content<0){
+						td.classList.add("minus");
+					}
+					var span = td;//document.createElement("span");
+					span.innerHTML= content;
+					//td.appendChild(span);
+					if(col.filter){
+						span.classList.add("filtertarget");
+						span.onclick=(function(cd,value){return function(e){tmp.setFilter(cd,[value]);}})(col.data,rowdata[col.data]);
+					}
+				});
+
+
+				tbody.appendChild(tr);
+			}
 		}
 
 

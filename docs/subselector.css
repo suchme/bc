@@ -1,0 +1,227 @@
+tr span.rarelity{
+padding:1px;
+
+}
+tr div{
+	margin-bottom:2px;
+	
+}
+th ::before,
+th ::after{
+	content:"" !important;
+}
+/*サブウィンド*/
+div.subwindow{
+	position:fixed;
+	z-index:100;
+	width:100%;
+	height:100%;
+	padding:0px;
+	left:0px;
+	top:0px;
+	text-align:center;
+}
+div.back{
+	position:absolute;
+	width:100%;
+	height:100%;
+	background-color:#000;
+	opacity:0.6;
+}
+div.submain{
+	text-align:left;
+	display:inline-block;
+	position:relative;
+	background-color:#222;
+	height:90%;
+	max-width:90%;
+	margin:20px;
+}
+table{
+	height:100%;
+	width:100%;
+	overflow:auto;
+	display:block;
+	text-align:left;
+}
+tbody tr{
+	white-space:nowrap;
+	vertical-align:top;
+}
+tr{
+	position:relative;
+	display:block;
+}
+tr td{
+	white-space:pre-wrap;
+}
+thead{
+	position:sticky;
+	display:table-caption;
+	top:0;
+	z-index:100;
+	background-color:#111;
+}
+tbody th{
+	position:sticky;
+	left:0;
+	background-color:#111;
+	z-index:99;
+}
+tbody{
+	font-size:smaller;
+	height:90%;
+}
+th{
+	overflow:hidden;
+
+}
+th.cat{
+	text-align:center;
+}
+th,td{
+	margin-left:4px ;
+	white-space: nowrap;
+	overflow:hidden;
+	display:inline-block;
+}
+table tbody tr:nth-child(odd) {
+	background: #333;
+}
+
+tr .category{
+	width:60px;
+}
+tr .active{
+	width:200px;
+}
+
+tr .passive{
+	width:300px;
+}
+tr .biko{
+	width:300px;
+	left:600px;
+	bottom:2px;
+}
+tr .name{
+width:260px;
+	font-size:medium;
+	padding:2px;
+	font-weight:bold;
+
+}
+th.status::before{
+	content:"" !important;
+}
+tr .status{
+	width:30px;
+	margin:1px;
+}
+tr .name{
+	white-space: normal;
+}
+
+.filtertarget{
+	cursor:cell;
+	text-decoration:underline dotted ;
+}
+tr .category::before{
+	content:"[";
+}
+tr .category::after{
+	content:"]";
+}
+tr .part{
+	width:80px;
+	display:inline-block;
+	text-align:inherit;
+color:#999;
+}
+tr .class{
+	width:100px;
+	left:70px;
+	bottom:2px;
+	color:#999;
+}
+tr .rarelity{
+	width:60px;
+	color:#000;
+}
+
+tr .distance{
+	width:100px;
+	left:300px;
+	bottom:0px;
+}
+button.pick{
+	background-color:#c00;
+	color:#fff;
+	width:30px;
+	height:32px;
+}
+tr.header_sort button{
+text-decoration: underline;
+    background: none;
+    color: #fff;
+padding:0px;
+}
+tr .cat:nth-child(-n+22){
+	background-color:#311;
+}
+tr .cat:nth-child(+n+22){
+	background-color:#133;
+}
+tr .cat:nth-child(+n+28){
+	background-color:#313;
+}
+
+tr .cat{
+	width:20px;
+}
+td.cat{
+	text-align:right;
+}
+
+tr .shinki{
+width:140px !important;
+}
+tr .recover
+,tr .dash
+,tr .dash_cost
+,tr .jump_cost
+,tr .guard_cost
+,tr .hover_cost
+{
+	width:30px !important;
+}
+th.status{
+	text-align:inherit;
+	position:inherit;
+	background-color:inherit;
+}
+tr th.pick{
+	width:60px;
+}
+tr:nth-child(odd) th.pick {
+	text-align:right;
+}
+td.N
+,td.R
+,td.SR
+,td.UR{
+color:#000;
+}
+tr .distance{
+width:80px;
+}
+tr .short{
+color:#f66;
+}
+tr .long{
+color:#0cf;
+}
+tr .bougu{
+color:#939;
+}
+
