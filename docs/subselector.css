@@ -1,13 +1,14 @@
-tr span.rarelity{
-padding:1px;
-
+tr{
+	white-space:nowrap;
+	position:relative;
+	display:block;
 }
-tr div{
-	margin-bottom:2px;
-	
+thead span{
+	background-color:inherit !important;
+	vertical-align:bottom;
 }
-th ::before,
-th ::after{
+thead ::before,
+thead ::after{
 	content:"" !important;
 }
 /*サブウィンド*/
@@ -44,14 +45,6 @@ table{
 	display:block;
 	text-align:left;
 }
-tbody tr{
-	white-space:nowrap;
-	vertical-align:top;
-}
-tr{
-	position:relative;
-	display:block;
-}
 tr td{
 	white-space:pre-wrap;
 }
@@ -64,7 +57,6 @@ thead{
 }
 tbody th{
 	position:sticky;
-	left:0;
 	background-color:#111;
 	z-index:99;
 }
@@ -80,8 +72,6 @@ th.cat{
 	text-align:center;
 }
 th,td{
-	margin-left:4px ;
-	white-space: nowrap;
 	overflow:hidden;
 	display:inline-block;
 }
@@ -101,47 +91,39 @@ tr .passive{
 }
 tr .biko{
 	width:300px;
-	left:600px;
-	bottom:2px;
 }
 tr .name{
-width:260px;
-	font-size:medium;
-	padding:2px;
+	width:300px;
+	font-size:larger;
 	font-weight:bold;
+	white-space: nowrap;
+	overflow:hidden;
 
-}
-th.status::before{
-	content:"" !important;
+	padding:4px;
+
 }
 tr .status{
 	width:30px;
-	margin:1px;
-}
-tr .name{
-	white-space: normal;
 }
 
 .filtertarget{
 	cursor:cell;
 	text-decoration:underline dotted ;
 }
-tr .category::before{
+.category::before{
 	content:"[";
 }
-tr .category::after{
+.category::after{
 	content:"]";
 }
-tr .part{
+.part{
 	width:80px;
 	display:inline-block;
 	text-align:inherit;
-color:#999;
+	color:#999;
 }
-tr .class{
+.class{
 	width:100px;
-	left:70px;
-	bottom:2px;
 	color:#999;
 }
 tr .rarelity{
@@ -151,8 +133,13 @@ tr .rarelity{
 
 tr .distance{
 	width:100px;
-	left:300px;
-	bottom:0px;
+}
+
+tr th.pick{
+	width:60px;
+}
+tr:nth-child(odd) th.pick {
+	text-align:right;
 }
 button.pick{
 	background-color:#c00;
@@ -166,23 +153,20 @@ text-decoration: underline;
     color: #fff;
 padding:0px;
 }
-tr .cat:nth-child(-n+22){
+tr .cat.short{
 	background-color:#311;
 }
-tr .cat:nth-child(+n+22){
+tr .cat.long{
 	background-color:#133;
 }
-tr .cat:nth-child(+n+28){
+tr .cat.bougu{
 	background-color:#313;
 }
 
 tr .cat{
 	width:20px;
-}
-td.cat{
 	text-align:right;
 }
-
 tr .shinki{
 width:140px !important;
 }
@@ -195,17 +179,6 @@ tr .recover
 {
 	width:30px !important;
 }
-th.status{
-	text-align:inherit;
-	position:inherit;
-	background-color:inherit;
-}
-tr th.pick{
-	width:60px;
-}
-tr:nth-child(odd) th.pick {
-	text-align:right;
-}
 td.N
 ,td.R
 ,td.SR
@@ -215,13 +188,45 @@ color:#000;
 tr .distance{
 width:80px;
 }
-tr .short{
+tr .category.short
+, .distance.short{
 color:#f66;
 }
-tr .long{
+tr .category.long
+, .distance.long{
 color:#0cf;
 }
-tr .bougu{
+tr .category.bougu{
 color:#939;
 }
 
+span.guarge_parent{
+	width: 102px;
+	height: 2px;
+	display: block;
+	background-color: #000;
+	padding-left:1px;
+	padding-right:1px;
+}
+div.guarge_child{
+	width:20%;
+	height:100%;
+	background-color: #ccc;
+}
+
+tr .guarge
+{
+	width:110px;
+	margin:0px;
+	padding:0px;
+}
+tr .flying{
+	width:20px;
+}
+tbody .guarge_title{
+	font-size:6px;
+}
+thead .guarge_parent
+,thead .guarge_title{
+	display:none;
+}

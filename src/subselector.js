@@ -148,6 +148,8 @@ export default class Subselector{
 		cols.forEach(function(cols){
 			var filter= filters[cols.data];
 			var th = document.querySelector(".header_filter [column='"+cols.data+"']");
+			if(!th)return;
+
 			th.innerHTML="";
 			if(filter){
 				filter.forEach(function(e,idx){
@@ -246,6 +248,7 @@ export default class Subselector{
 
 				cols.forEach(function(col){
 					var td = tr.querySelector("[column='"+col.data+"']");
+					if(!td)return;
 					var content =  typeof col.disp == "function"?col.disp(rowdata,td):rowdata[col.data];
 					//td.classList.add(col.data);
 					if(col.class){
@@ -258,7 +261,9 @@ export default class Subselector{
 						td.classList.add("minus");
 					}
 					var span = td;//document.createElement("span");
-					span.innerHTML= content;
+					if(content || content===0){
+						span.innerHTML= content;
+					}
 					//td.appendChild(span);
 					if(col.filter){
 						span.classList.add("filtertarget");

@@ -3,6 +3,7 @@
 import DATA from "./data.js";
 import Binder from "./binder.js";
 import Subselector from "./subselector.js";
+import SubLayout from "./sub_layout.js";
 
 var values={total:{},subtotal:{},extra_passives:[],bonus:{}};
 var binder = new Binder();
@@ -388,68 +389,21 @@ class Main {
 						,{data:"lp", label:"体",class:"status",sort:-1}
 						,{data:"bst",label:"ブ",class:"status",sort:-1}
 						];
+					cols.splice(6,0,{class:"status",label:"回復",data:"recover",sort:-1});
+					cols.splice(7,0,{class:"status",label:"走速度",data:"dash",sort:-1});
+					cols.splice(8,0,{class:"status",label:"走消費",data:"dash_cost"});
+					cols.splice(9,0,{class:"status",label:"跳消費",data:"jump_cost"});
+					cols.splice(10,0,{class:"status",label:"浮消費",data:"hover_cost"});
+					cols.splice(10,0,{class:"status",label:"防御消費",data:"guard_cost"});
+					cols.splice(0,0, {label:"name",data:"name",filter:1
+						,disp:function(e){ 
+						if(e.parent === undefined){return e.name};
+						return (
+						(e.parent!=="-"?"-":"")
+						+(e.set !==""?"+":"")
+						+e.name);}}
+						);
 
-		subselector.rowhtml ="";
-					if(part_idx===0){
-						//神姫の場合
-
-						cols.splice(0,0, {label:"name",data:"name",filter:1,class:"shinki"
-							,disp:function(e){ 
-							if(e.parent === undefined){return e.name};
-							return (
-							(e.parent!=="-"?"-":"")
-							+(e.set !==""?"+":"")
-							+e.name);}}
-							);
-						cols.splice(6,0,{class:"status",label:"回復",data:"recover",sort:-1});
-						cols.splice(7,0,{class:"status",label:"走速度",data:"dash",sort:-1});
-						cols.splice(8,0,{class:"status",label:"走消費",data:"dash_cost"});
-						cols.splice(9,0,{class:"status",label:"跳消費",data:"jump_cost"});
-						cols.splice(10,0,{class:"status",label:"浮消費",data:"hover_cost"});
-						cols.splice(10,0,{class:"status",label:"防御消費",data:"guard_cost"});
-						subselector.filter={};
-						var datalist = [];
-						DATA.shinkis.forEach(function(e2){
-							var data={};
-							cols.forEach(function(e){
-								data[e.data]=e2[e.data];
-							});
-							DATA.category_short.forEach(function(e,idx){
-								if(idx===0)return;
-								data["cat"+idx]=e2.apts[idx];
-							});
-							data.cd = e2.cd;
-							datalist.push(data);
-						});
-						subselector.source= datalist;
-						DATA.category_short.forEach(function(e,idx){
-							if(idx===0)return;
-							cols.push({label:e,data:"cat"+idx,class:"cat",sort:-1})
-						});
-					}else{
-						//武装の場合
-
-						cols.splice(0,0, {label:"name",data:"name",filter:1
-							,disp:function(e){ 
-							if(e.parent === undefined){return e.name};
-							return (
-							(e.parent!=="-"?"-":"")
-							+(e.set !==""?"+":"")
-							+e.name);}}
-							);
-						if(part_idx!==6){
-							cols.push({class:"status",label:"回復",data:"recover",sort:-1});
-						}
-						cols.push({class:"status",label:"走速度",data:"dash",sort:-1});
-						cols.push({class:"status",label:"走消費",data:"dash_cost"});
-						//cols.push({class:"status",label:"跳消費",class:"cost",data:"jump_cost"});
-						if(part_idx===5){
-							cols.push({class:"status",label:"浮消費",data:"hover_cost"});
-						}
-
-						if(part_idx===6){
-							//武器
-							cols.push({class:"status",label:"防御消費",data:"guard_cost"});
 							cols.splice(1,0,{data:"distance",label:"回収範囲",filter:1,disp:function(e,parent){
 								if(e[this.data]===0){
 									parent.classList.add("short");
@@ -472,44 +426,13 @@ class Main {
 							cols.push({data:"active",filter:1,disp:function(e){
 									return getSkillName(DATA.actives[e.active],e.active_effect); }}); 
 									
+							cols.push({label:"リキャスト",data:"recast",disp:SubLayout.guarge});
+							cols.push({label:"リロード",data:"reload",disp:SubLayout.guarge});
+							cols.push({label:"射程",data:"range",disp:SubLayout.guarge});
 
-		subselector.rowhtml =`
-	<td>
-		<div class="name" column="name"></div>
-		<div style="margin-left:10px;">
-			<span class="part" column="part"></span>
-			<span class="rarelity">
-				<span  column="rarelity"></span>
-			</span>
-			<span class="class" column="class"></span>
-		</div>
-	</td>
-	<td style="width:60px;">
-		<div class="category" column="category"></div>
-		<div class="distance" column="distance"></div>
-	</td>
-	<td class="atk status" column="atk"></td>
-	<td class="def status" column="def"></td>
-	<td class="spd status" column="spd"></td>
-	<td class="lp status" column="lp"></td>
-	<td class="bst status" column="bst"></td>
-	<td class="dash status" column="dash"></td>
-	<td class="dash_cost status" column="dash_cost"></td>
-	<td class="guard_cost status" column="guard_cost"></td>
-	<td style="width:200px;">
-		<div class="active" column="active"></div>
-		<div class="biko" column="biko"></div>
-	</td>
-		`;
-
-						}else{
-							//防具
+							cols.push({data:"flying",label:"飛行",filter:1,disp:function(e){return DATA.flying[e.flying]}});
 							cols.push({data:"passive",filter:1,disp:function(e){
 									return getSkillName(DATA.passives[e.passive],e.effect); }}); 
-						}
-						if(part_idx===5){
-							cols.push({data:"flying",label:"飛行",filter:1,disp:function(e){return DATA.flying[e.flying]}});
-						}
 
 						cols.push({label:"備考",data:"biko"});
 						cols.splice(0,0,{data:"rarelity",filter:1,label:"レアリティ"
@@ -521,6 +444,59 @@ class Main {
 							,disp:function(e){return DATA.class[e.class];}});
 						cols.unshift({data:"part",filter:1
 							,disp:function(e){return DATA.part_name[e.part]}});
+					subselector.rowhtml = SubLayout.arr[part_idx];
+					if(part_idx===0){
+						//神姫の場合
+
+						//cols.splice(0,0, {label:"name",data:"name",filter:1,class:"shinki"
+						//	,disp:function(e){ 
+						//	if(e.parent === undefined){return e.name};
+						//	return (
+						//	(e.parent!=="-"?"-":"")
+						//	+(e.set !==""?"+":"")
+						//	+e.name);}}
+						//	);
+						subselector.filter={};
+						var datalist = [];
+						DATA.shinkis.forEach(function(e2){
+							var data={};
+							cols.forEach(function(e){
+								data[e.data]=e2[e.data];
+							});
+							DATA.category_short.forEach(function(e,idx){
+								if(idx===0)return;
+								data["cat"+idx]=e2.apts[idx];
+							});
+							data.cd = e2.cd;
+							datalist.push(data);
+						});
+						subselector.source= datalist;
+						DATA.category_short.forEach(function(e,idx){
+							if(idx===0)return;
+							cols.push({label:e,data:"cat"+idx,class:"cat",sort:-1})
+						});
+					}else{
+						//武装の場合
+
+						//if(part_idx!==6){
+						//	cols.push({class:"status",label:"回復",data:"recover",sort:-1});
+						//}
+						//cols.push({class:"status",label:"走速度",data:"dash",sort:-1});
+						//cols.push({class:"status",label:"走消費",data:"dash_cost"});
+						//if(part_idx===5){
+						//	cols.push({class:"status",label:"浮消費",data:"hover_cost"});
+						//}
+
+						if(part_idx===6){
+							//武器
+							//cols.push({class:"status",label:"防御消費",data:"guard_cost"});
+
+
+						}else{
+							//防具
+						}
+						if(part_idx===5){
+						}
 						subselector.filter={part:[part_idx],rarelity:[rarelity]};
 						subselector.source= DATA.armors;
 					}
