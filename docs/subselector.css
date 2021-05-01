@@ -1,6 +1,5 @@
 tr{
 	white-space:nowrap;
-	position:relative;
 	display:block;
 }
 thead span{
@@ -45,9 +44,6 @@ table{
 	display:block;
 	text-align:left;
 }
-tr td{
-	white-space:pre-wrap;
-}
 thead{
 	position:sticky;
 	display:table-caption;
@@ -55,22 +51,17 @@ thead{
 	z-index:100;
 	background-color:#111;
 }
-tbody th{
+th{
 	position:sticky;
 	background-color:#111;
 	z-index:99;
+	left:0px;
 }
 tbody{
 	font-size:smaller;
 	height:90%;
 }
-th{
-	overflow:hidden;
 
-}
-th.cat{
-	text-align:center;
-}
 th,td{
 	overflow:hidden;
 	display:inline-block;
@@ -97,10 +88,12 @@ tr .name{
 	font-size:larger;
 	font-weight:bold;
 	white-space: nowrap;
-	overflow:hidden;
-
-	padding:4px;
-
+}
+tbody .name{
+padding:4px;
+}
+tbody span{
+	vertical-align:top;
 }
 tr .status{
 	width:30px;
@@ -126,9 +119,22 @@ tr .status{
 	width:100px;
 	color:#999;
 }
+
+thead .name button{
+	margin-left:40px;
+	
+
+}
+.rarelity button{
+	white-space:nowrap;
+}
 tr .rarelity{
-	width:60px;
+	width:20px;
 	color:#000;
+	text-align:center;
+}
+tr .divname{
+overflow:hidden;
 }
 
 tr .distance{
@@ -137,6 +143,8 @@ tr .distance{
 
 tr th.pick{
 	width:60px;
+height:100%;
+	
 }
 tr:nth-child(odd) th.pick {
 	text-align:right;
@@ -185,28 +193,35 @@ td.N
 ,td.UR{
 color:#000;
 }
-tr .distance{
-width:80px;
+tbody .distance span{
+padding:1px;
 }
-tr .category.short
-, .distance.short{
+tbody .distance span.short{
+	background-color:#c00;
+}
+tbody .distance span.long{
+	background-color:#039;
+}
+
+
+tr .category.short{
 color:#f66;
 }
-tr .category.long
-, .distance.long{
+tr .category.long{
 color:#0cf;
 }
 tr .category.bougu{
 color:#939;
 }
 
+span.guarge{
+	width: 80px;
+}
+
 span.guarge_parent{
-	width: 102px;
-	height: 2px;
+	height: 3px;
 	display: block;
 	background-color: #000;
-	padding-left:1px;
-	padding-right:1px;
 }
 div.guarge_child{
 	width:20%;
@@ -216,9 +231,9 @@ div.guarge_child{
 
 tr .guarge
 {
-	width:110px;
-	margin:0px;
+	margin:2px;
 	padding:0px;
+	color:#999;
 }
 tr .flying{
 	width:20px;
@@ -229,4 +244,100 @@ tbody .guarge_title{
 thead .guarge_parent
 ,thead .guarge_title{
 	display:none;
+}
+
+
+
+
+.class.s17{
+	/* バニー*/
+	color:#666;
+}
+.class.s15{
+	/* サイフォス*/
+	color:#39c;
+}
+.class.s16{
+	/* 紅緒*/
+	color:#900;
+}
+.class.s2{
+	/* ツガル */
+	color:#f00;
+}
+.class.s3{
+	/* ジルダリア*/
+	color:#06f;
+}
+.class.s4{
+	/* ジュビジー */
+	color:#6c6;
+}
+
+.class.s5{
+	/*エウクランテ*/
+	color:#93c;
+}
+.class.s6{
+	/*イーアネイラ*/
+	color:#cc3;
+}
+
+.class.s18{
+	/* ヴァッフェドルフィン*/
+	color:#666;
+}
+
+.class.s7{
+	/* シュメッターリング */
+	color:#c99;
+}
+
+.class.s19{
+	/**ウェルクストラ*/
+	color:#ccc;
+}
+.class.s20{
+	/* ヴァローナ*/
+	color:#33c;
+}
+.class.s8{
+	/* ブライトフェザー*/
+	color:#6c6;
+}
+.class.s9{
+	/* ハーモニーグレイス*/
+	color:#999;
+}
+.class.s21{
+	color:#63c;/*レーネ*/
+
+}
+.class.s22{
+	color:#900;/*アイネス*/
+}
+.class.s0{
+	color:#ccc;/*アーンヴァルmk2*/
+}
+.class.s1{
+	color:#33f;/*ストラーフmk2*/
+}
+.class.s10{
+	color:#900;/*ガブ*/
+}
+.class.s11{
+	color:#999;/*蓮華*/
+}
+.class.s12{
+	color:#66c;/*ラプ*/
+}
+.class.s13{
+	color:#c99;/*アーティル*/
+}
+.class.s14{
+	color:#393;/*エーデル*/
+}
+
+span.sep{
+width:6px;
 }

@@ -38,7 +38,6 @@ export default class Subselector{
 		//ヘッダ作る
 		if(this.rowhtml !==""){
 			this.rowhtml  = this.rowhtml.replace(/>\s+?</g,"><");
-			console.log(this.rowhtml);
 
 			document.querySelector(".header_filter").innerHTML="";
 			document.querySelector(".header_sort").innerHTML="";
@@ -49,8 +48,13 @@ export default class Subselector{
 			th.className="pick";
 			document.querySelector(".header_sort").appendChild(th);
 
-			document.querySelector(".header_filter").insertAdjacentHTML('beforeend',this.rowhtml.replace(/td/g,"th"));
-			document.querySelector(".header_sort").insertAdjacentHTML('beforeend',this.rowhtml.replace(/td/g,"th"));
+			th = document.createElement("th");
+			th.insertAdjacentHTML('beforeend',this.rowhtml);
+			document.querySelector(".header_filter").appendChild(th);
+
+			th = document.createElement("th");
+			th.insertAdjacentHTML('beforeend',this.rowhtml);
+			document.querySelector(".header_sort").appendChild(th);
 
 			var dom = this.dom;
 			cols.forEach(function(col){
@@ -244,7 +248,10 @@ export default class Subselector{
 				span.onclick=(function(r){return function(e){tmp.close(r);}})(rowdata);
 				th.appendChild(span);
 				tr.appendChild(th);
-				tr.insertAdjacentHTML('beforeend',this.rowhtml);
+
+				var td = document.createElement("td");
+				td.insertAdjacentHTML('beforeend',this.rowhtml);
+				tr.appendChild(td);
 
 				cols.forEach(function(col){
 					var td = tr.querySelector("[column='"+col.data+"']");

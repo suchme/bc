@@ -395,7 +395,7 @@ class Main {
 					cols.splice(9,0,{class:"status",label:"跳消費",data:"jump_cost"});
 					cols.splice(10,0,{class:"status",label:"浮消費",data:"hover_cost"});
 					cols.splice(10,0,{class:"status",label:"防御消費",data:"guard_cost"});
-					cols.splice(0,0, {label:"name",data:"name",filter:1
+					cols.splice(0,0, {label:"名称",data:"name",filter:1
 						,disp:function(e){ 
 						if(e.parent === undefined){return e.name};
 						return (
@@ -423,15 +423,23 @@ class Main {
 								}
 
 								return DATA.category_short[e.category];}}); 
-							cols.push({data:"active",filter:1,disp:function(e){
-									return getSkillName(DATA.actives[e.active],e.active_effect); }}); 
+							cols.push({data:"active",label:"アクティブスキル",filter:1,disp:function(e,parent){
+								if(e.active===0){
+									parent.style.display = "none";
+								}
+								return getSkillName(DATA.actives[e.active],e.active_effect);
+							}}); 
 									
 							cols.push({label:"リキャスト",data:"recast",disp:SubLayout.guarge});
 							cols.push({label:"リロード",data:"reload",disp:SubLayout.guarge});
 							cols.push({label:"射程",data:"range",disp:SubLayout.guarge});
 
 							cols.push({data:"flying",label:"飛行",filter:1,disp:function(e){return DATA.flying[e.flying]}});
-							cols.push({data:"passive",filter:1,disp:function(e){
+							cols.push({data:"passive",label:"パッシブスキル",filter:1,disp:function(e,parent){
+
+									if(e.passive===0){
+										parent.style.display = "none";
+									}
 									return getSkillName(DATA.passives[e.passive],e.effect); }}); 
 
 						cols.push({label:"備考",data:"biko"});
@@ -441,8 +449,10 @@ class Main {
 								return DATA.rarelity[e[this.data]];
 							}});
 						cols.unshift({data:"class",label:"分類",filter:1
-							,disp:function(e){return DATA.class[e.class];}});
-						cols.unshift({data:"part",filter:1
+							,disp:function(e,node){
+								node.classList.add(DATA.class_shinki[e.class]);
+								return DATA.class[e.class];}});
+						cols.unshift({data:"part",label:"部位",filter:1
 							,disp:function(e){return DATA.part_name[e.part]}});
 					subselector.rowhtml = SubLayout.arr[part_idx];
 					if(part_idx===0){
@@ -610,7 +620,7 @@ class Main {
 
 
 		var dt=new Date(DATA.date);
-		values.version="code2021/04/28<br>"
+		values.version="code2021/05/01<br>"
 			+ "data"+ dt.getFullYear() +"/"+("0"+(dt.getMonth()+1)).slice(-2)
 			+"/" +("0"+dt.getDate()).slice(-2);
 
@@ -658,6 +668,7 @@ class Main {
 		//パッシブサブ画面
 		var span = document.querySelector("#add_extra_passive");
 		span.addEventListener("click",(e)=>{
+			subselector.rowhtml="";
 
 			subselector.cols=[
 				{label:"パッシブスキル",data:"name",filter:1,disp:function(e){

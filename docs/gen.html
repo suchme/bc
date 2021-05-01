@@ -216,6 +216,17 @@ var prepareData=function(data){
 	});
 
 
+	//分類と神姫紐づけ
+	DATA.class_shinki={};
+	DATA.class.forEach((elem,idx)=>{
+		var target = elem;
+		var shinki = DATA.shinkis.find((a)=>{return a.name === target});
+		if(shinki){
+			DATA.class_shinki[idx]=shinki.cd;
+		}
+	});
+
+
 	DATA.date= Date.now();
 
 

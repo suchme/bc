@@ -22,6 +22,7 @@ button{
     border: 0;
     border-radius: 2px;
 	margin:1px;
+	padding:1px;
 	white-space:pre-wrap;
 	line-height:90%;
 }
@@ -37,6 +38,7 @@ select{
 	margin:1px;
 }
 select.rarelity{
+	font-weight:bold;
 	width:30px;
 }
 select.lv{
@@ -60,13 +62,12 @@ span.setting{
 	width:160px;
 	  text-align:right;
 }
+span.setting span.part{
+color:white;
+}
 span.detail{
 	width:240px;
 }
-span.part{
-	text-align:right;
-}
-
 .status{
 	text-align:right;
 	width:40px;
@@ -116,11 +117,14 @@ opacity:40%;
 	content:'回';
 }
 .zero{
-	color:#999;
+	color:#999 !important;
 	font-weight:normal;
 }
 .minus{
 	color:#f33;
+}
+.minus.cost{
+	color:#33f;
 }
 .status.recover{
 	background-color:#66c;
@@ -152,19 +156,20 @@ opacity:40%;
 ,.status.hover_cost
 ,.status.guard_cost
 ,.status.cost{
-	background-color:#611;
+	background-color:#411;
+	color:#c33;
 }
 .N{
 	background-color:#eee;
 }
 .R{
-	background-color:#fc3;
+	background-color:#f93;
 }
 .SR{
-	background-color:#ccf;
+	background-color:#99f;
 }
 .UR{
-	background-color:#ff6;
+	background-color:#ff3;
 }
 
 
@@ -197,9 +202,6 @@ span.active{
 }
 span.apt{
 	margin-left:2px;
-}
-span.minus{
-	color:#f00;
 }
 
 :not(th).part::before{
