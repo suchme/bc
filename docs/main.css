@@ -38,8 +38,8 @@ select{
 	margin:1px;
 }
 select.rarelity{
-	font-weight:bold;
 	width:30px;
+	text-align:center;
 }
 select.lv{
 	width:20px;

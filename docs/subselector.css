@@ -2,6 +2,9 @@ tr{
 	white-space:nowrap;
 	display:block;
 }
+tbody tr{
+	padding: 6px 0;
+}
 thead span{
 	background-color:inherit !important;
 	vertical-align:bottom;
@@ -142,18 +145,13 @@ tr .distance{
 }
 
 tr th.pick{
-	width:60px;
-height:100%;
-	
-}
-tr:nth-child(odd) th.pick {
-	text-align:right;
+	width:30px;
 }
 button.pick{
 	background-color:#c00;
 	color:#fff;
-	width:30px;
 	height:32px;
+	padding:2px;
 }
 tr.header_sort button{
 text-decoration: underline;
