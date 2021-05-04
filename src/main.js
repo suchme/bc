@@ -457,15 +457,6 @@ class Main {
 					subselector.rowhtml = SubLayout.arr[part_idx];
 					if(part_idx===0){
 						//神姫の場合
-
-						//cols.splice(0,0, {label:"name",data:"name",filter:1,class:"shinki"
-						//	,disp:function(e){ 
-						//	if(e.parent === undefined){return e.name};
-						//	return (
-						//	(e.parent!=="-"?"-":"")
-						//	+(e.set !==""?"+":"")
-						//	+e.name);}}
-						//	);
 						subselector.filter={};
 						var datalist = [];
 						DATA.shinkis.forEach(function(e2){
@@ -486,30 +477,10 @@ class Main {
 							cols.push({label:e,data:"cat"+idx,class:"cat",sort:-1})
 						});
 					}else{
-						//武装の場合
-
-						//if(part_idx!==6){
-						//	cols.push({class:"status",label:"回復",data:"recover",sort:-1});
-						//}
-						//cols.push({class:"status",label:"走速度",data:"dash",sort:-1});
-						//cols.push({class:"status",label:"走消費",data:"dash_cost"});
-						//if(part_idx===5){
-						//	cols.push({class:"status",label:"浮消費",data:"hover_cost"});
-						//}
-
-						if(part_idx===6){
-							//武器
-							//cols.push({class:"status",label:"防御消費",data:"guard_cost"});
-
-
-						}else{
-							//防具
-						}
-						if(part_idx===5){
-						}
 						subselector.filter={part:[part_idx],rarelity:[rarelity]};
 						subselector.source= DATA.armors;
 					}
+					subselector.sort=[];
 					subselector.cols=cols;
 					subselector.open(function(e){
 						if(!e){ return; }

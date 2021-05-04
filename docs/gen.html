@@ -17,6 +17,8 @@
 <script type="text/javascript">
 "use strict";
 var DATA={shinkis:[],armors:[],individuals:[]};
+
+
 //データ整形ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 
 var mem=[ "cd","set","class","name","rarelity"
@@ -25,16 +27,11 @@ var mem=[ "cd","set","class","name","rarelity"
 	,"dash_cost","jump_cost","hover_cost","guard_cost"
 	,"passive","effect","active","active_effect"
 	,"biko"];
-var conv=function(row,n){
+var conv=function(){
 	var armor = {};
-
-
-	armor.part=n;
-
 	mem.forEach(function(e,index){
-		armor[e]=row[index];
+		armor[e]=0;
 	});
-	if(armor.biko==="-")armor.biko="";
 	return armor;
 }
 
@@ -117,51 +114,24 @@ var prepareData=function(data){
 	DATA.actives = data.active.map(function(e){return {name:e[0],effect_type:e[1],biko:e[2]};});
 
 	//武装
-	for(var j=1;j<6;j++){
+	for(var j=1;j<7;j++){
 		var part=DATA.part_cd[j];
 		var part_data= data[part];
+		var mems=part_data[0];
 		if(!part_data)continue;
-		for(var i=0;i<part_data.length;i++){
-			var row = part_data[i];
-			var armor = conv(row,j);
+		part_data.forEach((row,idx)=>{
+			if(!idx)return;
+			var armor = conv();
+			armor.part=j;
+			row.forEach((col,idx)=>{
+				armor[mems[idx]] = col;
+			});
+
 			DATA.armors.push(armor);
 
-	  		if(j===5){
-	  			armor.flying=row[21];
-				if(armor.flying !== 1)armor.flying=0;
-			}
-		}
+		});
 	}
 
-	//武器
-	var part_data= data.weapon;
-	var mems=part_data[0];
-	part_data.forEach((row,idx)=>{
-		if(!idx)return;
-		var armor={part:6};
-		row.forEach((col,idx)=>{
-			armor[mems[idx]] = col;
-		});
-		if(armor.biko==="-"){
-			armor.biko="";
-		}
-		DATA.armors.push(armor);
-
-	});
-//	for(var i=0;i<part_data.length;i++){
-//		var row = part_data[i];
-//		var armor = conv(row,6);
-//		armor.passive=0;
-//		armor.active=row[16];
-//		armor.active_effect=row[17];
-//		armor.biko=row[18];
-//		if(armor.biko==="-"){
-//			armor.biko="";
-//		}
-//		armor.category=row[19];
-//		armor.range=row[20];
-//		DATA.armors.push(armor);
-//	}
 
 
 	DATA.armors.forEach(function(e){

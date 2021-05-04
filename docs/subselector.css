@@ -92,9 +92,6 @@ tr .name{
 	font-weight:bold;
 	white-space: nowrap;
 }
-tbody .name{
-padding:4px;
-}
 tbody span{
 	vertical-align:top;
 }
@@ -130,11 +127,13 @@ thead .name button{
 }
 .rarelity button{
 	white-space:nowrap;
+	
 }
 tr .rarelity{
 	width:20px;
 	color:#000;
 	text-align:center;
+	margin-right:4px;
 }
 tr .divname{
 overflow:hidden;
