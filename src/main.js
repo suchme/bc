@@ -220,7 +220,7 @@ class Main {
 			if(armor.passive>0){
 				var passive={};
 				passive.skill = DATA.passives[armor.passive];
-				passive.effect= armor.effect;
+				passive.effect= armor.passive_effect;
 				passives.push(passive);
 				var span =getPassiveSpan(passive);
 				span_skill.appendChild(span);
@@ -287,6 +287,8 @@ class Main {
 		values.bonus.spd = Math.trunc(values.bonus.spd); 
 		values.bonus.lp  = Math.trunc(values.bonus.lp ); 
 		values.bonus.bst = Math.trunc(values.bonus.bst); 
+		values.bonus.dash= Math.trunc(values.bonus.dash); 
+		values.bonus.dash_cost= Math.trunc(values.bonus.dash_cost); 
 		add(values.total,values.bonus);
 
 
@@ -440,7 +442,7 @@ class Main {
 									if(e.passive===0){
 										parent.style.display = "none";
 									}
-									return getSkillName(DATA.passives[e.passive],e.effect); }}); 
+									return getSkillName(DATA.passives[e.passive],e.passive_effect); }}); 
 
 						cols.push({label:"備考",data:"biko"});
 						cols.splice(0,0,{data:"rarelity",filter:1,label:"レアリティ"
@@ -558,22 +560,26 @@ class Main {
 		});
 
 
-		var correctStatus=function(atk,def,spd,lp,bst){
-		   values.bonus.atk += values.subtotal.atk * 0.01*atk;
-		   values.bonus.def += values.subtotal.def * 0.01*def;
-		   values.bonus.spd += values.subtotal.spd * 0.01*spd;
-		   values.bonus.lp  += values.subtotal.lp  * 0.01*lp;
-		   values.bonus.bst += values.subtotal.bst * 0.01*bst;
+		//パッシブによるステータス変化計算
+		var correctStatus=function(target,eff){
+		   values.bonus[target] += values.subtotal[target] * eff;
 		}
-		DATA.passives[ 1].func=function(effect){ correctStatus(1+effect,0,0,0,0); }
-		DATA.passives[ 2].func=function(effect){ correctStatus(0,1+effect,0,0,0); }
-		DATA.passives[ 3].func=function(effect){ correctStatus(0,0,1+effect,0,0); }
-		DATA.passives[ 4].func=function(effect){ correctStatus(0,0,0,1+effect,0); }
-		DATA.passives[ 5].func=function(effect){ correctStatus(0,0,0,0,1+effect); }
+		DATA.passives[ 1].func=function(effect){ correctStatus("atk",(1+effect)*0.01); }
+		DATA.passives[ 2].func=function(effect){ correctStatus("def",(1+effect)*0.01); }
+		DATA.passives[ 3].func=function(effect){ correctStatus("spd",(1+effect)*0.01); }
+		DATA.passives[ 4].func=function(effect){ correctStatus("lp",(1+effect)*0.01); }
+		DATA.passives[ 5].func=function(effect){ correctStatus("bst",(1+effect)*0.01); }
 		DATA.passives[ 6].func=function(effect){
 			var a =Math.trunc(effect*0.5)
-			correctStatus(a+1,a+1,a,a+1,a+1);
+			correctStatus("atk",(1+a)*0.01); 
+			correctStatus("def",(1+a)*0.01);
+			correctStatus("spd",a*0.01); 
+			correctStatus("lp",(1+a)*0.01);
+			correctStatus("bst",(1+a)*0.01);
 		}
+		DATA.passives[20].func=function(effect){ correctStatus("dash",(1+effect)*0.01); }
+		DATA.passives[28].func=function(effect){ correctStatus("dash_cost",-effect*0.01); }
+		DATA.passives[29].func=function(effect){ correctStatus("hover_cost",-effect*0.01); }
 
 
 		document.querySelectorAll("select").forEach(function(node){
