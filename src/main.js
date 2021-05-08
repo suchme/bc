@@ -596,7 +596,7 @@ class Main {
 
 
 		var dt=new Date(DATA.date);
-		values.version="code2021/05/03<br>"
+		values.version="code2021/05/08<br>"
 			+ "data"+ dt.getFullYear() +"/"+("0"+(dt.getMonth()+1)).slice(-2)
 			+"/" +("0"+dt.getDate()).slice(-2);
 
