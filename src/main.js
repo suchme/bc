@@ -467,7 +467,8 @@ class Main {
 								data[e.data]=e2[e.data];
 							});
 							DATA.category_short.forEach(function(e,idx){
-								data["cat"+(idx+1)]=e2.apts[idx];
+								if(idx===0)return;
+								data["cat"+idx]=e2.apts[idx];
 							});
 							data.cd = e2.cd;
 							datalist.push(data);
