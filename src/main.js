@@ -166,7 +166,7 @@ class Main {
 		
 
 		//lv
-		if(values.shinki.lv==="60"){
+		if(values.shinki.lv!="1"){
 			add(values.shinki,{atk:8,def:8,spd:3,lp:80,bst:30});
 		}
 
@@ -199,16 +199,16 @@ class Main {
 				values[part].name=armor.name + "[" +DATA.category_short[armor.category]+"]";
 			}
 			add(values[part],armor);
-			if(lv==60){
+			if(lv!="1"){
 				var bonus;
 				if(armor.part===6){
 					if(armor.distance===0){
-						bonus= DATA.lv_bonus.weapon_short[r];
+						bonus= DATA.lv_bonus.weapon_short[r][lv];
 					}else{
-						bonus= DATA.lv_bonus.weapon_long[r];
+						bonus= DATA.lv_bonus.weapon_long[r][lv];
 					}
 				}else{
-					bonus= DATA.lv_bonus[part][r];
+					bonus= DATA.lv_bonus[part][r][lv];
 				}
 				add(values[part],bonus);
 			}
@@ -558,6 +558,20 @@ class Main {
 			}
 			org.parentNode.replaceChild(rare2,org);
 		});
+
+		//lvコンボ
+		var sel = document.querySelector("span.weapon select.lv ");
+		var option = document.createElement("OPTION");
+		option.textContent = "30";
+		option.value= 30;
+		sel.childNodes[1].after(option);
+
+		sel = document.querySelector("span.weapon2 select.lv ");
+		option = document.createElement("OPTION");
+		option.textContent = "30";
+		option.value= 30;
+		sel.childNodes[1].after(option);
+
 
 
 		//パッシブによるステータス変化計算

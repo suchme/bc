@@ -194,21 +194,30 @@ var prepareData=function(source){
 	output.lv_bonus={};
 	var sheet_data = source.lv_bonus;
 	var mems=sheet_data[0];
-	for(var i=1;i < sheet_data.length;){
+	for(var i=1;i < sheet_data.length;i++){
 		var bonuses=[];
 		var row = sheet_data[i];
 		var part = row[0];
-		for(var j=0;j < 4;j++){
+		//for(var j=0;j < 4;j++){
 			var bonus={};
 			var row = sheet_data[i];
+			var part = row[0];
 			row.forEach((a,idx)=>{
 				if(!idx)return;
 				bonus[mems[idx]]=a;
 			});
-			bonuses.push(bonus);
-			i++;
-		}
-		output.lv_bonus[part] = bonuses;
+			//bonuses.push(bonus);
+			//bonuses[bonus.lv]=bonus;
+				if(!output.lv_bonus[part]){
+					output.lv_bonus[part]={};
+				}
+				if(!output.lv_bonus[part][bonus.rarelity]){
+					output.lv_bonus[part][bonus.rarelity]={};
+				}
+			output.lv_bonus[part][bonus.rarelity][bonus.lv] = bonus;
+		//	i++;
+		//}
+//		output.lv_bonus[part] = bonuses;
 	}
 
 	;
