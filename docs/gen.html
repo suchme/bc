@@ -20,6 +20,13 @@ var output={shinkis:[],armors:[],individuals:[]};
 
 
 //データ整形ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+var Param = function(){
+	var obj={};
+	mem.forEach(function(e){
+		obj[e] = 0;
+	});
+	return obj;
+}
 
 var mem=[ "cd","set","class","name","rarelity"
 	,"atk","def","spd","lp","bst"
@@ -200,7 +207,7 @@ var prepareData=function(source){
 		var row = sheet_data[i];
 		var part = row[0];
 		//for(var j=0;j < 4;j++){
-			var bonus={};
+			var bonus=new Param();
 			var row = sheet_data[i];
 			var part = row[0];
 			row.forEach((a,idx)=>{

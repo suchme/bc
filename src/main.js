@@ -169,7 +169,8 @@ class Main {
 
 		//lv
 		if(values.shinki.lv!="1"){
-			add(values.shinki,{atk:8,def:8,spd:3,lp:80,bst:30});
+			add(values.shinki,DATA.lv_bonus.shinki[rare][values.shinki.lv]);
+			//add(values.shinki,{atk:8,def:8,spd:3,lp:80,bst:30});
 		}
 
 		//武装
@@ -570,6 +571,10 @@ class Main {
 		});
 
 		//lvコンボ
+		var sel = document.querySelector("span.shinki select.lv ");
+		sel.childNodes[3].innerText = "100";
+		sel.childNodes[3].value= "100";
+
 		var sel = document.querySelector("span.weapon select.lv ");
 		var option = document.createElement("OPTION");
 		option.textContent = "30";
