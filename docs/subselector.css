@@ -340,5 +340,16 @@ thead .guarge_parent
 }
 
 span.sep{
+	width:6px;
+}
+.armor .pick{
+width:32px;
+}
+
+table .height{
 width:6px;
+}
+thead span
+,tr span{
+margin:2px;
 }

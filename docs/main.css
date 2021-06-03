@@ -213,8 +213,8 @@ span.apt{
 }
 
 span.part{
-width:64px;
-	  text-align:right;
+	width:70px;
+	text-align:right;
 }
 .part::before{
 	content:"【";
@@ -228,19 +228,10 @@ display:none;
 }
 
 span.name{
-	width:120px;
-	 display:inline-block;
+	width:160px;
+	display:inline-block;
+	overflow:hidden;
 }
 span.outline{
 display:inline-block;
-	width:280px;
-}
-.armor .pick{
-width:32px;
-}
-
-thead span
-,tr span{
-width:16px;
-margin:2px;
 }

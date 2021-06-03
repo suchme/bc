@@ -17,7 +17,7 @@ SubLayout.shinki_html =`
 	<span column="hover_cost" class="hover_cost cost status "></span>
 	<span class="sep"></span>
 	<span column="expand" class="status "></span>
-	<span column="height" class=""></span>
+	<span column="height" class="height"></span>
 	<span class="sep"></span>
 	<span column="cat1" class=" short cat status "></span>
 	<span column="cat2" class=" short cat status "></span>
@@ -37,7 +37,7 @@ SubLayout.shinki_html =`
 `;
 
 SubLayout.head_html =`
-	<span>
+	<span "namearea">
 		<div class="divname">
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
@@ -96,7 +96,6 @@ SubLayout.body_html =`
 			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
 	<span class="sep"></span>
-	<span style="width:200px;">
 			<span style="width:200px;">
 				<div><span class="passive" column="passive"></span></div>
 				<div><span class="active" column="active"></span></div>

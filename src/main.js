@@ -154,16 +154,16 @@ class Main {
 		values.individual= DATA.individuals[values.shinki.individual];
 
 		var biko="";
-		//if(armor.flying){
-		//	biko+="飛行 ";
-		//}
-		//biko+="回"		+ values.shinki.recover+" ";
-		//biko+="走"		+ values.shinki.dash+" ";
-		//biko+="走費"		+ values.shinki.dash_cost+" ";
-		//biko+="跳費"		+ values.shinki.jump_cost+" ";
-		//biko+="浮費"		+ values.shinki.hover_cost+" ";
-		//biko+="防費"			+ values.shinki.guard_cost+" ";
-		//biko+=shinki.biko;
+		if(armor.flying){
+			biko+="飛行 ";
+		}
+		biko+="回"		+ values.shinki.recover+" ";
+		biko+="走"		+ values.shinki.dash+" ";
+		biko+="走費"		+ values.shinki.dash_cost+" ";
+		biko+="跳費"		+ values.shinki.jump_cost+" ";
+		biko+="浮費"		+ values.shinki.hover_cost+" ";
+		biko+="防費"			+ values.shinki.guard_cost+" ";
+		biko+=shinki.biko;
 		values.shinki.biko=biko;
 		
 
@@ -219,6 +219,12 @@ class Main {
 
 			if(part === "weapon2"){return;}
 			var span_skill= document.createElement("span");//document.querySelector("#"+part+" span.skill");
+			if(part === "weapon"){
+				var apt=values.shinki.apts.find((e)=>{return e.category === values.weapon.org.category});
+				if(apt){
+					span_skill.appendChild( getAptSpan(apt) );
+				}
+			}
 			if(armor.passive>0){
 				var passive={};
 				passive.skill = DATA.passives[armor.passive];
@@ -238,17 +244,17 @@ class Main {
 			values[part].skill=span_skill;
 
 			var biko="";
-			if(armor.flying){
-				biko+="飛行 ";
-			}
-			biko+=addBiko("回復",armor.recover);
-			biko+=addBiko("走",armor.dash);
-			biko+=addBiko("走費",armor.dash_cost);
-			biko+=addBiko("跳費",armor.jump_cost);
-			biko+=addBiko("浮費",armor.hover_cost);
-			biko+=addBiko("防費",armor.guard_cost);
-			biko+=armor.biko;
-			values[part].biko=biko;
+			//if(armor.flying){
+			//	biko+="飛行 ";
+			//}
+			//biko+=addBiko("回復",armor.recover);
+			//biko+=addBiko("走",armor.dash);
+			//biko+=addBiko("走費",armor.dash_cost);
+			//biko+=addBiko("跳費",armor.jump_cost);
+			//biko+=addBiko("浮費",armor.hover_cost);
+			//biko+=addBiko("防費",armor.guard_cost);
+			//biko+=armor.biko;
+			//values[part].biko=biko;
 		});
 
 		//小計
