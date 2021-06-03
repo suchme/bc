@@ -71,6 +71,15 @@ export default class Subselector{
 				}
 			});
 
+			th = document.createElement("td");
+			th.className="dummy_pick";
+			document.querySelector(".header_filter").appendChild(th);
+			th = document.createElement("td");
+			th.className="dummy_pick";
+			document.querySelector(".header_sort").appendChild(th);
+
+
+
 		}else{
 			var tr_sort = document.createElement("tr");
 			tr_sort.classList.add("header_sort");
@@ -108,6 +117,13 @@ export default class Subselector{
 			var trs= document.querySelectorAll("#sub_head tr");
 			trs[0].parentNode.replaceChild(tr_filter,trs[0]);
 			trs[1].parentNode.replaceChild(tr_sort,trs[1]);
+			
+			th = document.createElement("th");
+			th.className="dummy_pick";
+			tr_filter.appendChild(th);
+			th = document.createElement("th");
+			th.className="dummy_pick";
+			tr_sort.appendChild(th);
 		}
 
 
@@ -278,6 +294,9 @@ export default class Subselector{
 					}
 				});
 
+				th = document.createElement("td");
+				th.className="dummy_pick";
+				tr.appendChild(th);
 
 				tbody.appendChild(tr);
 			}

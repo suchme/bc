@@ -5,8 +5,10 @@ tr{
 tbody tr{
 	padding: 6px 0;
 }
-thead span{
+tr.header_filter span{
 	background-color:inherit !important;
+}
+thead span{
 	vertical-align:bottom;
 }
 thead ::before,
@@ -54,11 +56,19 @@ thead{
 	z-index:100;
 	background-color:#111;
 }
-th{
+th.pick{
 	position:sticky;
-	background-color:#111;
 	z-index:99;
-	left:0px;
+	left: calc(100% - 32px);
+	width:0px;
+	overflow:inherit;
+}
+button.pick{
+	background-color:#c00;
+	color:#fff;
+	height:32px;
+	width:32px;
+	border:1px solid black;
 }
 tbody{
 	font-size:smaller;
@@ -109,7 +119,7 @@ tr .status{
 .category::after{
 	content:"]";
 }
-.part{
+table .part{
 	width:80px;
 	display:inline-block;
 	text-align:inherit;
@@ -143,14 +153,8 @@ tr .distance{
 	width:100px;
 }
 
-tr th.pick{
+tr .dummy_pick{
 	width:30px;
-}
-button.pick{
-	background-color:#c00;
-	color:#fff;
-	height:32px;
-	padding:2px;
 }
 tr.header_sort button{
 text-decoration: underline;
@@ -158,14 +162,14 @@ text-decoration: underline;
     color: #fff;
 padding:0px;
 }
-tr .cat.short{
-	background-color:#311;
+table .cat.short{
+	background-color:#911;
 }
-tr .cat.long{
-	background-color:#133;
+table .cat.long{
+	background-color:#04c;
 }
-tr .cat.bougu{
-	background-color:#313;
+table .cat.bougu{
+	background-color:#616;
 }
 
 tr .cat{

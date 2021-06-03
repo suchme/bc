@@ -115,18 +115,20 @@ class Main {
 		values.shinki.apts.sort(function(a,b){return b.effect - a.effect;});
 		var span= document.createElement("span");
 		var br=0;
-		values.shinki.apts.forEach(function(e){
-			if(!br && e.effect<0){
-				span.appendChild(document.createElement("br"));
-				br=1;
-			}
-			span.appendChild(getAptSpan(e));
-		});
+
+		//武器適正
+		//values.shinki.apts.forEach(function(e){
+		//	if(!br && e.effect<0){
+		//		span.appendChild(document.createElement("br"));
+		//		br=1;
+		//	}
+		//	span.appendChild(getAptSpan(e));
+		//});
+		//span.appendChild(document.createElement("br"));
 
 		var passive={};
 		passive.skill = DATA.passives[values.shinki.org.exskill];
 		passive.effect= 0;
-		span.appendChild(document.createElement("br"));
 		span.appendChild(getPassiveSpan(passive));
 		values.shinki.skill= span;
 
@@ -152,16 +154,16 @@ class Main {
 		values.individual= DATA.individuals[values.shinki.individual];
 
 		var biko="";
-		if(armor.flying){
-			biko+="飛行 ";
-		}
-		biko+="回"		+ values.shinki.recover+" ";
-		biko+="走"		+ values.shinki.dash+" ";
-		biko+="走費"		+ values.shinki.dash_cost+" ";
-		biko+="跳費"		+ values.shinki.jump_cost+" ";
-		biko+="浮費"		+ values.shinki.hover_cost+" ";
-		biko+="防費"			+ values.shinki.guard_cost+" ";
-		biko+=shinki.biko;
+		//if(armor.flying){
+		//	biko+="飛行 ";
+		//}
+		//biko+="回"		+ values.shinki.recover+" ";
+		//biko+="走"		+ values.shinki.dash+" ";
+		//biko+="走費"		+ values.shinki.dash_cost+" ";
+		//biko+="跳費"		+ values.shinki.jump_cost+" ";
+		//biko+="浮費"		+ values.shinki.hover_cost+" ";
+		//biko+="防費"			+ values.shinki.guard_cost+" ";
+		//biko+=shinki.biko;
 		values.shinki.biko=biko;
 		
 
@@ -195,9 +197,9 @@ class Main {
 			values[part].org = armor;
 
 			values[part].name=armor.name;
-			if(armor.part===6){
-				values[part].name=armor.name + "[" +DATA.category_short[armor.category]+"]";
-			}
+			//if(armor.part===6){
+			//	values[part].name=armor.name + "[" +DATA.category_short[armor.category]+"]";
+			//}
 			add(values[part],armor);
 			if(lv!="1"){
 				var bonus;
@@ -291,7 +293,7 @@ class Main {
 
 		//レアリティ色
 		DATA.part_cd.forEach(function(e,idx){
-			document.querySelectorAll("span."+e+" select,span."+e+" button").forEach(function(node){
+			document.querySelectorAll("span."+e+" select").forEach(function(node){
 				node.classList.remove("N","R","SR","UR");
 				node.classList.add(DATA.rarelity[values[e].rarelity]);
 			});
@@ -374,6 +376,9 @@ class Main {
 				children[j].setAttribute("bind",part_cd+children[j].getAttribute("bind"));
 			}
 			 clone.querySelector(".part").textContent = DATA.part_name[i];
+			 if(i===7){
+			 	clone.querySelector(".part").textContent = "サブ"
+			 }
 	 
 			var span = clone.querySelector("button.armor");
 			span.addEventListener("click" ,(function(part_cd,part_idx){
@@ -389,11 +394,11 @@ class Main {
 						,{data:"bst",label:"ブ",class:"status",sort:-1}
 						];
 					cols.splice(6,0,{class:"status",label:"回復",data:"recover",sort:-1});
-					cols.splice(7,0,{class:"status",label:"走速度",data:"dash",sort:-1});
-					cols.splice(8,0,{class:"status",label:"走消費",data:"dash_cost"});
-					cols.splice(9,0,{class:"status",label:"跳消費",data:"jump_cost"});
-					cols.splice(10,0,{class:"status",label:"浮消費",data:"hover_cost"});
-					cols.splice(10,0,{class:"status",label:"防御消費",data:"guard_cost"});
+					cols.splice(7,0,{class:"status",label:"走",data:"dash",sort:-1});
+					cols.splice(8,0,{class:"status",label:"走費",data:"dash_cost"});
+					cols.splice(9,0,{class:"status",label:"跳費",data:"jump_cost"});
+					cols.splice(10,0,{class:"status",label:"浮費",data:"hover_cost"});
+					cols.splice(10,0,{class:"status",label:"防費",data:"guard_cost"});
 					cols.splice(0,0, {label:"名称",data:"name",filter:1
 						,disp:function(e){ 
 						if(e.parent === undefined){return e.name};

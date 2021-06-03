@@ -2,7 +2,7 @@ body{
 	background-color:#888;
 	color:#fff;
 	font-size:14px;
-	width:320px;
+	width:360px;
 	line-height:100%;
 }
 div.info{
@@ -60,23 +60,19 @@ span.armor{
 }
 span.setting{
 	width:160px;
-	  text-align:right;
-}
-span.setting span.part{
-color:white;
-}
-span.detail{
-	width:240px;
 }
 .status{
 	text-align:right;
-	width:40px;
+	width:32px;
 	position:relative;
 	background-color:#555;
 	margin:1px;
 	padding:1px;
 	z-index:1;
 	font-weight:bold;
+}
+.status.cost{
+width:32px;
 }
 .status::before{
 	position:absolute;
@@ -216,10 +212,29 @@ span.apt{
 	margin-left:2px;
 }
 
-:not(th).part::before{
+span.part{
+width:64px;
+	  text-align:right;
+}
+.part::before{
 	content:"【";
 }
-:not(th).part::after{
+.part::after{
 	content:"】";
 }
 
+#weapon2 .detail{
+display:none;
+}
+
+span.name{
+	width:120px;
+	 display:inline-block;
+}
+span.outline{
+display:inline-block;
+	width:280px;
+}
+.armor .pick{
+width:32px;
+}
