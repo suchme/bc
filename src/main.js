@@ -399,7 +399,9 @@ class Main {
 					cols.splice(9,0,{class:"status",label:"跳費",data:"jump_cost"});
 					cols.splice(10,0,{class:"status",label:"浮費",data:"hover_cost"});
 					cols.splice(10,0,{class:"status",label:"防費",data:"guard_cost"});
-					cols.splice(0,0, {label:"名称",data:"name",filter:1
+					cols.splice(10,0,{class:"status",label:"回収",data:"expand",sort:-1});
+					cols.splice(10,0,{label:"身長",data:"height",sort:0,filter:1});
+					cols.splice(10,0, {label:"名称",data:"name",filter:1
 						,disp:function(e){ 
 						if(e.parent === undefined){return e.name};
 						return (

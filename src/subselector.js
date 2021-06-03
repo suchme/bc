@@ -320,6 +320,9 @@ export default class Subselector{
 	setSort(col){
 		var data=col.data;
 		var sort = this.sort;
+		if(!col.sort){
+			return;
+		}
 
 		var idx = sort.indexOf(data);
 		if(idx<0){

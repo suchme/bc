@@ -16,6 +16,9 @@ SubLayout.shinki_html =`
 	<span column="guard_cost" class="guard_cost cost status "></span>
 	<span column="hover_cost" class="hover_cost cost status "></span>
 	<span class="sep"></span>
+	<span column="expand" class="status "></span>
+	<span column="height" class=""></span>
+	<span class="sep"></span>
 	<span column="cat1" class=" short cat status "></span>
 	<span column="cat2" class=" short cat status "></span>
 	<span column="cat3" class=" short cat status "></span>

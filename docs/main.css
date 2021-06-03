@@ -238,3 +238,9 @@ display:inline-block;
 .armor .pick{
 width:32px;
 }
+
+thead span
+,tr span{
+width:16px;
+margin:2px;
+}
