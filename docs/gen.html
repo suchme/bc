@@ -145,7 +145,7 @@ var prepareData=function(source){
 	}
 
 	//パッシブ
-	output.passives= source.passive.map(function(e){return {name:e[0],effect_type:e[1],biko:e[2]};});
+	output.passives= source.passive.map(function(e){return {name:e[0],effect_type:e[1],biko:e[2] + "\n" + e[3]};});
 
 
 	//アクティブ
@@ -164,6 +164,7 @@ var prepareData=function(source){
 			row.forEach((col,idx)=>{
 				armor[mems[idx]] = col;
 			});
+			if(armor.cd==="" || armor.cd == null)return;
 
 			output.armors.push(armor);
 

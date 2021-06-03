@@ -282,13 +282,10 @@ class Main {
 			}
 		});
 
-		values.bonus.atk = Math.trunc(values.bonus.atk); 
-		values.bonus.def = Math.trunc(values.bonus.def); 
-		values.bonus.spd = Math.trunc(values.bonus.spd); 
-		values.bonus.lp  = Math.trunc(values.bonus.lp ); 
-		values.bonus.bst = Math.trunc(values.bonus.bst); 
-		values.bonus.dash= Math.trunc(values.bonus.dash); 
-		values.bonus.dash_cost= Math.trunc(values.bonus.dash_cost); 
+		var keys = Object.keys(values.bonus);
+		keys.forEach((e)=>{
+			values.bonus[e] = Math.trunc(values.bonus[e]); 
+		});
 		add(values.total,values.bonus);
 
 
@@ -593,7 +590,7 @@ class Main {
 		}
 		DATA.passives[20].func=function(effect){ correctStatus("dash",(1+effect)*0.01); }
 		DATA.passives[28].func=function(effect){ correctStatus("dash_cost",-effect*0.01); }
-		DATA.passives[29].func=function(effect){ correctStatus("hover_cost",-effect*0.01); }
+		DATA.passives[29].func=function(effect){ correctStatus("hover_cost",-(effect*0.01+0.14)); }
 
 
 		document.querySelectorAll("select").forEach(function(node){
