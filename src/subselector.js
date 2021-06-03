@@ -320,7 +320,7 @@ export default class Subselector{
 	setSort(col){
 		var data=col.data;
 		var sort = this.sort;
-		if(!col.sort){
+		if(col.sort === 0){
 			return;
 		}
 
