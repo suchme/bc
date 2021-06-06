@@ -17,6 +17,7 @@
 </head>
 
 <body>
+<div class="main">
 <div class="info"><span>※最新版ぽくないときはスーパーリロードして</span>
 <span>※各種データ・計算式が正しいか分かりません。間違ってたら正しい値を教えてくれれば直します。</span>
 </div>
@@ -34,27 +35,21 @@
 	パッシブ 
 		<button id="add_extra_passive">追加</button>
 		<span id="extra_passive" class="biko"></span>
-		<!--
-		<span class="param" bind="individual">
-		</span>
-		-->
 	</div>
 
 	<div id="armor"></div>
 
-	<!--
-	<div>
-		<span class="setting">
-			<span class="name" style="display:none;" style="text-align:right;">ステータス計</span>
-		</span>
-		<span class="param"  bind="subtotal"></span><br>
-	</div>
-	-->
-	<div>
-		<div>
+	<div id="total">
+		<div style="position:relative;">
 最終値
 
 			<span >総コスト</span><span bind="total.cost"></span>
+
+		<span style="position:absolute;right:0px;">
+		<button onclick="
+			 document.querySelector('#export_window').style.display='block';
+			 ">export</button>
+			 </span>
 			<span class="name" style="display:none;" style="text-align:right;">武器適正とパッシブ適用後</span>
 		</div>
 				<div>
@@ -62,37 +57,13 @@
 				
 				<span class="status dash" bind="total.dash">
 				</span><span class="status recover" bind="total.recover">
-				</span><br>　　<span class="status dash_cost cost" bind="total.dash_cost">
+				</span><span class="status dash_cost cost" bind="total.dash_cost">
 				</span><span class="status jump_cost cost" bind="total.jump_cost">
 				</span><span class="status hover_cost cost" bind="total.hover_cost">
 				</span><span class="status guard_cost cost" bind="total.guard_cost">
 				</span>
 				</div>
-			<!--
-		<div style="">
-			<div>
-			<span class="param" bind="total"></span>
-			</div>
-			<div>
-				<span class="status recover" bind="total.recover">
-				</span><span class="status dash" bind="total.dash">
-				</span>
-			</div>
-			<div>
-				<span class="status dash_cost" bind="total.dash_cost">
-				</span><span class="status jump_cost" bind="total.jump_cost">
-				</span><span class="status hover_cost" bind="total.hover_cost">
-				</span><span class="status guard_cost" bind="total.guard_cost">
-				</span>
-			</div>
-		</div>
-		-->
 	</div>
-	<div style="text-align:right;">
-	<button onclick="
-		 document.querySelector('#export_window').style.display='block';
-		 ">export</button>
-		 </div>
 
 <div class="subwindow" id="export_window" style="display:none;">
 	<div  class="back"  onclick="this.parentNode.style.display='none';">
@@ -107,37 +78,33 @@
 <div style="display:none;" id="template">
 
 	<span id="template_armor">
-	<hr>
-		<span class="outline">
-			<div class="setting">
-				<span class="part"></span>
-				<span bind=".name" class="name"></span>
-				Lv<select class="lv" bind=".lv">
-					<option value="1">1</option>
-					<option value="60">60</option>
-				</select>
-				<select  class="rarelity" bind=".rarelity">
-				</select>
-			</div>
-			<div class="detail">
-				<div>
+		<div class="setting">
+			<span class="part"></span>
+			<span bind=".name" class="name"></span>
+			Lv<select class="lv" bind=".lv">
+				<option value="1">1</option>
+				<option value="60">60</option>
+			</select>
+			<select  class="rarelity" bind=".rarelity">
+			</select>
+
+			<button  class="armor change">変更</button>
+		</div>
+		<div class="detail">
+			<div>
 				<span class="param" bind=""></span>
-				
 				<span class="status dash" bind=".dash">
 				</span><span class="status recover" bind=".recover">
-				</span><br>　<span class="status dash_cost cost" bind=".dash_cost">
+				</span><span class="status dash_cost cost" bind=".dash_cost">
 				</span><span class="status jump_cost cost" bind=".jump_cost">
 				</span><span class="status hover_cost cost" bind=".hover_cost">
 				</span><span class="status guard_cost cost" bind=".guard_cost">
 				</span>
-				</div>
-				<!--
-				<span class="biko" bind=".biko"></span>
-				-->
 			</div>
-			<span class="skill" bind=".skill"></span><br>
-		</span>
-		<button  class="armor pick">変更</button>
+			<div>
+			<span class="skill" bind=".skill"></span>
+			</div>
+		</div>
 	</span>
 
 	<select id="rarelity" class="rarelity" bind="rarelity"> </select>
@@ -146,6 +113,7 @@
 	</span>
 </div>
 
+</div>
 </body>
 
 <script type="module" src="./index.js"></script>

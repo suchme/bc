@@ -1,9 +1,19 @@
-body{
-	background-color:#888;
-	color:#fff;
+html{
+	height:100%;
+
 	font-size:14px;
-	width:360px;
 	line-height:100%;
+}
+body{
+	color:#fff;
+	background-color:#333;
+	margin:0;
+	height:100%;
+
+}
+div.main{
+	background-color:#888;
+	width:400px;
 }
 div.info{
 	font-size:small;
@@ -57,6 +67,8 @@ span{
 }
 span.armor{
 	white-space:nowrap;
+	width:100%;
+	display:inline-block;
 }
 span.setting{
 	width:160px;
@@ -240,4 +252,36 @@ display:inline-block;
 .class::before{
 	margin-right:4px;
 	filter:drop-shadow(0px 0px 1px #fff);
+}
+
+
+div.setting{
+	position:relative;
+	height:24px;
+}
+button.change{
+	background-color:#c00;
+	color:#fff;
+	width:64px;
+	height:20px;
+	border:1px solid black;
+	position:absolute;
+	right:0px;
+}
+div#armor>div{
+	padding-top:4px;
+}
+
+
+div#armor>div:nth-child(odd){
+	background-color:#666;
+}
+
+.name{
+font-weight:bold;
+}
+div#total{
+	padding-top:4px;
+	padding-bottom:4px;
+	background-color:#000;
 }
