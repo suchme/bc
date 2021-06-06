@@ -707,8 +707,27 @@ class Main {
 			});
 		 });
 
-		binder.init(values);
-		binder.refresh();
+//動的スタイルシート生成
+var newStyle = document.createElement('style');newStyle.type = "text/css";
+document.getElementsByTagName('head').item(0).appendChild(newStyle);
+var stylesheet = document.styleSheets.item(document.styleSheets.length-1);
+DATA.shinkis.forEach((e)=>{
+	stylesheet.insertRule(` 
+		.class.${e.cd}::before{
+		content:url(icon/${e.cd}.png);
+	}
+	`, stylesheet.cssRules.length);
+
+	stylesheet.insertRule(` 
+		.class.${e.cd}{
+		color:${e.color};
+	}
+	`, stylesheet.cssRules.length);
+});
+
+
+binder.init(values);
+binder.refresh();
 
 		main.reCalc();
 

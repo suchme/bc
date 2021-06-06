@@ -235,3 +235,8 @@ span.name{
 span.outline{
 display:inline-block;
 }
+
+
+.class::before{
+	margin-right:4px;
+}
