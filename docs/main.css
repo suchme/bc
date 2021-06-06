@@ -239,4 +239,5 @@ display:inline-block;
 
 .class::before{
 	margin-right:4px;
+	filter:drop-shadow(0px 0px 1px #fff);
 }
