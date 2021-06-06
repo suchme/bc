@@ -240,7 +240,7 @@ display:none;
 }
 
 span.name{
-	width:160px;
+	width:200px;
 	display:inline-block;
 	overflow:hidden;
 }
@@ -250,7 +250,6 @@ display:inline-block;
 
 
 .class::before{
-	margin-right:4px;
 	filter:drop-shadow(0px 0px 1px #fff);
 }
 
@@ -284,4 +283,18 @@ div#total{
 	padding-top:4px;
 	padding-bottom:4px;
 	background-color:#000;
+}
+
+span.part_icon{
+	width:20px;
+	height:20px;
+	display:inline-block;
+
+}
+span.part{
+display:none;
+}
+
+#shinki .part_icon{
+display:none;
 }

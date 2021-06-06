@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
+ <g class="layer">
+  <title>Layer 1</title>
+  <ellipse cx="226" cy="186" fill="#FF0000" id="svg_2" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
+  <ellipse cx="203" cy="253" fill="#FF0000" id="svg_3" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
+  <ellipse cx="228" cy="160" fill="#FF0000" id="svg_4" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
+  <ellipse cx="193" cy="187" fill="#FF0000" id="svg_5" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
+  <ellipse cx="154" cy="191" fill="#FF0000" id="svg_6" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
+  <ellipse cx="135" cy="208" fill="#FF0000" id="svg_7" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
+  <ellipse cx="7" cy="52" fill="#FF0000" id="svg_8" stroke="#000000" stroke-width="5" transform="rotate(26.9664 -2.5 -45.5)"/>
+  <rect fill="#FF0000" height="0" id="svg_11" stroke="#000000" stroke-width="5" width="0" x="270" y="249"/>
+  <rect fill="#FF0000" height="0" id="svg_12" stroke="#000000" stroke-width="5" width="0" x="450" y="235"/>
+  <rect fill="#FF0000" height="0" id="svg_13" stroke="#000000" stroke-width="5" width="0" x="482" y="189"/>
+  <rect fill="#ff7f00" height="6.581544" id="svg_18" rx="1" ry="1" stroke="#000000" transform="rotate(14.2435 5.76665 11.2333)" width="2.147717" x="4.692792" y="7.942578"/>
+  <rect fill="none" height="0" id="svg_20" stroke="#000000" width="0" x="-14.13335" y="-7.46665"/>
+  <rect fill="none" height="0" id="svg_22" stroke="#000000" width="0" x="13.86665" y="10.83335"/>
+  <rect fill="none" height="0" id="svg_23" stroke="#000000" width="0" x="12.66665" y="10.83335"/>
+  <rect fill="#ff7f00" height="2.8" id="svg_24" stroke="#000000" transform="rotate(13.6504 6.41665 6.93335)" width="2.5" x="5.16665" y="5.53335"/>
+  <path d="m6.56665,3.73335l-0.890653,1.36665l-3.506998,0l-1.168999,3.8l1.419499,-1l3.506998,0l0.640153,-4.16665z" fill="#ff7f00" id="svg_17" stroke="#000000"/>
+  <rect fill="#ff7f00" height="6.581544" id="svg_27" rx="1" ry="1" stroke="#000000" transform="rotate(-16.308 10.8191 10.9979)" width="2.147717" x="9.745272" y="7.707112"/>
+  <rect fill="#ff7f00" height="2.8" id="svg_26" stroke="#000000" transform="rotate(-16.7678 9.72894 6.79518)" width="2.229915" x="8.613978" y="5.395184"/>
+  <path d="m9.719131,3.597884l0.869325,1.36665l3.423019,0l1.141006,3.8l-1.385508,-1l-3.423019,0l-0.624823,-4.16665z" fill="#ff7f00" id="svg_25" stroke="#000000"/>
+ </g>
+</svg>

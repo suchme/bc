@@ -89,6 +89,9 @@ class Main {
 		add(values.shinki,values.shinki.org);
 		values.shinki.name=values.shinki.org.name;
 
+		document.querySelector("#shinki span.name").className = 
+			"name " + values.shinki.org.cd;
+
 
 		//レアリティ
 		var rare = values.shinki.rarelity;
@@ -386,6 +389,9 @@ class Main {
 			 if(i===7){
 			 	clone.querySelector(".part").textContent = "サブ"
 			 }
+			 clone.querySelector(".part_icon").classList.add(part_cd);
+			 clone.querySelector(".part_icon").title= 
+			 	clone.querySelector(".part").textContent ;
 	 
 			var span = clone.querySelector("button.armor");
 			span.addEventListener("click" ,(function(part_cd,part_idx){
@@ -408,14 +414,24 @@ class Main {
 					cols.splice(10,0,{class:"status",label:"防費",data:"guard_cost"});
 					cols.splice(10,0,{class:"status",label:"回収",data:"expand",sort:-1});
 					cols.splice(10,0,{label:"身長",data:"height",sort:0,filter:1});
-					cols.splice(10,0, {label:"名称",data:"name",filter:1
-						,disp:function(e){ 
-						if(e.parent === undefined){return e.name};
-						return (
-						(e.parent!=="-"?"-":"")
-						+(e.set !==""?"+":"")
-						+e.name);}}
-						);
+
+					if(part_idx===0){
+						cols.splice(10,0, {label:"名称",data:"name",filter:1
+						,disp:function(e,node){
+							node.classList.add(e.cd);
+							return e.name;}});
+					}else{
+
+						cols.splice(10,0, {label:"名称",data:"name",filter:1
+							,disp:function(e){ 
+							if(e.parent === undefined){return e.name};
+							return (
+							(e.parent!=="-"?"-":"")
+							+(e.set !==""?"+":"")
+							+e.name);}}
+							);
+					}
+
 
 							cols.splice(1,0,{data:"distance",label:"回収範囲",filter:1,disp:function(e,parent){
 								if(e[this.data]===0){
@@ -713,8 +729,9 @@ document.getElementsByTagName('head').item(0).appendChild(newStyle);
 var stylesheet = document.styleSheets.item(document.styleSheets.length-1);
 DATA.shinkis.forEach((e)=>{
 	stylesheet.insertRule(` 
-		.class.${e.cd}::before{
+		.${e.cd}::before{
 		content:url(icon/${e.cd}.png);
+		margin-right:4px;
 	}
 	`, stylesheet.cssRules.length);
 
@@ -725,9 +742,23 @@ DATA.shinkis.forEach((e)=>{
 	`, stylesheet.cssRules.length);
 });
 
+DATA.part_cd.forEach(function(e){
 
-binder.init(values);
-binder.refresh();
+	stylesheet.insertRule(` 
+		span.part_icon.${e}{
+			background-image:url(icon/${e}.svg);
+			background-size:100%;
+		}
+	`, stylesheet.cssRules.length);
+	stylesheet.insertRule(` 
+		.part.${e}::before{
+			content:url(icon/${e}.svg);
+		}
+	`, stylesheet.cssRules.length);
+});
+
+	binder.init(values);
+	binder.refresh();
 
 		main.reCalc();
 

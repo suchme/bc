@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
+ <g class="layer">
+  <title>Layer 1</title>
+  <ellipse cx="226" cy="186" fill="#FF0000" id="svg_2" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
+  <ellipse cx="203" cy="253" fill="#FF0000" id="svg_3" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
+  <ellipse cx="228" cy="160" fill="#FF0000" id="svg_4" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
+  <ellipse cx="193" cy="187" fill="#FF0000" id="svg_5" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
+  <ellipse cx="154" cy="191" fill="#FF0000" id="svg_6" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
+  <ellipse cx="135" cy="208" fill="#FF0000" id="svg_7" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
+  <ellipse cx="7" cy="52" fill="#FF0000" id="svg_8" stroke="#000000" stroke-width="5" transform="rotate(26.9664 -2.5 -45.5)"/>
+  <rect fill="#FF0000" height="0" id="svg_11" stroke="#000000" stroke-width="5" width="0" x="270" y="249"/>
+  <rect fill="#FF0000" height="0" id="svg_12" stroke="#000000" stroke-width="5" width="0" x="450" y="235"/>
+  <rect fill="#FF0000" height="0" id="svg_13" stroke="#000000" stroke-width="5" width="0" x="482" y="189"/>
+  <rect fill="#ff7f00" height="10.59871" id="svg_1" rx="2" ry="2" stroke="#000000" transform="rotate(8.02803 3.23413 7.33782)" width="3.12798" x="1.670138" y="2.03847"/>
+  <rect fill="#ff7f00" height="10.366415" id="svg_9" rx="2" ry="2" stroke="#000000" transform="rotate(-7.40596 13.1586 7.47569)" width="3.013327" x="11.651893" y="2.292484"/>
+ </g>
+</svg>
