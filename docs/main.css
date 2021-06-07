@@ -253,8 +253,8 @@ display:inline-block;
 .class::before
 ,.name::before{
 	display:inline-block;
-	width:20px;
-	height:20px;
+	width:24px;
+	height:24px;
 	vertical-align:middle;
 }
 
@@ -291,8 +291,8 @@ div#total{
 }
 
 span.part_icon{
-	width:20px;
-	height:20px;
+	width:24px;
+	height:24px;
 	display:inline-block;
 
 }
