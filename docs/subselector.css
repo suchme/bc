@@ -180,7 +180,9 @@ tr .cat{
 	text-align:right;
 }
 tr .shinki{
-width:140px !important;
+	width:200px !important;
+	font-size:initial;
+
 }
 tr .recover
 ,tr .dash
@@ -273,10 +275,9 @@ margin:1px;
 }
 
 .shinki::before{
-	filter:drop-shadow(0px 0px 1px #fff);
 	display:inline-block;
-	width:16px;
-	height:16px;
+	width:20px;
+	height:20px;
 	vertical-align:middle;
 }
 

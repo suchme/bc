@@ -252,10 +252,9 @@ display:inline-block;
 
 .class::before
 ,.name::before{
-	filter:drop-shadow(0px 0px 1px #fff);
 	display:inline-block;
-	width:16px;
-	height:16px;
+	width:20px;
+	height:20px;
 	vertical-align:middle;
 }
 
