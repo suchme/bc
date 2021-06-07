@@ -1,23 +1,29 @@
 var SubLayout={};
 
 SubLayout.shinki_html =`
+	<span>
+	<div>
 	<span column="name" class="shinki"></span>
-	<span column="atk" class="atk status "></span>
-	<span column="def" class="def status "></span>
-	<span column="spd" class="spd status "></span>
-	<span column="lp" class="lp status  "></span>
-	<span column="bst" class="bst status "></span>
-	<span class="sep"></span>
-	<span column="dash" class="dash status  "></span>
-	<span column="recover" class="recover status "></span>
-	<span class="sep"></span>
-	<span column="dash_cost" class="dash_cost cost status "></span>
-	<span column="jump_cost" class="jump_cost cost status "></span>
-	<span column="guard_cost" class="guard_cost cost status "></span>
-	<span column="hover_cost" class="hover_cost cost status "></span>
-	<span class="sep"></span>
-	<span column="expand" class="status "></span>
 	<span column="height" class="height"></span>
+	</div>
+	<div>
+		<span column="atk" class="atk status "></span>
+		<span column="def" class="def status "></span>
+		<span column="spd" class="spd status "></span>
+		<span column="lp" class="lp status  "></span>
+		<span column="bst" class="bst status "></span>
+		<span class="sep"></span>
+		<span column="dash" class="dash status  "></span>
+		<span column="recover" class="recover status "></span>
+		<span class="sep"></span>
+		<span column="dash_cost" class="dash_cost cost status "></span>
+		<span column="jump_cost" class="jump_cost cost status "></span>
+		<span column="guard_cost" class="guard_cost cost status "></span>
+		<span column="hover_cost" class="hover_cost cost status "></span>
+		<span class="sep"></span>
+		<span column="expand" class="status "></span>
+	</div>
+	</span>
 	<span class="sep"></span>
 	<span column="cat1" class=" short cat status "></span>
 	<span column="cat2" class=" short cat status "></span>
@@ -41,14 +47,10 @@ SubLayout.head_html =`
 		<div class="divname">
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
-		</div>
-		<div style="margin-left:10px;">
 			<span class="part" column="part"></span>
 			<span class="class" column="class"></span>
 		</div>
-	</span>
-	<span>
-		<div>
+		<div style="margin-left:10px;">
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>
@@ -62,6 +64,10 @@ SubLayout.head_html =`
 			<span column="jump_cost" class="jump_cost cost status "></span>
 			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
+		</div>
+	</span>
+	<span>
+		<div>
 			<span class="sep"></span>
 			<span style="width:200px;">
 				<div><span class="passive" column="passive"></span></div>
@@ -72,16 +78,14 @@ SubLayout.head_html =`
 
 `;
 SubLayout.body_html =`
-	<span>
+	<span "namearea">
 		<div class="divname">
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
-		</div>
-		<div style="margin-left:10px;">
 			<span class="part" column="part"></span>
 			<span class="class" column="class"></span>
 		</div>
-	</span>
+		<div style="margin-left:10px;">
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>
@@ -95,6 +99,8 @@ SubLayout.body_html =`
 			<span column="jump_cost" class="jump_cost cost status "></span>
 			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
+		</div>
+	</span>
 	<span class="sep"></span>
 			<span style="width:200px;">
 				<div><span class="passive" column="passive"></span></div>
@@ -105,16 +111,14 @@ SubLayout.body_html =`
 `;
 
 SubLayout.arm_html =`
-	<span>
+	<span "namearea">
 		<div class="divname">
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
-		</div>
-		<div style="margin-left:10px;">
 			<span class="part" column="part"></span>
 			<span class="class" column="class"></span>
 		</div>
-	</span>
+		<div style="margin-left:10px;">
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>
@@ -128,6 +132,8 @@ SubLayout.arm_html =`
 			<span column="jump_cost" class="jump_cost cost status "></span>
 			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
+		</div>
+	</span>
 	<span class="sep"></span>
 	<span style="width:200px;">
 			<span style="width:200px;">
@@ -139,16 +145,14 @@ SubLayout.arm_html =`
 `;
 
 SubLayout.leg_html =`
-	<span>
+	<span "namearea">
 		<div class="divname">
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
-		</div>
-		<div style="margin-left:10px;">
 			<span class="part" column="part"></span>
 			<span class="class" column="class"></span>
 		</div>
-	</span>
+		<div style="margin-left:10px;">
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>
@@ -162,6 +166,8 @@ SubLayout.leg_html =`
 			<span column="jump_cost" class="jump_cost cost status "></span>
 			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
+		</div>
+	</span>
 	<span class="sep"></span>
 	<span style="width:200px;">
 			<span style="width:200px;">
@@ -173,16 +179,14 @@ SubLayout.leg_html =`
 `;
 
 SubLayout.rear_html =`
-	<span>
+	<span "namearea">
 		<div class="divname">
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
-		</div>
-		<div style="margin-left:10px;">
 			<span class="part" column="part"></span>
 			<span class="class" column="class"></span>
 		</div>
-	</span>
+		<div style="margin-left:10px;">
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>
@@ -196,7 +200,9 @@ SubLayout.rear_html =`
 			<span column="jump_cost" class="jump_cost cost status "></span>
 			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
-	<span column="flying" class="flying"></span>
+			<span column="flying" class="flying"></span>
+		</div>
+	</span>
 	<span class="sep"></span>
 	<span style="width:200px;">
 			<span style="width:200px;">
@@ -208,12 +214,11 @@ SubLayout.rear_html =`
 `;
 
 SubLayout.weapon_html =`
+
 	<span>
 		<div class="divname">
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
-		</div>
-		<div style="margin-left:10px;">
 			<span class="part" column="part"></span>
 			<span class="class" column="class"></span>
 			<span class="category" column="category"></span>
@@ -221,9 +226,7 @@ SubLayout.weapon_html =`
 				<span column="distance"></span>
 			</span>
 		</div>
-	</span>
-	<span>
-		<div>
+		<div style="margin-left:10px;">
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>
@@ -237,26 +240,27 @@ SubLayout.weapon_html =`
 			<span column="jump_cost" class="jump_cost cost status "></span>
 			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
-		</div>
-		<div class="guargediv">
-			<span column="recast" class="guarge">
-				<div class="guarge_title">リキャスト</div>
-				<span class="guarge_parent">
-					<div class="guarge_child" ></div>
+			<span class="sep"></span>
+				<span column="recast" class="guarge">
+					<div class="guarge_title">リキャスト</div>
+					<span class="guarge_parent">
+						<div class="guarge_child" ></div>
+					</span>
 				</span>
-			</span>
-			<span column="reload" class="guarge">
-				<div class="guarge_title">リロード</div>
-				<span class="guarge_parent">
-					<div class="guarge_child" ></div>
+				<span column="reload" class="guarge">
+					<div class="guarge_title">リロード</div>
+					<span class="guarge_parent">
+						<div class="guarge_child" ></div>
+					</span>
 				</span>
-			</span>
-			<span column="range" class="guarge">
-				<div class="guarge_title">射程</div>
-				<span class="guarge_parent">
-					<div class="guarge_child" ></div>
+				<span column="range" class="guarge">
+					<div class="guarge_title">射程</div>
+					<span class="guarge_parent">
+						<div class="guarge_child" ></div>
+					</span>
 				</span>
-			</span>
+				<span column="bullet_spd" class="bullet_spd "></span>
+				<span column="bullet_num" class="bullet_num"></span>
 		</div>
 	</span>
 	<span>

@@ -459,10 +459,12 @@ class Main {
 								return getSkillName(DATA.actives[e.active],e.active_effect);
 							}}); 
 									
-							cols.push({label:"リキャスト",data:"recast",disp:SubLayout.guarge});
-							cols.push({label:"リロード",data:"reload",disp:SubLayout.guarge});
-							cols.push({label:"射程",data:"range",disp:SubLayout.guarge});
+							cols.push({label:"リキャスト",data:"recast",disp:SubLayout.guarge,sort:1});
+							cols.push({label:"リロード",data:"reload",disp:SubLayout.guarge,sort:1});
+							cols.push({label:"射程",data:"range",disp:SubLayout.guarge,sort:1});
 
+							cols.push({label:"弾速",data:"bullet_spd",sort:1});
+							cols.push({label:"弾数",data:"bullet_num",sort:1});
 							cols.push({data:"flying",label:"飛行",filter:1,disp:function(e){return DATA.flying[e.flying]}});
 							cols.push({data:"passive",label:"パッシブスキル",filter:1,disp:function(e,parent){
 
@@ -756,6 +758,13 @@ DATA.part_cd.forEach(function(e){
 		}
 	`, stylesheet.cssRules.length);
 });
+
+//要素移動
+
+document.querySelector("#shinki div.skill").appendChild(
+	document.querySelector("span.addpassive")
+
+		);
 
 	binder.init(values);
 	binder.refresh();
