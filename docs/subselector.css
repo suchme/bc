@@ -18,7 +18,8 @@ thead *{
 }
 thead ::before,
 thead ::after{
-	content:"" !important;
+display:none !important;
+;
 	
 }
 /*サブウィンド*/

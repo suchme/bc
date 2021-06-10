@@ -80,12 +80,8 @@ span.setting{
 	position:relative;
 	background-color:#555;
 	margin:1px;
-	padding:1px;
 	z-index:1;
 	font-weight:bold;
-}
-.status.cost{
-width:32px;
 }
 .status::before{
 	position:absolute;
@@ -194,16 +190,20 @@ span.weapon2 span.status{
 .biko{
 	font-size:smaller;
 }
-span.passive::before{
-	background-color:#555;
-	color:#fff;
-	content:"パ";
-	margin-right:1px;
+
+span.passive::before,
+span.active::before{
+	background-image:url("icon/passive.svg");
+	background-size:12px;
+	display:inline-block;
+	width:14px;
+	height:14px;
+	background-repeat:no-repeat;
+	content:"";
+	background-position:bottom;
 }
 span.active::before{
-	background-color:#c33;
-	content:"ア";
-	margin-right:1px;
+	background-image:url("icon/active.svg");
 }
 span.passive{
 	margin-left:2px;
@@ -233,6 +233,7 @@ display:none;
 span.name{
 	width:200px;
 	display:inline-block;
+	white-space:pre-wrap;
 	overflow:hidden;
 }
 span.outline{
@@ -251,7 +252,7 @@ display:inline-block;
 
 div.setting{
 	position:relative;
-	height:24px;
+	height:20px;
 }
 button.change{
 	background-color:#c00;
@@ -261,9 +262,10 @@ button.change{
 	border:1px solid black;
 	position:absolute;
 	right:0px;
+	bottom:0px;
 }
 div#armor>div{
-	padding-top:4px;
+	padding-top:2px;
 }
 
 
@@ -281,8 +283,8 @@ div#total{
 }
 
 span.part_icon{
-	width:24px;
-	height:24px;
+	width:20px;
+	height:20px;
 	display:inline-block;
 
 }

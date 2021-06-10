@@ -1,19 +1,80 @@
-<?xml version="1.0"?>
-<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
- <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
- <g class="layer">
-  <title>Layer 1</title>
-  <ellipse cx="226" cy="186" fill="#FF0000" id="svg_2" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
-  <ellipse cx="203" cy="253" fill="#FF0000" id="svg_3" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
-  <ellipse cx="228" cy="160" fill="#FF0000" id="svg_4" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
-  <ellipse cx="193" cy="187" fill="#FF0000" id="svg_5" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
-  <ellipse cx="154" cy="191" fill="#FF0000" id="svg_6" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
-  <ellipse cx="135" cy="208" fill="#FF0000" id="svg_7" rx="0" ry="0" stroke="#000000" stroke-width="5"/>
-  <ellipse cx="7" cy="52" fill="#FF0000" id="svg_8" stroke="#000000" stroke-width="5" transform="rotate(26.9664 -2.5 -45.5)"/>
-  <rect fill="#FF0000" height="0" id="svg_11" stroke="#000000" stroke-width="5" width="0" x="270" y="249"/>
-  <rect fill="#FF0000" height="0" id="svg_12" stroke="#000000" stroke-width="5" width="0" x="450" y="235"/>
-  <rect fill="#FF0000" height="0" id="svg_13" stroke="#000000" stroke-width="5" width="0" x="482" y="189"/>
-  <rect fill="#ff7f00" height="10.59871" id="svg_1" rx="2" ry="2" stroke="#000000" transform="rotate(8.02803 3.23413 7.33782)" width="3.12798" x="1.670138" y="2.03847"/>
-  <rect fill="#ff7f00" height="10.366415" id="svg_9" rx="2" ry="2" stroke="#000000" transform="rotate(-7.40596 13.1586 7.47569)" width="3.013327" x="11.651893" y="2.292484"/>
- </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="256"
+   height="256"
+   viewBox="0 0 67.733331 67.733335"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="arm.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="43.739606"
+     inkscape:cy="170.49077"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1918"
+     inkscape:window-height="1044"
+     inkscape:window-x="0"
+     inkscape:window-y="17"
+     inkscape:window-maximized="1"
+     showguides="false" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="レイヤー 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-229.26665)">
+    <path
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#ff9900;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       d="m 20.57529,242.56076 a 6.0006,6.0006 0 0 0 -7.311463,4.30246 l -7.364606,26.80149 a 6.0006,6.0006 0 1 0 11.571107,3.17955 l 7.364603,-26.8015 a 6.0006,6.0006 0 0 0 -4.259641,-7.482 z"
+       id="path884"
+       inkscape:connector-curvature="0"
+       inkscape:tile-cx="20.445311"
+       inkscape:tile-cy="31.11656"
+       inkscape:tile-w="14.001249"
+       inkscape:tile-h="41.966993"
+       inkscape:tile-x0="13.444687"
+       inkscape:tile-y0="10.133058" />
+    <use
+       x="0"
+       y="0"
+       inkscape:tiled-clone-of="#path884"
+       xlink:href="#path884"
+       transform="matrix(-1,0,0,1,68.656253,0.2672696)"
+       id="use894"
+       width="100%"
+       height="100%" />
+  </g>
 </svg>
