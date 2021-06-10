@@ -169,7 +169,7 @@ class Main {
 
 		//lv
 		if(values.shinki.lv!="1"){
-			add(values.shinki,DATA.lv_bonus.shinki[rare][values.shinki.lv]);
+			add(values.shinki,DATA.lv_bonus.shinki[0][values.shinki.lv]);
 			//add(values.shinki,{atk:8,def:8,spd:3,lp:80,bst:30});
 		}
 
@@ -412,12 +412,12 @@ class Main {
 						];
 					cols.splice(6,0,{class:"status",label:"回復",data:"recover",sort:-1});
 					cols.splice(7,0,{class:"status",label:"走",data:"dash",sort:-1});
-					cols.splice(8,0,{class:"status",label:"走費",data:"dash_cost"});
-					cols.splice(9,0,{class:"status",label:"跳費",data:"jump_cost"});
-					cols.splice(10,0,{class:"status",label:"浮費",data:"hover_cost"});
-					cols.splice(10,0,{class:"status",label:"防費",data:"guard_cost"});
-					cols.splice(10,0,{class:"status",label:"回収",data:"expand",sort:-1});
-					cols.splice(10,0,{label:"身長",data:"height",sort:0,filter:1});
+					cols.splice(8,0,{class:"status",label:"展開",data:"extend",sort:-1});
+					cols.splice(9,0,{class:"status",label:"走費",data:"dash_cost"});
+					cols.splice(10,0,{class:"status",label:"跳費",data:"jump_cost"});
+					cols.splice(11,0,{class:"status",label:"浮費",data:"hover_cost"});
+					cols.splice(11,0,{class:"status",label:"防費",data:"guard_cost"});
+					cols.splice(11,0,{label:"身長",data:"height",sort:0,filter:1});
 
 					if(part_idx===0){
 						cols.splice(10,0, {label:"名称",data:"name",filter:1
@@ -655,7 +655,7 @@ class Main {
 
 
 		var dt=new Date(DATA.date);
-		values.version="code2021/06/04<br>"
+		values.version="code2021/06/11<br>"
 			+ "data"+ dt.getFullYear() +"/"+("0"+(dt.getMonth()+1)).slice(-2)
 			+"/" +("0"+dt.getDate()).slice(-2);
 
@@ -772,6 +772,14 @@ DATA.part_cd.forEach(function(e){
 	//		content:url(icon/${e}.svg);
 	//	}
 	//`, stylesheet.cssRules.length);
+});
+
+//パラメータ説明追加
+DATA.param_cd.forEach((e,idx)=>{
+	document.querySelectorAll(".status."+e).forEach((ee)=>{
+		ee.title=DATA.param_name[idx] + "\n" + DATA.param_title[idx];
+	})
+	
 });
 
 

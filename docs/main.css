@@ -135,6 +135,9 @@ opacity:40%;
 .status.guard_cost{
 	background-image:url('icon/guard_cost.svg');
 }
+.status.extend{
+	background-image:url('icon/extend.svg');
+}
 .zero{
 	color:#999 !important;
 	font-weight:normal;
@@ -146,11 +149,8 @@ opacity:40%;
 	color:#fff;
 }
 
-.status.dash_cost
-,.status.jump_cost
-,.status.hover_cost
-,.status.guard_cost
-,.status.cost{
+.status.cost{
+width:28px;
 	background-color:#411;
 	color:#c33;
 }
@@ -231,7 +231,7 @@ display:none;
 }
 
 span.name{
-	width:200px;
+	width:220px;
 	display:inline-block;
 	white-space:pre-wrap;
 	overflow:hidden;

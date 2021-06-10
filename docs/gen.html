@@ -30,7 +30,7 @@ var Param = function(){
 
 var mem=[ "cd","set","class","name","rarelity"
 	,"atk","def","spd","lp","bst"
-	,"recover","dash"
+	,"recover","dash","extend"
 	,"dash_cost","jump_cost","hover_cost","guard_cost"
 	,"passive","effect","active","active_effect"
 	,"biko"];
@@ -43,7 +43,7 @@ class Armor{
 }
 var shinki_mem=[
 	"cd","name","atk","def","spd","lp","bst"
-	,"recover","dash"
+	,"recover","dash","extend"
 	,"dash_cost","jump_cost","hover_cost","guard_cost"
 	,"exskill","biko"];
 class Shinki{
@@ -135,19 +135,13 @@ var prepareData=function(source){
 	//アイコン補正
 	for(var i=0;i<source.individuals.length;i++){
 		var row = source.individuals[i];
-		var individual= {};
+		var individual= new Param();
 		individual.name=row[0];
 		individual.atk=Number(row[1]);
 		individual.def=Number(row[2]);
 		individual.spd=Number(row[3]);
 		individual.lp=Number(row[4]);
 		individual.bst=Number(row[5]);
-		individual.dash=0;
-		individual.recover=0;
-		individual.dash_cost=0;
-		individual.jump_cost=0;
-		individual.guard_cost=0;
-		individual.hover_cost=0;
 		output.individuals.push(individual);
 	}
 
@@ -206,16 +200,14 @@ var prepareData=function(source){
 		var bonuses=[];
 		var row = sheet_data[i];
 		var part = row[0];
-		//for(var j=0;j < 4;j++){
 			var bonus=new Param();
 			var row = sheet_data[i];
 			var part = row[0];
 			row.forEach((a,idx)=>{
 				if(!idx)return;
 				bonus[mems[idx]]=a;
+
 			});
-			//bonuses.push(bonus);
-			//bonuses[bonus.lv]=bonus;
 				if(!output.lv_bonus[part]){
 					output.lv_bonus[part]={};
 				}
@@ -223,9 +215,6 @@ var prepareData=function(source){
 					output.lv_bonus[part][bonus.rarelity]={};
 				}
 			output.lv_bonus[part][bonus.rarelity][bonus.lv] = bonus;
-		//	i++;
-		//}
-//		output.lv_bonus[part] = bonuses;
 	}
 
 	;
