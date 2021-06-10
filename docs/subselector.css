@@ -11,9 +11,15 @@ tr.header_filter span{
 thead span{
 	vertical-align:bottom;
 }
+
+thead *{
+	background-image:none !important;
+	
+}
 thead ::before,
 thead ::after{
 	content:"" !important;
+	
 }
 /*サブウィンド*/
 div.subwindow{
@@ -250,6 +256,14 @@ tr .guarge
 tr .flying{
 	width:40px;
 	text-align:center;
+}
+
+span.flying.enable{
+	background-image:url("icon/flying.svg");
+	background-size:16px;
+	background-repeat:no-repeat;
+	background-position:center;
+color:rgba(0,0,0,0);
 }
 tbody .guarge_title{
 	font-size:8px;

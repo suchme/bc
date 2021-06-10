@@ -74,7 +74,7 @@ var prepareData=function(source){
 		for(var j=1;j<list.length;j++){
 			var row = list[j];
 			for(var k=0;k<row.length;k++){
-				if(row[k]==="" || row[k]==="#N/A"){
+				if(k!=0 &&(row[k]==="" || row[k]==="#N/A") ){
 					row[k]=list[j-1][k];
 				}
 			}

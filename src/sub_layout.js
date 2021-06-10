@@ -18,8 +18,8 @@ SubLayout.shinki_html =`
 		<span class="sep"></span>
 		<span column="dash_cost" class="dash_cost cost status "></span>
 		<span column="jump_cost" class="jump_cost cost status "></span>
-		<span column="guard_cost" class="guard_cost cost status "></span>
 		<span column="hover_cost" class="hover_cost cost status "></span>
+		<span column="guard_cost" class="guard_cost cost status "></span>
 		<span class="sep"></span>
 		<span column="expand" class="status "></span>
 	</div>
@@ -62,8 +62,8 @@ SubLayout.head_html =`
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
-			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
+			<span column="guard_cost" class="guard_cost cost status "></span>
 		</div>
 	</span>
 	<span>
@@ -97,8 +97,8 @@ SubLayout.body_html =`
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
-			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
+			<span column="guard_cost" class="guard_cost cost status "></span>
 		</div>
 	</span>
 	<span class="sep"></span>
@@ -130,8 +130,8 @@ SubLayout.arm_html =`
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
-			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
+			<span column="guard_cost" class="guard_cost cost status "></span>
 		</div>
 	</span>
 	<span class="sep"></span>
@@ -164,8 +164,8 @@ SubLayout.leg_html =`
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
-			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
+			<span column="guard_cost" class="guard_cost cost status "></span>
 		</div>
 	</span>
 	<span class="sep"></span>
@@ -198,8 +198,8 @@ SubLayout.rear_html =`
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
-			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
+			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="flying" class="flying"></span>
 		</div>
 	</span>
@@ -238,8 +238,8 @@ SubLayout.weapon_html =`
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
-			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
+			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span class="sep"></span>
 				<span column="recast" class="guarge">
 					<div class="guarge_title">リキャスト</div>

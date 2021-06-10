@@ -157,9 +157,6 @@ class Main {
 		values.individual= DATA.individuals[values.shinki.individual];
 
 		var biko="";
-		if(armor.flying){
-			biko+="飛行 ";
-		}
 		biko+="回"		+ values.shinki.recover+" ";
 		biko+="走"		+ values.shinki.dash+" ";
 		biko+="走費"		+ values.shinki.dash_cost+" ";
@@ -228,6 +225,13 @@ class Main {
 				if(apt){
 					span_skill.appendChild( getAptSpan(apt) );
 				}
+			}
+			if(armor.flying){
+				var img=document.createElement("img");
+				img.src= "icon/flying.svg";
+				img.width=16;
+				img.height=16;
+				span_skill.appendChild(img);
 			}
 			if(armor.passive>0){
 				var passive={};
@@ -303,7 +307,7 @@ class Main {
 
 		//レアリティ色
 		DATA.part_cd.forEach(function(e,idx){
-			document.querySelectorAll("span."+e+" select").forEach(function(node){
+			document.querySelectorAll("span."+e+" select.rarelity").forEach(function(node){
 				node.classList.remove("N","R","SR","UR");
 				node.classList.add(DATA.rarelity[values[e].rarelity]);
 			});
@@ -465,7 +469,9 @@ class Main {
 
 							cols.push({label:"弾速",data:"bullet_spd",sort:1});
 							cols.push({label:"弾数",data:"bullet_num",sort:1});
-							cols.push({data:"flying",label:"飛行",filter:1,disp:function(e){return DATA.flying[e.flying]}});
+							cols.push({data:"flying",label:"飛行",filter:1,disp:function(e,parent){
+									if(e.flying) parent.classList.add("enable");
+									return DATA.flying[e.flying]}});
 							cols.push({data:"passive",label:"パッシブスキル",filter:1,disp:function(e,parent){
 
 									if(e.passive===0){
@@ -640,6 +646,11 @@ class Main {
 			option.value= idx;
 			select.appendChild(option);
 		});
+
+		select.addEventListener("change",(e)=>{
+			var ct = e.currentTarget;
+			ct.className="individual_" + ct.value;
+		});
 		
 
 
@@ -732,8 +743,12 @@ var stylesheet = document.styleSheets.item(document.styleSheets.length-1);
 DATA.shinkis.forEach((e)=>{
 	stylesheet.insertRule(` 
 		.${e.cd}::before{
-		content:url(icon/${e.cd}.png);
+content:'';
+		background-image:url(icon/${e.cd}.png);
 		margin-right:4px;
+		background-size:contain;
+
+		display:inline-block;
 	}
 	`, stylesheet.cssRules.length);
 
@@ -752,14 +767,13 @@ DATA.part_cd.forEach(function(e){
 			background-size:100%;
 		}
 	`, stylesheet.cssRules.length);
-	stylesheet.insertRule(` 
-		.part.${e}::before{
-			content:url(icon/${e}.svg);
-		}
-	`, stylesheet.cssRules.length);
+	//stylesheet.insertRule(` 
+	//	.part.${e}::before{
+	//		content:url(icon/${e}.svg);
+	//	}
+	//`, stylesheet.cssRules.length);
 });
 
-//要素移動
 
 document.querySelector("#shinki div.skill").appendChild(
 	document.querySelector("span.addpassive")

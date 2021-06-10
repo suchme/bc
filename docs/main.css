@@ -97,33 +97,47 @@ width:32px;
 	font-weight:normal;
 opacity:40%;
 }
-.status.atk::before{
-	color:#fcc;
-	content:'攻';
+.status{
+	background-size:12px;
+	background-repeat:no-repeat;
+	background-position:left;
 }
-.status.def::before{
-	color:#cfc;
-	content:'防';
+.status.atk{
+	background-image:url('icon/atk.svg');
+
 }
-.status.spd::before{
-	color:#ff9;
-	content:'速';
+.status.def{
+	background-image:url('icon/def.svg');
+
 }
-.status.lp::before{
-	color:#ccc;
-	content:'体';
+.status.spd{
+	background-image:url('icon/spd.svg');
 }
-.status.bst::before{
-	color:#cff;
-	content:'ブ';
+.status.lp{
+	background-image:url('icon/lp.svg');
 }
-.status.dash::before{
-	color:#ff0;
-	content:'走';
+.status.bst{
+	background-image:url('icon/bst.svg');
 }
-.status.recover::before{
-	color:#0cc;
-	content:'回';
+.status.dash{
+	background-image:url('icon/dash.svg');
+}
+.status.recover{
+	background-image:url('icon/recover.svg');
+	background-color:#66c;
+}
+.status.dash_cost{
+	background-image:url('icon/dash_cost.svg');
+}
+
+.status.jump_cost{
+	background-image:url('icon/jump_cost.svg');
+}
+.status.hover_cost{
+	background-image:url('icon/flying_cost.svg');
+}
+.status.guard_cost{
+	background-image:url('icon/guard_cost.svg');
 }
 .zero{
 	color:#999 !important;
@@ -135,31 +149,7 @@ opacity:40%;
 .status.minus.cost{
 	color:#fff;
 }
-.status.recover{
-	background-color:#66c;
-}
 
-
-.status.dash::before{
-	color:#ffc;
-	content:'走';
-}
-.status.dash_cost::before{
-	color:#fcc;
-	content:'走費';
-}
-.status.jump_cost::before{
-	color:#fcc;
-	content:'跳費';
-}
-.status.guard_cost::before{
-	color:#fcc;
-	content:'防費';
-}
-.status.hover_cost::before{
-	color:#fcc;
-	content:'浮費';
-}
 .status.dash_cost
 ,.status.jump_cost
 ,.status.hover_cost
@@ -302,4 +292,67 @@ display:none;
 
 #shinki .part_icon{
 	display:none;
+}
+
+svg *{
+ fill: #fb8c00 !important;
+
+}
+
+#individual{
+	background-size:12px;
+	background-repeat:no-repeat;
+	background-position:right
+		,right 12px center
+		,right 24px center
+		,right 36px center
+		,right 48px center;
+	text-indent:200%;
+	background-color:black;
+color:white;
+}
+.individual_1{
+	background-image:url('icon/atk.svg');
+}
+.individual_2{
+	background-image:url('icon/def.svg');
+}
+.individual_3{
+	background-image:url('icon/lp.svg');
+}
+.individual_4{
+	background-image:url('icon/bst.svg');
+}
+.individual_5{
+	background-image:
+		url('icon/def.svg')
+		,url('icon/atk.svg')
+		;
+}
+.individual_6{
+	background-image:
+		url('icon/bst.svg')
+		,url('icon/atk.svg')
+	;
+}
+.individual_7{
+	background-image:
+		url('icon/lp.svg')
+		,url('icon/def.svg')
+	;
+}
+.individual_8{
+	background-image:
+		url('icon/bst.svg')
+		,url('icon/lp.svg')
+	;
+}
+.individual_9{
+	background-image:
+		url('icon/bst.svg')
+		,url('icon/lp.svg')
+		,url('icon/spd.svg')
+		,url('icon/def.svg')
+		,url('icon/atk.svg')
+	;
 }
