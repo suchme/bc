@@ -741,16 +741,21 @@ var newStyle = document.createElement('style');newStyle.type = "text/css";
 document.getElementsByTagName('head').item(0).appendChild(newStyle);
 var stylesheet = document.styleSheets.item(document.styleSheets.length-1);
 DATA.shinkis.forEach((e)=>{
-	stylesheet.insertRule(` 
-		.${e.cd}::before{
-content:'';
-		background-image:url(icon/${e.cd}.png);
-		margin-right:4px;
-		background-size:contain;
-
-		display:inline-block;
-	}
-	`, stylesheet.cssRules.length);
+	//	if(e.cd=='s0' || e.cd=='s1' || e.cd=='s2'){
+	//		stylesheet.insertRule(` 
+	//			.${e.cd}::before{
+	//	content:'';
+	//			background-image:url(icon/${e.cd}.svg);
+	//		}
+	//		`, stylesheet.cssRules.length);
+	//		}else{
+			stylesheet.insertRule(` 
+				.${e.cd}::before{
+		content:'';
+				background-image:url(icon/${e.cd}.png);
+			}
+			`, stylesheet.cssRules.length);
+	//		}
 
 	stylesheet.insertRule(` 
 		.class.${e.cd}{

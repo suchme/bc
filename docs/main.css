@@ -358,3 +358,8 @@ color:white;
 		,url('icon/atk.svg')
 	;
 }
+
+#shinki .name::before{
+	margin-right:4px;
+	background-size:contain;
+}

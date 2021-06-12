@@ -291,6 +291,7 @@ margin:1px;
 
 .shinki::before{
 	display:inline-block;
+	background-size:contain;
 	width:24px;
 	height:24px;
 	vertical-align:middle;
