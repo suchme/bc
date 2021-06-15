@@ -363,3 +363,7 @@ color:white;
 	margin-right:4px;
 	background-size:contain;
 }
+
+#form .extend{
+display:none;
+}
