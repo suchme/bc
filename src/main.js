@@ -89,8 +89,8 @@ class Main {
 		add(values.shinki,values.shinki.org);
 		values.shinki.name=values.shinki.org.name;
 
-		document.querySelector("#shinki span.name").className = 
-			"name " + values.shinki.org.cd;
+		document.querySelector("#shinki .part_icon").className = 
+			"part_icon " + values.shinki.org.cd;
 
 
 		//レアリティ
@@ -750,8 +750,15 @@ DATA.shinkis.forEach((e)=>{
 	//		`, stylesheet.cssRules.length);
 	//		}else{
 			stylesheet.insertRule(` 
-				.${e.cd}::before{
-		content:'';
+				.part_icon.${e.cd}{
+				content:'';
+				background-image:url(icon/${e.cd}.png);
+			}
+			`, stylesheet.cssRules.length);
+
+			stylesheet.insertRule(` 
+				.shinki.${e.cd}::before{
+				content:'';
 				background-image:url(icon/${e.cd}.png);
 			}
 			`, stylesheet.cssRules.length);

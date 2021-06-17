@@ -61,7 +61,7 @@ textarea.export{
 
 }
 span.armor span{
-	vertical-align:top;
+	vertical-align:middle;
 }
 span{
 	display:inline-block;
@@ -155,7 +155,7 @@ width:28px;
 	color:#c33;
 }
 .N{
-	background-color:#eee;
+	background-color:#aaa;
 }
 .R{
 	background-color:#f93;
@@ -233,8 +233,8 @@ display:none;
 span.name{
 	width:220px;
 	display:inline-block;
-	white-space:pre-wrap;
 	overflow:hidden;
+	text-shadow:1px 1px 0 black;
 }
 span.outline{
 display:inline-block;
@@ -293,7 +293,8 @@ display:none;
 }
 
 #shinki .part_icon{
-	display:none;
+width:24px;
+height:24px;
 }
 
 svg *{
