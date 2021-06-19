@@ -73,8 +73,8 @@ var prepareData=function(source){
 		var list = source[keys[i]];
 		for(var j=1;j<list.length;j++){
 			var row = list[j];
-			for(var k=0;k<row.length;k++){
-				if(k!=0 &&(row[k]==="" || row[k]==="#N/A") ){
+			for(var k=1;k<row.length;k++){
+				if(row[k]==="" || row[k]==="#N/A"){
 					row[k]=list[j-1][k];
 				}
 			}
