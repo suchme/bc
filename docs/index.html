@@ -43,10 +43,10 @@
 	<div id="armor"></div>
 
 	<div id="total">
-		<div style="position:relative;">
+		<div style="position:relative;" class="totalhead">
 最終値
 
-			<span >総コスト</span><span bind="total.cost"></span>
+			<span>総コスト</span><span bind="total.cost"></span>
 
 		<span style="position:absolute;right:0px;">
 		<button onclick="
@@ -83,7 +83,6 @@
 
 	<span id="template_armor">
 		<div class="setting">
-			<span class="part_icon"></span>
 			<span class="part"></span>
 			<span bind=".name" class="name"></span>
 			Lv<select class="lv" bind=".lv">

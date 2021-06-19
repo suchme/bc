@@ -232,12 +232,7 @@ export default class Subselector{
 					if(col.class){
 						td.classList.add(col.class);
 					}
-					if(content===0){
-						td.classList.add("zero");
-					}
-					if(content<0){
-						td.classList.add("minus");
-					}
+					td.setAttribute("value",content);
 					var span = td;//document.createElement("span");
 					span.innerHTML= content;
 					//td.appendChild(span);
@@ -277,12 +272,7 @@ export default class Subselector{
 					if(col.class){
 						td.classList.add(col.class);
 					}
-					if(content===0){
-						td.classList.add("zero");
-					}
-					if(content<0){
-						td.classList.add("minus");
-					}
+					td.setAttribute("value",content);
 					var span = td;//document.createElement("span");
 					if(content || content===0){
 						span.innerHTML= content;

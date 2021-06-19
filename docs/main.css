@@ -78,7 +78,7 @@ span.setting{
 	text-align:right;
 	width:32px;
 	position:relative;
-	background-color:#555;
+	background-color:rgba(0,0,0,0.4);
 	margin:1px;
 	z-index:1;
 	font-weight:bold;
@@ -137,16 +137,6 @@ opacity:40%;
 }
 .status.extend{
 	background-image:url('icon/extend.svg');
-}
-.zero{
-	color:#999 !important;
-	font-weight:normal;
-}
-.minus{
-	color:#f33;
-}
-.status.minus.cost{
-	color:#fff;
 }
 
 .status.cost{
@@ -279,7 +269,6 @@ font-weight:bold;
 div#total{
 	padding-top:4px;
 	padding-bottom:4px;
-	background-color:#000;
 }
 
 span.part_icon{
@@ -367,4 +356,24 @@ color:white;
 
 #form .extend{
 display:none;
+}
+
+.status[value='0']{
+	color:#888;
+	font-weight:normal;
+}
+.status[value^='-']
+,.minus{
+	color:#f33;
+}
+.status.cost[value^='-']{
+	color:#fff;
+}
+
+span.armor{
+	background-repeat:no-repeat;
+	background-size:contain;
+}
+div.totalhead{
+	background-color:#000;
 }

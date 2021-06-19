@@ -13,13 +13,29 @@ export default class Binder {
 		for(var i=0;i<bindedNodes.length;i++){
 			this.bind(bindedNodes[i]);
 		}
+
+		bindedNodes = document.querySelectorAll("*");
+		bindedNodes.forEach((node)=>{
+			for(var i=0;i<node.attributes.length;i++){
+				var name = node.attributes[i].name;
+				if(name.indexOf(":")!==0)continue;
+				this.bind(node,name);
+			
+			};
+		});
+		
 	}
 
 	//bindが指定されたノードを渡してバインド情報を登録する
-	bind(target){
+	bind(target,param){
 		var bind={};
 		bind.target = target;
-		bind.variable = bind.target.getAttribute("bind").split(".");
+		if(!param){
+			param ="bind";
+		}else{
+		}
+		bind.param = param.replace(":","");
+		bind.variable = bind.target.getAttribute(param).split(".");
 		this.binds.push(bind);
 	}
 
@@ -50,6 +66,10 @@ export default class Binder {
 			if(bind.old_value  === value){
 				continue;}
 			var target = bind.target;
+			if(bind.param !=="bind"){
+				target.setAttribute(bind.param,value);
+				continue;
+			}
 			if(target.tagName==="INPUT" || target.tagName==="SELECT" || target.tagName==="TEXTAREA"){
 				if(target.value !== value){
 					target.value = value;

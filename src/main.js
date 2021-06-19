@@ -89,8 +89,10 @@ class Main {
 		add(values.shinki,values.shinki.org);
 		values.shinki.name=values.shinki.org.name;
 
-		document.querySelector("#shinki .part_icon").className = 
-			"part_icon " + values.shinki.org.cd;
+//		document.querySelector("#shinki .part_icon").className = 
+//			"part_icon " + values.shinki.org.cd;
+		document.querySelector("#shinki .name").className = 
+			"name shinki " + values.shinki.org.cd;
 
 
 		//レアリティ
@@ -388,13 +390,14 @@ class Main {
 			var children = clone.querySelectorAll("[bind]");
 			for(var j=0;j<children.length;j++){
 				children[j].setAttribute("bind",part_cd+children[j].getAttribute("bind"));
+				children[j].setAttribute(":value",children[j].getAttribute("bind"));
 			}
 			 clone.querySelector(".part").textContent = DATA.part_name[i];
 			 if(i===7){
 			 	clone.querySelector(".part").textContent = "サブ"
 			 }
-			 clone.querySelector(".part_icon").classList.add(part_cd);
-			 clone.querySelector(".part_icon").title= 
+			 //clone.querySelector(".part_icon").classList.add(part_cd);
+			 //clone.querySelector(".part_icon").title= 
 			 	clone.querySelector(".part").textContent ;
 	 
 			var span = clone.querySelector("button.armor");
@@ -571,6 +574,7 @@ class Main {
 			var children = newnode.querySelectorAll("[bind]");
 			children.forEach(function(e){
 				e.setAttribute("bind",bindName +e.getAttribute("bind"));
+				e.setAttribute(":value",e.getAttribute("bind"));
 			});
 			node.parentNode.replaceChild(newnode,node);
 		});
@@ -778,6 +782,12 @@ DATA.part_cd.forEach(function(e){
 		span.part_icon.${e}{
 			background-image:url(icon/${e}.svg);
 			background-size:100%;
+		}
+	`, stylesheet.cssRules.length);
+
+	stylesheet.insertRule(` 
+		span.armor.${e}{
+			background-image:url(icon/${e}_back.svg);
 		}
 	`, stylesheet.cssRules.length);
 	//stylesheet.insertRule(` 
