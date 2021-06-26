@@ -4,21 +4,19 @@ export default class Binder {
 		this.binds=[];
 		this.args_root = window;
 	}
+
+	//初期化&バインド
 	init(_args_root){
 		if(_args_root){
 			this.args_root = _args_root;
 		}
 		this.binds=[];
-		var bindedNodes = document.querySelectorAll("#form [bind]");
-		for(var i=0;i<bindedNodes.length;i++){
-			this.bind(bindedNodes[i]);
-		}
 
-		bindedNodes = document.querySelectorAll("*");
+		var bindedNodes = document.querySelectorAll("*");
 		bindedNodes.forEach((node)=>{
 			for(var i=0;i<node.attributes.length;i++){
 				var name = node.attributes[i].name;
-				if(name.indexOf(":")!==0)continue;
+				if(name.indexOf("bind:")!==0)continue;
 				this.bind(node,name);
 			
 			};
@@ -26,15 +24,12 @@ export default class Binder {
 		
 	}
 
-	//bindが指定されたノードを渡してバインド情報を登録する
+	//ノードとバインド変数を渡してバインド情報を登録する
 	bind(target,param){
 		var bind={};
 		bind.target = target;
-		if(!param){
-			param ="bind";
-		}else{
-		}
-		bind.param = param.replace(":","");
+
+		bind.param = param.replace("bind:","");
 		bind.variable = bind.target.getAttribute(param).split(".");
 		this.binds.push(bind);
 	}
@@ -66,7 +61,7 @@ export default class Binder {
 			if(bind.old_value  === value){
 				continue;}
 			var target = bind.target;
-			if(bind.param !=="bind"){
+			if(bind.param !=="text"){
 				target.setAttribute(bind.param,value);
 				continue;
 			}

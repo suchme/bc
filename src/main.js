@@ -72,7 +72,8 @@ class Main {
 		//計算処理
 		var passives=[];
 
-		var nodes = document.querySelectorAll("#form select[bind]");
+		//var nodes = document.querySelectorAll("#form select[bind:]");
+		var nodes = document.querySelectorAll("#form select[bind\\:value]");
 		for(var i=0;i<nodes.length;i++){
 			var node = nodes[i];
 			const bind = binder.binds.find(function(elem){return elem.target ===node});
@@ -307,13 +308,13 @@ class Main {
 		add(values.total,values.bonus);
 
 
-		//レアリティ色
-		DATA.part_cd.forEach(function(e,idx){
-			document.querySelectorAll("span."+e+" select.rarelity").forEach(function(node){
-				node.classList.remove("N","R","SR","UR");
-				node.classList.add(DATA.rarelity[values[e].rarelity]);
-			});
-		});
+//		//レアリティ色
+//		DATA.part_cd.forEach(function(e,idx){
+//			document.querySelectorAll("span."+e+" select.rarelity").forEach(function(node){
+//				node.classList.remove("N","R","SR","UR");
+//				node.classList.add(DATA.rarelity[values[e].rarelity]);
+//			});
+//		});
 
 
 
@@ -387,11 +388,17 @@ class Main {
 			clone.id = target.id;
 			clone.classList.add(target.id,"armor");
 
-			var children = clone.querySelectorAll("[bind]");
-			for(var j=0;j<children.length;j++){
-				children[j].setAttribute("bind",part_cd+children[j].getAttribute("bind"));
-				children[j].setAttribute(":value",children[j].getAttribute("bind"));
-			}
+			//var children = clone.querySelectorAll("[bind\\:text]");
+
+			var bindedNodes = clone.querySelectorAll("*");
+			bindedNodes.forEach((node)=>{
+			//for(var j=0;j<children.length;j++){
+				for(var i=0;i<node.attributes.length;i++){
+					var name = node.attributes[i].name;
+					if(name.indexOf("bind:")!==0)continue;
+					node.setAttribute(name,part_cd + node.getAttribute(name));
+				};
+			});
 			 clone.querySelector(".part").textContent = DATA.part_name[i];
 			 if(i===7){
 			 	clone.querySelector(".part").textContent = "サブ"
@@ -565,16 +572,21 @@ class Main {
 			if(idx>=5)return false;
 			var span = document.createElement("span");
 			span.classList.add("status",e);
-			span.setAttribute("bind","."+e);
+			span.setAttribute("bind:text","."+e);
+			span.setAttribute("bind:value","."+e);
 			param.appendChild(span);
 		});
 		nodes.forEach(function(node){
 			var newnode = param.cloneNode(true);
-			var bindName = node.getAttribute("bind");
-			var children = newnode.querySelectorAll("[bind]");
-			children.forEach(function(e){
-				e.setAttribute("bind",bindName +e.getAttribute("bind"));
-				e.setAttribute(":value",e.getAttribute("bind"));
+			var bindName = node.getAttribute("bind:text");
+
+			var bindedNodes = newnode.querySelectorAll("*");
+			bindedNodes.forEach((node)=>{
+				for(var i=0;i<node.attributes.length;i++){
+					var name = node.attributes[i].name;
+					if(name.indexOf("bind:")!==0)continue;
+					node.setAttribute(name,bindName+ node.getAttribute(name));
+				};
 			});
 			node.parentNode.replaceChild(newnode,node);
 		});
@@ -592,8 +604,9 @@ class Main {
 		nodes.forEach(function(org){
 			var rare2 = rare.cloneNode(true);
 			rare2.id="";
-			if(org.getAttribute("bind") !== null){
-				rare2.setAttribute("bind",org.getAttribute("bind"));
+			if(org.getAttribute("bind:value") !== null){
+				rare2.setAttribute("bind:value",org.getAttribute("bind:value"));
+				rare2.setAttribute("bind:text",org.getAttribute("bind:value"));
 			}
 			org.parentNode.replaceChild(rare2,org);
 		});
@@ -808,13 +821,11 @@ DATA.param_cd.forEach((e,idx)=>{
 
 document.querySelector("#shinki div.skill").appendChild(
 	document.querySelector("span.addpassive")
-
-		);
+);
 
 	binder.init(values);
 	binder.refresh();
-
-		main.reCalc();
+	main.reCalc();
 
 	}
 

@@ -149,24 +149,60 @@ width:28px;
 }
 .R{
 	background-color:#f93;
+	/*
 	background: linear-gradient(to bottom
 		, #fff 0%
 		, #f93 50%
 		, #960 100%);
+		*/
 }
 .SR{
 	background-color:#99f;
+	/*
 	background: linear-gradient(to bottom
 		, #fff 0%
 		, #999 60%
 		, #c9f 100%);
+		*/
 }
 .UR{
 	background-color:#ff3;
+	/*
 	background: linear-gradient(to bottom
 		, #fff 0%
 		, #cc0 40%
 		, #ff3 100%);
+		*/
+}
+select.rarelity[value="0"]{
+	background-color:#aaa;
+}
+select.rarelity[value="1"]{
+	background-color:#f93;
+	/*
+	background: linear-gradient(to bottom
+		, #fff 0%
+		, #f93 50%
+		, #960 100%);
+		*/
+}
+select.rarelity[value="2"]{
+	background-color:#99f;
+	/*
+	background: linear-gradient(to bottom
+		, #fff 0%
+		, #999 60%
+		, #c9f 100%);
+		*/
+}
+select.rarelity[value="3"]{
+	background-color:#ff3;
+	/*
+	background: linear-gradient(to bottom
+		, #fff 0%
+		, #cc0 40%
+		, #ff3 100%);
+		*/
 }
 
 
