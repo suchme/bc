@@ -72,14 +72,12 @@ class Main {
 		//計算処理
 		var passives=[];
 
-		//var nodes = document.querySelectorAll("#form select[bind:]");
-		var nodes = document.querySelectorAll("#form select[bind\\:value]");
-		for(var i=0;i<nodes.length;i++){
-			var node = nodes[i];
-			const bind = binder.binds.find(function(elem){return elem.target ===node});
-			if(!bind)continue;
-			binder.setBindValue(bind,node.value);
-		}
+		var nodes = document.querySelectorAll("#form select[bind\\:content]");
+		nodes.forEach((node)=>{
+			const bind = binder.binds.find(function(elem){return elem.node===node});
+			if(!bind)return;
+			bind.feedBackValue(node.value);
+		});
 		values.total.cost=0;
 
 		//神姫
@@ -120,17 +118,6 @@ class Main {
 		});
 		values.shinki.apts.sort(function(a,b){return b.effect - a.effect;});
 		var span= document.createElement("span");
-		var br=0;
-
-		//武器適正
-		//values.shinki.apts.forEach(function(e){
-		//	if(!br && e.effect<0){
-		//		span.appendChild(document.createElement("br"));
-		//		br=1;
-		//	}
-		//	span.appendChild(getAptSpan(e));
-		//});
-		//span.appendChild(document.createElement("br"));
 
 		var passive={};
 		passive.skill = DATA.passives[values.shinki.org.exskill];
@@ -357,7 +344,11 @@ class Main {
 		values.export_text = export_text_data;
 
 
-		binder.refresh();
+		values.other_calc="最大ダッシュ継続可能時間: " + (values.total.bst/values.total.dash_cost-1).toFixed(2) +"[s]";
+		values.other_calc+="\nオーバーヒート復帰時間: " + (values.total.bst/values.total.recover).toFixed(2)+"[s]";
+		values.other_calc+="\nジャンプ+ダッシュ: " + (values.total.dash_cost + values.total.jump_cost)+"[bst]";
+
+//		binder.refresh();
 	}
 
 	onloadfunc=function(){
@@ -554,7 +545,7 @@ class Main {
 						}else{
 							values[part_cd].cd = e.cd;
 						}
-						binder.refresh();
+						//binder.refresh();
 						main.reCalc();
 					});
 					e.preventDefault();
@@ -572,13 +563,12 @@ class Main {
 			if(idx>=5)return false;
 			var span = document.createElement("span");
 			span.classList.add("status",e);
-			span.setAttribute("bind:text","."+e);
-			span.setAttribute("bind:value","."+e);
+			span.setAttribute("bind:content","."+e);
 			param.appendChild(span);
 		});
 		nodes.forEach(function(node){
 			var newnode = param.cloneNode(true);
-			var bindName = node.getAttribute("bind:text");
+			var bindName = node.getAttribute("bind:content");
 
 			var bindedNodes = newnode.querySelectorAll("*");
 			bindedNodes.forEach((node)=>{
@@ -604,9 +594,8 @@ class Main {
 		nodes.forEach(function(org){
 			var rare2 = rare.cloneNode(true);
 			rare2.id="";
-			if(org.getAttribute("bind:value") !== null){
-				rare2.setAttribute("bind:value",org.getAttribute("bind:value"));
-				rare2.setAttribute("bind:text",org.getAttribute("bind:value"));
+			if(org.getAttribute("bind:content") !== null){
+				rare2.setAttribute("bind:content",org.getAttribute("bind:content"));
 			}
 			org.parentNode.replaceChild(rare2,org);
 		});
@@ -672,7 +661,7 @@ class Main {
 
 
 		var dt=new Date(DATA.date);
-		values.version="code2021/06/11<br>"
+		values.version="code2021/06/11\n"
 			+ "data"+ dt.getFullYear() +"/"+("0"+(dt.getMonth()+1)).slice(-2)
 			+"/" +("0"+dt.getDate()).slice(-2);
 
@@ -824,7 +813,7 @@ document.querySelector("#shinki div.skill").appendChild(
 );
 
 	binder.init(values);
-	binder.refresh();
+//	binder.refresh();
 	main.reCalc();
 
 	}

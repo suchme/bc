@@ -22,7 +22,7 @@
 <span>※各種データ・計算式が正しいか分かりません。間違ってたら正しい値を教えてくれれば直します。</span>
 </div>
 <div id="form">
-<div style="position:fixed;bottom:2px;right:2px;font-size:8pt;" bind:text="version"></div>
+<div style="position:fixed;bottom:2px;right:2px;font-size:8pt;white-space:pre-wrap;" bind:content="version"></div>
 
 
 	<div><span class="shinki template_part" id="shinki" ></span>
@@ -31,7 +31,7 @@
 		<button id="add_extra_passive">パッシブ追加</button>
 		<span class="setting">
 			<span>アイコン</span>
-			<select id="individual"  bind:value="shinki.individual">
+			<select id="individual"  bind:content="shinki.individual">
 			</select>
 		</span>
 		</span>
@@ -46,7 +46,7 @@
 		<div style="position:relative;" class="totalhead">
 最終値
 
-			<span>総コスト</span><span bind:text="total.cost"></span>
+			<span>総コスト</span><span bind:content="total.cost"></span>
 
 		<span style="position:absolute;right:0px;">
 		<button onclick="
@@ -55,26 +55,29 @@
 			 </span>
 			<span class="name" style="display:none;" style="text-align:right;">武器適正とパッシブ適用後</span>
 		</div>
-				<div>
-				<span class="param" bind:text="total"></span>
-				
-				<span class="status dash" bind:text="total.dash">
-				</span><span class="status recover" bind:text="total.recover">
-				</span><span class="status extend " bind:text="total.extend">
-				</span><span class="status dash_cost cost" bind:text="total.dash_cost">
-				</span><span class="status jump_cost cost" bind:text="total.jump_cost">
-				</span><span class="status hover_cost cost" bind:text="total.hover_cost">
-				</span><span class="status guard_cost cost" bind:text="total.guard_cost">
-				</span>
-				</div>
+		<div>
+			<span class="param" bind:content="total"></span>
+			
+			<span class="status dash" bind:content="total.dash">
+			</span><span class="status recover" bind:content="total.recover">
+			</span><span class="status extend " bind:content="total.extend">
+			</span><span class="status dash_cost cost" bind:content="total.dash_cost">
+			</span><span class="status jump_cost cost" bind:content="total.jump_cost">
+			</span><span class="status hover_cost cost" bind:content="total.hover_cost">
+			</span><span class="status guard_cost cost" bind:content="total.guard_cost">
+			</span>
+		</div>
 	</div>
+	<div bind:content="other_calc" class="other_calc">
+	</div>
+
 
 <div class="subwindow" id="export_window" style="display:none;">
 	<div  class="back"  onclick="this.parentNode.style.display='none';">
 	</div>
 	<div style="width:400px;z-index:100; position:relative;text-align:left; " class="">
 		<div>export data</div>
-		<textarea rows="10" class="export" wrap="off" bind:value="export_text">aaa</textarea>
+		<textarea rows="10" class="export" wrap="off" >aaa</textarea>
 	</div>
 </div>
 </div>
@@ -84,36 +87,34 @@
 	<span id="template_armor">
 		<div class="setting">
 			<span class="part"></span>
-			<span bind:text=".name" class="name"></span>
-			Lv<select class="lv" bind:value=".lv">
+			<span bind:content=".name" class="name"></span>
+			Lv<select class="lv" >
 				<option value="1">1</option>
 				<option value="60">60</option>
 			</select>
-			<select  class="rarelity" bind:value=".rarelity">
+			<select  class="rarelity" bind:content=".rarelity">
 			</select>
 
 			<button  class="armor change">変更</button>
 		</div>
 		<div class="detail">
 			<div>
-				<span class="param" bind:text=""></span>
-				<span class="status dash" bind:text=".dash" bind:value=".dash">
-				</span><span class="status recover" bind:text=".recover" bind:value=".recover">
-				</span><span class="status extend " bind:text=".extend" bind:value=".extend">
-				</span><span class="status dash_cost cost" bind:text=".dash_cost" bind:value=".dash_cost">
-				</span><span class="status jump_cost cost" bind:text=".jump_cost" bind:value=".jump_cost">
-				</span><span class="status hover_cost cost" bind:text=".hover_cost" bind:value=".hover_cost">
-				</span><span class="status guard_cost cost" bind:text=".guard_cost" bind:value=".guard_cost">
+				<span class="param" bind:content=""></span>
+				<span class="status dash" bind:content=".dash" >
+				</span><span class="status recover" bind:content=".recover" >
+				</span><span class="status extend " bind:content=".extend" >
+				</span><span class="status dash_cost cost" bind:content=".dash_cost" >
+				</span><span class="status jump_cost cost" bind:content=".jump_cost" >
+				</span><span class="status hover_cost cost" bind:content=".hover_cost" >
+				</span><span class="status guard_cost cost" bind:content=".guard_cost" >
 				</span>
 			</div>
 			<div class="skill">
-			<span class="skill" bind:text=".skill"></span>
+			<span class="skill" bind:content=".skill"></span>
 			</div>
 		</div>
 	</span>
-
-	<select id="rarelity" class="rarelity" bind:value="rarelity"> </select>
-
+	<select id="rarelity" class="rarelity" > </select>
 	<span id="param">
 	</span>
 </div>

@@ -59,6 +59,7 @@ SubLayout.head_html =`
 			<span class="sep"></span>
 			<span column="dash" class="dash status  "></span>
 			<span column="recover" class="recover status "></span>
+			<span column="extend" class="extend status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
@@ -94,6 +95,7 @@ SubLayout.body_html =`
 			<span class="sep"></span>
 			<span column="dash" class="dash status  "></span>
 			<span column="recover" class="recover status "></span>
+			<span column="extend" class="extend status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
@@ -127,6 +129,7 @@ SubLayout.arm_html =`
 			<span class="sep"></span>
 			<span column="dash" class="dash status  "></span>
 			<span column="recover" class="recover status "></span>
+			<span column="extend" class="extend status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
@@ -161,6 +164,7 @@ SubLayout.leg_html =`
 			<span class="sep"></span>
 			<span column="dash" class="dash status  "></span>
 			<span column="recover" class="recover status "></span>
+			<span column="extend" class="extend status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
@@ -195,6 +199,7 @@ SubLayout.rear_html =`
 			<span class="sep"></span>
 			<span column="dash" class="dash status  "></span>
 			<span column="recover" class="recover status "></span>
+			<span column="extend" class="extend status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
@@ -235,6 +240,7 @@ SubLayout.weapon_html =`
 			<span class="sep"></span>
 			<span column="dash" class="dash status  "></span>
 			<span column="recover" class="recover status "></span>
+			<span column="extend" class="extend status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>

@@ -174,10 +174,10 @@ width:28px;
 		, #ff3 100%);
 		*/
 }
-select.rarelity[value="0"]{
+select.rarelity[content="0"]{
 	background-color:#aaa;
 }
-select.rarelity[value="1"]{
+select.rarelity[content="1"]{
 	background-color:#f93;
 	/*
 	background: linear-gradient(to bottom
@@ -186,7 +186,7 @@ select.rarelity[value="1"]{
 		, #960 100%);
 		*/
 }
-select.rarelity[value="2"]{
+select.rarelity[content="2"]{
 	background-color:#99f;
 	/*
 	background: linear-gradient(to bottom
@@ -195,7 +195,7 @@ select.rarelity[value="2"]{
 		, #c9f 100%);
 		*/
 }
-select.rarelity[value="3"]{
+select.rarelity[content="3"]{
 	background-color:#ff3;
 	/*
 	background: linear-gradient(to bottom
@@ -390,19 +390,21 @@ color:white;
 	background-size:contain;
 }
 
+/*
 #form .extend{
 display:none;
 }
+*/
 
-.status[value='0']{
+.status[content='0']{
 	color:#888;
 	font-weight:normal;
 }
-.status[value^='-']
+.status[content^='-']
 ,.minus{
 	color:#f33;
 }
-.status.cost[value^='-']{
+.status.cost[content^='-']{
 	color:#fff;
 }
 
@@ -412,4 +414,9 @@ span.armor{
 }
 div.totalhead{
 	background-color:#000;
+}
+
+div.other_calc{
+	white-space:pre-wrap;
+	font-size:small;
 }
