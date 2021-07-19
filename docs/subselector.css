@@ -296,4 +296,12 @@ margin:1px;
 	height:24px;
 	vertical-align:middle;
 }
-
+div.value{
+	position:absolute;
+	color:white;
+	bottom:0px;
+	
+}
+span.guarge{
+	position:relative;
+}

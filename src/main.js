@@ -464,9 +464,9 @@ class Main {
 								return getSkillName(DATA.actives[e.active],e.active_effect);
 							}}); 
 									
-							cols.push({label:"リキャスト",data:"recast",disp:SubLayout.guarge,sort:1});
-							cols.push({label:"リロード",data:"reload",disp:SubLayout.guarge,sort:1});
-							cols.push({label:"射程",data:"range",disp:SubLayout.guarge,sort:1});
+							cols.push({label:"リキャスト",data:"recast",disp:SubLayout.guarge,sort:-1});
+							cols.push({label:"リロード",data:"reload",disp:SubLayout.guarge,sort:-1});
+							cols.push({label:"射程",data:"range",disp:SubLayout.guarge,sort:-1});
 
 							cols.push({label:"弾速",data:"bullet_spd",sort:1});
 							cols.push({label:"弾数",data:"bullet_num",sort:1});

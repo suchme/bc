@@ -248,20 +248,20 @@ SubLayout.weapon_html =`
 			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span class="sep"></span>
 				<span column="recast" class="guarge">
-					<div class="guarge_title">リキャスト</div>
 					<span class="guarge_parent">
+						<div class="value" ></div>
 						<div class="guarge_child" ></div>
 					</span>
 				</span>
 				<span column="reload" class="guarge">
-					<div class="guarge_title">リロード</div>
 					<span class="guarge_parent">
+						<div class="value" ></div>
 						<div class="guarge_child" ></div>
 					</span>
 				</span>
 				<span column="range" class="guarge">
-					<div class="guarge_title">射程</div>
 					<span class="guarge_parent">
+						<div class="value" ></div>
 						<div class="guarge_child" ></div>
 					</span>
 				</span>
@@ -288,7 +288,8 @@ SubLayout.arr=[
 
 SubLayout.guarge = function(e,parent){
 	parent.querySelector("div.guarge_child").style.width=e[this.data] +"%";
-	parent.parentNode.title=e;
+	parent.title=e[this.data];
+	parent.querySelector("div.value").innerText=e[this.data];
 	return null;
 };
 export default SubLayout ;
