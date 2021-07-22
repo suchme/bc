@@ -287,9 +287,25 @@ SubLayout.arr=[
 
 
 SubLayout.guarge = function(e,parent){
+	var data=e[this.data];
+	if(data<0){
+		parent.querySelector("div.guarge_child").style.width="0";
+	}else{
+		parent.querySelector("div.guarge_child").style.width=data +"%";
+	}
+	parent.title=data*0.01;
+	if(data===100){
+		parent.querySelector("div.value").innerText="";
+	}else{
+		parent.querySelector("div.value").innerText=((1-data*0.01)*3).toFixed(2) +"sec";
+	}
+	return null;
+};
+
+SubLayout.guarge_range = function(e,parent){
 	parent.querySelector("div.guarge_child").style.width=e[this.data] +"%";
 	parent.title=e[this.data];
-	parent.querySelector("div.value").innerText=e[this.data];
+	parent.querySelector("div.value").innerText=(e[this.data]*0.01).toFixed(3);
 	return null;
 };
 export default SubLayout ;

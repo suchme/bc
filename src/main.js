@@ -466,7 +466,7 @@ class Main {
 									
 							cols.push({label:"リキャスト",data:"recast",disp:SubLayout.guarge,sort:-1});
 							cols.push({label:"リロード",data:"reload",disp:SubLayout.guarge,sort:-1});
-							cols.push({label:"射程",data:"range",disp:SubLayout.guarge,sort:-1});
+							cols.push({label:"射程",data:"range",disp:SubLayout.guarge_range,sort:-1});
 
 							cols.push({label:"弾速",data:"bullet_spd",sort:1});
 							cols.push({label:"弾数",data:"bullet_num",sort:1});
@@ -758,7 +758,7 @@ DATA.shinkis.forEach((e)=>{
 			stylesheet.insertRule(` 
 				.part_icon.${e.cd}{
 				content:'';
-				background-image:url(icon/${e.cd}.png);
+				background-image:url(icon/${e.cd}_.png);
 			}
 			`, stylesheet.cssRules.length);
 
@@ -766,7 +766,7 @@ DATA.shinkis.forEach((e)=>{
 				.shinki.${e.cd}::before
 				,.class.${e.cd}::before{
 				content:'';
-				background-image:url(icon/${e.cd}.png);
+				background-image:url(icon/${e.cd}_.png);
 			}
 			`, stylesheet.cssRules.length);
 	//		}
