@@ -27,7 +27,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.9899495"
-     inkscape:cx="357.69724"
+     inkscape:cx="154.65658"
      inkscape:cy="-36.176003"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -46,7 +46,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -69,17 +69,31 @@
            y="20.634459"
            style="font-size:266.66665649px" /></flowRegion><flowPara
          id="flowPara822"
-         style="font-size:266.66665649px">HEADHEA</flowPara></flowRoot>    <text
-       xml:space="preserve"
+         style="font-size:266.66665649px">HEADHEA</flowPara></flowRoot>    <g
+       aria-label="HEAD"
        style="font-style:normal;font-weight:normal;font-size:39.16186142px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#777777;fill-opacity:1;stroke:none;stroke-width:0.40793607"
-       x="59.391773"
-       y="291.40689"
-       id="text826"><tspan
-         sodipodi:role="line"
-         id="tspan824"
-         x="59.391773"
-         y="291.40689"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607">HEAD</tspan></text>
+       id="text826">
+      <path
+         d="m 110.53716,290.62365 h -6.89248 V 264.46353 H 73.725015 v 26.16012 h -6.892488 v -55.92313 h 6.892488 v 24.04538 h 29.919665 v -24.04538 h 6.89248 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607"
+         id="path828"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 161.52576,290.62365 h -35.95059 v -55.92313 h 35.0107 v 5.9526 h -28.19654 v 18.32775 h 24.98527 v 5.63931 h -24.98527 v 19.97255 h 29.13643 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607"
+         id="path830"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 214.39421,290.62365 h -7.51907 l -6.18758,-16.44798 h -22.47891 l -6.10925,16.44798 h -7.44075 l 22.16561,-56.31475 h 5.56099 z m -15.66474,-22.00896 -5.63931,-14.88151 q -2.58468,-6.81416 -3.52457,-11.27862 h -0.23497 q -1.3315,5.09105 -3.60289,11.27862 l -5.56098,14.88151 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607"
+         id="path832"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 222.06988,234.70052 h 16.8396 q 14.33324,0 22.08729,7.12745 8.14566,7.44076 8.14566,20.75579 0,16.05636 -11.51358,23.41879 -7.20578,4.6211 -19.26764,4.6211 h -16.29133 z m 6.89248,49.89221 h 8.85059 q 23.96705,0 23.96705,-22.00897 0,-21.93064 -23.57544,-21.93064 h -9.2422 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607"
+         id="path834"
+         inkscape:connector-curvature="0" />
+    </g>
     <g
        transform="matrix(1.7240245,0,0,1.7240245,-26.322886,-177.81046)"
        id="g4594"

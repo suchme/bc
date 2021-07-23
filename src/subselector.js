@@ -232,7 +232,7 @@ export default class Subselector{
 					if(col.class){
 						td.classList.add(col.class);
 					}
-					td.setAttribute("value",content);
+					td.setAttribute("content",content);
 					var span = td;//document.createElement("span");
 					span.innerHTML= content;
 					//td.appendChild(span);
@@ -272,7 +272,7 @@ export default class Subselector{
 					if(col.class){
 						td.classList.add(col.class);
 					}
-					td.setAttribute("value",content);
+					td.setAttribute("content",content);
 					var span = td;//document.createElement("span");
 					if(content || content===0){
 						span.innerHTML= content;

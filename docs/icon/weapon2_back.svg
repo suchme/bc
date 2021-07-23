@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.9899495"
-     inkscape:cx="865.36168"
+     inkscape:cx="662.32102"
      inkscape:cy="45.835592"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -45,7 +45,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -68,16 +68,25 @@
            y="20.634459"
            style="font-size:266.66665649px" /></flowRegion><flowPara
          id="flowPara822"
-         style="font-size:266.66665649px">HEADHEA</flowPara></flowRoot>    <text
-       xml:space="preserve"
+         style="font-size:266.66665649px">HEADHEA</flowPara></flowRoot>    <g
+       aria-label="SUB"
        style="font-style:normal;font-weight:normal;font-size:39.16186142px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#464646;fill-opacity:1;stroke:none;stroke-width:0.40793607"
-       x="59.391773"
-       y="291.40689"
-       id="text826"><tspan
-         sodipodi:role="line"
-         id="tspan824"
-         x="59.391773"
-         y="291.40689"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607">SUB</tspan></text>
+       id="text826">
+      <path
+         d="m 95.107391,246.84069 q -4.307805,-7.51907 -13.001738,-7.51907 -4.934395,0 -7.832372,3.05462 -2.271388,2.42804 -2.271388,5.79596 0,3.60289 2.897977,5.9526 1.958093,1.56647 8.772257,4.38613 l 2.663007,1.09653 q 9.007228,3.68121 12.140177,7.9107 2.819649,3.75953 2.819649,8.45896 0,7.51907 -5.560979,11.9052 -4.934395,3.91619 -12.688443,3.91619 -12.923415,0 -19.815902,-9.79047 l 5.404337,-4.07283 q 5.48266,7.83237 14.489888,7.83237 4.386129,0 7.284106,-2.03641 3.759539,-2.66301 3.759539,-7.20579 0,-3.60289 -2.74133,-6.26589 -2.897978,-2.81966 -10.886998,-5.87428 l -2.271388,-0.86156 q -13.315032,-5.01272 -13.315032,-14.72486 0,-6.34423 4.307804,-10.57371 4.777747,-4.6211 12.923415,-4.6211 11.983529,0 18.327753,9.39885 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607"
+         id="path818"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 156.82641,234.70052 v 36.73382 q 0,7.75405 -3.83786,12.68844 -6.2659,8.06735 -18.56272,8.06735 -12.37515,0 -18.71937,-8.06735 -3.75954,-4.77774 -3.75954,-12.68844 v -36.73382 h 6.89249 v 35.87226 q 0,6.89249 3.36792,10.65203 4.46445,4.93439 12.2185,4.93439 7.91069,0 12.2185,-4.93439 3.36792,-3.83787 3.36792,-10.65203 v -35.87226 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607"
+         id="path820"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 196.61484,261.7222 q 13.78497,2.50636 13.78497,13.31503 0,9.5555 -9.47717,13.62833 -4.6211,1.95809 -11.59191,1.95809 h -18.1711 v -55.92313 h 15.97804 q 7.12746,0 11.67023,1.64479 9.47717,3.44625 9.47717,12.37515 0,10.73035 -11.67023,12.76677 z m -18.71937,-2.81965 h 8.38064 q 14.88151,0 14.88151,-9.47717 0,-9.16388 -14.41157,-9.16388 h -8.85058 z m 0,26.0818 h 10.49538 q 14.72486,0 14.72486,-10.33874 0,-6.42254 -7.28411,-8.9289 -4.3078,-1.48815 -9.16387,-1.48815 h -8.77226 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607"
+         id="path822"
+         inkscape:connector-curvature="0" />
+    </g>
   </g>
 </svg>

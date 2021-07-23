@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.9899495"
-     inkscape:cx="454.14225"
+     inkscape:cx="251.10159"
      inkscape:cy="114.24154"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -68,17 +68,41 @@
            y="20.634459"
            style="font-size:266.66665649px" /></flowRegion><flowPara
          id="flowPara822"
-         style="font-size:266.66665649px">HEADHEA</flowPara></flowRoot>    <text
-       xml:space="preserve"
+         style="font-size:266.66665649px">HEADHEA</flowPara></flowRoot>    <g
+       aria-label="WEAPON"
        style="font-style:normal;font-weight:normal;font-size:39.16186142px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#464646;fill-opacity:1;stroke:none;stroke-width:0.40793607"
-       x="59.391773"
-       y="291.40689"
-       id="text826"><tspan
-         sodipodi:role="line"
-         id="tspan824"
-         x="59.391773"
-         y="291.40689"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607">WEAPON</tspan></text>
+       id="text826">
+      <path
+         d="m 131.4496,234.70052 -17.38787,56.70637 h -5.24769 L 98.788606,257.64937 q -1.723122,-5.56099 -2.897978,-11.98353 h -0.234971 q -1.096532,5.40433 -3.054625,11.98353 L 82.497271,291.40689 H 77.171258 L 59.940039,234.70052 h 7.675725 l 9.007228,31.7211 q 2.271388,8.22399 3.524568,13.62833 h 0.234971 q 1.174856,-5.32601 3.524567,-13.62833 l 8.850581,-30.78122 h 5.952603 l 9.320528,30.78122 q 2.11474,6.97081 3.60289,13.70665 h 0.23497 q 1.6448,-7.75404 3.36792,-13.70665 l 8.9289,-31.7211 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607"
+         id="path827"
+         inkscape:connector-curvature="0" />
+      <path
+         d="M 175.46749,290.62365 H 139.5169 v -55.92313 h 35.0107 v 5.9526 h -28.19654 v 18.32775 h 24.98527 v 5.63931 h -24.98527 v 19.97255 h 29.13643 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607"
+         id="path829"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 228.33595,290.62365 h -7.51908 l -6.18757,-16.44798 h -22.47891 l -6.10925,16.44798 h -7.44076 L 200.766,234.3089 h 5.56098 z m -15.66475,-22.00896 -5.63931,-14.88151 q -2.58468,-6.81416 -3.52456,-11.27862 h -0.23497 q -1.33151,5.09105 -3.6029,11.27862 l -5.56098,14.88151 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607"
+         id="path831"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 236.0116,234.70052 h 16.29134 q 21.38237,0 21.38237,16.05636 0,16.99625 -21.77399,16.99625 h -9.00723 v 22.87052 h -6.89249 z m 6.89249,27.56995 h 7.67573 q 15.89971,0 15.89971,-11.43527 0,-10.5737 -14.72486,-10.5737 h -8.85058 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607"
+         id="path833"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 308.30427,233.60398 q 11.20029,0 18.40607,7.20579 8.14567,8.06734 8.14567,22.08729 0,13.55 -8.30231,21.77399 -7.20579,7.12746 -18.24943,7.12746 -10.96532,0 -18.1711,-7.12746 -8.30232,-8.22399 -8.30232,-22.08729 0,-13.62833 8.14567,-21.77399 7.12746,-7.20579 18.32775,-7.20579 z m 0,5.63931 q -7.20578,0 -12.37515,5.16937 -6.57919,6.57919 -6.57919,18.24942 0,11.67024 6.57919,18.17111 5.09104,5.09104 12.37515,5.09104 7.28411,0 12.45347,-5.09104 6.57919,-6.57919 6.57919,-18.4844 0,-11.27862 -6.65751,-17.93613 -5.09104,-5.16937 -12.37515,-5.16937 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607"
+         id="path835"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 391.56231,290.62365 h -6.26589 l -24.90695,-37.75203 q -2.81965,-4.22948 -6.81416,-11.59191 h -0.3133 l 0.15665,3.68121 q 0.39162,10.02544 0.39162,16.21301 v 29.44972 h -6.73584 v -55.92313 h 9.2422 l 21.38238,32.50434 q 3.99451,6.18757 7.36243,12.37515 h 0.31329 q -0.54827,-12.61012 -0.54827,-18.40608 v -26.47341 h 6.73584 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607"
+         id="path837"
+         inkscape:connector-curvature="0" />
+    </g>
     <path
        style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#999999;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.85325372;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
        d="m 39.830596,249.57099 c -1.513743,0.0405 -2.610995,1.45722 -2.271501,2.93295 l 2.666577,11.85641 c 0.671881,3.12431 5.358411,2.1165 4.686529,-1.0078 l -2.666577,-11.85954 c -0.230378,-1.14278 -1.249684,-1.954 -2.415028,-1.92202 z"

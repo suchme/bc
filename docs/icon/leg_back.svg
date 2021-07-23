@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.9899495"
-     inkscape:cx="662.32102"
+     inkscape:cx="459.28036"
      inkscape:cy="45.835592"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -54,17 +54,26 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-229.26665)">
-    <text
-       xml:space="preserve"
+    <g
+       aria-label="LEG"
        style="font-style:normal;font-weight:normal;font-size:39.16186142px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#464646;fill-opacity:1;stroke:none;stroke-width:0.40793607"
-       x="59.391773"
-       y="291.40689"
-       id="text826"><tspan
-         sodipodi:role="line"
-         id="tspan824"
-         x="59.391773"
-         y="291.40689"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607">LEG</tspan></text>
+       id="text826">
+      <path
+         d="M 100.35508,290.62365 H 66.832527 v -55.92313 h 6.970811 v 49.81388 h 26.551742 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607"
+         id="path825"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 143.98132,290.62365 h -35.95059 v -55.92313 h 35.01071 v 5.9526 h -28.19655 v 18.32775 h 24.98527 v 5.63931 h -24.98527 v 19.97255 h 29.13643 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607"
+         id="path827"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 201.07926,281.8514 q -2.89798,3.60289 -8.22399,6.50087 -6.34422,3.44624 -13.94162,3.44624 -11.98353,0 -19.65926,-8.06734 -7.44075,-7.83238 -7.44075,-20.75579 0,-13.23671 7.75405,-21.4607 7.44075,-7.9107 18.64104,-7.9107 15.5081,0 21.93065,13.39336 l -6.2659,2.89798 q -4.77775,-10.33873 -15.58642,-10.33873 -7.98902,0 -13.31504,6.03092 -5.6393,6.42255 -5.6393,17.30955 0,9.79046 4.93439,15.97804 5.56099,6.89248 15.03816,6.89248 10.18208,0 15.35145,-6.18757 v -10.887 H 182.20324 V 263.367 h 18.87602 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607"
+         id="path829"
+         inkscape:connector-curvature="0" />
+    </g>
     <path
        style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#999999;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.00001383;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
        d="m 36.67721,246.21103 c -1.633617,0.0436 -2.817761,1.57262 -2.451382,3.16521 l 2.877745,12.79532 c 0.725088,3.37173 5.782746,2.28411 5.057657,-1.08761 l -2.877744,-12.79869 c -0.248622,-1.23328 -1.348648,-2.10874 -2.606276,-2.07423 z"
