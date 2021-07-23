@@ -297,7 +297,7 @@ SubLayout.guarge = function(e,parent){
 	if(data===100){
 		parent.querySelector("div.value").innerText="";
 	}else{
-		parent.querySelector("div.value").innerText=((1-data*0.01)*3).toFixed(2) +"sec";
+		parent.querySelector("div.value").innerText=((1-data*0.01)*3).toFixed(2) +"[s]";
 	}
 	return null;
 };
