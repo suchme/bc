@@ -44,7 +44,11 @@ function getAptSpan(apt){
 	span.textContent ="[" + DATA.category_short[apt.category]+ "]";
 	span.className= "apt";
 	var span2 = document.createElement("span");
-	span2.textContent =apt.effect+"%";
+	if(apt.effect>0){
+		span2.textContent ="+"+apt.effect+"%";
+	}else{
+		span2.textContent =apt.effect+"%";
+	}
 	span2.className= (apt.effect)<0?"minus":"";
 	 span.appendChild(span2);
 	return span;
@@ -105,7 +109,9 @@ class Main {
 				apt.category = idx;
 				if(effect===100){
 					effect-=20*rare;
-				}else if(effect===-50){
+				}else if(effect>=50){
+					effect-=10*rare;
+				}else if(effect<=-50){
 					effect+=10*rare;
 				}else if(effect<0){
 					effect+=5*rare;
