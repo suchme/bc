@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.9899495"
-     inkscape:cx="865.36168"
-     inkscape:cy="45.835592"
+     inkscape:cx="454.14225"
+     inkscape:cy="114.24154"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -45,7 +45,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -79,5 +79,71 @@
          x="59.391773"
          y="291.40689"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.32372284px;font-family:'IPA モナー UIゴシック';-inkscape-font-specification:'IPA モナー UIゴシック';fill:#777777;fill-opacity:1;stroke-width:0.40793607">WEAPON</tspan></text>
+    <path
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#999999;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.85325372;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       d="m 39.830596,249.57099 c -1.513743,0.0405 -2.610995,1.45722 -2.271501,2.93295 l 2.666577,11.85641 c 0.671881,3.12431 5.358411,2.1165 4.686529,-1.0078 l -2.666577,-11.85954 c -0.230378,-1.14278 -1.249684,-1.954 -2.415028,-1.92202 z"
+       id="path4588-3"
+       inkscape:connector-curvature="0"
+       inkscape:label="腕"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#999999;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.85325372;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       d="m 37.113719,266.07614 c -1.322211,0.019 -2.379205,1.10526 -2.361986,2.42748 l -0.01566,19.98683 c -0.04795,3.24046 4.836236,3.24371 4.792617,0.002 l 0.01566,-19.98684 c 0.01934,-1.35033 -1.080301,-2.44994 -2.43063,-2.4306 z"
+       id="path4590-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="脚" />
+    <g
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:1.16007626;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:tile-y0="15.060258"
+       inkscape:tile-x0="34.190875"
+       inkscape:label="左手足"
+       id="use4598-7"
+       transform="matrix(-1.9322745,0,0,1.9322468,94.971259,-235.24304)">
+      <path
+         sodipodi:nodetypes="cccccc"
+         inkscape:label="腕"
+         inkscape:connector-curvature="0"
+         id="path839"
+         d="m 34.831412,250.985 c -0.7834,0.0209 -1.351255,0.75416 -1.175558,1.5179 l 1.380019,6.13607 c 0.347716,1.61693 2.773111,1.09536 2.425395,-0.52157 l -1.380019,-6.13769 c -0.119227,-0.59143 -0.646743,-1.01126 -1.249837,-0.99471 z"
+         style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#999999;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.95911169;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+      <path
+         inkscape:label="脚"
+         sodipodi:nodetypes="ccccccc"
+         inkscape:connector-curvature="0"
+         id="path841"
+         d="m 33.42536,259.52695 c -0.684277,0.01 -1.231297,0.57201 -1.222386,1.2563 l -0.0081,10.34382 c -0.02481,1.67705 2.502872,1.67873 2.480298,0.002 l 0.0081,-10.34384 c 0.01001,-0.69883 -0.559083,-1.26792 -1.257912,-1.25791 z"
+         style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#999999;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.95911169;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+    </g>
+    <ellipse
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:1.85325372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path4606-5"
+       cx="33.667278"
+       cy="244.18555"
+       rx="5.8215942"
+       ry="5.8229046"
+       inkscape:label=" 頭" />
+    <rect
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:1.85325372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect825-3"
+       width="7.7650781"
+       height="5.2483964"
+       x="29.965197"
+       y="250.58838"
+       inkscape:label="胸" />
+    <path
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:1.85325372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 30.23156,255.87023 -0.461273,4.52702 -1.791641,3.90104 5.775249,2.56404 5.775231,-2.56404 -1.843481,-3.93334 -0.236468,-4.52817 -3.711945,0.21102 z"
+       id="rect829-5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:label="腰" />
+    <path
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#dd9900;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.99376202;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       d="m 13.358482,239.88546 c -1.517133,0.13656 -2.425171,1.82052 -1.879799,3.48607 l 5.978968,18.62 c 1.107479,3.52898 5.682566,2.09796 4.575115,-1.43096 l -5.979408,-18.62356 c -0.389608,-1.29173 -1.527029,-2.15759 -2.694865,-2.0515 z"
+       id="path4588-3-3"
+       inkscape:connector-curvature="0"
+       inkscape:label="腕"
+       sodipodi:nodetypes="ccccccc" />
   </g>
 </svg>

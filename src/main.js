@@ -784,7 +784,7 @@ DATA.shinkis.forEach((e)=>{
 	`, stylesheet.cssRules.length);
 });
 
-DATA.part_cd.forEach(function(e){
+DATA.part_cd.forEach(function(e,i){
 
 	stylesheet.insertRule(` 
 		span.part_icon.${e}{
@@ -796,6 +796,7 @@ DATA.part_cd.forEach(function(e){
 	stylesheet.insertRule(` 
 		span.armor.${e}{
 			background-image:url(icon/${e}_back.svg);
+			background-position-x:${i*10}px;
 		}
 	`, stylesheet.cssRules.length);
 	//stylesheet.insertRule(` 
