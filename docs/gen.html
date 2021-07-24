@@ -200,21 +200,21 @@ var prepareData=function(source){
 		var bonuses=[];
 		var row = sheet_data[i];
 		var part = row[0];
-			var bonus=new Param();
-			var row = sheet_data[i];
-			var part = row[0];
-			row.forEach((a,idx)=>{
-				if(!idx)return;
-				bonus[mems[idx]]=a;
+		var bonus=new Param();
+		var row = sheet_data[i];
+		var part = row[0];
+		row.forEach((a,idx)=>{
+			if(!idx)return;
+			bonus[mems[idx]]=a;
 
-			});
-				if(!output.lv_bonus[part]){
-					output.lv_bonus[part]={};
-				}
-				if(!output.lv_bonus[part][bonus.rarelity]){
-					output.lv_bonus[part][bonus.rarelity]={};
-				}
-			output.lv_bonus[part][bonus.rarelity][bonus.lv] = bonus;
+		});
+			if(!output.lv_bonus[part]){
+				output.lv_bonus[part]={};
+			}
+			if(!output.lv_bonus[part][bonus.rarelity]){
+				output.lv_bonus[part][bonus.rarelity]={};
+			}
+		output.lv_bonus[part][bonus.rarelity][bonus.lv] = bonus;
 	}
 
 	;
