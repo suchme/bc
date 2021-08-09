@@ -3,7 +3,7 @@ tr{
 	display:block;
 }
 tbody tr{
-	padding: 6px 0;
+	padding: 3px 0;
 }
 tr.header_filter span{
 	background-color:inherit !important;
@@ -141,12 +141,14 @@ table .part{
 }
 
 thead .name button{
-	margin-left:40px;
 	
 
 }
 .rarelity button{
 	white-space:nowrap;
+position:absolute;
+	bottom:0px;
+	right:0px;
 	
 }
 tr .rarelity{
@@ -304,4 +306,8 @@ div.value{
 }
 span.guarge{
 	position:relative;
+}
+
+span.rarelity{
+position:relative;
 }

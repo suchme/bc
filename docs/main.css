@@ -13,8 +13,9 @@ body{
 
 }
 div.main{
-	background-color:#888;
+padding:4px;
 	width:400px;
+	
 	display:inline-block;
 	text-align:left;
 }
@@ -57,7 +58,8 @@ select.lv{
 }
 
 textarea.export{
-	width:100%;
+	width:95%;
+	height:95%;
 
 }
 span.armor span{
@@ -273,6 +275,7 @@ display:inline-block;
 	width:24px;
 	height:24px;
 	vertical-align:middle;
+	margin-top:-4px;
 }
 
 
@@ -420,3 +423,58 @@ div.other_calc{
 	white-space:pre-wrap;
 	font-size:small;
 }
+
+div.tabmain{
+	background-color:#888;
+height:480px;
+	   z-index:-1;
+}
+div.tabmain>div{
+	display:none;
+	width:100%;
+	height:100%;
+	border:1px solid black;
+}
+div.tab_main[hoge="main"]{
+	display:block;
+}
+div.tab_extension[hoge="extension"]{
+	display:block;
+}
+div.tab_export[hoge="export"]{
+	display:block;
+}
+div.tab_about[hoge="about"]{
+	display:block;
+}
+
+input[type="radio"]{
+display:none;
+}
+input[type="radio"]:checked + span{
+background-color:#888;
+border-top-color:#888;
+
+}
+
+div.tabbuttons{
+	margin-top:-1px;
+}
+label.tabbutton{
+margin-left:1px;
+margin-top:1px;
+display:inline-block;
+width:64px;
+height:20px;
+z-index:100;
+}
+label.tabbutton span{
+text-align:center;
+display:inline-block;
+width:100%;
+height:90%;
+border:1px solid black;
+background-color:#666;
+}
+
+	

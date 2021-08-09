@@ -43,14 +43,20 @@ SubLayout.shinki_html =`
 `;
 
 SubLayout.head_html =`
-	<span "namearea">
-		<div class="divname">
-			<span class="rarelity" column="rarelity"></span>
-			<span class="name" column="name"></span>
+	<span class="">
+		<div>
 			<span class="part" column="part"></span>
+			<span class="rarelity" column="rarelity"></span>
+		</div>
+		<div>
 			<span class="class" column="class"></span>
 		</div>
-		<div style="margin-left:10px;">
+	</span>
+	<span class="namearea">
+		<div class="divname">
+			<span class="name" column="name"></span>
+		</div>
+		<div>
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>
@@ -79,14 +85,20 @@ SubLayout.head_html =`
 
 `;
 SubLayout.body_html =`
-	<span "namearea">
-		<div class="divname">
-			<span class="rarelity" column="rarelity"></span>
-			<span class="name" column="name"></span>
+	<span class="">
+		<div>
 			<span class="part" column="part"></span>
+			<span class="rarelity" column="rarelity"></span>
+		</div>
+		<div>
 			<span class="class" column="class"></span>
 		</div>
-		<div style="margin-left:10px;">
+	</span>
+	<span class="namearea">
+		<div class="divname">
+			<span class="name" column="name"></span>
+		</div>
+		<div>
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>
@@ -113,14 +125,20 @@ SubLayout.body_html =`
 `;
 
 SubLayout.arm_html =`
-	<span "namearea">
-		<div class="divname">
-			<span class="rarelity" column="rarelity"></span>
-			<span class="name" column="name"></span>
+	<span class="">
+		<div>
 			<span class="part" column="part"></span>
+			<span class="rarelity" column="rarelity"></span>
+		</div>
+		<div>
 			<span class="class" column="class"></span>
 		</div>
-		<div style="margin-left:10px;">
+	</span>
+	<span class="namearea">
+		<div class="divname">
+			<span class="name" column="name"></span>
+		</div>
+		<div>
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>
@@ -148,14 +166,20 @@ SubLayout.arm_html =`
 `;
 
 SubLayout.leg_html =`
-	<span "namearea">
-		<div class="divname">
-			<span class="rarelity" column="rarelity"></span>
-			<span class="name" column="name"></span>
+	<span class="">
+		<div>
 			<span class="part" column="part"></span>
+			<span class="rarelity" column="rarelity"></span>
+		</div>
+		<div>
 			<span class="class" column="class"></span>
 		</div>
-		<div style="margin-left:10px;">
+	</span>
+	<span class="namearea">
+		<div class="divname">
+			<span class="name" column="name"></span>
+		</div>
+		<div>
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>
@@ -183,14 +207,20 @@ SubLayout.leg_html =`
 `;
 
 SubLayout.rear_html =`
-	<span "namearea">
-		<div class="divname">
-			<span class="rarelity" column="rarelity"></span>
-			<span class="name" column="name"></span>
+	<span class="">
+		<div>
 			<span class="part" column="part"></span>
+			<span class="rarelity" column="rarelity"></span>
+		</div>
+		<div>
 			<span class="class" column="class"></span>
 		</div>
-		<div style="margin-left:10px;">
+	</span>
+	<span class="namearea">
+		<div class="divname">
+			<span class="name" column="name"></span>
+		</div>
+		<div>
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>
@@ -219,19 +249,24 @@ SubLayout.rear_html =`
 `;
 
 SubLayout.weapon_html =`
-
+	<span class="">
+		<div>
+			<span class="part" column="part"></span>
+			<span class="rarelity" column="rarelity"></span>
+		</div>
+		<div>
+			<span class="class" column="class"></span>
+		</div>
+	</span>
 	<span>
 		<div class="divname">
-			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
-			<span class="part" column="part"></span>
-			<span class="class" column="class"></span>
 			<span class="category" column="category"></span>
 			<span class="distance">
 				<span column="distance"></span>
 			</span>
 		</div>
-		<div style="margin-left:10px;">
+		<div>
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>

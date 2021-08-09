@@ -5,7 +5,7 @@ import Binder from "./binder.js";
 import Subselector from "./subselector.js";
 import SubLayout from "./sub_layout.js";
 
-var values={total:{},subtotal:{},extra_passives:[],bonus:{}};
+var values={total:{},subtotal:{},extra_passives:[],bonus:{},selected_tab:"main",extension:{}};
 var binder = new Binder();
 var subselector= new Subselector();
 
@@ -76,11 +76,11 @@ class Main {
 		//計算処理
 		var passives=[];
 
-		var nodes = document.querySelectorAll("#form select[bind\\:content]");
+		var nodes = document.querySelectorAll("#form select[bind\\:]");
 		nodes.forEach((node)=>{
 			const bind = binder.binds.find(function(elem){return elem.node===node});
 			if(!bind)return;
-			bind.feedBackValue(node.value);
+			bind.feedBack(node.value);
 		});
 		values.total.cost=0;
 
@@ -350,9 +350,10 @@ class Main {
 		values.export_text = export_text_data;
 
 
-		values.other_calc="最大ダッシュ継続可能時間: " + (values.total.bst/values.total.dash_cost-1).toFixed(2) +"[s]";
-		values.other_calc+="\nオーバーヒート復帰時間: " + (values.total.bst/values.total.recover).toFixed(2)+"[s]";
-		values.other_calc+="\nジャンプ+ダッシュ: " + (values.total.dash_cost + values.total.jump_cost)+"[bst]";
+		values.extension.dash_time= ((values.total.bst - values.total.dash_cost)/values.total.dash_cost).toFixed(2);
+		values.extension.recover_overheat=(values.total.bst/values.total.recover).toFixed(2);
+		values.extension.hover_time=((values.total.bst -values.total.jump_cost - values.total.dash_cost)
+		   / values.total.hover_cost).toFixed(2);
 
 //		binder.refresh();
 	}
@@ -569,12 +570,12 @@ class Main {
 			if(idx>=5)return false;
 			var span = document.createElement("span");
 			span.classList.add("status",e);
-			span.setAttribute("bind:content","."+e);
+			span.setAttribute("bind:","."+e);
 			param.appendChild(span);
 		});
 		nodes.forEach(function(node){
 			var newnode = param.cloneNode(true);
-			var bindName = node.getAttribute("bind:content");
+			var bindName = node.getAttribute("bind:");
 
 			var bindedNodes = newnode.querySelectorAll("*");
 			bindedNodes.forEach((node)=>{
@@ -600,8 +601,8 @@ class Main {
 		nodes.forEach(function(org){
 			var rare2 = rare.cloneNode(true);
 			rare2.id="";
-			if(org.getAttribute("bind:content") !== null){
-				rare2.setAttribute("bind:content",org.getAttribute("bind:content"));
+			if(org.getAttribute("bind:") !== null){
+				rare2.setAttribute("bind:",org.getAttribute("bind:"));
 			}
 			org.parentNode.replaceChild(rare2,org);
 		});
@@ -667,7 +668,7 @@ class Main {
 
 
 		var dt=new Date(DATA.date);
-		values.version="code2021/07/23\n"
+		values.version="code2021/08/09\n"
 			+ "data"+ dt.getFullYear() +"/"+("0"+(dt.getMonth()+1)).slice(-2)
 			+"/" +("0"+dt.getDate()).slice(-2);
 
