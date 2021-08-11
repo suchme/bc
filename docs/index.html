@@ -18,11 +18,11 @@
 
 <body>
 <div class="main">
+		<div style="position:fixed;bottom:2px;right:2px;font-size:8pt;white-space:pre-wrap;" bind:="version"></div>
 <div class="tabmain">
 
 <div class="tab_body tab_main" bind:hoge="selected_tab">
 	<div id="form">
-		<div style="position:fixed;bottom:2px;right:2px;font-size:8pt;white-space:pre-wrap;" bind:="version"></div>
 
 		<div><span class="shinki template_part" id="shinki" ></span>
 		
@@ -107,8 +107,10 @@
 </div>
 
 <div class="tab_body tab_about" bind:hoge="selected_tab">
-	<div class="info"><span>・最新版ぽくないときはスーパーリロードしてください。</span>
-		<span>・各種データ・計算式が正しいか分かりません。間違ってたら正しい値を教えてくれれば直します。</span>
+	<div class="info">
+		・最新版ぽくないときはスーパーリロードしてください。<br>
+		・各種データ・計算式が正しいか分かりません。間違ってたら正しい値を教えてくれれば直します。<br>
+		数値の算出式および算出ツール<a href="https://suchme.github.io/calc/">https://suchme.github.io/calc/</a><br>
 	</div>
 </div>
 
