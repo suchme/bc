@@ -645,7 +645,7 @@ class Main {
 		}
 		DATA.passives[20].func=function(effect){ correctStatus("dash",(1+effect)*0.01); }
 		DATA.passives[28].func=function(effect){ correctStatus("dash_cost",-effect*0.01); }
-		DATA.passives[29].func=function(effect){ correctStatus("hover_cost",-(effect*0.01+0.14)); }
+		DATA.passives[29].func=function(effect){ correctStatus("hover_cost",-(effect*0.01)); }
 
 
 		document.querySelectorAll("select").forEach(function(node){
