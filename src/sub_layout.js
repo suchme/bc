@@ -253,35 +253,20 @@ SubLayout.weapon_html =`
 		<div>
 			<span class="part" column="part"></span>
 			<span class="rarelity" column="rarelity"></span>
+			<span class="category" column="category"></span>
 		</div>
 		<div>
 			<span class="class" column="class"></span>
-		</div>
-	</span>
-	<span>
-		<div class="divname">
-			<span class="name" column="name"></span>
-			<span class="category" column="category"></span>
 			<span class="distance">
 				<span column="distance"></span>
 			</span>
 		</div>
 		<div>
-			<span column="atk" class="atk status "></span>
-			<span column="def" class="def status "></span>
-			<span column="spd" class="spd status "></span>
-			<span column="lp" class="lp status  "></span>
-			<span column="bst" class="bst status "></span>
-			<span class="sep"></span>
-			<span column="dash" class="dash status  "></span>
-			<span column="recover" class="recover status "></span>
-			<span column="extend" class="extend status "></span>
-			<span class="sep"></span>
-			<span column="dash_cost" class="dash_cost cost status "></span>
-			<span column="jump_cost" class="jump_cost cost status "></span>
-			<span column="hover_cost" class="hover_cost cost status "></span>
-			<span column="guard_cost" class="guard_cost cost status "></span>
-			<span class="sep"></span>
+		</div>
+	</span>
+	<span>
+		<div class="divname">
+			<span class="name" column="name"></span>
 				<span column="recast" class="guarge">
 					<span class="guarge_parent">
 						<div class="value" ></div>
@@ -300,6 +285,23 @@ SubLayout.weapon_html =`
 						<div class="guarge_child" ></div>
 					</span>
 				</span>
+		</div>
+		<div>
+			<span column="atk" class="atk status "></span>
+			<span column="def" class="def status "></span>
+			<span column="spd" class="spd status "></span>
+			<span column="lp" class="lp status  "></span>
+			<span column="bst" class="bst status "></span>
+			<span class="sep"></span>
+			<span column="dash" class="dash status  "></span>
+			<span column="recover" class="recover status "></span>
+			<span column="extend" class="extend status "></span>
+			<span class="sep"></span>
+			<span column="dash_cost" class="dash_cost cost status "></span>
+			<span column="jump_cost" class="jump_cost cost status "></span>
+			<span column="hover_cost" class="hover_cost cost status "></span>
+			<span column="guard_cost" class="guard_cost cost status "></span>
+			<span class="sep"></span>
 				<span column="bullet_spd" class="bullet_spd "></span>
 				<span column="bullet_num" class="bullet_num"></span>
 		</div>

@@ -107,7 +107,7 @@ tr .biko{
 	width:200px;
 }
 tr .name{
-	width:300px;
+	width:400px;
 	font-size:larger;
 	font-weight:bold;
 	white-space: nowrap;
@@ -162,7 +162,14 @@ overflow:hidden;
 }
 
 tr .distance{
-	width:100px;
+	width:20px;
+	position:relative;
+}
+tr .distance button{
+	position:absolute;
+	white-space:nowrap;
+right:0px;
+bottom:0px;
 }
 
 tr .dummy_pick{
