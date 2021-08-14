@@ -151,6 +151,7 @@ class Main {
 
 		//アイコン補正
 		values.individual= DATA.individuals[values.shinki.individual];
+		add(values.shinki,values.individual);
 
 		var biko="";
 		biko+="回"		+ values.shinki.recover+" ";
@@ -264,7 +265,6 @@ class Main {
 		//小計
 		reset(values.subtotal);
 		add(values.subtotal,values.shinki);
-		add(values.subtotal,values.individual);
 		add(values.subtotal,values.head);
 		add(values.subtotal,values.body);
 		add(values.subtotal,values.arm);
