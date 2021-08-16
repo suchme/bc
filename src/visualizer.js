@@ -3,8 +3,11 @@ import Rastgl from "./lib/rastgl.js"
 import Util from "./lib/util.js"
 import Engine from "./engine/engine.js"
 
+
 export default class Visualizer{
 	constructor(){
+		this.engine = new Engine();
+
 	}
 	main(){
 //		var canvas = document.getElementById("canvas");
@@ -18,8 +21,8 @@ export default class Visualizer{
 			if(globalParam.debugMenu){
 				debugClose();
 			}
-			Engine.init(document.getElementById("aaa"));
-			Engine.start();
+			this.engine.init(document.getElementById("aaa"));
+			this.engine.start();
 		}
 
 		var a = document.getElementById("aaa");

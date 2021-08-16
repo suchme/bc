@@ -11,8 +11,126 @@ import Util from "../lib/util.js"
 import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "../lib/vector.js"
 
 var ono3d;
-//var Engine = (function(){
+
 export default class Engine{
+	constructor(){
+	}
+
+	init(parentnode){
+		var canvas =document.createElement("canvas");
+		canvas.width=WIDTH;
+		canvas.height=HEIGHT;
+		parentnode.appendChild(canvas);
+		var canvasgl = document.getElementById("maincanvas");
+		if(!canvasgl){
+			canvasgl =document.createElement("canvas");
+			canvasgl.width=WIDTH;
+			canvasgl.height=HEIGHT;
+			parentnode.appendChild(canvasgl);
+		}else{
+			canvasgl.width=WIDTH;
+			canvasgl.height=HEIGHT;
+			ret.WIDTH=canvasgl.width;
+			ret.HEIGHT=canvasgl.height;
+			WIDTH=ret.WIDTH;
+			HEIGHT=ret.HEIGHT;
+		}
+		var ctx=canvas.getContext("2d");
+		gl = canvasgl.getContext('webgl') || canvasgl.getContext('experimental-webgl');
+
+		Util.enableVirtualPad=true;
+		Util.init(canvas,canvasgl,parentnode);
+
+		if(gl){
+			globalParam.enableGL=true;
+		}else{
+			globalParam.enableGL=false;
+		}
+		globalParam.gl=gl;
+
+
+		if(globalParam.enableGL){
+			Rastgl.init(gl);
+			canvas.style.width="0px";
+			canvasgl.style.display="inline";
+			//Ono3d.setDrawMethod(3);
+		}else{
+			canvasgl.style.display="none";
+			canvas.style.display="inline";
+		}
+		ono3d = new Ono3d()
+		ret.ono3d = ono3d;
+
+
+		bufTexture=Ono3d.createTexture(1024,1024);
+		gl.bindTexture(gl.TEXTURE_2D, bufTexture.glTexture);
+		ret.bufTexture=bufTexture;
+
+		tex512 = Ono3d.createTexture(512,512);
+		averageTexture = Ono3d.createTexture(512,512);
+
+		onoPhy = new OnoPhy();
+		ret.onoPhy = onoPhy;
+		
+		Rastgl.ono3d = ono3d;
+
+		inittime=Date.now();
+
+		span=document.getElementById("cons");
+
+		
+
+	//	Util.loadJs("../engine/o3o.js",function(){
+
+			sigmaShader=Ono3d.loadShader("../lib/spherical_harmonics/sigma.shader");
+			shadow_gauss_shader=Ono3d.loadShader("../engine/gauss_shadow.shader");
+
+			for(var i=0;i<9;i++){
+				shShader.push(Ono3d.loadShader("../lib/spherical_harmonics/sh"+i+".shader"));
+			}
+
+			O3o.setOno3d(ono3d)
+			ono3d.init(canvas,ctx);
+			ono3d.rendercanvas=canvas;
+	//	});
+	}
+
+
+
+
+
+	start(){
+	
+	var url=location.search.substring(1,location.search.length)
+	var args=url.split("&")
+
+	for(i=args.length;i--;){
+		var arg=args[i].split("=")
+		if(arg.length >1){
+			if(!isNaN(arg[1]) && arg[1]!=""){
+				if(arg[1].length>1 && arg[1].indexOf(0) =="0"){
+					globalParam[arg[0]] = arg[1]
+				}else{
+					globalParam[arg[0]] = +arg[1]
+				}
+			}else{
+				globalParam[arg[0]] = arg[1]
+			}
+		}
+	}
+
+	Engine.skyTexture =Engine.loadEnvTexture("../engine/sky.jpg");
+
+	if(this.userInit){
+		this.userInit();
+	}
+	Util.setFps(globalParam.fps,mainloop);
+	Util.fpsman();
+
+
+	drawFlg=true;
+	animationFunc();
+}
 }
 	var shShader=[];
 	var sigmaShader;
@@ -399,6 +517,8 @@ var drawSub = Engine.drawSub= function(x,y,w,h){
 	//	ono3d.projectionMatrix,camera.aov*camera.znear,camera.aov*HEIGHT/WIDTH*camera.znear
 	//	,camera.znear,camera.zfar);
 
+	camera.calcMatrix();
+
 	gl.clear(gl.DEPTH_BUFFER_BIT);
 	gl.depthMask(false);
 	gl.disable(gl.BLEND);
@@ -406,6 +526,7 @@ var drawSub = Engine.drawSub= function(x,y,w,h){
 	if(skyTexture){
 		if(skyTexture.glTexture){
 			if(globalParam.stereomode==0){
+
 				ono3d.drawCelestialSphere(skyTexture);
 			}else{
 				ono3d.calcProjectionMatrix(
@@ -658,118 +779,8 @@ var drawFunc = function(){
 
 
 }
-Engine.start = function(){
-	
-	var url=location.search.substring(1,location.search.length)
-	var args=url.split("&")
-
-	for(i=args.length;i--;){
-		var arg=args[i].split("=")
-		if(arg.length >1){
-			if(!isNaN(arg[1]) && arg[1]!=""){
-				if(arg[1].length>1 && arg[1].indexOf(0) =="0"){
-					globalParam[arg[0]] = arg[1]
-				}else{
-					globalParam[arg[0]] = +arg[1]
-				}
-			}else{
-				globalParam[arg[0]] = arg[1]
-			}
-		}
-	}
-
-	Engine.skyTexture =Engine.loadEnvTexture("../engine/sky.jpg");
-
-	if(this.userInit){
-		this.userInit();
-	}
-	Util.setFps(globalParam.fps,mainloop);
-	Util.fpsman();
 
 
-	drawFlg=true;
-	animationFunc();
-}
-
-
-Engine.init=function(parentnode){
-	var canvas =document.createElement("canvas");
-	canvas.width=WIDTH;
-	canvas.height=HEIGHT;
-	parentnode.appendChild(canvas);
-	var canvasgl = document.getElementById("maincanvas");
-	if(!canvasgl){
-		canvasgl =document.createElement("canvas");
-		canvasgl.width=WIDTH;
-		canvasgl.height=HEIGHT;
-		parentnode.appendChild(canvasgl);
-	}else{
-		canvasgl.width=WIDTH;
-		canvasgl.height=HEIGHT;
-		ret.WIDTH=canvasgl.width;
-		ret.HEIGHT=canvasgl.height;
-		WIDTH=ret.WIDTH;
-		HEIGHT=ret.HEIGHT;
-	}
-	var ctx=canvas.getContext("2d");
-	gl = canvasgl.getContext('webgl') || canvasgl.getContext('experimental-webgl');
-
-	Util.enableVirtualPad=true;
-	Util.init(canvas,canvasgl,parentnode);
-
-	if(gl){
-		globalParam.enableGL=true;
-	}else{
-		globalParam.enableGL=false;
-	}
-	globalParam.gl=gl;
-
-
-	if(globalParam.enableGL){
-		Rastgl.init(gl);
-		canvas.style.width="0px";
-		canvasgl.style.display="inline";
-		//Ono3d.setDrawMethod(3);
-	}else{
-		canvasgl.style.display="none";
-		canvas.style.display="inline";
-	}
-	ono3d = new Ono3d()
-	ret.ono3d = ono3d;
-
-
-	bufTexture=Ono3d.createTexture(1024,1024);
-	gl.bindTexture(gl.TEXTURE_2D, bufTexture.glTexture);
-	ret.bufTexture=bufTexture;
-
-	tex512 = Ono3d.createTexture(512,512);
-	averageTexture = Ono3d.createTexture(512,512);
-
-	onoPhy = new OnoPhy();
-	ret.onoPhy = onoPhy;
-	
-	Rastgl.ono3d = ono3d;
-
-	inittime=Date.now();
-
-	span=document.getElementById("cons");
-
-	
-
-//	Util.loadJs("../engine/o3o.js",function(){
-
-		sigmaShader=Ono3d.loadShader("../lib/spherical_harmonics/sigma.shader");
-		shadow_gauss_shader=Ono3d.loadShader("../engine/gauss_shadow.shader");
-
-		for(var i=0;i<9;i++){
-			shShader.push(Ono3d.loadShader("../lib/spherical_harmonics/sh"+i+".shader"));
-		}
-
-		O3o.setOno3d(ono3d)
-		ono3d.init(canvas,ctx);
-		ono3d.rendercanvas=canvas;
-//	});
-}
 
 	
 

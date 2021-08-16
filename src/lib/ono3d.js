@@ -1238,15 +1238,24 @@ ret.calcST = function(s,t,p0,p1,p2,u0,v0,u1,v1,u2,v2){
 			w=1;
 			h=1;
 		}
+		var x=this.viewport[0];
+		var y=this.viewport[1];
+		var WIDTH=this.viewport[2];
+		var HEIGHT=this.viewport[3];
+			globalParam.gl.viewport(x,y,WIDTH,HEIGHT);
+			this.calcProjectionMatrix(this.projectionMatrix,this.aov*this.znear,this.aov*HEIGHT/WIDTH*this.znear
+				,this.znear,this.zfar);
+			Mat44.dot(this.pvMatrix,this.projectionMatrix,this.viewMatrix);
+
 
 		var shader = this.shaders["celestialsphere"];
 		var mat44 = new Array(16);
-			Mat44.copy(mat44,this.viewMatrix);
-			mat44[12]=0;
-			mat44[13]=0;
-			mat44[14]=0;
-			Mat44.dot(mat44,this.projectionMatrix,mat44);
-			Mat44.getInv(mat44,mat44);
+		Mat44.copy(mat44,this.viewMatrix);
+		mat44[12]=0;
+		mat44[13]=0;
+		mat44[14]=0;
+		Mat44.dot(mat44,this.projectionMatrix,mat44);
+		Mat44.getInv(mat44,mat44);
 		gl.useProgram(shader.program);
 		gl.uniformMatrix4fv(shader.unis["projectionMatrix"],false,new Float32Array(mat44));
 
