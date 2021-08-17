@@ -6,7 +6,7 @@ import Bsp from "../lib/bsp.js"
 import Delaunay from "../lib/delaunay.js"
 import Collider from "../lib/collider/collider.js"
 import AssetManager from "./assetmanager.js";
-import O3o from "./o3o.js";
+import O3o from "./o3o/o3o.js";
 import Util from "../lib/util.js"
 import Camera from "./camera.js"
 import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "../lib/vector.js"

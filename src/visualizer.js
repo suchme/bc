@@ -3,6 +3,8 @@ import Rastgl from "./lib/rastgl.js"
 import Util from "./lib/util.js"
 import Engine from "./engine/engine.js"
 import Scene from "./engine/scene.js"
+import O3o from "./engine/o3o/o3o.js"
+import AssetManager from "./engine/assetmanager.js"
 import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "./lib/vector.js"
 
 var homingCamera=function(angle,target,camera){
@@ -14,13 +16,30 @@ var homingCamera=function(angle,target,camera){
 		angle[2]=0;
 		
 	}
+var o3o;
 class Scene1 extends Scene{
 	constructor(){
 		super();
 		this.a=new Vec2();
 		this.p=new Vec3();
-		this.cameralen=1;
+		this.cameralen=10;
 		this.target=new Vec3();
+		o3o = AssetManager.o3o("human.o3o",(o3o)=>{
+			this.instance= o3o.createInstance();
+		});
+	}
+	draw(){
+		if(!this.instance)return;
+
+		var objects = this.instance.o3o.objects;
+		for(var i=0;i<objects.length;i++){
+			if(objects[i].hide_render){
+				continue;
+			}
+			var instance = this.instance.objectInstances[i];
+			instance.draw();
+		}
+		
 	}
 
 	move(){
@@ -75,6 +94,7 @@ export default class Visualizer{
 			var scene1 = new Scene1();
 			this.engine.scenes.push(scene1);
 			window.engine = this.engine;
+			window.ono3d = this.engine.ono3d;
 		}
 	}
 }

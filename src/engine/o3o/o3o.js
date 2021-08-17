@@ -1,16 +1,18 @@
 "use strict"
 
-import Ono3d from "../lib/ono3d.js"
-import Engine from "./engine.js"
-import OnoPhy from "../lib/onophy/onophy.js"
-import Geono from "../lib/geono.js"
-import Collider from "../lib/collider/collider.js"
-import AssetManager from "./assetmanager.js"
-import Rastgl from "../lib/rastgl.js"
-import Util from "../lib/util.js"
-import SH from "../lib/spherical_harmonics/sh.js";
-import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "../lib/vector.js"
-var O3o=(function(){
+import Ono3d from "../../lib/ono3d.js"
+import Engine from "../engine.js"
+import OnoPhy from "../../lib/onophy/onophy.js"
+import Geono from "../../lib/geono.js"
+import Collider from "../../lib/collider/collider.js"
+import AssetManager from "../assetmanager.js"
+import Rastgl from "../../lib/rastgl.js"
+import Util from "../../lib/util.js"
+import SH from "../../lib/spherical_harmonics/sh.js";
+
+import Mesh from "./mesh.js"
+import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "../../lib/vector.js"
+
 	const MAX_SIZE=4096;
 	var abs=Math.abs;
 
@@ -19,6 +21,7 @@ var O3o=(function(){
 	}
 
 
+var i;
 	const REPEAT_NONE = i=0
 		, REPEAT_LOOP = ++i
 		,REPEAT_LINER = ++i
@@ -77,6 +80,9 @@ var O3o=(function(){
 	rotationMode["YZX"]=EULER_YZX;
 	rotationMode["ZXY"]=EULER_ZXY;
 	rotationMode["ZYX"]=EULER_ZYX;
+
+
+var O3o=(function(){
 
 	var O3o = function(){
 		//モデルデータ
@@ -406,20 +412,6 @@ var O3o=(function(){
 		this.shapeKeyPoints = [];
 	}
 
-	var Mesh = function(){
-		//メッシュ情報
-		this.name=""; //名前
-		this.use_auto_smooth = 0;
-		this.auto_smooth_angle = 0;
-		this.vertices = [];//頂点
-		this.colors=[];//頂点色
-		this.shcoefs=[];//球面調和関数の係数
-		this.shapeKeys = [];//シェイプキー
-		this.faces = [];//面
-		this.edges = [];//辺
-		this.flg=0; //フラグ
-		this.uv_layers=[];//uv情報
-	};
 	var Uv_layer= function(){
 		//uv情報
 		this.name="" //名前
@@ -428,11 +420,11 @@ var O3o=(function(){
 	Mesh.prototype.objecttype=OBJECT_MESH;
 	ret.Mesh = Mesh;
 
-	var TypedClass=(function(){
-		var TypedClass=function(){};
-		var ret=TypedClass;
-
-		ret.array=function(n){
+	class TypedClass{
+		constructor(){
+		}
+	};
+	TypedClass.array= function(n){
 			var size=this.size;
 			var buffer=new ArrayBuffer(size*n);
 			var arr=[];
@@ -443,30 +435,25 @@ var O3o=(function(){
 			arr.buf=new Int8Array(buffer);
 			return arr;
 		}
-		//ret.set=function(src){
+	TypedClass.size = 0;
 
-		//	new Int8Array(src.vertices[0].pos.buffer);
-		//	var bbb=new Int8Array(dst.vertices[0].pos.buffer);
-		//	bbb.set(aaa);
 
-		//}
-		ret.size=0;
-		return ret;
-	})();
-	var Vertex = function(buffer,offset){
-		if(!buffer){
-			buffer=new ArrayBuffer(Vertex.size);
-			offset=0;
-		}
-		//頂点
-		//12+12+3+12=39バイト
-		this.pos = new Float32Array(buffer,offset,3);//new Vec3(); //座標
-		this.normal = new Float32Array(buffer,offset+12,3);//new Vec3(); //法線
-		this.groupWeights = new Float32Array(buffer,offset+24,3);//[1,0,0]; //グループウェイト
-		this.groupWeights.set([1,0,0]);
-		this.groups =new Int8Array(buffer,offset+36,3);//[-1,-1,-1]; //グループ
-		this.groups.set([-1,-1,-1]);
-	};
+	class Vertex{
+		constructor(buffer,offset){
+			if(!buffer){
+				buffer=new ArrayBuffer(Vertex.size);
+				offset=0;
+			}
+			//頂点
+			//12+12+3+12=39バイト
+			this.pos = new Float32Array(buffer,offset,3);//new Vec3(); //座標
+			this.normal = new Float32Array(buffer,offset+12,3);//new Vec3(); //法線
+			this.groupWeights = new Float32Array(buffer,offset+24,3);//[1,0,0]; //グループウェイト
+			this.groupWeights.set([1,0,0]);
+			this.groups =new Int8Array(buffer,offset+36,3);//[-1,-1,-1]; //グループ
+			this.groups.set([-1,-1,-1]);
+		};
+	}
 	Vertex.size=40;
 	ret.Vertex=Vertex;
 	Vertex.array=TypedClass.array;

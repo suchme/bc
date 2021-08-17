@@ -1,5 +1,5 @@
 
-import O3o from "./o3o.js";
+import O3o from "./o3o/o3o.js";
 import Ono3d from "../lib/ono3d.js"
 var AssetManager=(function(){
 	var AssetManager={};
