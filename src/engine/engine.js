@@ -8,12 +8,18 @@ import Collider from "../lib/collider/collider.js"
 import AssetManager from "./assetmanager.js";
 import O3o from "./o3o.js";
 import Util from "../lib/util.js"
+import Camera from "./camera.js"
 import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "../lib/vector.js"
+import Obj from "./obj.js"
+import ObjMan from "./objman.js"
+import Scene from "./scene.js"
 
 var ono3d;
 
 export default class Engine{
 	constructor(){
+		this.camera = new Camera();
+		this.scenes=[];
 	}
 
 	init(parentnode){
@@ -30,10 +36,10 @@ export default class Engine{
 		}else{
 			canvasgl.width=WIDTH;
 			canvasgl.height=HEIGHT;
-			ret.WIDTH=canvasgl.width;
-			ret.HEIGHT=canvasgl.height;
-			WIDTH=ret.WIDTH;
-			HEIGHT=ret.HEIGHT;
+			this.WIDTH=canvasgl.width;
+			this.HEIGHT=canvasgl.height;
+			WIDTH=this.WIDTH;
+			HEIGHT=this.HEIGHT;
 		}
 		var ctx=canvas.getContext("2d");
 		gl = canvasgl.getContext('webgl') || canvasgl.getContext('experimental-webgl');
@@ -59,18 +65,18 @@ export default class Engine{
 			canvas.style.display="inline";
 		}
 		ono3d = new Ono3d()
-		ret.ono3d = ono3d;
+		this.ono3d = ono3d;
 
 
 		bufTexture=Ono3d.createTexture(1024,1024);
 		gl.bindTexture(gl.TEXTURE_2D, bufTexture.glTexture);
-		ret.bufTexture=bufTexture;
+		this.bufTexture=bufTexture;
 
 		tex512 = Ono3d.createTexture(512,512);
 		averageTexture = Ono3d.createTexture(512,512);
 
 		onoPhy = new OnoPhy();
-		ret.onoPhy = onoPhy;
+		this.onoPhy = onoPhy;
 		
 		Rastgl.ono3d = ono3d;
 
@@ -95,534 +101,72 @@ export default class Engine{
 	//	});
 	}
 
+	drawFunc(){
+		drawFlg=false;
+		framecount++;
 
+		this.ono3d.clear();
 
+		performance.mark("drawStart");
 
-
-	start(){
-	
-	var url=location.search.substring(1,location.search.length)
-	var args=url.split("&")
-
-	for(i=args.length;i--;){
-		var arg=args[i].split("=")
-		if(arg.length >1){
-			if(!isNaN(arg[1]) && arg[1]!=""){
-				if(arg[1].length>1 && arg[1].indexOf(0) =="0"){
-					globalParam[arg[0]] = arg[1]
-				}else{
-					globalParam[arg[0]] = +arg[1]
-				}
-			}else{
-				globalParam[arg[0]] = arg[1]
-			}
+		performance.mark("drawGeometryStart");
+		for(var si=0;si<this.scenes.length;si++){
+			this.scenes[si].draw();
 		}
-	}
+		performance.mark("drawGeometryEnd");
 
-	Engine.skyTexture =Engine.loadEnvTexture("../engine/sky.jpg");
+		performance.mark("drawRasteriseStart");
 
-	if(this.userInit){
-		this.userInit();
-	}
-	Util.setFps(globalParam.fps,mainloop);
-	Util.fpsman();
-
-
-	drawFlg=true;
-	animationFunc();
-}
-}
-	var shShader=[];
-	var sigmaShader;
-	var shadow_gauss_shader;
-
-	var customMaterial;
-	var ret = Engine;
-	var HEIGHT=486,WIDTH=864;
-	ret.HEIGHT = HEIGHT;
-	ret.WIDTH= WIDTH;
-	var gl;
-	var onoPhy=null;
-	var bdf;
-	var bdfimage=null;
-	var soundbuffer=null;
-	ret.goClass=[];
-	ret.go=[];
-
-	var tex512;
-	var env2Texture;
-	var averageTexture;
-	var bufTexture;
-
-	ret.enableDraw=true;
-
-var objPool=[];
-	
-	//オブジェクトマネージャ
-	var STAT_EMPTY=0
-		,STAT_ENABLE=1
-		,STAT_CREATE=2
-	;
-	class Obj{
-		constructor(){
-			this.p=new Vec3();
-			this.scale=new Vec3();
-			this.rotq = new Vec4();
-			this.v=new Vec3();
-			this.a=new Vec3();
-			this.stat=STAT_EMPTY;
-			this.type=0;
-			this.hp=1;
-			this.t=0;
-			this.hitareas=[];
-			this.matrix=new Mat43();
-			this.phyObjs = [];
-		}
-	}
-	class ObjMan{
-		constructor(){
-			this.objs= []; 
-			this.id=0;
-		}
-
-		createObj(c){
-			if(!c){
-				c=Engine.defObj;
-			}
-			var obj = null;
-			if(objPool.length>0){
-				obj = objPool[objPool.length-1];
-				if(obj.stat<0){
-					//クールタイムなのは無視
-					obj=null;
-				}
-			}
-			if(!obj){
-				//プールからとってこれない場合は何個か追加する
-				for(var i=0;i<16;i++){
-					objPool.push(new Obj());
-				}
-			}
-			//プールからオブジェクトを移動
-			obj = objPool.pop();
-			this.objs.push(obj);
-
-			if(this.objs.length>1024){
-				//不本意
-				alert("objs>1024!");
-			}
-
-			//初期値セット
-			Mat43.setInit(obj.matrix);
-			obj.parent=null;
-			Vec3.set(obj.scale,1,1,1);
-			obj.angle=0;
-			obj.t=0;
-			obj.hp=1;
-			obj.stat=STAT_CREATE;
-			obj.pattern=0;
-			obj.frame=0;
-			obj.pos2=new Vec3();
-			obj.func=c;
-
-			//IDセット
-			obj.id=this.id;
-			this.id++;
-
-			obj.__proto__=c.prototype;
-
-			obj.scene = this.scene;
-			obj.init();
-
-			return obj;
-			
-		}
-		deleteObj(obj){
-			for(var i=0;i<this.objs.length;i++){
-				if(obj === this.objs[i]){
-					//クールタイムを取る
-					obj.stat=-10;
-					//プールに移動
-					objPool.unshift(objs[i]);
-					objs.splice(i,1);
-					break;
-				}
-			}
-		}
-		update(){
-			var objs = this.objs;
-			for(var i=0;i<this.objs.length;i++){
-
-				if(objs[i].stat===STAT_CREATE){
-					objs[i].stat=STAT_ENABLE;
-				}
-
-				if(objs[i].stat===STAT_ENABLE){
-					objs[i].t++;
-					objs[i].frame++;
-				}
-			}
-			for(var i=0;i<objPool.length;i++){
-				if(objPool[i].stat<0){
-					objPool[i].stat++;
-				}else{
-					break;
-				}
-			}
-
-		}
-		
-		move(){
-			var objs = this.objs;
-			for(i=0;i<objs.length;i++){
-				if(objs[i].stat!==STAT_ENABLE)continue;
-				objs[i].move();
-			}
-		}
-
-	};
-	ObjMan.Obj = Obj;
-
-class Scene{
-	constructor(){
-		this.objMan = new ObjMan();
-		this.objMan.scene = this;
-	};
-	move(){
-		this.objMan.update();
-		this.objMan.move();
-	}
-	hudDraw(){
-		var objMan=this.objMan;
-		for(i=0;i<objMan.objs.length;i++){
-			//HUD描画
-			var obj = objMan.objs[i];
-			ono3d.setTargetMatrix(0)
-			ono3d.loadIdentity()
-			ono3d.rf=0;
-			obj.drawhud();
-		}
-
-
-	}
-	draw(){
-		var objMan=this.objMan;
-		//描画関数
-
-
-		var environment = Engine.ono3d.environments[0];
-
-
-		Util.str2rgba(environment.sun.color,globalParam.lightColor1)
-		Util.str2rgba(environment.area.color,globalParam.lightColor2)
-
-		if(globalParam.cMaterial){
-			var cMat = ono3d.materials[ono3d.materials_index];
-			ono3d.materials_index++;
-			var a=new Vec3();
-			Util.hex2rgb(cMat.baseColor,globalParam.baseColor);
-			cMat.opacity=globalParam.opacity;
-			cMat.emt=globalParam.emi;
-			cMat.metallic=globalParam.metallic;
-			cMat.specular=globalParam.specular;
-			cMat.ior=globalParam.ior;
-			cMat.roughness=globalParam.roughness;
-			cMat.subRoughness=globalParam.subRoughness;
-			Util.hex2rgb(cMat.metalColor,globalParam.metalColor);
-			cMat.texture=globalParam.cTexture;
-
-			cMat.shader=Ono3d.calcMainShaderName(cMat);
-			customMaterial=cMat;
-		}
-
-			
-
-		camera.calcMatrix();
-		camera.calcCollision(camera.cameracol);
-		var lightSource= null;
-
-		if(globalParam.shadow){
-			lightSource = ono3d.environments[0].sun
-			if(lightSource){
-//				camera.calcCollision(camera.cameracol2,lightSource.viewmatrix);
-			}
-		}
-		for(i=0;i<objMan.objs.length;i++){
-			var obj = objMan.objs[i];
-			ono3d.setTargetMatrix(0)
-			ono3d.loadIdentity()
-			ono3d.rf=0;
-			obj.draw();
-		}
+		gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+		gl.depthMask(true);
+		gl.clear(gl.DEPTH_BUFFER_BIT);
+		this.drawSub(0,0,WIDTH,HEIGHT);
 		
 
-		Engine.calcLightMatrix();
-		// ステレオ描画設定
-		globalParam.stereo=-globalParam.stereoVolume * globalParam.stereomode*0.4;
-	}
 
-};
-Engine.Scene =Scene;
-class defObj{
-	//オブジェクトのベースクラス
-	constructor(){
-	};
-	init(){};
-	move(){};
-	draw(){};
-	drawShadow(){
-		this.draw();
-	};
-	hit(){};
-	delete(){};
-	drawhud(){};
-}
-Engine.defObj= defObj;
+		//描画結果をバッファにコピー
+		gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+		Ono3d.copyImage(bufTexture,0,0,0,0,WIDTH,HEIGHT);
 
-
-Engine.scenes=[];
-
-var i;
-var pad =new Vec2();
-Engine.pad = pad;
-Engine.probs = new Collider();
-
-var averageTexture; //光量計算用
-
-
-//hud描画用
-var blit = function(tex,x,y,w,h,u,v,u2,v2){
-		Ono3d.drawCopy(tex.glTexture,x,y,w*2,h*2
-						,u/tex.width,(v+v2)/tex.height,u2/tex.width,-v2/tex.height);
-}
-
-//カメラ
-var Camera= (function(){
-	var Camera = function(){
-		this.p=new Vec3();
-		this.a=new Vec3();
-		this.aov= 0.577;
-		this.znear=0.1;
-		this.zfar=100;
-
-		this.cameracol=new Collider.ConvexHull();
-		this.cameracol2=new Collider.ConvexHull();
-		for(var i=0;i<8;i++){
-			this.cameracol.poses.push(new Vec3());
-			this.cameracol2.poses.push(new Vec3());
-		}
-		this.pvMatrix=new Mat44();
-		this.matrix=new Mat43();
-	}
-	var ret = Camera;
-	var scope=[
-		[-1,-1,-1]
-		,[-1,1,-1]
-		,[1,1,-1]
-		,[1,-1,-1]
-		,[-1,-1,1]
-		,[-1,1,1]
-		,[1,1,1]
-		,[1,-1,1]
-	];
-	ret.prototype.calcMatrix=function(){
-		var rot=new Vec3();
-		var scale =new Vec3();
-		var m=new Mat43();
-		Vec3.set(scale,1,1,1);
-		Vec3.set(rot,this.a[0],this.a[1]+Math.PI,this.a[2]);
-		Mat43.fromLSE(this.matrix,this.p,scale,rot);
-		Mat43.getInv(m,this.matrix);
-		Mat44.copyMat43(ono3d.viewMatrix,m);
-
-		var persx = this.aov;
-		var persy = this.aov * ono3d.viewport[3]/ono3d.viewport[2];
-		ono3d.calcProjectionMatrix(this.pvMatrix,persx*this.znear,persy*this.znear,this.znear,this.zfar);
-
-		Mat44.dotMat43(this.pvMatrix,this.pvMatrix,m);
-		ono3d.znear=this.znear;
-		ono3d.zfar=this.zfar;
-		ono3d.aov=this.aov;
-
-	}
-
-	ret.prototype.calcCollision2=function(collision,matrix,z_near,z_far){
-		var v4=Vec4.poolAlloc();
-
-		for(var i=0;i<8;i++){
-			Vec3.copy(v4,scope[i]);
-			v4[3]=1;
-			if(v4[2]<0){
-				Vec4.mul(v4,v4,z_near);
-			}else{
-				Vec4.mul(v4,v4,z_far);
-			}
-			
-			Mat44.dotVec4(v4,matrix,v4);
-			Vec3.copy(collision.poses[i],v4);
-		}
-		collision.refresh();
-		Vec4.poolFree(1);
-	}
-	ret.prototype.calcCollision=function(collision,matrix){
-		var im = Mat44.poolAlloc();
-		var v4=Vec4.poolAlloc();
-		if(!matrix){
-			//Mat44.dot(im,ono3d.projectionMatrix,ono3d.viewMatrix);
-			Mat44.getInv(im,this.pvMatrix);
+		//画面平均光度算出
+		if(globalParam.autoExposure){
+			//オート露光調整の場合は画面全体の輝度から算出
+			Engine.calcExpose(bufTexture,(WIDTH-512)/2.0/1024,0 ,512/1024,HEIGHT/1024);
 		}else{
-			Mat44.getInv(im,matrix);
+			//マニュアル露光調整の場合は露光と最大値をセット
+			Engine.setExpose(globalParam.exposure_level,globalParam.exposure_upper);
 		}
 
-		for(var i=0;i<8;i++){
-			Vec3.copy(v4,scope[i]);
-			v4[3]=1;
-			if(!matrix){
-				if(v4[2]<0){
-					Vec4.mul(v4,v4,this.znear);
-				}else{
-					Vec4.mul(v4,v4,this.zfar);
-				}
-			}
-			Mat44.dotVec4(v4,im,v4);
-			Vec3.copy(collision.poses[i],v4);
+		if(globalParam.exposure_bloom ){
+			// ブルーム処理
+			ono3d.setViewport(0,0,WIDTH,HEIGHT);
+			Engine.bloom(bufTexture,globalParam.exposure_bloom);
+			Ono3d.copyImage(bufTexture,0,0,0,0,WIDTH,HEIGHT);
 		}
-		collision.refresh();
-		Vec4.poolFree(1);
-		Mat44.poolFree(1);
+
+
+		//トーンマッピング
+		gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+		ono3d.setViewport(0,0,WIDTH,HEIGHT);
+		Engine.toneMapping(bufTexture,WIDTH/1024,HEIGHT/1024);
+		
+
+
+
+		//gl.getParameter(gl.VIEWPORT);
+		performance.mark("drawRasteriseEnd");
+		for(var si=0;si<this.scenes.length;si++){
+			this.scenes[si].hudDraw();
+		}
+		performance.mark("drawEnd");
+
+
 	}
-
-	return ret;
-})();
-var camera = new Camera();
-Engine.camera = camera;
-
-
-var drawSub = Engine.drawSub= function(x,y,w,h){
-	//画面描画関数
-
-	ono3d.rf=0;
-	ono3d.lineWidth=1.0;
-	ono3d.smoothing=globalParam.smoothing;
-
-	ono3d.lightThreshold1=globalParam.lightThreshold1;
-	ono3d.lightThreshold2=globalParam.lightThreshold2;
-
-//背景描画
-	gl.disable(gl.DEPTH_TEST);
-	gl.disable(gl.BLEND);
-	gl.depthMask(true);
-	ono3d.setViewport(x,y,w,h);
-	//ono3d.calcProjectionMatrix(
-	//	ono3d.projectionMatrix,camera.aov*camera.znear,camera.aov*HEIGHT/WIDTH*camera.znear
-	//	,camera.znear,camera.zfar);
-
-	camera.calcMatrix();
-
-	gl.clear(gl.DEPTH_BUFFER_BIT);
-	gl.depthMask(false);
-	gl.disable(gl.BLEND);
-	var skyTexture=Engine.skyTexture;
-	if(skyTexture){
-		if(skyTexture.glTexture){
-			if(globalParam.stereomode==0){
-
-				ono3d.drawCelestialSphere(skyTexture);
-			}else{
-				ono3d.calcProjectionMatrix(
-					ono3d.projectionMatrix,camera.aov * camera.znear,camera.aov*HEIGHT/WIDTH*2 * camera.znear
-				,camera.znear,camera.zfar);
-				ono3d.setViewport(0,0,WIDTH/2,HEIGHT);
-				ono3d.drawCelestialSphere(skyTexture);
-				ono3d.setViewport(WIDTH/2,0,WIDTH/2,HEIGHT);
-				ono3d.drawCelestialSphere(skyTexture);
-				
-			}
-		}
-	}
-
-	ono3d.setViewport(x,y,w,h);
-	//オブジェクト描画
-	gl.depthMask(true);
-	gl.enable(gl.DEPTH_TEST);
-
-	if(globalParam.shader===0){
-		if(globalParam.cMaterial){
-			var faces=ono3d.faces;
-			var s=ono3d.faces_index;
-			for(var fi=ono3d.faces_static_index;fi<s;fi++){
-				faces[fi].material = customMaterial;
-			}
-		}
-		ono3d.render(camera.p);
-	}
-	
-	gl.finish();
-}
-
-	globalParam.outline_bold=0;
-	globalParam.outline_color="000000";
-	globalParam.lightColor1="808080";
-	globalParam.lightColor2="808080";;
-	globalParam.lightThreshold1=0.;
-	globalParam.lightThreshold2=1.;
-	globalParam.physics=1;
-	globalParam.physics_=0;
-	globalParam.smoothing=0;
-	globalParam.stereomode=0;
-	globalParam.stereoVolume=1;
-	globalParam.step=1;
-	globalParam.fps=60;
-	globalParam.scene=0;
-	globalParam.shadow=1;
-	globalParam.model="./f1.o3o";
-	globalParam.materialMode = false;
-//カスタムマテリアル
-	globalParam.baseColor= "ffffff";
-	globalParam.metallic= 0;
-	globalParam.metalColor= "ffffff";
-	globalParam.specular= 0;
-	globalParam.roughness= 0;
-	globalParam.subRoughness= 0;
-	globalParam.frenel = 0;
-	globalParam.opacity= 1.0;
-	globalParam.ior= 1.1;
-	globalParam.cNormal= 1.0;
-	globalParam.emi= 0.0;
-
-	globalParam.debugMenu= 0;
-	globalParam.shader= 0;
-
-//カメラ露光
-	globalParam.autoExposure=1;
-	globalParam.exposure_level=0.18;
-	globalParam.exposure_upper=1;
-	globalParam.exposure_bloom=0.1;
-	
-	globalParam.source=0;
-	globalParam.target=0;
-	globalParam.reference=0;
-	globalParam.actionAlpha=0;
-
-	
-
-
-var physicsTime;
-var span;
-var oldTime = 0;
-var nowTime =0;
-var drawgeometryTime=0;
-var drawrasteriseTime=0;
-var drawTime=0;
-var mseccount=0;
-var framecount=0;
-var inittime=0;
-var drawFlg=false;
-var mainloop=function(){
+	mainloop(){
 
 	drawFlg=true;
 	if(drawFlg){
-		drawFunc();
+		this.drawFunc();
 		//drawFlg=false;
 	}
 	var nowTime = performance.now()
@@ -638,8 +182,8 @@ var mainloop=function(){
 	}
 	
 
-	for(var si=0;si<Engine.scenes.length;si++){
-		Engine.scenes[si].move();
+	for(var si=0;si<this.scenes.length;si++){
+		this.scenes[si].move();
 	}
 
 	if(globalParam.physics){
@@ -705,6 +249,415 @@ var mainloop=function(){
 		performance.clearMeasures();
 	}
 }
+
+	calcMatrix(){
+		//カメラ情報からレンダリング用の行列作成
+		var camera = this.camera;
+		var rot=new Vec3();
+		var scale =new Vec3();
+		var m=new Mat43();
+		Vec3.set(scale,1,1,1);
+		Vec3.set(rot,camera.a[0],camera.a[1]+Math.PI,camera.a[2]);
+		Mat43.fromLSE(camera.matrix,camera.p,scale,rot);
+		Mat43.getInv(m,camera.matrix);
+		Mat44.copyMat43(ono3d.viewMatrix,m);
+
+		var persx = camera.aov;
+		var persy = camera.aov * ono3d.viewport[3]/ono3d.viewport[2];
+		ono3d.calcProjectionMatrix(camera.pvMatrix,persx*camera.znear,persy*camera.znear,camera.znear,camera.zfar);
+
+		Mat44.dotMat43(camera.pvMatrix,camera.pvMatrix,m);
+		ono3d.znear=camera.znear;
+		ono3d.zfar=camera.zfar;
+		ono3d.aov=camera.aov;
+
+	}
+
+	drawSub(x,y,w,h){
+		//画面描画関数
+
+		ono3d.rf=0;
+		ono3d.lineWidth=1.0;
+		ono3d.smoothing=globalParam.smoothing;
+
+		ono3d.lightThreshold1=globalParam.lightThreshold1;
+		ono3d.lightThreshold2=globalParam.lightThreshold2;
+
+	//背景描画
+		gl.disable(gl.DEPTH_TEST);
+		gl.disable(gl.BLEND);
+		gl.depthMask(true);
+		ono3d.setViewport(x,y,w,h);
+
+		this.calcMatrix();
+
+		gl.clear(gl.DEPTH_BUFFER_BIT);
+		gl.depthMask(false);
+		gl.disable(gl.BLEND);
+		var skyTexture=Engine.skyTexture;
+		if(skyTexture){
+			if(skyTexture.glTexture){
+				if(globalParam.stereomode==0){
+
+					ono3d.drawCelestialSphere(skyTexture);
+				}else{
+					ono3d.calcProjectionMatrix(
+						ono3d.projectionMatrix,camera.aov * camera.znear,camera.aov*HEIGHT/WIDTH*2 * camera.znear
+					,camera.znear,camera.zfar);
+					ono3d.setViewport(0,0,WIDTH/2,HEIGHT);
+					ono3d.drawCelestialSphere(skyTexture);
+					ono3d.setViewport(WIDTH/2,0,WIDTH/2,HEIGHT);
+					ono3d.drawCelestialSphere(skyTexture);
+					
+				}
+			}
+		}
+
+		ono3d.setViewport(x,y,w,h);
+		//オブジェクト描画
+		gl.depthMask(true);
+		gl.enable(gl.DEPTH_TEST);
+
+		if(globalParam.shader===0){
+			if(globalParam.cMaterial){
+				var faces=ono3d.faces;
+				var s=ono3d.faces_index;
+				for(var fi=ono3d.faces_static_index;fi<s;fi++){
+					faces[fi].material = customMaterial;
+				}
+			}
+			ono3d.render(this.camera.p);
+		}
+		
+		gl.finish();
+	}
+
+
+
+	start(){
+
+		//urlからオプションデータ取得
+		var url=location.search.substring(1,location.search.length)
+		var args=url.split("&")
+
+		for(var i=args.length;i--;){
+			var arg=args[i].split("=")
+			if(arg.length >1){
+				if(!isNaN(arg[1]) && arg[1]!=""){
+					if(arg[1].length>1 && arg[1].indexOf(0) =="0"){
+						globalParam[arg[0]] = arg[1]
+					}else{
+						globalParam[arg[0]] = +arg[1]
+					}
+				}else{
+					globalParam[arg[0]] = arg[1]
+				}
+			}
+		}
+
+		//デフォルト背景読み込み
+		Engine.skyTexture =this.loadEnvTexture("../engine/sky.jpg");
+
+		if(this.userInit){
+			//初期化処理が設定されていれば実行
+			this.userInit();
+		}
+
+		Util.setFps(globalParam.fps,()=>{
+			this.mainloop();
+		});
+		Util.fpsman();
+
+
+		drawFlg=true;
+		animationFunc();
+	}
+
+	loadEnvTexture(path){
+		//環境マップ読み込み
+		return AssetManager.texture(path,(image)=>{
+			gl.disable(gl.BLEND);
+			gl.disable(gl.DEPTH_TEST);
+
+
+			gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
+			gl.viewport(0,0,image.width,image.height);
+			Ono3d.postEffect(image,0,0 ,1,1,this.ono3d.shaders["envset"]); 
+			gl.bindTexture(gl.TEXTURE_2D, image.glTexture);
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+			Ono3d.copyImage(image,0,0,0,0,image.width,image.height);
+
+			gl.bindTexture(gl.TEXTURE_2D, null);
+			gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+			
+		});
+	}
+
+
+
+	calcLightMatrix(){
+		// ライト行列計算 ------
+		// パースシャドウマップを作るための行列を作る
+		var poses = lightArea_poses;
+		var camera = this.camera;
+		var light = this.ono3d.environments[0].sun;
+
+
+		var xup = new Vec3();
+		var yup = new Vec3();
+		var zup = new Vec3();
+		var z_near=1;
+		var z_far=100;
+		var projection_matrix = new Mat44();
+		var view_matrix = new Mat43();
+
+		var cameraz=new Vec3();
+
+		//ライト向きとカメラ向きからライトレンダリング向き決める
+		Vec3.set(yup,-light.matrix[8],-light.matrix[9],-light.matrix[10]);
+		Vec3.set(cameraz,camera.matrix[6],camera.matrix[7],camera.matrix[8]);
+
+		Vec3.cross(xup,yup,cameraz);
+		Vec3.norm(xup);
+		Vec3.cross(zup,xup,yup);
+		Vec3.norm(zup);
+
+
+		var sin_r = Math.max(0.05,Math.abs(Vec3.dot(zup,cameraz)));
+		z_far = Math.max(20,100 * sin_r-50);
+
+		if(sin_r<0.7){
+			Vec3.cross(cameraz,cameraz,xup);
+			Vec3.norm(cameraz);
+			if(Vec3.dot(cameraz,zup)<0){
+				Vec3.mul(cameraz,cameraz,-1);
+			}
+		}
+
+		var offset=(z_near +  Math.sqrt(z_near*z_far))/sin_r;
+
+
+		ono3d.calcPerspectiveMatrix
+			(projection_matrix
+			,-camera.aov * z_near
+			,camera.aov * z_near
+			,camera.aov * (HEIGHT/WIDTH) * z_near
+			,-camera.aov * (HEIGHT/WIDTH) * z_near
+			,z_near,z_far);
+		Mat43.getInv(view_matrix,camera.matrix);
+		Mat44.dotMat43(projection_matrix,projection_matrix,view_matrix);
+		Mat44.getInv(projection_matrix,projection_matrix);
+
+		var support= new Vec3();
+		var result= new Vec3();
+
+		//描画領域計算
+		
+		//視錐台の頂点を計算
+		var v4 = Vec4.poolAlloc();
+		for(var i=0;i<8;i++){
+			Vec4.set(v4,(i&1)*2-1,((i>>1)&1)*2-1,((i>>2)&1)*2-1,1);
+			if(v4[2]<0){
+				Vec4.mul(v4,v4,z_near);
+			}else{
+				Vec4.mul(v4,v4,z_far);
+			}
+			
+			Mat44.dotVec4(v4,projection_matrix,v4);
+			Vec3.copy(poses[i],v4);
+		}
+		Vec4.poolFree(1);
+
+		//視錐台を完全に含むシャドウ用視錐台を作る
+		//poses[8] は視錐台よりライト方向にあるオブジェクトを含むためのダミー
+		Vec3.madd(poses[8],camera.p,zup,-z_near);
+		Vec3.madd(poses[8],poses[8],yup,20);
+		var light_anchor_pos = new Vec3();
+		Vec3.mul(light_anchor_pos,xup
+			,(calcSupport(xup,poses)+calcSupport(xup,poses,1))*0.5);
+		Vec3.madd(light_anchor_pos,light_anchor_pos,yup
+			,(calcSupport(yup,poses)+calcSupport(yup,poses,1))*0.5);
+		Vec3.madd(light_anchor_pos,light_anchor_pos,zup
+			,calcSupport(zup,poses,1) +offset);
+
+		//シャドウマップ用行列計算
+		var view_matrix = light.viewmatrix;
+		Mat44.set(view_matrix
+			,xup[0], xup[1], xup[2] ,0
+			,yup[0] ,yup[1] ,yup[2] ,0
+			,zup[0] ,zup[1] ,zup[2] ,0
+			,light_anchor_pos[0] ,light_anchor_pos[1] ,light_anchor_pos[2] ,1
+		);
+		Mat44.getInv(view_matrix,view_matrix);
+
+		ono3d.calcPerspectiveMatrix(projection_matrix
+			,calcSupportAngle(xup,poses,light_anchor_pos,0,zup)   * offset 
+			,calcSupportAngle(xup,poses,light_anchor_pos,1,zup) * offset 
+			,30//calcSupportAngle(yup,poses,light_anchor_pos,1) * offset 
+			,-30//calcSupportAngle(yup,poses,light_anchor_pos)   * offset 
+			,offset,(calcSupport(zup,poses,1)-calcSupport(zup,poses))+offset);
+
+		projection_matrix[5]/= offset;
+		projection_matrix[13]= projection_matrix[9];
+		projection_matrix[9]=0;
+
+		Mat44.dot(view_matrix,projection_matrix,view_matrix);
+
+		Mat44.setInit(projection_matrix);
+		projection_matrix[5]=0;
+		projection_matrix[9]=-1;
+		projection_matrix[6]=-1;
+		projection_matrix[10]=0;
+		Mat44.dot(view_matrix,projection_matrix,view_matrix);
+
+
+	}
+}
+
+//カメラ位置計算
+var calcSupport=function(axis,poses,reverse){
+	var effic = 1;
+	if(reverse){
+		effic=-1;
+	}
+	var l = Vec3.dot(poses[0],axis)*effic;
+
+	for(pi=1;pi<poses.length;pi++){
+		var l2 = Vec3.dot(poses[pi],axis)*effic;
+		if(l2<l){
+			l=l2;
+		}
+	}
+
+	return l*effic;
+}
+var calcSupportAngle =function(axis,poses,ref_point,reverse,zup){
+	//posesが全て内包されるよう画角を求める
+	var effic = 1;
+	if(reverse){
+		effic=-1;
+	}
+	var vec3 = new Vec3();
+	var pi=0;
+
+	Vec3.sub(vec3,poses[pi],ref_point);
+	var l = Vec3.dot(vec3,axis)/-Vec3.dot(vec3,zup)*effic;
+
+	for(pi=1;pi<poses.length;pi++){
+		Vec3.sub(vec3,poses[pi],ref_point);
+		var l2 = Vec3.dot(vec3,axis)/-Vec3.dot(vec3,zup)*effic;
+		if(l2<l){
+			l=l2;
+		}
+	}
+	return l*effic;
+}
+
+
+
+
+	var shShader=[];
+	var sigmaShader;
+	var shadow_gauss_shader;
+
+	var customMaterial;
+	var ret = Engine;
+	var HEIGHT=486,WIDTH=864;
+	ret.HEIGHT = HEIGHT;
+	ret.WIDTH= WIDTH;
+	var gl;
+	var onoPhy=null;
+	var bdf;
+	var bdfimage=null;
+	var soundbuffer=null;
+	ret.goClass=[];
+	ret.go=[];
+
+	var tex512;
+	var env2Texture;
+	var averageTexture;
+	var bufTexture;
+
+
+	
+	ObjMan.Obj = Obj;
+
+Engine.Scene =Scene;
+
+
+var pad =new Vec2();
+Engine.pad = pad;
+Engine.probs = new Collider();
+
+var averageTexture; //光量計算用
+
+
+//hud描画用
+var blit = function(tex,x,y,w,h,u,v,u2,v2){
+		Ono3d.drawCopy(tex.glTexture,x,y,w*2,h*2
+						,u/tex.width,(v+v2)/tex.height,u2/tex.width,-v2/tex.height);
+}
+
+
+
+	globalParam.outline_bold=0;
+	globalParam.outline_color="000000";
+	globalParam.lightColor1="808080";
+	globalParam.lightColor2="808080";;
+	globalParam.lightThreshold1=0.;
+	globalParam.lightThreshold2=1.;
+	globalParam.physics=1;
+	globalParam.physics_=0;
+	globalParam.smoothing=0;
+	globalParam.stereomode=0;
+	globalParam.stereoVolume=1;
+	globalParam.step=1;
+	globalParam.fps=60;
+	globalParam.scene=0;
+	globalParam.shadow=1;
+	globalParam.model="./f1.o3o";
+	globalParam.materialMode = false;
+//カスタムマテリアル
+	globalParam.baseColor= "ffffff";
+	globalParam.metallic= 0;
+	globalParam.metalColor= "ffffff";
+	globalParam.specular= 0;
+	globalParam.roughness= 0;
+	globalParam.subRoughness= 0;
+	globalParam.frenel = 0;
+	globalParam.opacity= 1.0;
+	globalParam.ior= 1.1;
+	globalParam.cNormal= 1.0;
+	globalParam.emi= 0.0;
+
+	globalParam.debugMenu= 0;
+	globalParam.shader= 0;
+
+//カメラ露光
+	globalParam.autoExposure=1;
+	globalParam.exposure_level=0.18;
+	globalParam.exposure_upper=1;
+	globalParam.exposure_bloom=0.1;
+	
+	globalParam.source=0;
+	globalParam.target=0;
+	globalParam.reference=0;
+	globalParam.actionAlpha=0;
+
+	
+
+
+var physicsTime;
+var span;
+var oldTime = 0;
+var nowTime =0;
+var drawgeometryTime=0;
+var drawrasteriseTime=0;
+var drawTime=0;
+var mseccount=0;
+var framecount=0;
+var inittime=0;
+var drawFlg=false;
 var parentnode = (function (scripts) {
 	return scripts[scripts.length - 1].parentNode;
 }) (document.scripts || document.getElementsByTagName('script'));
@@ -720,65 +673,6 @@ var animationFunc = function(){
 	//drawFunc();
 }
 
-var drawFunc = function(){
-	drawFlg=false;
-	framecount++;
-
-	Engine.ono3d.clear();
-
-	performance.mark("drawStart");
-
-	performance.mark("drawGeometryStart");
-	for(var si=0;si<Engine.scenes.length;si++){
-		Engine.scenes[si].draw();
-	}
-	performance.mark("drawGeometryEnd");
-
-	performance.mark("drawRasteriseStart");
-
-	gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-	gl.depthMask(true);
-	gl.clear(gl.DEPTH_BUFFER_BIT);
-	drawSub(0,0,WIDTH,HEIGHT);
-	
-
-
-	//描画結果をバッファにコピー
-	gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-	Ono3d.copyImage(bufTexture,0,0,0,0,WIDTH,HEIGHT);
-
-	//画面平均光度算出
-	if(globalParam.autoExposure){
-		Engine.calcExpose(bufTexture,(WIDTH-512)/2.0/1024,0 ,512/1024,HEIGHT/1024);
-	}else{
-		Engine.setExpose(globalParam.exposure_level,globalParam.exposure_upper);
-	}
-
-	if(globalParam.exposure_bloom ){
-		// ブルーム処理
-		ono3d.setViewport(0,0,WIDTH,HEIGHT);
-		Engine.bloom(bufTexture,globalParam.exposure_bloom);
-		Ono3d.copyImage(bufTexture,0,0,0,0,WIDTH,HEIGHT);
-	}
-
-
-	//トーンマッピング
-	gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-	ono3d.setViewport(0,0,WIDTH,HEIGHT);
-	Engine.toneMapping(bufTexture,WIDTH/1024,HEIGHT/1024);
-	
-
-
-
-	//gl.getParameter(gl.VIEWPORT);
-	performance.mark("drawRasteriseEnd");
-	for(var si=0;si<Engine.scenes.length;si++){
-		Engine.scenes[si].hudDraw();
-	}
-	performance.mark("drawEnd");
-
-
-}
 
 
 
@@ -923,6 +817,7 @@ Engine.toneMapping = function(image,w,h){
 
 
 Engine.createSHcoeff= function(x,y,z,func){
+	//ライトプローブの球面調和関数の係数を計算する
 	var size = 32;
 	var tex;
 	if(!tex){
@@ -972,7 +867,10 @@ Engine.createSHcoeff= function(x,y,z,func){
 	
 	return tex;
 }
+
+
 Engine.createLightProbe=function(points,shcoefs){
+	//位置と球面調和係数のリストからライトプローブを作成
 	var triangles = Delaunay.create(points);
 	var bspTree=Bsp.createBspTree(triangles);
 	var lightProbe={};
@@ -984,184 +882,10 @@ Engine.createLightProbe=function(points,shcoefs){
 	return lightProbe;
 }
 
-Engine.loadEnvTexture=function(path){
-	return AssetManager.texture(path,function(image){
-		var envsize=16;
-		gl.disable(gl.BLEND);
-		gl.disable(gl.DEPTH_TEST);
-
-
-		gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
-		gl.viewport(0,0,image.width,image.height);
-		Ono3d.postEffect(image,0,0 ,1,1,Engine.ono3d.shaders["envset"]); 
-		gl.bindTexture(gl.TEXTURE_2D, image.glTexture);
-		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
-		Ono3d.copyImage(image,0,0,0,0,image.width,image.height);
-
-		gl.bindTexture(gl.TEXTURE_2D, null);
-		gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-		
-	});
-}
-
 
 var lightArea_poses = [];
 for(var pi=0;pi<8+1;pi++){
 	lightArea_poses.push(new Vec3());
-}
-Engine.calcLightMatrix = function(){
-	var poses = lightArea_poses;
-	var camera = this.camera;
-	var light = Engine.ono3d.environments[0].sun;
-
-
-
-	// ライト行列計算 ------
-
-	var xup = new Vec3();
-	var yup = new Vec3();
-	var zup = new Vec3();
-	var z_near=1;
-	var z_far=100;
-	var projection_matrix = new Mat44();
-	var view_matrix = new Mat43();
-
-	var cameraz=new Vec3();
-
-	//ライト向きとカメラ向きからライトレンダリング向き決める
-	Vec3.set(yup,-light.matrix[8],-light.matrix[9],-light.matrix[10]);
-	Vec3.set(cameraz,camera.matrix[6],camera.matrix[7],camera.matrix[8]);
-
-	Vec3.cross(xup,yup,cameraz);
-	Vec3.norm(xup);
-	Vec3.cross(zup,xup,yup);
-	Vec3.norm(zup);
-
-
-	var sin_r = Math.max(0.05,Math.abs(Vec3.dot(zup,cameraz)));
-	z_far = Math.max(20,100 * sin_r-50);
-
-	if(sin_r<0.7){
-		Vec3.cross(cameraz,cameraz,xup);
-		Vec3.norm(cameraz);
-		if(Vec3.dot(cameraz,zup)<0){
-			Vec3.mul(cameraz,cameraz,-1);
-		}
-	}
-
-	var offset=(z_near +  Math.sqrt(z_near*z_far))/sin_r;
-
-
-	ono3d.calcPerspectiveMatrix
-		(projection_matrix
-		,-camera.aov * z_near
-		,camera.aov * z_near
-		,camera.aov * (HEIGHT/WIDTH) * z_near
-		,-camera.aov * (HEIGHT/WIDTH) * z_near
-		,z_near,z_far);
-	Mat43.getInv(view_matrix,camera.matrix);
-	Mat44.dotMat43(projection_matrix,projection_matrix,view_matrix);
-	Mat44.getInv(projection_matrix,projection_matrix);
-
-	var support= new Vec3();
-	var result= new Vec3();
-
-	//描画領域計算
-	
-	var v4 = Vec4.poolAlloc();
-	for(var i=0;i<8;i++){
-		Vec4.set(v4,(i&1)*2-1,((i>>1)&1)*2-1,((i>>2)&1)*2-1,1);
-		if(v4[2]<0){
-			Vec4.mul(v4,v4,z_near);
-		}else{
-			Vec4.mul(v4,v4,z_far);
-		}
-		
-		Mat44.dotVec4(v4,projection_matrix,v4);
-		Vec3.copy(poses[i],v4);
-	}
-	Vec4.poolFree(1);
-
-	Vec3.madd(poses[8],camera.p,zup,-z_near);
-	Vec3.madd(poses[8],poses[8],yup,20);
-
-	//カメラ位置計算
-	var calcSupport=function(axis,poses,reverse){
-		var effic = 1;
-		if(reverse){
-			effic=-1;
-		}
-		var l = Vec3.dot(poses[0],axis)*effic;
-
-		for(pi=1;pi<poses.length;pi++){
-			var l2 = Vec3.dot(poses[pi],axis)*effic;
-			if(l2<l){
-				l=l2;
-			}
-		}
-
-		return l*effic;
-	}
-	var calcSupportAngle =function(axis,poses,ref_point,reverse){
-		var effic = 1;
-		if(reverse){
-			effic=-1;
-		}
-		var vec3 = new Vec3();
-		var pi=0;
-
-		Vec3.sub(vec3,poses[pi],ref_point);
-		var l = Vec3.dot(vec3,axis)/-Vec3.dot(vec3,zup)*effic;
-
-		for(pi=1;pi<poses.length;pi++){
-			Vec3.sub(vec3,poses[pi],ref_point);
-			var l2 = Vec3.dot(vec3,axis)/-Vec3.dot(vec3,zup)*effic;
-			if(l2<l){
-				l=l2;
-			}
-		}
-
-		return l*effic;
-	}
-	var light_anchor_pos = new Vec3();
-	Vec3.mul(light_anchor_pos,xup
-		,(calcSupport(xup,poses)+calcSupport(xup,poses,1))*0.5);
-	Vec3.madd(light_anchor_pos,light_anchor_pos,yup
-		,(calcSupport(yup,poses)+calcSupport(yup,poses,1))*0.5);
-	Vec3.madd(light_anchor_pos,light_anchor_pos,zup
-		,calcSupport(zup,poses,1) +offset);
-
-	//シャドウマップ用行列計算
-	var view_matrix = light.viewmatrix;
-	Mat44.set(view_matrix
-		,xup[0], xup[1], xup[2] ,0
-		,yup[0] ,yup[1] ,yup[2] ,0
-		,zup[0] ,zup[1] ,zup[2] ,0
-		,light_anchor_pos[0] ,light_anchor_pos[1] ,light_anchor_pos[2] ,1
-	);
-	Mat44.getInv(view_matrix,view_matrix);
-
-	ono3d.calcPerspectiveMatrix(projection_matrix
-		,calcSupportAngle(xup,poses,light_anchor_pos)   * offset 
-		,calcSupportAngle(xup,poses,light_anchor_pos,1) * offset 
-		,30//calcSupportAngle(yup,poses,light_anchor_pos,1) * offset 
-		,-30//calcSupportAngle(yup,poses,light_anchor_pos)   * offset 
-		,offset,(calcSupport(zup,poses,1)-calcSupport(zup,poses))+offset);
-
-	projection_matrix[5]/= offset;
-	projection_matrix[13]= projection_matrix[9];
-	projection_matrix[9]=0;
-
-	Mat44.dot(view_matrix,projection_matrix,view_matrix);
-
-	Mat44.setInit(projection_matrix);
-	projection_matrix[5]=0;
-	projection_matrix[9]=-1;
-	projection_matrix[6]=-1;
-	projection_matrix[10]=0;
-	Mat44.dot(view_matrix,projection_matrix,view_matrix);
-
-
 }
 
 Engine.shadowGauss=function(width,height,d,src,x,y,w,h){

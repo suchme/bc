@@ -334,6 +334,7 @@ var Ono3d = (function(){
 		}
 	};
 	ret.prototype.calcPerspectiveMatrix = function(mat,left,right,top,bottom,zn,zf){
+		//透視行列を作る 
 		Mat44.set(mat
 			,2*zn/(right-left),0,0,0
 			,0,2*zn/(top-bottom),0,0
