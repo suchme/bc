@@ -177,6 +177,13 @@ ret.init=function(_gl){
 		num[0] = Math.max((raw[0]*Math.pow(2,-idx[0]) -1.0),0.0) ;
 		num[1] = Math.max((raw[1]*Math.pow(2,-idx[1]) -1.0),0.0) ;
 		num[2] = Math.max((raw[2]*Math.pow(2,-idx[2]) -1.0),0.0) ;
+
+		var geta = 15.0;
+		result[0] = ((idx[0]+geta)<<3) + Math.floor(num[0]*8);
+		result[1] = ((idx[1]+geta)<<3) + Math.floor(num[1]*8);
+		result[2] = ((idx[2]+geta)<<3) + Math.floor(Math.fract(num[0]*8)*8);
+		result[3] = ((num[2]*32)<<3) + Math.floor(Math.fract(num[1]*8)*8);
+		Vec4.mul(result,result,1/255);
 		//return (vec4((idx +geta),floor(num.b * 32.0))*8.0
 		//+ floor(vec4(num.rg,fract(num.rg * 8.0))*8.0) 
 		//)/255.0; 

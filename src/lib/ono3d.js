@@ -392,7 +392,9 @@ var Ono3d = (function(){
 	var fa16 =new Float32Array(16);
 	var mat=new Float32Array(9);
 	var fa =new Float32Array(3);
+
 	ret.calcMainShaderName=function(material){
+		//マテリアルの各種設定を有効化したシェーダを取得
 		var options=["lightMap","opacity","specular","hightMapPower","pbrMap"];
 		var num=0;
 		for(var oi=0;oi<options.length;oi++){
@@ -1095,6 +1097,7 @@ ret.calcST = function(s,t,p0,p1,p2,u0,v0,u1,v1,u2,v2){
 			var options=["lightmap","transmission","reflect","height","pbr"];
 			var txt = ret.main_shader_org;
 			for(var j=0;j<options.length;j++){
+				//各種機能を有効/無効化
 				if(num&(1<<j)){
 					var re = new RegExp("/\\*\\[" + options[j] +"\\]","g");
 					txt=txt.replace(re,"");
@@ -1108,12 +1111,15 @@ ret.calcST = function(s,t,p0,p1,p2,u0,v0,u1,v1,u2,v2){
 				}
 			}
 			if(!(num&1)){
+				//ライトマップが有効ではない場合は
+				//ライトプローブ関連行を有効化
 				var re = new RegExp("/\\*\\[" + "lightprobe" +"\\]","g");
 				txt=txt.replace(re,"");
 				re = new RegExp("\\[" + "lightprobe" +"\\]\\*/","g");
 				txt=txt.replace(re,"");
 				
 			}else{
+				//ライトプローブ関連行を無効化
 				var re = new RegExp("/\\*\\[lightprobe\\][\\s\\S]*?\\[lightprobe\\]\\*/","g");
 				txt=txt.replace(re,"");
 			}
