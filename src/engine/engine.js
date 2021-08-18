@@ -294,7 +294,7 @@ export default class Engine{
 		gl.clear(gl.DEPTH_BUFFER_BIT);
 		gl.depthMask(false);
 		gl.disable(gl.BLEND);
-		var skyTexture=Engine.skyTexture;
+		var skyTexture=this.skyTexture;
 		if(skyTexture){
 			if(skyTexture.glTexture){
 				if(globalParam.stereomode==0){
@@ -356,7 +356,7 @@ export default class Engine{
 		}
 
 		//デフォルト背景読み込み
-		Engine.skyTexture =this.loadEnvTexture("../engine/sky.jpg");
+		this.skyTexture =this.loadEnvTexture("../engine/sky.jpg");
 
 		if(this.userInit){
 			//初期化処理が設定されていれば実行

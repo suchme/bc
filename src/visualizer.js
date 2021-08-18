@@ -35,9 +35,9 @@ class Scene1 extends Scene{
 
 		//環境マップ
 		//gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-		ono3d.environments[0].envTexture = ono3d.createEnv(null,0,0,0,()=>{engine.drawSub()});
+		ono3d.environments[0].envTexture = ono3d.createEnv(null,0,0,0,(x,y,w,h)=>{engine.drawSub(x,y,w,h)});
 
-		Engine.createSHcoeff(0,0,0,()=>{engine.drawSub()});
+		Engine.createSHcoeff(0,0,0,(x,y,w,h)=>{engine.drawSub(x,y,w,h)});
 		var gl = Rastgl.gl;
 		var u8 = new Uint8Array(9*4);
 		gl.readPixels(0, 0, 9, 1, gl.RGBA, gl.UNSIGNED_BYTE, u8);
