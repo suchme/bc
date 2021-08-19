@@ -815,9 +815,9 @@ DATA.param_cd.forEach((e,idx)=>{
 	})
 	
 
+});
 	var v = new Visualizer();
 	v.main();
-});
 
 
 document.querySelector("#shinki div.skill").appendChild(

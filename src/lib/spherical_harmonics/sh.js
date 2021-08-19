@@ -1,22 +1,11 @@
-
 import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "../vector.js"
-var SH = (function(){
-	var SH = {};
-	var ret = SH;
 
-ret.A=function(l){
-	if(l==1){
-		return 2/3;
-	}else if(l&1){
-		return 0;
-	}else{
-		return 2*Math.pow(-1,l/2-1)/((l+2)*(l-1))
-		*(kaijo(l)/(Math.pow(2,l)*Math.pow(kaijo(l/2),2)));
-	}
-	return 0;
-}
-
+export default class SH{
+	constructor(){
+	};
+};
 var kaijo=function(n){
+	//階乗
 	var result=1;
 	for(var i=n;i>0;i--){
 		result *= i;
@@ -25,6 +14,7 @@ var kaijo=function(n){
 
 }
 var kaijo2=function(n){
+	//二重階乗
 	if(n<0){
 		return kaijo2(n+2)/(n+2);
 	}
@@ -36,20 +26,13 @@ var kaijo2=function(n){
 
 }
 var K = function(l,m){
+	//(2l+1)(l-|m|)!/(4π)(l+|m|)!
 	var a = (2*l+1)/(4*Math.PI);
 	var b = kaijo(l-Math.abs(m))/kaijo(l+Math.abs(m));
 	return Math.sqrt(a*b);
 }
-ret.Y=function(l,m,theta,pi){
-	if(m>0){
-		return Math.sqrt(2)*K(l,m)*Math.cos(m*pi)*P(l,m,Math.cos(theta));
-	}else if(m<0){
-		return Math.sqrt(2)*K(l,m)*Math.sin(-m*pi)*P(l,-m,Math.cos(theta));
-	}else{
-		return K(l,0)*P(l,0,Math.cos(theta));
-	}
-}
 var P=function(l,m,x){
+	//ルジャンドルの陪関数
 	if(m===l){
 		return  Math.pow(-1,m)*kaijo2(2*m-1)*Math.pow(1-x*x,m/2);
 	}
@@ -59,12 +42,34 @@ var P=function(l,m,x){
 	return ((2*l-1)*x*P(l-1,m,x)-(l+m-1)*P(l-2,m,x))/(l-m);
 	
 }
+SH.A = function(l){
+	if(l==1){
+		return 2/3;
+	}else if(l&1){
+		return 0;
+	}else{
+		return 2*Math.pow(-1,l/2-1)/((l+2)*(l-1))
+		*(kaijo(l)/(Math.pow(2,l)*Math.pow(kaijo(l/2),2)));
+	}
+	return 0;
+}
+
+SH.Y=function(l,m,theta,pi){
+	//球面調和関数
+	if(m>0){
+		return Math.sqrt(2)*K(l,m)*Math.cos(m*pi)*P(l,m,Math.cos(theta));
+	}else if(m<0){
+		return Math.sqrt(2)*K(l,m)*Math.sin(-m*pi)*P(l,-m,Math.cos(theta));
+	}else{
+		return K(l,0)*P(l,0,Math.cos(theta));
+	}
+}
 
 
 //---------ここから下高速化関数-------------
 
 //l<=2までの係数を積分で求めるときに使う(最後にencode2_2()を行わないといけない)
-ret.encode2xyz=function(cs,src,x,y,z){
+SH.encode2xyz=function(cs,src,x,y,z){
 
 	Vec3.madd(cs[0],cs[0],src,1);
 	Vec3.madd(cs[1],cs[1],src,x);
@@ -76,7 +81,7 @@ ret.encode2xyz=function(cs,src,x,y,z){
 	Vec3.madd(cs[7],cs[7],src,z*y);
 	Vec3.madd(cs[8],cs[8],src,(z*z-x*x));
 }
-ret.encode2=function(cs,src,theta,pi){
+SH.encode2=function(cs,src,theta,pi){
 	var y=Math.cos(theta);
 	var x=Math.sin(pi)*Math.sin(theta);
 	var z=Math.cos(pi)*Math.sin(theta);
@@ -89,7 +94,7 @@ var Y10Y10 = 3;
 var Y20Y20 = 5/4;
 var Y21Y21 = 15;
 var Y22Y22 = 15/4;
-ret.encode2_2=function(cs){
+SH.encode2_2=function(cs){
 	Vec3.mul(cs[0],cs[0],Y00Y00);
 	Vec3.mul(cs[1],cs[1],Y10Y10);
 	Vec3.mul(cs[2],cs[2],Y10Y10);
@@ -102,35 +107,32 @@ ret.encode2_2=function(cs){
 }
 
 //encode2の結果から復元
-ret.decode2xyz=function(result,cs,x,y,z){
+SH.decode2xyz=function(result,cs,x,y,z){
+	var c4 = x*z;
+	var c5 = x*y;
+	var c6 = 3*y*y-1;
+	var c7 = z*y;
+	var c8 = z*z-x*x;
 	for(var i=0;i<3;i++){
 		result[i]=cs[0][i]
 			+ cs[1][i]*x
 			+ cs[2][i]*y
 			+ cs[3][i]*z
-			+ cs[4][i]*x*z
-			+ cs[5][i]*x*y
-			+ cs[6][i]*(3*y*y-1)
-			+ cs[7][i]*z*y
-			+ cs[8][i]*(z*z-x*x);
+			+ cs[4][i]*c4
+			+ cs[5][i]*c5
+			+ cs[6][i]*c6
+			+ cs[7][i]*c7
+			+ cs[8][i]*c8
 	}
-	//Vec3.madd(result,cs[0],cs[1],x);
-	//Vec3.madd(result,result,cs[2],y);
-	//Vec3.madd(result,result,cs[3],z);
-	//Vec3.madd(result,result,cs[4],x*z);
-	//Vec3.madd(result,result,cs[5],x*y);
-	//Vec3.madd(result,result,cs[6],(3*y*y-1));
-	//Vec3.madd(result,result,cs[7],z*y);
-	//Vec3.madd(result,result,cs[8],(z*z-x*x));
 }
-ret.decode2=function(result,cs,theta,pi){
+SH.decode2=function(result,cs,theta,pi){
 	var y=Math.cos(theta);
 	var x=Math.sin(pi)*Math.sin(theta);
 	var z=Math.cos(pi)*Math.sin(theta);
 	this.decode2xyz(result,cs,x,y,z);
 }
 
-ret.mulA=function(cs){
+SH.mulA=function(cs){
 	var a=this.A(0);
 	var next=1;
 	for(var i=0;i<cs.length;i++){
@@ -144,7 +146,7 @@ ret.mulA=function(cs){
 
 
 //------係数をそこそこ効率よく求める----------
-ret.encode3=function(cs,src,lmax,theta,pi){
+SH.encode3=function(cs,src,lmax,theta,pi){
 	var cos=Math.cos(theta);
 	var sin=Math.sin(theta);
 	
@@ -190,7 +192,7 @@ var K2 = function(l,m){
 	var b = kaijo(l-m)/kaijo(l+m);
 	return a*b;
 }
-ret.encode3_2=function(cs,lmax){
+SH.encode3_2=function(cs,lmax){
 	for(var l=0;l<lmax;l++){
 		for(var m=0;m<=l;m++){
 			var c=cs[(l+1)*l+m];
@@ -206,7 +208,7 @@ ret.encode3_2=function(cs,lmax){
 	}
 }
 
-ret.decode3=function(result,cs,lmax,theta,pi){
+SH.decode3=function(result,cs,lmax,theta,pi){
 	var cos=Math.cos(theta);
 	var sin=Math.sin(theta);
 	
@@ -256,7 +258,7 @@ var Y11 = Math.sqrt( 3/(4*Math.PI));
 var Y20 = 1/4*Math.sqrt( 5/(Math.PI));
 var Y22 = 3/2*Math.sqrt(5/(3*Math.PI));
 
-ret.Y_2=function(l,m,theta,pi){
+SH.Y_2=function(l,m,theta,pi){
 	if(l>2){
 		return this.Y(l,m,theta,pi);
 	}
@@ -285,11 +287,8 @@ ret.Y_2=function(l,m,theta,pi){
 }
 var As=[];
 for(var i=0;i<9;i++){
-	var a=ret.A(i);
+	var a=SH.A(i);
 	As.push(a);
 }
 
-return ret;
-})();
 
-export default SH;

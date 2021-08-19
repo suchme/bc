@@ -3,7 +3,6 @@ import Util from "./util.js"
 import Rastgl from "./rastgl.js"
 import Sort from "./sort.js"
 import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "./vector.js"
-//import Engine from "../../../engine/engine.js"
 
 var Ono3d = (function(){
 	var _PI= 1.0/Math.PI;

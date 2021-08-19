@@ -120,7 +120,12 @@ export default class Engine{
 		gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 		gl.depthMask(true);
 		gl.clear(gl.DEPTH_BUFFER_BIT);
+
+		this.calcMatrix();
 		this.drawSub(0,0,WIDTH,HEIGHT);
+		//if(ono3d.envbufTexture.glTexture){
+		//Ono3d.drawCopy(ono3d.envbufTexture,0,0,1,1)
+		//}
 		
 
 
@@ -289,7 +294,7 @@ export default class Engine{
 		gl.depthMask(true);
 		ono3d.setViewport(x,y,w,h);
 
-		this.calcMatrix();
+		//this.calcMatrix();
 
 		gl.clear(gl.DEPTH_BUFFER_BIT);
 		gl.depthMask(false);
@@ -830,6 +835,7 @@ Engine.createSHcoeff= function(x,y,z,func){
 	//キューブマップ作成
 	ono3d.setNearFar(0.01,80.0);
 	ono3d.createCubeMap(envBuf,x,y,z,256,func);
+	//return;
 
 	gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 	gl.clearColor(0,0,0,1);
