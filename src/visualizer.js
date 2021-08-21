@@ -1,5 +1,4 @@
 import Ono3d from "./lib/ono3d.js"
-import SH from "./lib/spherical_harmonics/sh.js";
 import Rastgl from "./lib/rastgl.js"
 import Util from "./lib/util.js"
 import Engine from "./engine/engine.js"
@@ -23,7 +22,7 @@ class Scene1 extends Scene{
 		super();
 		this.a=new Vec2();
 		this.p=new Vec3();
-		this.cameralen=10;
+		this.cameralen=5;
 		this.target=new Vec3();
 		o3o = AssetManager.o3o("human.o3o",(o3o)=>{
 			this.instance= o3o.createInstance();
@@ -33,44 +32,7 @@ class Scene1 extends Scene{
 
 		ono3d.clear();
 
-		//環境マップ
-		//gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-		ono3d.environments[0].envTexture = ono3d.createEnv(null,0,0,0,(x,y,w,h)=>{engine.drawSub(x,y,w,h)});
-
-		Engine.createSHcoeff(0,0,0,(x,y,w,h)=>{engine.drawSub(x,y,w,h)});
-		var gl = Rastgl.gl;
-		var u8 = new Uint8Array(9*4);
-		gl.readPixels(0, 0, 9, 1, gl.RGBA, gl.UNSIGNED_BYTE, u8);
-		var ratio = 1/(255*16*16*Math.PI*4);
-		var shcoef=[];
-		var d = new Vec4();
-		for(var j=0;j<9;j++){
-			d[0] = u8[(j)*4+0];
-			d[1] = u8[(j)*4+1];
-			d[2] = u8[(j)*4+2];
-			d[3] = u8[(j)*4+3];
-			var e = [0,0,0];//new Vec3();
-			Ono3d.unpackFloat(e,d);
-			e[0]=e[0]*ratio;
-			e[1]=e[1]*ratio;
-			e[2]=e[2]*ratio;
-			shcoef.push(e);
-		}
-		SH.mulA(shcoef);
-
-		var points=[];
-		var shcoefs=[];
-		var MAX=1000;
-		for(var i=0;i<8;i++){
-			var p=new Vec3();
-			Vec3.set(p,((i&1)*2-1)*MAX,(((i&2)>>1)*2-1)*MAX,(((i&4)>>2)*2-1)*MAX);
-			points.push(p);
-		}
-		for(var i=0;i<8;i++){
-			shcoefs.push(shcoef);
-		}
-		var lightProbe = Engine.createLightProbe(points,shcoefs);
-		ono3d.environments[0].lightProbe = lightProbe;
+		engine.calcEnvironment();
 	}
 	draw(){
 		if(!this.instance)return;
@@ -80,19 +42,13 @@ class Scene1 extends Scene{
 			this.hoge=true;
 		}
 
-		var objects = this.instance.o3o.objects;
-		for(var i=0;i<objects.length;i++){
-			if(objects[i].hide_render){
-				continue;
-			}
-			var instance = this.instance.objectInstances[i];
-			instance.draw();
-		}
+		Mat44.setInit(ono3d.worldMatrix);
+		ono3d.worldMatrix[13]=-1;
+		this.instance.draw();
 		
 	}
 
 	move(){
-//		console.log("HOGE");
 		if(Util.pressOn){
 			this.a[1]-=(Util.cursorX-Util.oldcursorX)/Engine.WIDTH;
 			this.a[0]-=((Util.cursorY-Util.oldcursorY)/Engine.HEIGHT);

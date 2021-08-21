@@ -1827,6 +1827,16 @@ var O3o=(function(){
 			}
 
 		}
+		ret.prototype.draw=function(){
+			var objects = this.o3o.objects;
+			for(var i=0;i<objects.length;i++){
+				if(objects[i].hide_render){
+					continue;
+				}
+				var instance = this.objectInstances[i];
+				instance.draw();
+			}
+		}
 
 		ret.prototype.joinPhyObj=function(onoPhy){
 			var objectInstances=this.objectInstances;

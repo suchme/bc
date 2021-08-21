@@ -1,4 +1,5 @@
 "use strict"
+import SH from "../lib/spherical_harmonics/sh.js";
 import Rastgl from "../lib/rastgl.js"
 import Ono3d from "../lib/ono3d.js"
 import OnoPhy from "../lib/onophy/onophy.js"
@@ -86,19 +87,61 @@ export default class Engine{
 
 		
 
-	//	Util.loadJs("../engine/o3o.js",function(){
 
-			sigmaShader=Ono3d.loadShader("../lib/spherical_harmonics/sigma.shader");
-			shadow_gauss_shader=Ono3d.loadShader("../engine/gauss_shadow.shader");
+		sigmaShader=Ono3d.loadShader("../lib/spherical_harmonics/sigma.shader");
+		shadow_gauss_shader=Ono3d.loadShader("../engine/gauss_shadow.shader");
 
-			for(var i=0;i<9;i++){
-				shShader.push(Ono3d.loadShader("../lib/spherical_harmonics/sh"+i+".shader"));
-			}
+		for(var i=0;i<9;i++){
+			shShader.push(Ono3d.loadShader("../lib/spherical_harmonics/sh"+i+".shader"));
+		}
 
-			O3o.setOno3d(ono3d)
-			ono3d.init(canvas,ctx);
-			ono3d.rendercanvas=canvas;
-	//	});
+		O3o.setOno3d(ono3d)
+		ono3d.init(canvas,ctx);
+		ono3d.rendercanvas=canvas;
+	}
+
+	calcEnvironment(){
+		var ono3d = this.ono3d;
+		var engine = this;
+
+		//環境マップ
+		ono3d.environments[0].envTexture = ono3d.createEnv(null,0,0,0,(x,y,w,h)=>{engine.drawSub(x,y,w,h)});
+
+		Engine.createSHcoeff(0,0,0,(x,y,w,h)=>{engine.drawSub(x,y,w,h)});
+		var gl = Rastgl.gl;
+		var u8 = new Uint8Array(9*4);
+		gl.readPixels(0, 0, 9, 1, gl.RGBA, gl.UNSIGNED_BYTE, u8);
+		var ratio = 1/(255*16*16*Math.PI*4);
+		var shcoef=[];
+		var d = new Vec4();
+		for(var j=0;j<9;j++){
+			d[0] = u8[(j)*4+0];
+			d[1] = u8[(j)*4+1];
+			d[2] = u8[(j)*4+2];
+			d[3] = u8[(j)*4+3];
+			var e = [0,0,0];//new Vec3();
+			Ono3d.unpackFloat(e,d);
+			e[0]=e[0]*ratio;
+			e[1]=e[1]*ratio;
+			e[2]=e[2]*ratio;
+			shcoef.push(e);
+		}
+		SH.mulA(shcoef);
+
+		var points=[];
+		var shcoefs=[];
+		var MAX=1000;
+		for(var i=0;i<8;i++){
+			var p=new Vec3();
+			Vec3.set(p,((i&1)*2-1)*MAX,(((i&2)>>1)*2-1)*MAX,(((i&4)>>2)*2-1)*MAX);
+			points.push(p);
+		}
+		for(var i=0;i<8;i++){
+			shcoefs.push(shcoef);
+		}
+		var lightProbe = Engine.createLightProbe(points,shcoefs);
+		ono3d.environments[0].lightProbe = lightProbe;
+
 	}
 
 	drawFunc(){
