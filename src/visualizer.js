@@ -33,6 +33,7 @@ class Scene1 extends Scene{
 		ono3d.clear();
 
 		engine.calcEnvironment();
+		this.a[1]=Math.PI;
 	}
 	draw(){
 		if(!this.instance)return;
@@ -50,8 +51,8 @@ class Scene1 extends Scene{
 
 	move(){
 		if(Util.pressOn){
-			this.a[1]-=(Util.cursorX-Util.oldcursorX)/Engine.WIDTH;
-			this.a[0]-=((Util.cursorY-Util.oldcursorY)/Engine.HEIGHT);
+			this.a[1]-=(Util.cursorX-Util.oldcursorX)/engine.WIDTH;
+			this.a[0]-=((Util.cursorY-Util.oldcursorY)/engine.HEIGHT);
 
 		}
 		this.a[0] =Math.min(this.a[0],Math.PI/2);
@@ -93,7 +94,7 @@ export default class Visualizer{
 			if(globalParam.debugMenu){
 				debugClose();
 			}
-			this.engine.init(document.getElementById("aaa"));
+			this.engine.init(document.getElementById("aaa"),400,400);
 			this.engine.start();
 
 			var scene1 = new Scene1();

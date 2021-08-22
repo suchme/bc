@@ -17,8 +17,6 @@
 </head>
 
 <body>
-<div id="aaa">
-</div>
 
 <div class="main">
 		<div style="position:fixed;bottom:2px;right:2px;font-size:8pt;white-space:pre-wrap;" bind:="version"></div>
@@ -108,6 +106,10 @@
 <div class="tab_body tab_export" bind:hoge="selected_tab">
 	<textarea class="export" wrap="off" bind:="export_text">aaa</textarea>
 </div>
+<div class="tab_body tab_visualize" bind:hoge="selected_tab">
+<div id="aaa">
+</div>
+</div>
 
 <div class="tab_body tab_about" bind:hoge="selected_tab">
 	<div class="info">
@@ -125,6 +127,7 @@
 <label class="tabbutton"><input type="radio" name="tab" value="main" bind:="selected_tab" feedback><span>main</span></label>
 <label class="tabbutton"><input type="radio" name="tab" value="extension" bind:="selected_tab" feedback><span>extension</span></label>
 <label class="tabbutton"><input type="radio" name="tab" value="export" bind:="selected_tab" feedback><span>export</span></label>
+<label class="tabbutton"><input type="radio" name="tab" value="visualize" bind:="selected_tab" feedback><span>visualize</span></label>
 <label class="tabbutton"><input type="radio" name="tab" value="about" bind:="selected_tab" feedback><span>about</span></label>
 </div>
 

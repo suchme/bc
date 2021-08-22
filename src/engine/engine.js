@@ -23,7 +23,10 @@ export default class Engine{
 		this.scenes=[];
 	}
 
-	init(parentnode){
+	init(parentnode,WIDTH,HEIGHT){
+		this.WIDTH = WIDTH;
+		this.HEIGHT =HEIGHT;
+
 		var canvas =document.createElement("canvas");
 		canvas.width=WIDTH;
 		canvas.height=HEIGHT;
@@ -107,11 +110,12 @@ export default class Engine{
 		//環境マップ
 		ono3d.environments[0].envTexture = ono3d.createEnv(null,0,0,0,(x,y,w,h)=>{engine.drawSub(x,y,w,h)});
 
-		Engine.createSHcoeff(0,0,0,(x,y,w,h)=>{engine.drawSub(x,y,w,h)});
+		var size =32;
+		Engine.createSHcoeff(0,0,0,size,(x,y,w,h)=>{engine.drawSub(x,y,w,h)});
 		var gl = Rastgl.gl;
 		var u8 = new Uint8Array(9*4);
 		gl.readPixels(0, 0, 9, 1, gl.RGBA, gl.UNSIGNED_BYTE, u8);
-		var ratio = 1/(255*16*16*Math.PI*4);
+		var ratio = 1/(255*(size*size*0.25)*Math.PI*4);
 		var shcoef=[];
 		var d = new Vec4();
 		for(var j=0;j<9;j++){
@@ -126,11 +130,16 @@ export default class Engine{
 			e[2]=e[2]*ratio;
 			shcoef.push(e);
 		}
+		//拡散用の係数に変換
 		SH.mulA(shcoef);
 
+
+		//ライトプローブ生成
 		var points=[];
 		var shcoefs=[];
 		var MAX=1000;
+
+		//外側に最大の枠を作っておく
 		for(var i=0;i<8;i++){
 			var p=new Vec3();
 			Vec3.set(p,((i&1)*2-1)*MAX,(((i&2)>>1)*2-1)*MAX,(((i&4)>>2)*2-1)*MAX);
@@ -145,6 +154,8 @@ export default class Engine{
 	}
 
 	drawFunc(){
+		var HEIGHT = this.HEIGHT;
+		var WIDTH = this.WIDTH;
 		drawFlg=false;
 		framecount++;
 
@@ -165,7 +176,7 @@ export default class Engine{
 		gl.clear(gl.DEPTH_BUFFER_BIT);
 
 		this.calcMatrix();
-		this.drawSub(0,0,WIDTH,HEIGHT);
+		this.drawSub(0,0,this.WIDTH,this.HEIGHT);
 		//if(ono3d.envbufTexture.glTexture){
 		//Ono3d.drawCopy(ono3d.envbufTexture,0,0,1,1)
 		//}
@@ -610,9 +621,6 @@ var calcSupportAngle =function(axis,poses,ref_point,reverse,zup){
 
 	var customMaterial;
 	var ret = Engine;
-	var HEIGHT=486,WIDTH=864;
-	ret.HEIGHT = HEIGHT;
-	ret.WIDTH= WIDTH;
 	var gl;
 	var onoPhy=null;
 	var bdf;
@@ -864,9 +872,8 @@ Engine.toneMapping = function(image,w,h){
 }
 
 
-Engine.createSHcoeff= function(x,y,z,func){
+Engine.createSHcoeff= function(x,y,z,size,func){
 	//ライトプローブの球面調和関数の係数を計算する
-	var size = 32;
 	var tex;
 	if(!tex){
 		tex =Ono3d.createTexture(size*4,size*4);
@@ -878,32 +885,31 @@ Engine.createSHcoeff= function(x,y,z,func){
 	//キューブマップ作成
 	ono3d.setNearFar(0.01,80.0);
 	ono3d.createCubeMap(envBuf,x,y,z,256,func);
-	//return;
 
 	gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 	gl.clearColor(0,0,0,1);
 	gl.clear(gl.COLOR_BUFFER_BIT);
 
 	for(var i=0;i<9;i++){
+		//係数の数だけループ
 		gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
 		gl.clearColor(0,0,0,1);
 		gl.clear(gl.COLOR_BUFFER_BIT);
 		ono3d.setViewport(0,0,size*4,size*2);
+		//係数ごとのシェーダで計算
 		Ono3d.postEffect(envBuf,0,0,256*4/envBuf.width,256*2/envBuf.height,shShader[i]); 
 
 		Ono3d.copyImage(tex,0,0,0,0,size*4,size);
 		Ono3d.copyImage(tex,0,size,0,size,size*2,size);
 
+		//計算結果を全て合計
 		var texsize=tex.width;
-
-
 		while(2<texsize){
 			//積分
 			texsize>>=1;
 			ono3d.setViewport(0,0,texsize,texsize);
 			Ono3d.postEffect(tex,0,0,texsize*2/tex.width,texsize*2/tex.width,sigmaShader); 
 			Ono3d.copyImage(tex,0,0,0,0,texsize,texsize);
-
 		}
 
 		//ラストはメインのフレームに描く

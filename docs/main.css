@@ -444,6 +444,9 @@ div.tab_extension[hoge="extension"]{
 div.tab_export[hoge="export"]{
 	display:block;
 }
+div.tab_visualize[hoge="visualize"]{
+	display:block;
+}
 div.tab_about[hoge="about"]{
 	display:block;
 }
