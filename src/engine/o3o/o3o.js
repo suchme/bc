@@ -10,14 +10,46 @@ import Rastgl from "../../lib/rastgl.js"
 import Util from "../../lib/util.js"
 import SH from "../../lib/spherical_harmonics/sh.js";
 
+import Material from "./material.js"
+import Armature from "./armature.js"
+import Bone from "./bone.js"
+import Envirnoment from "./environment.js"
+import Light from "./light.js"
 import Mesh from "./mesh.js"
+import Pose from "./pose.js"
+import PoseBone from "./posebone.js"
+import ObjectType from "./objecttype.js"
+import RigidBody from "./rigidbody.js"
+import Scene from "./scene.js"
+import RigidBodyConstraint from "./rigidbodyconstraint.js"
+import SceneObject from "./sceneobject.js"
 import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "../../lib/vector.js"
 
 	const MAX_SIZE=4096;
 	var abs=Math.abs;
+	var ono3d = null;
+	var basecolorShader;
 
 	var loadTexture=function(path,func){
-		return AssetManager.texture(path,func);
+		//return engine.loadEnvTexture(path);
+		//return AssetManager.texture(path,func);
+		return AssetManager.texture(path,(image)=>{
+			var gl = Rastgl.gl;
+			gl.disable(gl.BLEND);
+			gl.disable(gl.DEPTH_TEST);
+
+
+			gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
+			gl.viewport(0,0,image.width,image.height);
+			Ono3d.postEffect(image,0,0 ,1,1,Engine.basecolorShader); 
+			gl.bindTexture(gl.TEXTURE_2D, image.glTexture);
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+			Ono3d.copyImage(image,0,0,0,0,image.width,image.height);
+
+			gl.bindTexture(gl.TEXTURE_2D, null);
+			gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+			
+		});
 	}
 
 
@@ -39,11 +71,6 @@ var i;
 	interpolateConvert["LINER"] = INTERPOLATE_LINER;
 	interpolateConvert["SPLINE"] = INTERPOLATE_SPLINE;
 	
-	var OBJECT_MESH = i=1
-		,OBJECT_ARMATURE= ++i
-		,OBJECT_LIGHT= ++i
-		,OBJECT_REFLECTIONPROBE= ++i
-	;
 
 	var ShapeKey = function(){
 		this.shapeKeyPoints = [];
@@ -100,310 +127,24 @@ var O3o=(function(){
 	}
 	var ret =O3o;
 	
-	var ono3d = null;
 	ret.setOno3d = function(a){
 		ono3d=a;
 	}
 
 
 
-	var Scene = (function(){
-		var Scene=function(){
-			//シーン
-			this.name=""; //名前
-			this.frame_start=0; //開始フレーム
-			this.frame_end=0;//終了フレーム
-			this.objects= []; //シーンに存在するオブジェクト
-			this.world = {};
-		}
-		var ret=Scene;
 
-		ret.prototype.setFrame=ret.setFrame=function(frame){
-			var objects = this.objects;
-			var o3o = this.o3o;
-			if(o3o){
-				for(var i=o3o.materials.length;i--;){
-					////マテリアルのUVアニメーション
-					//var material=o3o.materials[i];
-					//for(var j=material.texture_slots.length;j--;){
-					//	var texture_slot = material.texture_slots[j];
-					//	if(texture_slot.action){
-					//		addaction(texture_slot,"0",texture_slot.action,frame);
-					//	}
-					//}
-				}
-			}
-
-			for(var i=0;i<objects.length;i++){
-				objects[i].flg=false;
-			}
-
-			for(var i=0;i<objects.length;i++){
-				//オブジェクト(アーマチュア及びメッシュ)のアニメーション
-				if(objects[i].action){
-					//対象オブジェクトに関連するアクションを計算
-					addaction(objects[i],"",objects[i].action,frame)
-				}
-				//objects[i].calcMatrix(frame);
-
-				if(objects[i].objecttype===OBJECT_ARMATURE && objects[i].action){
-					//もしアーマチュアの場合は、ボーンの計算を行う
-					objects[i].pose.setAction(objects[i].action,frame);
-				}
-			}
-
-		}
-		return ret;
-	})();
-
-	var SceneObject = (function(){
-		var SceneObject = function(){
-			this.name="";//オブジェクト名
-			this.type=""; //オブジェクト種類
-			this.hide_render=0; //レンダリングするかどうか
-			this.data=""; //内容(メッシュとかアーマチュア)
-			this.modifiers=[]; //モディファイア
-
-			this.location=new Vec3(); //平行移動
-			this.scale=new Vec3(); //スケール
-			this.rotation_mode=EULER_XYZ;//角度形式(デフォルトはオイラー角XYZ)
-			this.rotation=new Vec4();//回転オイラー角かクォータニオン
-
-			this.bound_box = [];//バウンディングボックス
-			this.bound_type= "";//バウンディング形
-
-			this.parent=""; //親オブジェクト
-			this.iparentmatrix=new Mat43(); //親とのオフセット行列
-			this.parent_bone=null; //親骨オブジェクト
-			this.pose = null;
-
-			this.action=""; //関連付けられたアニメーション
-			this.groups=[]; //頂点グループ
-
-			this.rigid_body = new RigidBody(); //剛体設定
-			this.rigid_body_constraint = new RigidBodyConstraint();//剛体コンストレイント設定
-
-			this.flg=false;//既に合成行列が計算されているかどうかのフラグ
-
-			this.poseBones=null;
-			this.static=0;
-		}
-		var ret=SceneObject;
-
-		return ret;
-	})();
-	var Light = function(){
-		this.name="";
-		this.type="";
-		this.color=new Vec3();
-	}
 	var ReflectionProbe= function(){
 		this.name="";
 		this.type="";
 		this.distance=2;
 		this.falloff=0.1;
 	}
-	var RigidBody = function(){
-		//剛体設定
-		this.type="";
-		this.mass=1.0;
-		this.collision_shape="";
-		this.friction=0.5;
-		this.restitution=0.0;
-		this.collision_groups=0;
-	}
-	var RigidBodyConstraint = function(){
-		//剛体コンストレイント設定
-		this.breaking_threshold=0.0;
-		this.disable_collisions=false;
-		this.enabled= false;
-		this.limit_ang_lower=new Vec3();
-		this.limit_ang_upper=new Vec3();
-		this.limit_lin_lower=new Vec3();
-		this.limit_lin_upper=new Vec3();
-		this.motor_ang_max_impulse=1;
-		this.motor_ang_target_velocity=1;
-		this.motor_lin_max_impulse=1;
-		this.motor_lin_target_velocity=1;
-		this.object1=null;
-		this.object2=null;
-		this.spring_damping=new Vec3();
-		this.spring_stiffness=new Vec3();
-		this.spring_damping_ang=new Vec3();
-		this.spring_stiffness_ang=new Vec3();
-		this.use_breaking=0;
-		this.use_limit_ang=new Vec3();
-		this.use_limit_lin=new Vec3();
-		this.use_motor_ang=0;
-		this.use_motor_lin=0;
-		this.use_spring=new Vec3();
-		this.use_spring_ang=new Vec3();
-		this.type="";
-	}
-	var PoseBoneConstraint = function(){
-		//ポーズボーンコンストレイント設定
-		this.name="";
-		this.type="";
-		this.target="";
-	}
-	var Pose= ret.Pose = (function(){
-		var Pose= function(armature){
-			this.armature = armature;
-			this.poseBones = []; // ボーンの状態
-			this.matrices=[];
-			for(var i=0;i<armature.bones.length;i++){
-				this.poseBones.push(new PoseBone());
-				this.matrices.push(new Mat43());
-			}
-		}
-		var ret = Pose;
 
-		ret.prototype.setAction=function(action,frame){
-			var armature = this.armature;
-			var poseBones = this.poseBones;
-			for(var i=0;i<poseBones.length;i++){
-				//ボーンの数だけ計算する
-				var poseBone = poseBones[i];
-				var bone = armature.bones[i];
-				//対象ボーンのアクションを計算
-				addaction(poseBone,bone.name,action,frame)
-			}
-		}
-
-		ret.prototype.reset= function(){
-			for(var i=0;i<this.poseBones.length;i++){
-				this.poseBones[i].reset();
-			}
-		}
-		ret.copy= function(a,b){
-			for(var i=0;i<b.poseBones.length;i++){
-				PoseBone.copy(a.poseBones[i],b.poseBones[i]);
-			}
-		}
-		ret.add= function(a,b,c){
-			for(var i=0;i<b.poseBones.length;i++){
-				PoseBone.add(a.poseBones[i],b.poseBones[i],c.poseBones[i]);
-			}
-		}
-		ret.sub = function(a,b,c){
-			for(var i=0;i<b.poseBones.length;i++){
-				PoseBone.sub(a.poseBones[i],b.poseBones[i],c.poseBones[i]);
-			}
-		}
-		ret.madd = function(a,b,c,d){
-			for(var i=0;i<b.poseBones.length;i++){
-				PoseBone.madd(a.poseBones[i],b.poseBones[i],c.poseBones[i],d);
-			}
-		}
-		ret.mul = function(a,b,c){
-			for(var i=0;i<b.poseBones.length;i++){
-				PoseBone.mul(a.poseBones[i],b.poseBones[i],c);
-			}
-		}
-		return ret;
-	})();
-
-	var PoseBone = (function(){
-		var PoseBone = function(){
-			//ボーン状態
-			this.location=new Vec3();
-			this.rotation_mode=QUATERNION;
-			this.rotation=new Vec4();
-			this.scale=new Vec3();
-			this.constraints=[];
-
-			this.reset();
-		}
-		var ret = PoseBone;
-		ret.prototype.reset = function(){
-			Vec3.set(this.location,0,0,0);
-			Vec3.set(this.rotation,0,0,0,0);
-			Vec3.set(this.scale,1,1,1);
-		}
-
-		ret.copy=function(a,b){
-			Vec3.copy(a.location,b.location);
-			Vec3.copy(a.scale,b.scale);
-			Vec4.copy(a.rotation,b.rotation);
-		}
-		ret.add=function(a,b,c){
-			Vec3.add(a.location,b.location,c.location);
-			for(var i=0;i<3;i++){
-				a.scale[i]=b.scale[i]*c.scale[i];
-			}
-			Vec4.qdot(a.rotation,b.rotation,c.rotation);
-		}
-		ret.sub=function(a,b,c){
-			Vec3.sub(a.location,b.location,c.location);
-			for(var i=0;i<3;i++){
-				a.scale[i]=b.scale[i]/c.scale[i];
-			}
-			Vec4.qmdot(a.rotation,b.rotation,c.rotation);
-		}
-		ret.mul=function(a,b,c){
-			Vec3.mul(a.location,b.location,c);
-			for(var i=0;i<3;i++){
-				a.scale[i]=(b.scale[i]-1)*c+1;
-			}
-			Vec4.qmul(a.rotation,b.rotation,c);
-		}
-		ret.madd=function(a,b,c,d){
-			Vec3.madd(a.location,b.location,c,d);
-			Vec3.madd(a.scale,b.scale,c,d);
-			var vec4 = Vec4.poolAlloc();
-			iVec4.qmul(vec4,c,d);
-			Vec4.qdot(a.rotation,b.rotation,vec4);
-			Vec4.poolFree(1);
-		}
-		return ret;
-	})();
-	var Material = function(){
-		//マテリアル
-		this.name="";
-		this.baseColor=new Vec3();
-		Vec3.set(this.baseColor,1,1,1);
-		this.baseColorMap="";
-		this.opacity=1.0;
-		this.specular=0.0;
-		this.metallic=0.0;
-		this.roughness=0.0;
-		this.ior=1.0;
-		this.subRoughness=0.0;
-		this.emt=0.0;
-		this.pbrMap="";
-		this.hightMap="";
-		this.hightMapPower=0;
-		this.hightBase=0.5;
-		this.lightMap="";
-		this.uv="";
-		this.fresnel=0.0;
-
-		this.shader="";
-	}
-	var Environment = function(){
-		//ライティング環境
-		this.name="";
-		this.lights=[];
-		this.lightProbe=null;
-	}
 
 	ret.Material=Material;
 	var defaultMaterial= ret.defaultMaterial= new Material();
 
-	var Armature = function(){
-		//骨組み
-		this.name=""; //名前
-		this.bones=[]; //骨
-	}
-	Armature.prototype.objecttype=OBJECT_ARMATURE;
-	function Bone(){
-		//骨
-		this.name="";
-		this.parent="";
-		this.length=0;
-		this.matrix = new Mat43();
-		this.imatrix = new Mat43();
-	};
 	ret.Bone = Bone;
 
 	var ShapeKey = function(){
@@ -417,7 +158,7 @@ var O3o=(function(){
 		this.name="" //名前
 		this.data=[]; //uv値
 	};
-	Mesh.prototype.objecttype=OBJECT_MESH;
+	Mesh.prototype.objecttype=ObjectType.MESH;
 	ret.Mesh = Mesh;
 
 	class TypedClass{
@@ -891,10 +632,10 @@ var O3o=(function(){
 
 		//オブジェクトのdataをアドレスに変換
 		var typedatas={
-			"MESH":{objecttype:OBJECT_MESH,target:"meshes"}
-			,"ARMATURE":{objecttype:OBJECT_ARMATURE,target:"armatures"}
-			,"LIGHT":{objecttype:OBJECT_LIGHT,target:"lights"}
-			,"LIGHT_PROBE":{objecttype:OBJECT_REFLECTIONPROBE,target:"reflectionProbes"}
+			"MESH":{objecttype:ObjectType.MESH,target:"meshes"}
+			,"ARMATURE":{objecttype:ObjectType.ARMATURE,target:"armatures"}
+			,"LIGHT":{objecttype:ObjectType.LIGHT,target:"lights"}
+			,"LIGHT_PROBE":{objecttype:ObjectType.REFLECTIONPROBE,target:"reflectionProbes"}
 		};
 		var scene,name,object,objects
 		for(j=o3o.objects.length;j--;){
@@ -1873,7 +1614,7 @@ var O3o=(function(){
 			this.matrix = new Mat43();
 			this.boneMatrices=[];
 			this.boneFlgs=[];
-			if(object.objecttype===OBJECT_ARMATURE){
+			if(object.objecttype===ObjectType.ARMATURE){
 				var bones = object.data.bones;
 				for(var i=0;i<bones.length;i++){
 					this.boneMatrices.push(new Mat43());
@@ -2219,6 +1960,7 @@ var O3o=(function(){
 
 	var table=new Array(64);
 	ret.prototype.modMirror = function(dst,mod){
+		//ミラーリングをフリーズ
 		var obj = this.object;
 		var bufMesh = dst;
 		var bufMeshVertices =bufMesh.vertices
@@ -2232,7 +1974,15 @@ var O3o=(function(){
 		if(mod.use_y){ mrr=1};
 		if(mod.use_z){ mrr=2};
 
+		var uv_layerdata = null;
+		if(bufMesh.uv_layerSize){
+			//uv指定ありの場合はレイヤを設定(0番固定)
+			uv_layerdata=bufMesh.uv_layers[0].data;
+		}
+
+
 		for(j =0;j<vertexSize;j++){
+			//頂点をコピー
 			srcvertex=bufMeshVertices[j];
 			dstvertex=bufMeshVertices[j+vertexSize];
 
@@ -2251,12 +2001,12 @@ var O3o=(function(){
 		var dstFace,srcFace;
 		var faceSize=bufMesh.faceSize;
 		for(var j =0;j<faceSize;j++){
+			//フェイスをコピー
 			srcFace= bufMesh.faces[j]
 			srcvertices=srcFace.idx;
 			dstFace= bufMesh.faces[faceSize+j]
 			dstFace.idxnum=srcFace.idxnum;
 			dstvertices=dstFace.idx;
-			//var dst=dstFace.uv,src=srcFace.uv
 			for(var k=0;k<srcFace.idxnum;k++){
 				var _k = srcFace.idxnum-k;
 				if(k==0){_k=0};
@@ -2267,15 +2017,35 @@ var O3o=(function(){
 					//座標が中心に近い場合は共有
 					dstvertices[k] = srcvertices[_k];
 				}
-
-			//	dst[k*2] = src[_k*2]
-			//	dst[k*2+1] = src[_k*2+1]
 			}
 
 			dstFace.material = srcFace.material;
 			dstFace.mat= srcFace.mat;
 			dstFace.fs= srcFace.fs;
 
+
+		}
+		for(var i = 0;i<bufMesh.uv_layerSize;i++){
+			var dstdata=bufMesh.uv_layers[i].data;
+			var d = faceSize * 2 - dstdata.length;
+			for(var j=0;j<d;j++){
+				dstdata.push([]);
+			}
+
+		}
+		if(uv_layerdata){
+			//uv情報をコピー
+			var dstdata=uv_layerdata;
+
+			for(var j = 0;j<faceSize;j++){
+				srcFace= bufMesh.faces[j]
+				for(var k=0;k<srcFace.idxnum;k++){
+					var _k = srcFace.idxnum-k;
+					if(k==0){_k=0};
+					dstdata[j+faceSize][k*2] = dstdata[j][_k*2];
+					dstdata[j+faceSize][k*2+1] = dstdata[j][_k*2+1];
+				}
+			}
 		}
 		var jj=0;
 		for(var j =0;j<bufMesh.edgeSize;j++){

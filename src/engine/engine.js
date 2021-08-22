@@ -93,6 +93,7 @@ export default class Engine{
 
 		sigmaShader=Ono3d.loadShader("../lib/spherical_harmonics/sigma.shader");
 		shadow_gauss_shader=Ono3d.loadShader("../engine/gauss_shadow.shader");
+		Engine.basecolorShader=Ono3d.loadShader("../lib/shader/basecolor.shader");
 
 		for(var i=0;i<9;i++){
 			shShader.push(Ono3d.loadShader("../lib/spherical_harmonics/sh"+i+".shader"));
@@ -106,6 +107,7 @@ export default class Engine{
 	calcEnvironment(){
 		var ono3d = this.ono3d;
 		var engine = this;
+		this.calcLightMatrix();
 
 		//環境マップ
 		ono3d.environments[0].envTexture = ono3d.createEnv(null,0,0,0,(x,y,w,h)=>{engine.drawSub(x,y,w,h)});
@@ -455,6 +457,8 @@ export default class Engine{
 
 
 	calcLightMatrix(){
+		var HEIGHT = this.HEIGHT;
+		var WIDTH = this.WIDTH;
 		// ライト行列計算 ------
 		// パースシャドウマップを作るための行列を作る
 		var poses = lightArea_poses;

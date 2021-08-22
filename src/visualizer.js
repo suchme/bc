@@ -17,6 +17,7 @@ var homingCamera=function(angle,target,camera){
 		
 	}
 var o3o;
+var o3o_arm;
 class Scene1 extends Scene{
 	constructor(){
 		super();
@@ -24,9 +25,13 @@ class Scene1 extends Scene{
 		this.p=new Vec3();
 		this.cameralen=5;
 		this.target=new Vec3();
-		o3o = AssetManager.o3o("human.o3o",(o3o)=>{
+		o3o = AssetManager.o3o("anval.o3o",(o3o)=>{
 			this.instance= o3o.createInstance();
 		});
+		o3o_arm = AssetManager.o3o("arm.o3o",(o3o)=>{
+			this.instance_arm= o3o.createInstance();
+		});
+		this.t=0;
 	}
 	create(){
 
@@ -44,8 +49,9 @@ class Scene1 extends Scene{
 		}
 
 		Mat44.setInit(ono3d.worldMatrix);
-		ono3d.worldMatrix[13]=-1;
+//		ono3d.worldMatrix[13]=-1;
 		this.instance.draw();
+		this.instance_arm.draw();
 		
 	}
 
@@ -76,7 +82,15 @@ class Scene1 extends Scene{
 		homingCamera(camera.a,this.target,camera.p);
 
 		var light = engine.ono3d.environments[0].sun;
+		Vec3.set(light.color,1,1,1);
+		Mat44.fromRotVector(light.matrix,Math.PI*0.7,1,1,0);
+
 		Mat44.dot(light.viewmatrix2,engine.ono3d.projectionMatrix,engine.ono3d.viewMatrix);
+
+		var scene= o3o.scenes[0];
+		scene.setFrame(this.t);
+		this.instance.calcMatrix(1.0/globalParam.fps);
+		this.t++;
 	}
 };
 
