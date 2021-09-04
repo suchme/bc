@@ -1,3 +1,4 @@
+import ObjectType from "./objecttype.js"
 export default class Mesh{
 	constructor(){
 		//メッシュ情報
@@ -14,3 +15,4 @@ export default class Mesh{
 		this.uv_layers=[];//uv情報
 	};
 };
+Mesh.prototype.objecttype=ObjectType.MESH;

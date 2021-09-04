@@ -16,20 +16,37 @@ var homingCamera=function(angle,target,camera){
 		angle[2]=0;
 		
 	}
-var o3o;
-var o3o_arm;
+var primitives={};
+var naked;
+var naked_instance;
+var o3o_tmp;
 class Scene1 extends Scene{
 	constructor(){
 		super();
 		this.a=new Vec2();
 		this.p=new Vec3();
-		this.cameralen=5;
+		this.cameralen=3.5;
 		this.target=new Vec3();
-		o3o = AssetManager.o3o("anval.o3o",(o3o)=>{
-			this.instance= o3o.createInstance();
+
+		naked = AssetManager.o3o("model/naked.o3o",(o3o)=>{
+			naked_instance = o3o.createInstance();
 		});
-		o3o_arm = AssetManager.o3o("arm.o3o",(o3o)=>{
-			this.instance_arm= o3o.createInstance();
+		for(var i=0;i<24;i++){
+			var f=(function(){
+				var ii = i;
+				return (o3o)=>{
+					if(o3o){
+						primitives[ii]= o3o.createInstance();
+					}else{
+						console.log("sippai");
+					}
+				}
+			})();
+
+			AssetManager.o3o("model/s"+i+".o3o",f);
+		}	
+		o3o_tmp= AssetManager.o3o("model/tmp.o3o",(o3o)=>{
+			this.instance_tmp= o3o.createInstance();
 		});
 		this.t=0;
 	}
@@ -41,6 +58,7 @@ class Scene1 extends Scene{
 		this.a[1]=Math.PI;
 	}
 	draw(){
+		this.instance = primitives[0];
 		if(!this.instance)return;
 
 		if(!this.hoge){
@@ -50,8 +68,18 @@ class Scene1 extends Scene{
 
 		Mat44.setInit(ono3d.worldMatrix);
 //		ono3d.worldMatrix[13]=-1;
+		var org_matrices=naked_instance.objectInstances["Armature"].boneMatrices;
+		var matrices=this.instance_tmp.objectInstances["Armature"].boneMatrices;
+		for(var i=0;i<matrices.length;i++){
+			Mat44.copy(matrices[i],org_matrices[i]);
+		}
+
+		matrices=this.instance.objectInstances["Armature"].boneMatrices;
+		for(var i=0;i<matrices.length;i++){
+			Mat44.copy(matrices[i],org_matrices[i]);
+		}
 		this.instance.draw();
-		this.instance_arm.draw();
+		this.instance_tmp.draw("Arm");
 		
 	}
 
@@ -87,9 +115,10 @@ class Scene1 extends Scene{
 
 		Mat44.dot(light.viewmatrix2,engine.ono3d.projectionMatrix,engine.ono3d.viewMatrix);
 
-		var scene= o3o.scenes[0];
+		this.instance = primitives[0];
+		var scene= naked.scenes[0];
 		scene.setFrame(this.t);
-		this.instance.calcMatrix(1.0/globalParam.fps);
+		naked_instance.calcMatrix(1.0/globalParam.fps);
 		this.t++;
 	}
 };
@@ -108,7 +137,7 @@ export default class Visualizer{
 			if(globalParam.debugMenu){
 				debugClose();
 			}
-			this.engine.init(document.getElementById("aaa"),400,400);
+			this.engine.init(document.getElementById("aaa"),400,460);
 			this.engine.start();
 
 			var scene1 = new Scene1();

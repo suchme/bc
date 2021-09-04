@@ -212,9 +212,20 @@ export default class Util{
 					if(callback){
 						callback(buf);
 					}
+				}else{
+					if(callback){
+						callback(null);
+					}
 				}
 				loadingCount--;
 				console.log("loadtext end",loadingCount);
+			}
+			request.onerror=function(e){
+				if(callback){
+					callback(null);
+				}
+				loadingCount--;
+				console.log("loadtext failed",loadingCount);
 			}
 			console.log("loadtext start",url);
 			loadingCount++;
