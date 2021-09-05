@@ -7,6 +7,7 @@ import SubLayout from "./sub_layout.js";
 import Visualizer from "./visualizer.js";
 
 var values={total:{},subtotal:{},extra_passives:[],bonus:{},selected_tab:"main",extension:{}};
+window.values = values;
 var binder = new Binder();
 var subselector= new Subselector();
 

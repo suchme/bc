@@ -30,21 +30,23 @@ class Scene1 extends Scene{
 
 		naked = AssetManager.o3o("model/naked.o3o",(o3o)=>{
 			naked_instance = o3o.createInstance();
-		});
-		for(var i=0;i<24;i++){
-			var f=(function(){
-				var ii = i;
-				return (o3o)=>{
-					if(o3o){
-						primitives[ii]= o3o.createInstance();
-					}else{
-						console.log("sippai");
-					}
-				}
-			})();
 
-			AssetManager.o3o("model/s"+i+".o3o",f);
-		}	
+			for(var i=0;i<24;i++){
+				var f=(function(){
+					var name = "s"+i;
+					return (o3o)=>{
+						if(o3o){
+							primitives[name]= o3o.createInstance();
+						}else{
+							primitives[name]= naked_instance;
+							console.log("sippai");
+						}
+					}
+				})();
+
+				AssetManager.o3o("model/s"+i+".o3o",f);
+			}	
+		});
 		o3o_tmp= AssetManager.o3o("model/tmp.o3o",(o3o)=>{
 			this.instance_tmp= o3o.createInstance();
 		});
@@ -58,7 +60,7 @@ class Scene1 extends Scene{
 		this.a[1]=Math.PI;
 	}
 	draw(){
-		this.instance = primitives[0];
+		this.instance = primitives[values.shinki.cd];
 		if(!this.instance)return;
 
 		if(!this.hoge){
@@ -115,7 +117,7 @@ class Scene1 extends Scene{
 
 		Mat44.dot(light.viewmatrix2,engine.ono3d.projectionMatrix,engine.ono3d.viewMatrix);
 
-		this.instance = primitives[0];
+		this.instance = primitives[values.shinki.cd];
 		var scene= naked.scenes[0];
 		scene.setFrame(this.t);
 		naked_instance.calcMatrix(1.0/globalParam.fps);
