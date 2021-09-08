@@ -4,7 +4,7 @@ import DATA from "./data.js";
 import Binder from "./lib/binder.js";
 import Subselector from "./subselector.js";
 import SubLayout from "./sub_layout.js";
-import Visualizer from "./visualizer.js";
+//import Visualizer from "./visualizer.js";
 
 var values={total:{},subtotal:{},extra_passives:[],bonus:{},selected_tab:"main",extension:{}};
 window.values = values;
@@ -302,6 +302,22 @@ class Main {
 		});
 		add(values.total,values.bonus);
 
+		reset(values.subtotal);
+		add(values.subtotal,values.total);
+		
+		//固有パッシブ補正
+		var skill = DATA.passives[values.shinki.org.exskill];
+		switch(skill.name){
+			case "カーテンコール":
+				values.total.bst += Math.trunc(values.total.bst *0.2)
+				break;
+			case "クイックドローガード":
+				values.total.guard_cost -= Math.trunc(values.total.guard_cost *0.6)
+				break;
+			case "グライドオンプレステイル":
+				values.total.hover_cost -= Math.trunc(values.total.hover_cost *0.3)
+				break;
+		}
 
 //		//レアリティ色
 //		DATA.part_cd.forEach(function(e,idx){
@@ -356,6 +372,8 @@ class Main {
 		values.extension.recover_overheat=(values.total.bst/values.total.recover).toFixed(2);
 		values.extension.hover_time=((values.total.bst -values.total.jump_cost - values.total.dash_cost)
 		   / values.total.hover_cost).toFixed(2);
+		values.extension.jump_time=((values.total.bst -values.total.jump_cost - values.total.dash_cost)
+		   / values.total.jump_cost).toFixed(2);
 
 //		binder.refresh();
 	}
@@ -567,14 +585,14 @@ class Main {
 
 		//param
 		var nodes= document.querySelectorAll("span.param");
-		var param= document.getElementById("param");
-		DATA.param_cd.forEach(function(e,idx){
-			if(idx>=5)return false;
-			var span = document.createElement("span");
-			span.classList.add("status",e);
-			span.setAttribute("bind:","."+e);
-			param.appendChild(span);
-		});
+		var param= document.getElementById("template_param");
+		//DATA.param_cd.forEach(function(e,idx){
+		//	if(idx>=5)return false;
+		//	var span = document.createElement("span");
+		//	span.classList.add("status",e);
+		//	span.setAttribute("bind:","."+e);
+		//	param.appendChild(span);
+		//});
 		nodes.forEach(function(node){
 			var newnode = param.cloneNode(true);
 			var bindName = node.getAttribute("bind:");
@@ -817,8 +835,8 @@ DATA.param_cd.forEach((e,idx)=>{
 	
 
 });
-	var v = new Visualizer();
-	v.main();
+//	var v = new Visualizer();
+//	v.main();
 
 
 document.querySelector("#shinki div.skill").appendChild(
@@ -834,6 +852,16 @@ document.querySelector("#shinki div.skill").appendChild(
 
 }
 
+window.lvmax=function(){
+	values.shinki.lv=100;
+	values.head.lv=60;
+	values.body.lv=60;
+	values.arm.lv=60;
+	values.leg.lv=60;
+	values.rear.lv=60;
+	values.weapon.lv=60;
+	values.weapon2.lv=60;
+}
 
 var main = new Main();
 

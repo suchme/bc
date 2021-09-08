@@ -31,7 +31,7 @@
 			<button id="add_extra_passive">パッシブ追加</button>
 			<span class="setting">
 				<span>アイコン</span>
-				<select id="individual"  bind:="shinki.individual">
+				<select id="individual" bind:="shinki.individual">
 				</select>
 			</span>
 			</span>
@@ -46,21 +46,18 @@
 			<div style="position:relative;" class="totalhead">
 	最終値
 
-				<span>総コスト</span><span bind:="total.cost"></span>
+				<span>総コスト</span><span bind:="total.cost">
+				
+				</span>
 
 				<span class="name" style="display:none;" style="text-align:right;">武器適正とパッシブ適用後</span>
 			</div>
 			<div>
+				<span class="param" bind:="subtotal"></span>
+			</div>
+			<div>
+				常在固有パッシブ適用
 				<span class="param" bind:="total"></span>
-				
-				<span class="status dash" bind:="total.dash">
-				</span><span class="status recover" bind:="total.recover">
-				</span><span class="status extend " bind:="total.extend">
-				</span><span class="status dash_cost cost" bind:="total.dash_cost">
-				</span><span class="status jump_cost cost" bind:="total.jump_cost">
-				</span><span class="status hover_cost cost" bind:="total.hover_cost">
-				</span><span class="status guard_cost cost" bind:="total.guard_cost">
-				</span>
 			</div>
 		</div>
 	</div>
@@ -70,36 +67,38 @@
 	<div>
 		<span class="param" bind:="total"></span>
 		
-		<span class="status dash" bind:="total.dash">
-		</span><span class="status recover" bind:="total.recover">
-		</span><span class="status extend " bind:="total.extend">
-		</span><span class="status dash_cost cost" bind:="total.dash_cost">
-		</span><span class="status jump_cost cost" bind:="total.jump_cost">
-		</span><span class="status hover_cost cost" bind:="total.hover_cost">
-		</span><span class="status guard_cost cost" bind:="total.guard_cost">
 		</span>
 	</div>
-	<div>
+	<ul>
+	<li>
 		<div>オーバーヒート復帰時間</div>
 		<span class="status bst" bind:="total.bst"></span>
 		/ <span class="status recover" bind:="total.recover"></span>
-		= <span bind:="extension.recover_overheat"></span>[s]
-	</div>
-	<div>
+		= <span class="result" bind:="extension.recover_overheat"></span>[s]
+	</li>
+	<li>
 		<div>最大ダッシュ継続時間</div>
 		(<span class="status bst" bind:="total.bst"></span>
 		- <span class="status dash_cost cost" bind:="total.dash_cost"></span>
 		) / <span class="status dash_cost cost" bind:="total.dash_cost"></span>
-		= <span bind:="extension.dash_time"></span>[s]
-	</div>
-	<div>
-		<div>最大ホバリング時間</div>
+		= <span class="result" bind:="extension.dash_time"></span>[s]
+	</li>
+	<li>
+		<div>最大ホバリング継続時間</div>
 		( <span class="status bst" bind:="total.bst"></span>
 		- <span class="status jump_cost cost " bind:="total.jump_cost"></span>
 		- <span class="status dash_cost cost " bind:="total.dash_cost"></span>
 		) / <span class="status hover_cost cost" bind:="total.hover_cost"></span>
-		= <span bind:="extension.hover_time"></span>[s]
-	</div>
+		= <span class="result" bind:="extension.hover_time"></span>[s]
+	</li>
+	<li>
+		<div>最大慣性ジャンプ継続時間</div>
+		( <span class="status bst" bind:="total.bst"></span>
+		- <span class="status jump_cost cost " bind:="total.jump_cost"></span>
+		- <span class="status dash_cost cost " bind:="total.dash_cost"></span>
+		) / <span class="status jump_cost cost" bind:="total.jump_cost"></span>
+		= <span class="result" bind:="extension.jump_time"></span>[s]
+	</li>
 </div>
 
 
@@ -127,8 +126,12 @@
 <label class="tabbutton"><input type="radio" name="tab" value="main" bind:="selected_tab" feedback><span>main</span></label>
 <label class="tabbutton"><input type="radio" name="tab" value="extension" bind:="selected_tab" feedback><span>extension</span></label>
 <label class="tabbutton"><input type="radio" name="tab" value="export" bind:="selected_tab" feedback><span>export</span></label>
+<!--
 <label class="tabbutton"><input type="radio" name="tab" value="visualize" bind:="selected_tab" feedback><span>visualize</span></label>
+-->
 <label class="tabbutton"><input type="radio" name="tab" value="about" bind:="selected_tab" feedback><span>about</span></label>
+
+				<button onclick="lvmax()" >LvMAX</button>
 </div>
 
 </div>
@@ -157,14 +160,6 @@
 		<div class="detail">
 			<div>
 				<span class="param" bind:=""></span>
-				<span class="status dash" bind:=".dash" >
-				</span><span class="status recover" bind:=".recover" >
-				</span><span class="status extend " bind:=".extend" >
-				</span><span class="status dash_cost cost" bind:=".dash_cost" >
-				</span><span class="status jump_cost cost" bind:=".jump_cost" >
-				</span><span class="status hover_cost cost" bind:=".hover_cost" >
-				</span><span class="status guard_cost cost" bind:=".guard_cost" >
-				</span>
 			</div>
 			<div class="skill">
 			<span class="skill" bind:=".skill"></span>
@@ -174,6 +169,22 @@
 	<select id="rarelity" class="rarelity" > </select>
 	<span id="param">
 	</span>
+	<span id="template_param">
+		<span class="status atk" bind:=".atk" >
+		</span><span class="status def" bind:=".def" >
+		</span><span class="status spd " bind:=".spd" >
+		</span><span class="status lp" bind:=".lp" >
+		</span><span class="status bst" bind:=".bst" >
+		</span> <span class="status dash" bind:=".dash" >
+		</span><span class="status extend " bind:=".extend" >
+		</span><span class="status recover" bind:=".recover" >
+		</span><span class="status dash_cost cost" bind:=".dash_cost" >
+		</span><span class="status guard_cost cost" bind:=".guard_cost" >
+		</span><span class="status jump_cost cost" bind:=".jump_cost" >
+		</span><span class="status hover_cost cost" bind:=".hover_cost" >
+		</span>
+	</span>
+
 </div>
 
 </body>

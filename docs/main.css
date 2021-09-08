@@ -54,7 +54,7 @@ select.rarelity{
 	text-align:center;
 }
 select.lv{
-	width:20px;
+	width:30px;
 }
 
 textarea.export{
@@ -125,7 +125,7 @@ opacity:40%;
 	background-color:#66c;
 }
 .status.dash_cost{
-	background-image:url('icon/dash_cost.svg');
+	background-image:url('icon/dash.svg');
 }
 
 .status.jump_cost{
@@ -135,7 +135,7 @@ opacity:40%;
 	background-image:url('icon/flying_cost.svg');
 }
 .status.guard_cost{
-	background-image:url('icon/guard_cost.svg');
+	background-image:url('icon/def.svg');
 }
 .status.extend{
 	background-image:url('icon/extend.svg');
@@ -143,7 +143,7 @@ opacity:40%;
 
 .status.cost{
 width:28px;
-	background-color:#411;
+	background-color:#111;
 	color:#c33;
 }
 .N{
@@ -405,10 +405,10 @@ display:none;
 }
 .status[content^='-']
 ,.minus{
-	color:#f33;
+	color:#c33;
 }
 .status.cost[content^='-']{
-	color:#fff;
+	color:#66f;
 }
 
 span.armor{
@@ -485,3 +485,4 @@ background-color:#666;
 canvas{
 width:400px;
 }
+

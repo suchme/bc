@@ -55,6 +55,7 @@ class Bind{
 			node.setAttribute(bind.attribute_name,value);
 			return;
 		}
+			node.setAttribute("content",value);
 		switch(node.tagName){
 			case "INPUT":
 			case "SELECT":
