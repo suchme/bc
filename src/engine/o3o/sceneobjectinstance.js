@@ -11,6 +11,7 @@ import Mesh from "./mesh.js"
 import Collider from "../../lib/collider/collider.js"
 import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "../../lib/vector.js"
 import bufMesh from "./bufmesh.js"
+
 var sphere = new Collider.Sphere();
 var cuboid = new Collider.Cuboid();
 var cylinder = new Collider.Cylinder();
@@ -35,8 +36,6 @@ deformMesh.edges=Edge.array(MAX_SIZE);
 var table=new Array(64);
 
 for(i=0;i<MAX_SIZE;i++){
-	//deformMesh.faces.push(new Face());
-	//deformMesh.edges.push(new Edge());
 	deformMesh.ratios.push(new Vec4());
 
 };
@@ -668,6 +667,17 @@ export default class SceneObjectInstance{
 				pos[0]=mat0*x + mat3*y + mat6*z + mat9;
 				pos[1]=mat1*x + mat4*y + mat7*z + mat10;
 				pos[2]=mat2*x + mat5*y + mat8*z + mat11;
+			}
+
+			if(Mat43.determinant(defMat)<0){
+				//フェイス反転している場合は戻す
+				var faces = dst.faces;
+				for(var i=0;i<dst.faceSize;i++){
+					var idx=faces[i].idx;
+					var buf = idx[0];
+					idx[0] = idx[2];
+					idx[2]= buf;
+				}
 			}
 		}
 

@@ -947,6 +947,15 @@ var Mat43=(function(){
 
 		this.poolFree(1);
 	}
+
+	ret.determinant = function(b){
+		return b[0]*b[4]*b[8]
+			+b[3]*b[7]*b[2]
+			+b[6]*b[1]*b[5]
+			-b[0]*b[7]*b[5]
+			-b[3]*b[1]*b[8]
+			-b[6]*b[4]*b[2];
+	};
 	ret.getInv=function(a,b){
 		var det =
 			 b[0]*b[4]*b[8]
@@ -1374,6 +1383,17 @@ export class Mat44{
 	}
 	static getRotVector(target,angle){
 		Mat43.getRotVector.call(this,target,angle);
+	}
+
+	static determinant = function(a){
+		return b[0]*b[5]*b[10]*b[15]+b[0]*b[9]*b[14]*b[7]+b[0]*b[13]*b[6]*b[11]
+			+b[4]*b[1]*b[14]*b[11]+b[4]*b[9]*b[2]*b[15]+b[4]*b[13]*b[10]*b[3]
+			+b[8]*b[1]*b[6]*b[15]+b[8]*b[5]*b[14]*b[3]+b[8]*b[13]*b[2]*b[7]
+			+b[12]*b[1]*b[10]*b[7]+b[12]*b[5]*b[2]*b[11]+b[12]*b[9]*b[6]*b[3]
+			-b[0]*b[5]*b[14]*b[11]-b[0]*b[9]*b[6]*b[15]-b[0]*b[13]*b[10]*b[7]
+			-b[4]*b[1]*b[10]*b[15]-b[4]*b[9]*b[14]*b[3]-b[4]*b[13]*b[2]*b[11]
+			-b[8]*b[1]*b[14]*b[7]-b[8]*b[5]*b[2]*b[15]-b[8]*b[13]*b[6]*b[3]
+			-b[12]*b[1]*b[6]*b[11]-b[12]*b[5]*b[10]*b[3]-b[12]*b[9]*b[2]*b[7];
 	}
 	static getInv(a,b){
 		var det =

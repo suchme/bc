@@ -51,6 +51,9 @@ class Scene1 extends Scene{
 			this.instance_tmp= o3o.createInstance();
 		});
 		this.t=0;
+		globalParam.autoExposure=false;
+		globalParam.exposure_level = 0.2;
+		globalParam.exposure_upper = 1;
 	}
 	create(){
 
