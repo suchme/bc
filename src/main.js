@@ -1,11 +1,13 @@
 "use strict";
 
 import DATA from "./data.js";
-import Binder from "./binder.js";
+import Binder from "./lib/binder.js";
 import Subselector from "./subselector.js";
 import SubLayout from "./sub_layout.js";
+import Visualizer from "./visualizer.js";
 
 var values={total:{},subtotal:{},extra_passives:[],bonus:{},selected_tab:"main",extension:{}};
+window.values = values;
 var binder = new Binder();
 var subselector= new Subselector();
 
@@ -813,7 +815,10 @@ DATA.param_cd.forEach((e,idx)=>{
 		ee.title=DATA.param_name[idx] + "\n" + DATA.param_title[idx];
 	})
 	
+
 });
+	var v = new Visualizer();
+	v.main();
 
 
 document.querySelector("#shinki div.skill").appendChild(
@@ -828,6 +833,7 @@ document.querySelector("#shinki div.skill").appendChild(
 
 
 }
+
 
 var main = new Main();
 
