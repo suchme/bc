@@ -28,11 +28,12 @@ class Scene1 extends Scene{
 		this.p=new Vec3();
 		this.cameralen=3.5;
 		this.target=new Vec3();
+		this.instances=[];
 
 		naked = AssetManager.o3o("model/naked.o3o",(o3o)=>{
 			naked_instance = o3o.createInstance();
 
-			for(var i=0;i<28;i++){
+			for(var i=0;i<30;i++){
 				var f=(function(){
 					var name = "s"+i;
 					return (o3o)=>{
