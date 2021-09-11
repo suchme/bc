@@ -141,11 +141,6 @@ opacity:40%;
 	background-image:url('icon/extend.svg');
 }
 
-.status.cost{
-width:28px;
-	background-color:#111;
-	color:#c33;
-}
 .N{
 	background-color:#aaa;
 }
@@ -399,16 +394,24 @@ display:none;
 }
 */
 
-.status[content='0']{
+.status[content='0']
+,.status.cost[content='0']
+{
 	color:#888;
 	font-weight:normal;
 }
 .status[content^='-']
+,.status.cost
 ,.minus{
 	color:#c33;
 }
-.status.cost[content^='-']{
-	color:#66f;
+.status.cost[content^='-']
+,.status[content^='+']{
+	color:#3ee;
+}
+.status.cost{
+	width:28px;
+	background-color:#111;
 }
 
 span.armor{
@@ -426,7 +429,7 @@ div.other_calc{
 
 div.tabmain{
 	background-color:#888;
-height:480px;
+height:490px;
 	   z-index:-1;
 }
 div.tabmain>div{

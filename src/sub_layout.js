@@ -3,8 +3,11 @@ var SubLayout={};
 SubLayout.shinki_html =`
 	<span>
 	<div>
-	<span column="name" class="shinki"></span>
-	<span column="height" class="height"></span>
+		<span column="name" class="shinki"></span>
+		<span column="short_regist" class="short_regist status"></span>
+		<span column="long_regist" class="long_regist status"></span>
+		<span column="height" class="height status"></span>
+		<span column="expassive" class=""></span>
 	</div>
 	<div>
 		<span column="atk" class="atk status "></span>
@@ -14,16 +17,14 @@ SubLayout.shinki_html =`
 		<span column="bst" class="bst status "></span>
 		<span class="sep"></span>
 		<span column="dash" class="dash status  "></span>
-		<span column="recover" class="recover status "></span>
 		<span column="extend" class="extend status "></span>
+		<span column="recover" class="recover status "></span>
 		<span class="sep"></span>
 		<span column="dash_cost" class="dash_cost cost status "></span>
+		<span column="guard_cost" class="guard_cost cost status "></span>
 		<span column="jump_cost" class="jump_cost cost status "></span>
 		<span column="hover_cost" class="hover_cost cost status "></span>
-		<span column="guard_cost" class="guard_cost cost status "></span>
 		<span class="sep"></span>
-	</div>
-	</span>
 	<span class="sep"></span>
 	<span column="cat1" class=" short cat status "></span>
 	<span column="cat2" class=" short cat status "></span>
@@ -40,6 +41,8 @@ SubLayout.shinki_html =`
 	<span column="cat13" class="long cat status "></span>
 	<span column="cat14" class="long cat status "></span>
 	<span column="cat15" class="bougu cat status "></span>
+	</div>
+	</span>
 `;
 
 SubLayout.head_html =`
@@ -64,13 +67,13 @@ SubLayout.head_html =`
 			<span column="bst" class="bst status "></span>
 			<span class="sep"></span>
 			<span column="dash" class="dash status  "></span>
-			<span column="recover" class="recover status "></span>
 			<span column="extend" class="extend status "></span>
+			<span column="recover" class="recover status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
+			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
-			<span column="guard_cost" class="guard_cost cost status "></span>
 		</div>
 	</span>
 	<span>
@@ -106,13 +109,13 @@ SubLayout.body_html =`
 			<span column="bst" class="bst status "></span>
 			<span class="sep"></span>
 			<span column="dash" class="dash status  "></span>
-			<span column="recover" class="recover status "></span>
 			<span column="extend" class="extend status "></span>
+			<span column="recover" class="recover status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
+			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
-			<span column="guard_cost" class="guard_cost cost status "></span>
 		</div>
 	</span>
 	<span class="sep"></span>
@@ -146,13 +149,13 @@ SubLayout.arm_html =`
 			<span column="bst" class="bst status "></span>
 			<span class="sep"></span>
 			<span column="dash" class="dash status  "></span>
-			<span column="recover" class="recover status "></span>
 			<span column="extend" class="extend status "></span>
+			<span column="recover" class="recover status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
+			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
-			<span column="guard_cost" class="guard_cost cost status "></span>
 		</div>
 	</span>
 	<span class="sep"></span>
@@ -187,13 +190,13 @@ SubLayout.leg_html =`
 			<span column="bst" class="bst status "></span>
 			<span class="sep"></span>
 			<span column="dash" class="dash status  "></span>
-			<span column="recover" class="recover status "></span>
 			<span column="extend" class="extend status "></span>
+			<span column="recover" class="recover status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
+			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
-			<span column="guard_cost" class="guard_cost cost status "></span>
 		</div>
 	</span>
 	<span class="sep"></span>
@@ -228,13 +231,13 @@ SubLayout.rear_html =`
 			<span column="bst" class="bst status "></span>
 			<span class="sep"></span>
 			<span column="dash" class="dash status  "></span>
-			<span column="recover" class="recover status "></span>
 			<span column="extend" class="extend status "></span>
+			<span column="recover" class="recover status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
+			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
-			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="flying" class="flying"></span>
 		</div>
 	</span>
@@ -294,13 +297,13 @@ SubLayout.weapon_html =`
 			<span column="bst" class="bst status "></span>
 			<span class="sep"></span>
 			<span column="dash" class="dash status  "></span>
-			<span column="recover" class="recover status "></span>
 			<span column="extend" class="extend status "></span>
+			<span column="recover" class="recover status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
+			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
-			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span class="sep"></span>
 				<span column="bullet_spd" class="bullet_spd "></span>
 				<span column="bullet_num" class="bullet_num"></span>

@@ -3,7 +3,7 @@ tr{
 	display:block;
 }
 tbody tr{
-	padding: 3px 0;
+	padding: 0px 0;
 }
 tr.header_filter span{
 	background-color:inherit !important;
@@ -283,6 +283,9 @@ thead .guarge_parent
 	display:none;
 }
 
+.status.height{
+	font-weight:normal;
+}
 span.sep{
 	width:6px;
 }
@@ -316,5 +319,10 @@ span.guarge{
 }
 
 span.rarelity{
-position:relative;
+	position:relative;
+}
+
+span.short_regist[content=',']
+,span.long_regist[content=',']{
+	visibility:hidden;
 }

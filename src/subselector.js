@@ -176,7 +176,16 @@ export default class Subselector{
 					var button = document.createElement("button");
 					var obj={};
 					obj[cols.data]=e;
-					button.textContent=cols.disp?cols.disp(obj,button):e;
+					var content = cols.disp?cols.disp(obj,button):e;
+
+					if(content === null){
+						return;
+						}
+					if(content instanceof HTMLElement || content.nodeName){
+						button.appendChild(content);
+					}else{
+						button.textContent=content;
+					}
 					button.onclick=function(){
 						filter.splice(idx,1);
 						tmp.setFilter(cols.data,filter)
@@ -228,13 +237,23 @@ export default class Subselector{
 				cols.forEach(function(col){
 					var td = document.createElement("td");
 					var content =  typeof col.disp == "function"?col.disp(rowdata,td):rowdata[col.data];
+					if(content === null){
+						return;
+						}
 					td.classList.add(col.data);
 					if(col.class){
 						td.classList.add(col.class);
 					}
-					td.setAttribute("content",content);
 					var span = td;//document.createElement("span");
-					span.innerHTML= content;
+					if(content === null){
+						return;
+						}
+					if(content instanceof HTMLElement || content.nodeName){
+						span.addChild(content);
+					}else{
+						td.setAttribute("content",content);
+						span.innerHTML= content;
+					}
 					//td.appendChild(span);
 					if(col.filter){
 						span.classList.add("filtertarget");
@@ -268,14 +287,22 @@ export default class Subselector{
 					var td = tr.querySelector("[column='"+col.data+"']");
 					if(!td)return;
 					var content =  typeof col.disp == "function"?col.disp(rowdata,td):rowdata[col.data];
+					if(content === null){
+						return;
+					}
 					//td.classList.add(col.data);
 					if(col.class){
 						td.classList.add(col.class);
 					}
-					td.setAttribute("content",content);
 					var span = td;//document.createElement("span");
-					if(content || content===0){
+					if(content instanceof HTMLElement || content.nodeName){
+						span.appendChild(content);
+					}else{
+						td.setAttribute("content",content);
 						span.innerHTML= content;
+						if(content || content===0){
+							span.innerHTML= content;
+						}
 					}
 					//td.appendChild(span);
 					if(col.filter){

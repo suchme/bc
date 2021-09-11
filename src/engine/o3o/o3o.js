@@ -94,6 +94,24 @@ export default class O3o{
 
 	}
 
+	getCollectionObjectList(collection_name){
+		var objects=[];
+		var collection = this.collections[collection_name];
+		if(!collection)return objects;
+
+
+		collection.children.forEach((value)=>{
+			//入れ子の場合
+			var children = this.getCollectionObjectList(value);
+			objects= objects.concat(children);
+		});
+
+		objects = objects.concat(collection.objects);
+		return objects;
+
+	}
+
+
 
 	createInstance(){ 
 		return new O3oInstance(this);

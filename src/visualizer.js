@@ -18,6 +18,7 @@ var homingCamera=function(angle,target,camera){
 	}
 var primitives={};
 var naked;
+var o3o_head;
 var naked_instance;
 var o3o_tmp;
 class Scene1 extends Scene{
@@ -49,6 +50,10 @@ class Scene1 extends Scene{
 		});
 		o3o_tmp= AssetManager.o3o("model/tmp.o3o",(o3o)=>{
 			this.instance_tmp= o3o.createInstance();
+		});
+		o3o_head = AssetManager.o3o("model/head.o3o",(o3o)=>{
+//			this.o3o.collections["h1"];
+			this.instance_head = o3o.createInstance();
 		});
 		this.t=0;
 		globalParam.autoExposure=false;
@@ -83,8 +88,9 @@ class Scene1 extends Scene{
 		for(var i=0;i<matrices.length;i++){
 			Mat44.copy(matrices[i],org_matrices[i]);
 		}
+
 		this.instance.draw();
-		this.instance_tmp.draw("Arm");
+		//this.instance_tmp.draw("Arm");
 		
 	}
 

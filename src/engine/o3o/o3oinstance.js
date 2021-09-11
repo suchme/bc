@@ -2,10 +2,13 @@ import O3o from "./o3o.js"
 import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "../../lib/vector.js"
 import SceneObjectInstance from "./sceneobjectinstance.js"
 export default class O3oInstance{
-	constructor(o3o){
+	constructor(o3o,_objects){
 		this.objectInstances=[];
 		this.objectInstances_assoc={};
 		var objects = o3o.objects;
+		if(_objects){
+			objects = _objects;
+		}
 
 		for(var i=0;i<objects.length;i++){
 			var object=objects[i];
@@ -61,15 +64,8 @@ export default class O3oInstance{
 
 	//コレクション内を描画
 	drawCollections(target){
-		var collection = this.o3o.collections[target];
-		if(!collection)return;
+		var objects = this.o3o.getCollectionObjectList(target);
 
-		collection.children.forEach((value)=>{
-			//入れ子の場合
-			this.drawCollection(value);
-		});
-
-		var objects = collection.objects;
 		for(var i=0;i<objects.length;i++){
 			if(objects[i].hide_render){
 				continue;

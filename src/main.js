@@ -78,12 +78,6 @@ class Main {
 		//計算処理
 		var passives=[];
 
-		var nodes = document.querySelectorAll("#form select[bind\\:]");
-		nodes.forEach((node)=>{
-			const bind = binder.binds.find(function(elem){return elem.node===node});
-			if(!bind)return;
-			bind.feedBack(node.value);
-		});
 		values.total.cost=0;
 
 		//神姫
@@ -128,7 +122,7 @@ class Main {
 		var span= document.createElement("span");
 
 		var passive={};
-		passive.skill = DATA.passives[values.shinki.org.exskill];
+		passive.skill = DATA.passives[values.shinki.org.expassive];
 		passive.effect= 0;
 		span.appendChild(getPassiveSpan(passive));
 		values.shinki.skill= span;
@@ -306,7 +300,7 @@ class Main {
 		add(values.subtotal,values.total);
 		
 		//固有パッシブ補正
-		var skill = DATA.passives[values.shinki.org.exskill];
+		var skill = DATA.passives[values.shinki.org.expassive];
 		switch(skill.name){
 			case "カーテンコール":
 				values.total.bst += Math.trunc(values.total.bst *0.2)
@@ -445,7 +439,22 @@ class Main {
 					cols.splice(10,0,{class:"status",label:"跳費",data:"jump_cost"});
 					cols.splice(11,0,{class:"status",label:"浮費",data:"hover_cost"});
 					cols.splice(11,0,{class:"status",label:"防費",data:"guard_cost"});
-					cols.splice(11,0,{label:"身長",data:"height",sort:0,filter:1});
+					cols.splice(11,0,{label:"近耐",data:"short_regist",sort:1,filter:1});
+					cols.splice(11,0,{label:"遠耐",data:"long_regist",sort:1,filter:1});
+					cols.splice(11,0,{label:"身長",data:"height",sort:1,filter:1});
+
+						cols.push({data:"expassive",label:"固有パッシブスキル",filter:1,disp:function(e,parent){
+
+								if(e.expassive===0){
+									parent.style.display = "none";
+								}
+								var passive={};
+								passive.skill = DATA.passives[e.expassive];
+								passive.effect= 0;
+								return getPassiveSpan(passive);
+								//return getSkillName(DATA.passives[e.expassive],-1); 
+						}}); 
+
 
 					if(part_idx===0){
 						cols.splice(10,0, {label:"名称",data:"name",filter:1
@@ -669,7 +678,13 @@ class Main {
 
 
 		document.querySelectorAll("select").forEach(function(node){
-			node.addEventListener("change",()=>{ main.reCalc(); });
+			node.addEventListener("change",function(){
+				var node = this;
+				const bind = binder.binds.find(function(elem){return elem.node===node});
+				if(!bind)return;
+				bind.feedBack(node.value);
+				   
+				main.reCalc(); });
 		});
 
 		var select = document.querySelector("#individual");
@@ -688,7 +703,7 @@ class Main {
 
 
 		var dt=new Date(DATA.date);
-		values.version="code2021/08/09\n"
+		values.version="code2021/09/11\n"
 			+ "data"+ dt.getFullYear() +"/"+("0"+(dt.getMonth()+1)).slice(-2)
 			+"/" +("0"+dt.getDate()).slice(-2);
 
@@ -853,14 +868,26 @@ document.querySelector("#shinki div.skill").appendChild(
 }
 
 window.lvmax=function(){
-	values.shinki.lv=100;
-	values.head.lv=60;
-	values.body.lv=60;
-	values.arm.lv=60;
-	values.leg.lv=60;
-	values.rear.lv=60;
-	values.weapon.lv=60;
-	values.weapon2.lv=60;
+	if(values.shinki.lv !== 100){
+		values.shinki.lv=100;
+		values.head.lv=60;
+		values.body.lv=60;
+		values.arm.lv=60;
+		values.leg.lv=60;
+		values.rear.lv=60;
+		values.weapon.lv=60;
+		values.weapon2.lv=60;
+	}else{
+		values.shinki.lv=1;
+		values.head.lv=1;
+		values.body.lv=1;
+		values.arm.lv=1;
+		values.leg.lv=1;
+		values.rear.lv=1;
+		values.weapon.lv=1;
+		values.weapon2.lv=1;
+	}
+	main.reCalc();
 }
 
 var main = new Main();

@@ -45,7 +45,7 @@ var shinki_mem=[
 	"cd","name","atk","def","spd","lp","bst"
 	,"recover","dash","extend"
 	,"dash_cost","jump_cost","hover_cost","guard_cost"
-	,"exskill","biko"];
+	,"expassive","biko"];
 class Shinki{
 	constructor(){
 		var shinki={};
@@ -81,6 +81,8 @@ var prepareData=function(source){
 		}
 		
 	}
+
+
 	//名称リスト
 	var lists = source.lists;
 	for(var i=0;i<lists[0].length;i++){
@@ -99,11 +101,19 @@ var prepareData=function(source){
 		var shinki = new Shinki();
 		row.forEach((col,idx)=>{
 			if(idx>=row.length-15){
+				//適正
 				shinki.apts.push(col);
 			}else{
 				shinki[mems[idx]] = col;
 			}
 		});
+
+		if(shinki.short_regist==0){
+			shinki.short_regist=",";
+		}
+		if(shinki.long_regist==0){
+			shinki.long_regist=",";
+		}
 
 		output.shinkis.push(shinki);
 
