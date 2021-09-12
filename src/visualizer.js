@@ -4,6 +4,7 @@ import Util from "./lib/util.js"
 import Engine from "./engine/engine.js"
 import Scene from "./engine/scene.js"
 import O3o from "./engine/o3o/o3o.js"
+import SceneObjectInstance from "./engine/o3o/sceneobjectinstance.js"
 import AssetManager from "./engine/assetmanager.js"
 import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "./lib/vector.js"
 
@@ -38,7 +39,7 @@ class Scene1 extends Scene{
 					var name = "s"+i;
 					return (o3o)=>{
 						if(o3o){
-							primitives[name]= o3o.createInstance();
+						primitives[name]= o3o.createInstance();
 						}else{
 							primitives[name]= naked_instance;
 							console.log("sippai");
@@ -50,7 +51,8 @@ class Scene1 extends Scene{
 			}	
 		});
 		o3o_tmp= AssetManager.o3o("model/tmp.o3o",(o3o)=>{
-			this.instance_tmp= o3o.createInstance();
+			this.instances.push(new SceneObjectInstance(o3o.objects["Body"]));
+			this.instances.push(new SceneObjectInstance(o3o.objects["Armature"]));
 		});
 		o3o_head = AssetManager.o3o("model/head.o3o",(o3o)=>{
 //			this.o3o.collections["h1"];
@@ -80,7 +82,7 @@ class Scene1 extends Scene{
 		Mat44.setInit(ono3d.worldMatrix);
 //		ono3d.worldMatrix[13]=-1;
 		var org_matrices=naked_instance.objectInstances["Armature"].boneMatrices;
-		var matrices=this.instance_tmp.objectInstances["Armature"].boneMatrices;
+		var matrices=this.instances.objectInstances["Armature"].boneMatrices;
 		for(var i=0;i<matrices.length;i++){
 			Mat44.copy(matrices[i],org_matrices[i]);
 		}
@@ -90,7 +92,8 @@ class Scene1 extends Scene{
 			Mat44.copy(matrices[i],org_matrices[i]);
 		}
 
-		this.instance.draw();
+		//this.instance.draw();
+		this.instances[0].draw();
 		//this.instance_tmp.draw("Arm");
 		
 	}
