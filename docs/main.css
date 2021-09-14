@@ -12,6 +12,10 @@ body{
 	height:100%;
 
 }
+
+div.skill{
+	text-align:right;
+}
 div.main{
 padding:4px;
 	width:400px;
@@ -45,9 +49,6 @@ button.armor{
 }
 select{
 	appearance: none;
-	border:none;
-	padding:1px;
-	margin:1px;
 }
 select.rarelity{
 	width:30px;
@@ -276,7 +277,7 @@ display:inline-block;
 
 div.setting{
 	position:relative;
-	height:20px;
+	/*height:20px;*/
 }
 button.change{
 	background-color:#c00;
