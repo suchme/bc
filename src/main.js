@@ -15,14 +15,14 @@ function getPassiveSpan(skill){
 	var span = document.createElement("span");
 	span.textContent = getSkillName(skill.skill,skill.effect);
 	span.title = skill.skill.biko;
-	span.className = "passive";
+	span.className = "passive icon";
 	return span;
 }
 function getSkillSpan(skill){
 	var span = document.createElement("span");
 	span.textContent = getSkillName(skill.skill,skill.effect);
 	span.title = skill.skill.biko;
-	span.className = "passive";
+	span.className = "passive icon";
 	return span;
 }
 function getSkillName(skill,effect){
@@ -239,7 +239,7 @@ class Main {
 				skill.skill = DATA.actives[armor.active];
 				skill.effect= armor.active_effect;
 				var span =getSkillSpan(skill);
-				span.className = "active";
+				span.className = "active icon";
 				span_skill.appendChild(span);
 			}
 			values[part].skill=span_skill;
@@ -310,6 +310,9 @@ class Main {
 				break;
 			case "グライドオンプレステイル":
 				values.total.hover_cost -= Math.trunc(values.total.hover_cost *0.3)
+				break;
+			case "忍びの技術":
+				values.total.dash += Math.trunc(values.total.dash*0.15)
 				break;
 		}
 
@@ -493,10 +496,12 @@ class Main {
 								}
 
 								return DATA.category_short[e.category];}}); 
-							cols.push({data:"active",label:"アクティブスキル",filter:1,disp:function(e,parent){
+							cols.push({data:"active",label:"アクティブスキル",filter:1,disp:function(e,node){
 								if(e.active===0){
-									parent.style.display = "none";
+									node.style.display = "none";
 								}
+								node.classList.add("icon");
+									node.classList.add("active");
 								return getSkillName(DATA.actives[e.active],e.active_effect);
 							}}); 
 									
@@ -509,11 +514,13 @@ class Main {
 							cols.push({data:"flying",label:"飛行",filter:1,disp:function(e,parent){
 									if(e.flying) parent.classList.add("enable");
 									return DATA.flying[e.flying]}});
-							cols.push({data:"passive",label:"パッシブスキル",filter:1,disp:function(e,parent){
+							cols.push({data:"passive",label:"パッシブスキル",filter:1,disp:function(e,node){
 
 									if(e.passive===0){
-										parent.style.display = "none";
+										node.style.display = "none";
 									}
+									node.classList.add("icon");
+									node.classList.add("passive");
 									return getSkillName(DATA.passives[e.passive],e.passive_effect); }}); 
 
 						cols.push({label:"備考",data:"biko"});
@@ -523,9 +530,10 @@ class Main {
 								return DATA.rarelity[e[this.data]];
 							}});
 						cols.unshift({data:"class",label:"分類",filter:1
-							,disp:function(e,node){
-								node.classList.add(DATA.class_shinki[e.class]);
-								return DATA.class[e.class];}});
+							,disp:function(e,node,data){
+								node.classList.add(DATA.class_shinki[data]);
+								node.classList.add("class");
+								return DATA.class[data];}});
 						cols.unshift({data:"part",label:"部位",filter:1
 							,disp:function(e){return DATA.part_name[e.part]}});
 					subselector.rowhtml = SubLayout.arr[part_idx];
@@ -703,7 +711,7 @@ class Main {
 
 
 		var dt=new Date(DATA.date);
-		values.version="code2021/09/11\n"
+		values.version="code2021/10/16\n"
 			+ "data"+ dt.getFullYear() +"/"+("0"+(dt.getMonth()+1)).slice(-2)
 			+"/" +("0"+dt.getDate()).slice(-2);
 
@@ -805,7 +813,7 @@ DATA.shinkis.forEach((e)=>{
 			`, stylesheet.cssRules.length);
 
 			stylesheet.insertRule(` 
-				.shinki.${e.cd}::before
+				.shinki .${e.cd}::before
 				,.class.${e.cd}::before{
 				content:'';
 				background-image:url(icon/${e.cd}_.png);

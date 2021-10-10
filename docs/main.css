@@ -215,8 +215,8 @@ span.weapon2 span.status{
 	font-size:smaller;
 }
 
-span.passive::before,
-span.active::before{
+span.passive.icon::before,
+span.active.icon::before{
 	background-image:url("icon/passive.svg");
 	background-size:12px;
 	display:inline-block;
@@ -226,7 +226,7 @@ span.active::before{
 	content:"";
 	background-position:bottom;
 }
-span.active::before{
+span.active.icon::before{
 	background-image:url("icon/active.svg");
 }
 span.passive{
@@ -409,6 +409,12 @@ display:none;
 .status.cost[content^='-']
 ,.status[content^='+']{
 	color:#3ee;
+}
+[content="+"]{
+	color:#3ee;
+}
+[content="-"]{
+	color:#c33;
 }
 .status.cost{
 	width:28px;

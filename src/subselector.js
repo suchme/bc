@@ -160,7 +160,13 @@ export default class Subselector{
 		var data= source.filter(function(e){
 			var flg=true;
 			keys.forEach(function(key){
-				flg &= (filters[key].indexOf(e[key])>=0);
+				var data = e[key];
+				if(!Array.isArray(data)){
+					data=[data];
+				}
+				filters[key].forEach((fil)=>{
+					flg &= (data.indexOf(fil)>=0);
+				});
 			});
 			return flg;
 		});
@@ -176,12 +182,14 @@ export default class Subselector{
 					var button = document.createElement("button");
 					var obj={};
 					obj[cols.data]=e;
-					var content = cols.disp?cols.disp(obj,button):e;
+					var content = cols.disp?cols.disp(obj,button,e):e;
 
 					if(content === null){
 						return;
 						}
-					if(content instanceof HTMLElement || content.nodeName){
+					if(content instanceof HTMLElement 
+						//|| content.nodeName
+							){
 						button.appendChild(content);
 					}else{
 						button.textContent=content;
@@ -257,7 +265,7 @@ export default class Subselector{
 					//td.appendChild(span);
 					if(col.filter){
 						span.classList.add("filtertarget");
-						span.onclick=(function(cd,value){return function(e){tmp.setFilter(cd,[value]);}})(col.data,rowdata[col.data]);
+						span.onclick=(function(cd,value){return function(e){tmp.setFilter(cd,[value]);}})(col.data,content);
 					}
 					tr.appendChild(td);
 				});
@@ -286,29 +294,35 @@ export default class Subselector{
 				cols.forEach(function(col){
 					var td = tr.querySelector("[column='"+col.data+"']");
 					if(!td)return;
-					var content =  typeof col.disp == "function"?col.disp(rowdata,td):rowdata[col.data];
-					if(content === null){
-						return;
-					}
-					//td.classList.add(col.data);
 					if(col.class){
 						td.classList.add(col.class);
 					}
-					var span = td;//document.createElement("span");
-					if(content instanceof HTMLElement || content.nodeName){
-						span.appendChild(content);
-					}else{
-						td.setAttribute("content",content);
-						span.innerHTML= content;
-						if(content || content===0){
-							span.innerHTML= content;
+					var datas = rowdata[col.data];
+					if(!Array.isArray(datas)){
+						datas= [datas];
+					}
+					datas.forEach((data)=>{
+						var span = document.createElement("span");
+						var content =  typeof col.disp == "function"?col.disp(rowdata,span,data):rowdata[col.data];
+						if(content === null){
+							return;
 						}
-					}
-					//td.appendChild(span);
-					if(col.filter){
-						span.classList.add("filtertarget");
-						span.onclick=(function(cd,value){return function(e){tmp.setFilter(cd,[value]);}})(col.data,rowdata[col.data]);
-					}
+						if(content instanceof HTMLElement
+							   //|| content.nodeName
+								){
+							span.appendChild(content);
+							td.appendChild(span);
+						}else{
+							span.setAttribute("content",content);
+							span.innerHTML= content;
+							td.appendChild(span);
+						}
+						//td.appendChild(span);
+						if(col.filter){
+							span.classList.add("filtertarget");
+							span.onclick=(function(cd,value){return function(e){tmp.setFilter(cd,[value]);}})(col.data,data);
+						}
+					});
 				});
 
 				th = document.createElement("td");

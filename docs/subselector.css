@@ -112,6 +112,9 @@ tr .name{
 	font-weight:bold;
 	white-space: nowrap;
 }
+tr .class{
+	white-space:pre-wrap;
+}
 tbody span{
 	vertical-align:bottom;
 }
@@ -301,7 +304,7 @@ thead span
 margin:1px;
 }
 
-.shinki::before{
+.shinki span::before{
 	display:inline-block;
 	background-size:contain;
 	width:24px;
@@ -325,4 +328,11 @@ span.rarelity{
 span.short_regist[content=',']
 ,span.long_regist[content=',']{
 	visibility:hidden;
+}
+button.class{
+background-color:black;
+}
+
+span.filtertarget.class{
+width:initial;
 }

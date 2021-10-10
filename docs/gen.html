@@ -100,7 +100,7 @@ var prepareData=function(source){
 		if(!idx)return;
 		var shinki = new Shinki();
 		row.forEach((col,idx)=>{
-			if(idx>=row.length-15){
+			if(idx>=row.length-16){
 				//適正
 				shinki.apts.push(col);
 			}else{
@@ -109,10 +109,10 @@ var prepareData=function(source){
 		});
 
 		if(shinki.short_regist==0){
-			shinki.short_regist=",";
+			shinki.short_regist=".";
 		}
 		if(shinki.long_regist==0){
-			shinki.long_regist=",";
+			shinki.long_regist=".";
 		}
 
 		output.shinkis.push(shinki);
@@ -188,6 +188,11 @@ var prepareData=function(source){
 		if(output.actives[e.active].effect_type===1 && e.active_effect===0){
 			e.active_effect=e.rarelity+1;
 		}
+		var classes = e.class.split('|');
+		classes = classes.map((e)=>{
+			return output.class.indexOf(e);
+		});
+		e.class=classes;
 	});
 
 	output.armors.forEach(function(e){
