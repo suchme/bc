@@ -303,19 +303,19 @@ export default class Subselector{
 					}
 					datas.forEach((data)=>{
 						var span = document.createElement("span");
+							td.appendChild(span);
 						var content =  typeof col.disp == "function"?col.disp(rowdata,span,data):rowdata[col.data];
 						if(content === null){
+							td.removeChild(span);
 							return;
 						}
 						if(content instanceof HTMLElement
 							   //|| content.nodeName
 								){
 							span.appendChild(content);
-							td.appendChild(span);
 						}else{
 							span.setAttribute("content",content);
 							span.innerHTML= content;
-							td.appendChild(span);
 						}
 						//td.appendChild(span);
 						if(col.filter){

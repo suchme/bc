@@ -97,14 +97,14 @@ tr .category{
 	width:60px;
 }
 tr .active{
-	width:200px;
+	/*width:200px;*/
 }
 
 tr .passive{
 	width:200px;
 }
 tr .biko{
-	width:200px;
+	/*width:200px;*/
 }
 tr .name{
 	width:400px;
@@ -229,13 +229,13 @@ tbody .distance span.long{
 }
 
 
-tr .category.short{
+tr .category .short{
 color:#f66;
 }
-tr .category.long{
+tr .category .long{
 color:#0cf;
 }
-tr .category.bougu{
+tr .category .bougu{
 color:#939;
 }
 
@@ -312,7 +312,6 @@ margin:1px;
 	vertical-align:middle;
 }
 div.value{
-	position:absolute;
 	color:white;
 	bottom:2px;
 	
@@ -336,3 +335,15 @@ background-color:black;
 span.filtertarget.class{
 width:initial;
 }
+span.status span[content^='-']
+{
+	color:#c33;
+}
+span.status.cost span[content^='-']{
+	color:#3ee;
+}
+span[content='0']{
+	color:#888;
+	font-weight:normal;
+}
+	

@@ -40,7 +40,8 @@ SubLayout.shinki_html =`
 	<span column="cat12" class="long cat status "></span>
 	<span column="cat13" class="long cat status "></span>
 	<span column="cat14" class="long cat status "></span>
-	<span column="cat15" class="bougu cat status "></span>
+	<span column="cat15" class="long cat status "></span>
+	<span column="cat16" class="bougu cat status "></span>
 	</div>
 	</span>
 `;
@@ -270,24 +271,8 @@ SubLayout.weapon_html =`
 	<span>
 		<div class="divname">
 			<span class="name" column="name"></span>
-				<span column="recast" class="guarge">
-					<span class="guarge_parent">
-						<div class="value" ></div>
-						<div class="guarge_child" ></div>
-					</span>
-				</span>
-				<span column="reload" class="guarge">
-					<span class="guarge_parent">
-						<div class="value" ></div>
-						<div class="guarge_child" ></div>
-					</span>
-				</span>
-				<span column="range" class="guarge">
-					<span class="guarge_parent">
-						<div class="value" ></div>
-						<div class="guarge_child" ></div>
-					</span>
-				</span>
+		<span class="active" column="active"></span>
+		<span class="biko" column="biko"></span>
 		</div>
 		<div>
 			<span column="atk" class="atk status "></span>
@@ -305,13 +290,29 @@ SubLayout.weapon_html =`
 			<span column="jump_cost" class="jump_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
 			<span class="sep"></span>
+				<span column="recast" class="guarge">
+					<div class="value" ></div>
+					<span class="guarge_parent">
+						<div class="guarge_child" ></div>
+					</span>
+				</span>
+				<span column="reload" class="guarge">
+					<div class="value" ></div>
+					<span class="guarge_parent">
+						<div class="guarge_child" ></div>
+					</span>
+				</span>
+				<span column="range" class="guarge">
+					<div class="value" ></div>
+					<span class="guarge_parent">
+						<div class="guarge_child" ></div>
+					</span>
+				</span>
 				<span column="bullet_spd" class="bullet_spd "></span>
 				<span column="bullet_num" class="bullet_num"></span>
 		</div>
 	</span>
 	<span>
-		<div><span class="active" column="active"></span></div>
-		<div class="biko" column="biko"></div>
 	</span>
 `;
 
@@ -328,6 +329,7 @@ SubLayout.arr=[
 
 SubLayout.guarge = function(e,parent){
 	var data=e[this.data];
+	parent= parent.parentNode;
 	if(data<0){
 		parent.querySelector("div.guarge_child").style.width="0";
 	}else{
@@ -343,6 +345,7 @@ SubLayout.guarge = function(e,parent){
 };
 
 SubLayout.guarge_range = function(e,parent){
+	parent= parent.parentNode;
 	parent.querySelector("div.guarge_child").style.width=e[this.data] +"%";
 	parent.title=e[this.data];
 	parent.querySelector("div.value").innerText=(e[this.data]*0.01).toFixed(3);
