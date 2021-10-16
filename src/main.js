@@ -487,7 +487,7 @@ class Main {
 							}});
 							cols.splice(2,0,{data:"category",label:"カテゴリ",filter:1,disp:function(e,p){
 
-								if(e.category===16){
+								if(e.category>=16){
 									p.classList.add("bougu");
 								}else if(e.distance===0){
 									p.classList.add("short");

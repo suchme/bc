@@ -42,6 +42,7 @@ SubLayout.shinki_html =`
 	<span column="cat14" class="long cat status "></span>
 	<span column="cat15" class="long cat status "></span>
 	<span column="cat16" class="bougu cat status "></span>
+	<span column="cat17" class="bougu cat status "></span>
 	</div>
 	</span>
 `;
