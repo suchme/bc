@@ -139,7 +139,6 @@ table .part{
 	color:#999;
 }
 .class{
-	width:130px;
 	color:#999;
 }
 
@@ -149,9 +148,6 @@ thead .name button{
 }
 .rarelity button{
 	white-space:nowrap;
-position:absolute;
-	bottom:0px;
-	right:0px;
 	
 }
 tr .rarelity{
@@ -217,6 +213,12 @@ td.N
 ,td.SR
 ,td.UR{
 color:#000;
+}
+span.N
+,span.R
+,span.SR
+,span.UR{
+width:100%;
 }
 tbody .distance span{
 padding:1px;
@@ -332,6 +334,10 @@ button.class{
 background-color:black;
 }
 
+.class:before{
+	margin-top:-10px;
+	margin-bottom:-10px;
+}
 span.filtertarget.class{
 width:initial;
 }
