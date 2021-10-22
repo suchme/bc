@@ -281,6 +281,10 @@ span[content="闇神姫"]::before{
 	content:"";
 	background-image:url("icon/yami.png");
 }
+span[content="テンペスタ"]::before{
+	content:"";
+	background-image:url("icon/tempesta.png");
+}
 
 span.flying .enable{
 	background-image:url("icon/flying.svg");

@@ -190,7 +190,14 @@ var prepareData=function(source){
 		}
 		var classes = e.class.split('|');
 		classes = classes.map((e)=>{
-			return output.class.indexOf(e);
+			var idx = output.class.indexOf(e)
+			if(idx<0){
+				//ない場合は追加
+				output.class.push(e);
+				idx = output.class.indexOf(e)
+			}
+			return idx;
+			
 		});
 		e.class=classes;
 	});
