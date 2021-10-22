@@ -215,7 +215,6 @@ SubLayout.rear_html =`
 	<span class="rowheader">
 		<div>
 			<span class="part" column="part"></span>
-			<span class="rarelity" column="rarelity"></span>
 		</div>
 		<div>
 			<span class="class" column="class"></span>
@@ -223,6 +222,7 @@ SubLayout.rear_html =`
 	</span>
 	<span class="namearea">
 		<div class="divname">
+			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
 		</div>
 		<div>

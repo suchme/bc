@@ -107,8 +107,9 @@ tr .biko{
 }
 tr .name{
 	width:400px;
-	font-size:larger;
+	/*font-size:larger;
 	font-weight:bold;
+	*/
 	white-space: nowrap;
 }
 tr span.rowheader{
@@ -275,7 +276,13 @@ tr .flying{
 	text-align:center;
 }
 
-span.flying.enable{
+
+span[content="闇神姫"]::before{
+	content:"";
+	background-image:url("icon/yami.png");
+}
+
+span.flying .enable{
 	background-image:url("icon/flying.svg");
 	background-size:16px;
 	background-repeat:no-repeat;

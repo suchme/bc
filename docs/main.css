@@ -220,8 +220,8 @@ span.active.icon::before{
 	background-image:url("icon/passive.svg");
 	background-size:12px;
 	display:inline-block;
-	width:14px;
-	height:14px;
+	width:12px;
+	height:12px;
 	background-repeat:no-repeat;
 	content:"";
 	background-position:bottom;
