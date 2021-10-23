@@ -194,9 +194,9 @@ export default class Subselector{
 					}else{
 						button.textContent=content;
 					}
+					var target = filter[idx];
 					button.onclick=function(){
-						filter.splice(idx,1);
-						tmp.setFilter(cols.data,filter)
+						tmp.removeFilter(cols.data,target);
 					};
 					th.appendChild(button);
 				});
@@ -335,6 +335,14 @@ export default class Subselector{
 
 
 	}
+	removeFilter(name,value){
+		var filter = this.filter[name];
+		var idx = filter.indexOf(value);
+		if(idx>=0){
+			filter.splice(idx,1);
+			this.createTable();
+		}
+	}
 	setFilter(name,value){
 		var filter = this.filter;
 		if(!value){
@@ -342,7 +350,10 @@ export default class Subselector{
 		}else if(value.length===0){
 			delete filter[name];
 		}else{
-			filter[name]=value;
+			if(!filter[name]){
+				filter[name]=[];
+			}
+			filter[name]=filter[name].concat(value);
 		}
 
 		this.createTable();

@@ -768,7 +768,7 @@ class Main {
 				,{label:"効果量",data:"effect",filter:1,disp:function(e){return DATA.effect[e.effect];}}
 			];
 
-			subselector.filter={effect:[0,1]};
+			subselector.filter={effect:[1]};
 			var source=[];
 			DATA.passives.forEach(function(e,idx){
 				if(idx===0)return;
@@ -808,7 +808,7 @@ DATA.shinkis.forEach((e)=>{
 			stylesheet.insertRule(` 
 				.part_icon.${e.cd}{
 				content:'';
-				background-image:url(icon/${e.cd}_.png);
+				background-image:url(icon/${e.cd}.png);
 			}
 			`, stylesheet.cssRules.length);
 
@@ -816,7 +816,7 @@ DATA.shinkis.forEach((e)=>{
 				.shinki .${e.cd}::before
 				,.class.${e.cd}::before{
 				content:'';
-				background-image:url(icon/${e.cd}_.png);
+				background-image:url(icon/${e.cd}.png);
 			}
 			`, stylesheet.cssRules.length);
 	//		}
