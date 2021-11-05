@@ -140,6 +140,7 @@ export default class SceneObjectInstance{
 		
 	}
 	resetMatrix(){
+		//オブジェクトの姿勢行列の計算済みフラグをオフにする
 		this.flg=false;
 		for(var i=0;i<this.boneFlgs.length;i++){
 			this.boneFlgs[i]=false;
@@ -527,6 +528,7 @@ export default class SceneObjectInstance{
 
 
 	modArmature(dst,mod){
+		//アーマチュア変形
 		var bufMesh = dst;
 		var bufMeshVertices =bufMesh.vertices
 		var renderVertex;
@@ -600,6 +602,7 @@ export default class SceneObjectInstance{
 		Mat43.poolFree(2);
 	}
 	calcModifiers(dst){
+		//モディファイア適用
 		var flg=0;
 		var obj = this.object;
 		for(var i=0,imax=obj.modifiers.length;i<imax;i++){
@@ -700,6 +703,7 @@ export default class SceneObjectInstance{
 		return faces;
 	}
 	draw= function(environment,environment2,envratio){
+		//描画
 		var obj = this.object;
 		if(obj.type !== "MESH"){
 			return null;

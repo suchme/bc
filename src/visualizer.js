@@ -18,9 +18,9 @@ var homingCamera=function(angle,target,camera){
 		
 	}
 var primitives={};
-var naked;
+var base_model;
+var base_instance;
 var o3o_head;
-var naked_instance;
 var o3o_tmp;
 class Scene1 extends Scene{
 	constructor(){
@@ -31,8 +31,9 @@ class Scene1 extends Scene{
 		this.target=new Vec3();
 		this.instances=[];
 
-		naked = AssetManager.o3o("model/naked.o3o",(o3o)=>{
-			naked_instance = o3o.createInstance();
+		base_model = AssetManager.o3o("model/base.o3o",(o3o)=>{
+			base_instance = o3o.createInstance();
+			
 
 			for(var i=0;i<30;i++){
 				var f=(function(){
@@ -41,7 +42,7 @@ class Scene1 extends Scene{
 						if(o3o){
 						primitives[name]= o3o.createInstance();
 						}else{
-							primitives[name]= naked_instance;
+							primitives[name]= base_instance;
 							console.log("sippai");
 						}
 					}
@@ -49,14 +50,6 @@ class Scene1 extends Scene{
 
 				AssetManager.o3o("model/s"+i+".o3o",f);
 			}	
-		});
-		o3o_tmp= AssetManager.o3o("model/tmp.o3o",(o3o)=>{
-			this.instances.push(new SceneObjectInstance(o3o.objects["Body"]));
-			this.instances.push(new SceneObjectInstance(o3o.objects["Armature"]));
-		});
-		o3o_head = AssetManager.o3o("model/head.o3o",(o3o)=>{
-//			this.o3o.collections["h1"];
-			this.instance_head = o3o.createInstance();
 		});
 		this.t=0;
 		globalParam.autoExposure=false;
@@ -71,8 +64,9 @@ class Scene1 extends Scene{
 		this.a[1]=Math.PI;
 	}
 	draw(){
-		this.instance = primitives[values.shinki.cd];
-		if(!this.instance)return;
+		//this.instance = primitives[values.shinki.cd];
+		//if(!this.instance)return;
+		if(!base_instance)return;
 
 		if(!this.hoge){
 			this.create();
@@ -81,28 +75,29 @@ class Scene1 extends Scene{
 
 		Mat44.setInit(ono3d.worldMatrix);
 //		ono3d.worldMatrix[13]=-1;
-		var org_matrices=naked_instance.objectInstances["Armature"].boneMatrices;
-		var matrices=this.instances.objectInstances["Armature"].boneMatrices;
-		for(var i=0;i<matrices.length;i++){
-			Mat44.copy(matrices[i],org_matrices[i]);
-		}
+	//	var org_matrices=naked_instance.objectInstances["Armature"].boneMatrices;
+		//var matrices=this.instance.objectInstances["Armature"].boneMatrices;
+		//for(var i=0;i<matrices.length;i++){
+		//	Mat44.copy(matrices[i],org_matrices[i]);
+		//}
 
-		matrices=this.instance.objectInstances["Armature"].boneMatrices;
-		for(var i=0;i<matrices.length;i++){
-			Mat44.copy(matrices[i],org_matrices[i]);
-		}
+		//matrices=this.instance.objectInstances["Armature"].boneMatrices;
+		//for(var i=0;i<matrices.length;i++){
+		//	Mat44.copy(matrices[i],org_matrices[i]);
+		//}
 
-		//this.instance.draw();
-		this.instances[0].draw();
+		base_instance.draw();
+		//this.instances[0].draw();
 		//this.instance_tmp.draw("Arm");
 		
 	}
 
 	move(){
+
 		if(Util.pressOn){
+			//クリックされていた場合は視点変更
 			this.a[1]-=(Util.cursorX-Util.oldcursorX)/engine.WIDTH;
 			this.a[0]-=((Util.cursorY-Util.oldcursorY)/engine.HEIGHT);
-
 		}
 		this.a[0] =Math.min(this.a[0],Math.PI/2);
 		this.a[0] =Math.max(this.a[0],-Math.PI/2);
@@ -112,16 +107,14 @@ class Scene1 extends Scene{
 		this.p[2]=-Math.cos(this.a[1])*this.p[2];
 
 		Vec3.mul(this.p,this.p,this.cameralen);
-
 		Vec3.add(this.p,this.p,this.target);
 
 		var camera = engine.camera;
-
 		camera.p[0]+=(this.p[0]-camera.p[0])*0.3
 		camera.p[1]+=(this.p[1]-camera.p[1])*0.3
 		camera.p[2]+=(this.p[2]-camera.p[2])*0.3
 
-
+		//ターゲット注目
 		homingCamera(camera.a,this.target,camera.p);
 
 		var light = engine.ono3d.environments[0].sun;
@@ -130,10 +123,12 @@ class Scene1 extends Scene{
 
 		Mat44.dot(light.viewmatrix2,engine.ono3d.projectionMatrix,engine.ono3d.viewMatrix);
 
-		this.instance = primitives[values.shinki.cd];
-		var scene= naked.scenes[0];
+		//this.instance = primitives[values.shinki.cd];
+		var scene= base_model.scenes[0];
 		scene.setFrame(this.t);
-		naked_instance.calcMatrix(1.0/globalParam.fps);
+		//naked_instance.calcMatrix(1.0/globalParam.fps);
+		base_instance.calcMatrix(1.0/globalParam.fps);
+
 		this.t++;
 	}
 };

@@ -309,10 +309,13 @@ class Main {
 				values.total.guard_cost -= Math.trunc(values.total.guard_cost *0.6)
 				break;
 			case "グライドオンプレステイル":
-				values.total.hover_cost -= Math.trunc(values.total.hover_cost *0.3)
+				values.total.hover_cost -= Math.trunc(values.total.hover_cost *0.5)
 				break;
 			case "忍びの技術":
 				values.total.dash += Math.trunc(values.total.dash*0.15)
+				break;
+			case "忍びの忍術":
+				values.total.dash += Math.trunc(values.total.dash*0.20)
 				break;
 		}
 
