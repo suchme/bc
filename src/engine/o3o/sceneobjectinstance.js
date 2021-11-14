@@ -233,7 +233,9 @@ export default class SceneObjectInstance{
 
 		if(obj.parent){
 			var parent=obj.parent;
-			var parentInstance = o3oInstance.objectInstances[parent.idx];
+			//var parentInstance = o3oInstance.objectInstances[parent.idx];
+			var parentInstance = o3oInstance.searchObject(parent.name);
+
 			parentInstance.calcMatrix(dt,flg);
 
 			if(obj.parent_bone){
@@ -566,7 +568,7 @@ export default class SceneObjectInstance{
 		Mat43.dot(bM,bM2,this.matrix);
 		Mat43.getInv(bM2,bM);
 
-		var bones = mod.object.data.bones;
+		var bones = armature_instance.object.data.bones;
 		var boneMatrices=armature_instance.boneMatrices;
 
 

@@ -5,6 +5,7 @@ import Binder from "./lib/binder.js";
 import Subselector from "./subselector.js";
 import SubLayout from "./sub_layout.js";
 import Visualizer from "./visualizer.js";
+var v = new Visualizer();
 
 var values={total:{},subtotal:{},extra_passives:[],bonus:{},selected_tab:"main",extension:{}};
 window.values = values;
@@ -75,6 +76,9 @@ class Main {
 
 
 	reCalc(){
+		if(v.scene){
+			v.scene.update();
+		}
 		//計算処理
 		var passives=[];
 
@@ -861,8 +865,7 @@ DATA.param_cd.forEach((e,idx)=>{
 	
 
 });
-	var v = new Visualizer();
-	v.main();
+v.main();
 
 
 document.querySelector("#shinki div.skill").appendChild(

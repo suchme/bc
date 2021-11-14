@@ -38,19 +38,8 @@ class Scene1 extends Scene{
 			
 
 			for(var i=0;i<30;i++){
-				var f=(function(){
-					var name = "s"+i;
-					return (o3o)=>{
-						if(o3o){
-						primitives[name]= o3o.createInstance();
-						}else{
-							primitives[name]= base_instance;
-							console.log("sippai");
-						}
-					}
-				})();
 
-				AssetManager.o3o("model/s"+i+".o3o",f);
+				primitives["s"+i]=AssetManager.o3o("model/s"+i+".o3o");
 			}	
 			tmp_model = AssetManager.o3o("model/tmp.o3o",(o3o)=>{
 				o3o.objects.forEach((object,idx,arr)=>{
@@ -70,6 +59,28 @@ class Scene1 extends Scene{
 		globalParam.autoExposure=false;
 		globalParam.exposure_level = 0.2;
 		globalParam.exposure_upper = 1;
+	}
+	update(){
+		if(!tmp_model)return;
+		var target_o3o = primitives["s2"];
+		var targets = ["Head","Body","Arm.L","Arm.R","Leg.L","Leg.R","Rear"];
+		tmp_model.objects.forEach((object,idx,arr)=>{
+			var name = object.name;
+			if(!targets.includes(name))return;
+			if(!target_o3o.objects_name_hash[name])return;
+
+			arr[idx] = target_o3o.objects_name_hash[name];
+			tmp_model.objects_name_hash[object.name] = target_o3o.objects_name_hash[name];
+			
+		});
+		tmp_instance = tmp_model.createInstance();
+		tmp_model.collections["h1"].objects.forEach((object,idx,arr)=>{
+			tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
+		});
+		tmp_model.collections["b1"].objects.forEach((object,idx,arr)=>{
+			tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
+		});
+
 	}
 	create(){
 
@@ -104,6 +115,7 @@ class Scene1 extends Scene{
 
 		//base_instance.draw();
 		tmp_instance.drawCollections("h1");
+		tmp_instance.drawCollections("b1");
 //		tmp_instance.objectInstances["Head"].draw();
 		//this.instances[0].draw();
 		//this.instance_tmp.draw("Arm");
@@ -154,8 +166,6 @@ class Scene1 extends Scene{
 export default class Visualizer{
 	constructor(){
 		this.engine = new Engine();
-
-
 	}
 	main(){
 		if(Util.getLoadingCount()>0){
@@ -172,6 +182,8 @@ export default class Visualizer{
 			this.engine.scenes.push(scene1);
 			window.engine = this.engine;
 			window.ono3d = this.engine.ono3d;
+
+			this.scene=scene1;
 
 		}
 	}

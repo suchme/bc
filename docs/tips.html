@@ -1,0 +1,88 @@
+<html>
+<head>
+<style>
+body{
+	padding:0px;
+	margin:0px;
+	background-color:gray;
+}
+div.header{
+	padding:10px;
+}
+div.header2{
+	background-color:gray;
+	color:white;
+}
+div.header2 div{
+	background-color:black;
+	width:400px;
+	margin:auto;
+}
+div.body{
+	width:400px;
+	margin:auto;
+	background-color:white;
+}
+a{
+	color:white;
+	appearance: none;
+	background:none;
+	border:none;
+	text-decoration:underline;
+	padding:4px;
+}
+
+</style>
+<script>
+var changePage=function(tag){
+	document.querySelectorAll("div[class^='body_']").forEach((e)=>{
+		e.style.display="none";
+	});
+	document.querySelectorAll("div[class='body_" + tag + "']").forEach((e)=>{
+		e.style.display="inline-block";
+	});
+}
+var ona=function(e){
+	changePage(e.target.attributes.href.nodeValue);
+}
+var onl=function(){
+	var l=location.href;
+	var i = l.indexOf("#");
+	changePage(l.substring(i));
+
+}
+</script>
+
+</head>
+<body onload="onl()">
+<div class="header">
+	aaaaa
+</div>
+<div class="header2" onclick="ona(event)">
+	<div>
+<a id="A" href="#a"> a </a>
+<a id="B" href="#b"> b </a>
+<a id="C" href="#c"> c </a>
+<br>
+<a id="A" href="#a"> a </a>
+<a id="B" href="#b"> b </a>
+<a id="C" href="#c"> c </a>
+	</div>
+</div>
+
+<div class="body">
+<div class="body_#a" >
+	<h2>aaaa</h2>
+	<ul>
+	<li> h</li>
+	<p>aaa</p>
+	<li>h2</li>
+	<p>dwbbbaaa</p>
+	</ul>
+</div>
+<div class="body_#b"> –{•¶b </div>
+<div class="body_#c"> –{•¶c </div>
+</div>
+
+</body>
+</html>
