@@ -11,6 +11,7 @@ export default class O3oInstance{
 		}
 
 		for(var i=0;i<objects.length;i++){
+			//オブジェクトのインスタンスを作成
 			var object=objects[i];
 			object.idx=i;
 			var instance = new SceneObjectInstance(object);
@@ -18,39 +19,55 @@ export default class O3oInstance{
 			this.objectInstances.push(instance);
 			this.objectInstances[object.name]=instance;
 		}
+
+		//オブジェクトインスタンス初期化
 		Mat44.setInit(ono3d.worldMatrix);
 		this.calcMatrix(0,true);
 
 
 		for(var i=0;i<objects.length;i++){
+			//物理設定のあるオブジェクトは物理オブジェクト作成
 			var object=objects[i];
-			var instance = this.objectInstances[object.idx];
+			var instance = this.objectInstances[object.name];
 			instance.phyObj= O3o.createPhyObj(object,instance);
 
 		}
 
 		for(var i=0;i<objects.length;i++){
-			if(objects[i].rigid_body_constraint){
-				//ジョイント作成
-				var joint=createPhyJoint(objects[i],this.objectInstances);
-				this.objectInstances[i].joint=joint;
-			}
+			//ジョイント作成
+			if(!objects[i].rigid_body_constraint)continue;
+			var joint=createPhyJoint(objects[i],this.objectInstances);
+			this.objectInstances[i].joint=joint;
 		}
 		this.o3o= o3o;
 
 		o3o.scenes[0].setFrame(0);
-		//メッシュ変形のバインド
 		for(i=0;i<o3o.objects.length;i++){
+			//メッシュ変形のバインド
 			var object=o3o.objects[i];
 			var instance = this.objectInstances[i];
 			for(var j=0;j<object.modifiers.length;j++){
 				if(object.modifiers[j].type==="MESH_DEFORM"){
-					var ins2= this.objectInstances[object.modifiers[j].object.idx];
+					var ins2= this.objectInstances[object.modifiers[j].object.name];
 					bind(instance,ins2,object.modifiers[j]);
 				}
 			}	
 		}
 		
+	}
+	searchObject(name){
+		var children = this.objectInstances;
+		var result = children.find((child)=>{return child.object.name === name;});
+		if(result){
+			return result;
+		}
+		children.forEach((child)=>{
+			result = child.searchObject(name);
+			if(result){
+				return false;
+			}
+		});
+		return result;
 	}
 	calcMatrix(dt,flg){
 		for(var i=0;i<this.objectInstances.length;i++){
@@ -66,13 +83,16 @@ export default class O3oInstance{
 	drawCollections(target){
 		var objects = this.o3o.getCollectionObjectList(target);
 
-		for(var i=0;i<objects.length;i++){
-			if(objects[i].hide_render){
-				continue;
+		objects.forEach((object)=>{
+			if(object.hide_render){
+				return;
 			}
-			var instance = this.objectInstances[i];
-			instance.draw();
-		}
+			var instance = this.objectInstances[object.name];
+			if(instance){
+				instance.draw();
+			}
+		});
+
 	}
 
 	draw(target){

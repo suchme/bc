@@ -43,6 +43,7 @@ for(i=0;i<MAX_SIZE;i++){
 
 var abs = Math.abs;
 
+
 var groupMatricies = new Array(64)
 		,groupMatFlg= new Array(64)
 	;
@@ -62,6 +63,7 @@ export default class SceneObjectInstance{
 		this.matrix = new Mat43();
 		this.boneMatrices=[];
 		this.boneFlgs=[];
+		this.children=[];
 		if(object.objecttype===ObjectType.ARMATURE){
 			var bones = object.data.bones;
 			for(var i=0;i<bones.length;i++){
@@ -71,6 +73,20 @@ export default class SceneObjectInstance{
 		}
 	}
 	
+	searchObject(name){
+		if(!this.children)return false;
+		var result = this.children.find((child)=>{return child.object.name === name;});
+		if(result){
+			return result;
+		}
+		this.children.forEach((child)=>{
+			result = child.searchObject(name);
+			if(result){
+				return false;
+			}
+		});
+		return result;
+	}
 	getTempCollision(groups){
 		var collision;
 		var obj = this.object;
@@ -543,12 +559,15 @@ export default class SceneObjectInstance{
 
 		var bM = Mat43.poolAlloc();
 		var bM2 = Mat43.poolAlloc();
-		Mat43.getInv(bM2,objectInstances[mod.object.idx].matrix);
+		//var armature_instance= objectInstances[mod.object.name];
+		var armature_instance= this.o3oInstance.searchObject(mod.object.name);
+		if(!armature_instance)return;
+		Mat43.getInv(bM2,armature_instance.matrix);
 		Mat43.dot(bM,bM2,this.matrix);
 		Mat43.getInv(bM2,bM);
 
 		var bones = mod.object.data.bones;
-		var boneMatrices=objectInstances[mod.object.idx].boneMatrices;
+		var boneMatrices=armature_instance.boneMatrices;
 
 
 
@@ -1071,172 +1090,174 @@ export default class SceneObjectInstance{
 
 }
 
-	var setMaterial=function(material,name){
-		var renderMaterial;
-		var material;
-		var renderMaterials=ono3d.materials;
-		var i=0;
-		for(;i<ono3d.materials_index;i++){
-			if(renderMaterials[i].name === name){
-				return i;
-			}
+
+
+var setMaterial=function(material,name){
+	var renderMaterial;
+	var material;
+	var renderMaterials=ono3d.materials;
+	var i=0;
+	for(;i<ono3d.materials_index;i++){
+		if(renderMaterials[i].name === name){
+			return i;
 		}
-		renderMaterial = renderMaterials[i];
-		ono3d.materials_index++;
-
-		renderMaterial.offsetx=0;
-		renderMaterial.offsety=0;
-		renderMaterial.name =name;
-		Vec3.copy(renderMaterial.baseColor,material.baseColor);
-		renderMaterial.opacity = material.opacity;
-		renderMaterial.metallic= material.metallic;
-		renderMaterial.specular= material.specular;
-		renderMaterial.roughness= material.roughness;
-		renderMaterial.ior = material.ior;
-		renderMaterial.subRoughness = material.subRoughness;
-		renderMaterial.emt = material.emt;
-		
-
-		renderMaterial.baseColorMap= material.baseColorMap; 
-		renderMaterial.hightMap =material.hightMap;
-		renderMaterial.hightMapPower =material.hightMapPower;
-		renderMaterial.hightBase=material.hightBase;
-		renderMaterial.pbrMap = material.pbrMap;
-		renderMaterial.lightMap = material.lightMap;
-
-		renderMaterial.shader = material.shader;
-
-		return i;
 	}
+	renderMaterial = renderMaterials[i];
+	ono3d.materials_index++;
+
+	renderMaterial.offsetx=0;
+	renderMaterial.offsety=0;
+	renderMaterial.name =name;
+	Vec3.copy(renderMaterial.baseColor,material.baseColor);
+	renderMaterial.opacity = material.opacity;
+	renderMaterial.metallic= material.metallic;
+	renderMaterial.specular= material.specular;
+	renderMaterial.roughness= material.roughness;
+	renderMaterial.ior = material.ior;
+	renderMaterial.subRoughness = material.subRoughness;
+	renderMaterial.emt = material.emt;
+	
+
+	renderMaterial.baseColorMap= material.baseColorMap; 
+	renderMaterial.hightMap =material.hightMap;
+	renderMaterial.hightMapPower =material.hightMapPower;
+	renderMaterial.hightBase=material.hightBase;
+	renderMaterial.pbrMap = material.pbrMap;
+	renderMaterial.lightMap = material.lightMap;
+
+	renderMaterial.shader = material.shader;
+
+	return i;
+}
 
 
-	var copyMesh= function(dst,src){
-		dst.name=src.name;
+var copyMesh= function(dst,src){
+	dst.name=src.name;
 
-		//頂点情報をコピー
-		//var d=src.vertexSize - dst.vertices.length;
-		//for(var i = 0;i<d;i++){
-		//	//変数領域が足りない場合は追加
-		//	dst.vertices.push(new Vertex());
-		//}
-		//for(var i = 0;i<src.vertexSize;i++){
-		//	dst.vertices[i].pos.set(src.vertices[i].pos);
-		//	for(var j=0;j<3;j++){
-		//		dst.vertices[i].groups[j]= src.vertices[i].groups[j];
-		//		dst.vertices[i].groupWeights[j]= src.vertices[i].groupWeights[j];
-		//	}
-		//}
-		dst.vertices.buf.set(src.vertices.buf);
+	//頂点情報をコピー
+	//var d=src.vertexSize - dst.vertices.length;
+	//for(var i = 0;i<d;i++){
+	//	//変数領域が足りない場合は追加
+	//	dst.vertices.push(new Vertex());
+	//}
+	//for(var i = 0;i<src.vertexSize;i++){
+	//	dst.vertices[i].pos.set(src.vertices[i].pos);
+	//	for(var j=0;j<3;j++){
+	//		dst.vertices[i].groups[j]= src.vertices[i].groups[j];
+	//		dst.vertices[i].groupWeights[j]= src.vertices[i].groupWeights[j];
+	//	}
+	//}
+	dst.vertices.buf.set(src.vertices.buf);
 //		var aaa=new Int8Array(src.vertices[0].pos.buffer);
 //		var bbb=new Int8Array(dst.vertices[0].pos.buffer);
 //		bbb.set(aaa);
-		dst.vertexSize=src.vertexSize;
+	dst.vertexSize=src.vertexSize;
 
-		//辺情報をコピー
-		//var d=src.edgeSize - dst.edges.length;
-		//for(var i = 0;i<d;i++){
-		//	//変数領域が足りない場合は追加
-		//	dst.edges.push(new Edge());
-		//}
-		//for(var i = 0;i<src.edgeSize;i++){
-		//	var srcEdge=src.edges[i];
-		//	var dstEdge=dst.edges[i];
-		//	dstEdge.vIndices[0]=srcEdge.vIndices[0];
-		//	dstEdge.vIndices[1]=srcEdge.vIndices[1];
-		//	dstEdge.fIndices[0]=srcEdge.fIndices[0];
-		//	dstEdge.fIndices[1]=srcEdge.fIndices[1];
-		//}
-		dst.edges.buf.set(src.edges.buf);
-		//aaa=new Int8Array(src.edges[0].vIndices.buffer);
-		//bbb=new Int8Array(dst.edges[0].vIndices.buffer);
-		//bbb.set(aaa);
-		dst.edgeSize=src.edgeSize;
+	//辺情報をコピー
+	//var d=src.edgeSize - dst.edges.length;
+	//for(var i = 0;i<d;i++){
+	//	//変数領域が足りない場合は追加
+	//	dst.edges.push(new Edge());
+	//}
+	//for(var i = 0;i<src.edgeSize;i++){
+	//	var srcEdge=src.edges[i];
+	//	var dstEdge=dst.edges[i];
+	//	dstEdge.vIndices[0]=srcEdge.vIndices[0];
+	//	dstEdge.vIndices[1]=srcEdge.vIndices[1];
+	//	dstEdge.fIndices[0]=srcEdge.fIndices[0];
+	//	dstEdge.fIndices[1]=srcEdge.fIndices[1];
+	//}
+	dst.edges.buf.set(src.edges.buf);
+	//aaa=new Int8Array(src.edges[0].vIndices.buffer);
+	//bbb=new Int8Array(dst.edges[0].vIndices.buffer);
+	//bbb.set(aaa);
+	dst.edgeSize=src.edgeSize;
 
-		//面情報をコピー
-		//d=src.faceSize - dst.faces.length;
-		//for(var i = 0;i<d;i++){
-		//	//変数領域が足りない場合は追加
-		//	dst.faces.push(new Face());
-		//}
-		for(var i = 0;i<src.faceSize;i++){
-			var dstFace=dst.faces[i];
-			var srcFace =src.faces[i];
+	//面情報をコピー
+	//d=src.faceSize - dst.faces.length;
+	//for(var i = 0;i<d;i++){
+	//	//変数領域が足りない場合は追加
+	//	dst.faces.push(new Face());
+	//}
+	for(var i = 0;i<src.faceSize;i++){
+		var dstFace=dst.faces[i];
+		var srcFace =src.faces[i];
 
-			dstFace.material = srcFace.material;
-			dstFace.mat= srcFace.mat;
-			dstFace.idxnum=srcFace.idxnum;
-			dstFace.fs = srcFace.fs;
+		dstFace.material = srcFace.material;
+		dstFace.mat= srcFace.mat;
+		dstFace.idxnum=srcFace.idxnum;
+		dstFace.fs = srcFace.fs;
 
-	//		for(var j=0;j<srcFace.idxnum;j++){
-	//			dstFace.idx[j]= srcFace.idx[j];
-	//		}
-		}
-		if(src.faces.length>0){
-			dst.faces.buf.set(src.faces.buf);
-		}
-		//aaa=new Int8Array(src.faces[0].idx.buffer);
-		//bbb=new Int8Array(dst.faces[0].idx.buffer);
-		//bbb.set(aaa);
+//		for(var j=0;j<srcFace.idxnum;j++){
+//			dstFace.idx[j]= srcFace.idx[j];
+//		}
+	}
+	if(src.faces.length>0){
+		dst.faces.buf.set(src.faces.buf);
+	}
+	//aaa=new Int8Array(src.faces[0].idx.buffer);
+	//bbb=new Int8Array(dst.faces[0].idx.buffer);
+	//bbb.set(aaa);
 
-		dst.faceSize=src.faceSize;
+	dst.faceSize=src.faceSize;
 
-		//uvをコピー
-		var d=src.uv_layersSize - dst.uv_layers.length;
-		for(var i = 0;i<d;i++){
-			//変数領域が足りない場合は追加
+	//uvをコピー
+	var d=src.uv_layersSize - dst.uv_layers.length;
+	for(var i = 0;i<d;i++){
+		//変数領域が足りない場合は追加
+		dst.uv_layers.push(new UvLayer());
+	}
+	for(var i = 0;i<src.uv_layerSize;i++){
+		var srcdata=src.uv_layers[i].data;
+		if(dst.uv_layers.length<=i){
 			dst.uv_layers.push(new UvLayer());
 		}
-		for(var i = 0;i<src.uv_layerSize;i++){
-			var srcdata=src.uv_layers[i].data;
-			if(dst.uv_layers.length<=i){
-				dst.uv_layers.push(new UvLayer());
-			}
-			var dstdata=dst.uv_layers[i].data;
-			d = src.faceSize - dstdata.length;
-			for(var j=0;j<d;j++){
-				dstdata.push([]);
-			}
-
-			for(var j = 0;j<src.faceSize;j++){
-				dstdata[j][0] = srcdata[j][0];
-				dstdata[j][1] = srcdata[j][1];
-				dstdata[j][2] = srcdata[j][2];
-				dstdata[j][3] = srcdata[j][3];
-				dstdata[j][4] = srcdata[j][4];
-				dstdata[j][5] = srcdata[j][5];
-				dstdata[j][6] = srcdata[j][6];
-				dstdata[j][7] = srcdata[j][7];
-			}
+		var dstdata=dst.uv_layers[i].data;
+		d = src.faceSize - dstdata.length;
+		for(var j=0;j<d;j++){
+			dstdata.push([]);
 		}
-		dst.uv_layerSize=src.uv_layerSize;
-		
+
+		for(var j = 0;j<src.faceSize;j++){
+			dstdata[j][0] = srcdata[j][0];
+			dstdata[j][1] = srcdata[j][1];
+			dstdata[j][2] = srcdata[j][2];
+			dstdata[j][3] = srcdata[j][3];
+			dstdata[j][4] = srcdata[j][4];
+			dstdata[j][5] = srcdata[j][5];
+			dstdata[j][6] = srcdata[j][6];
+			dstdata[j][7] = srcdata[j][7];
+		}
 	}
+	dst.uv_layerSize=src.uv_layerSize;
 	
-	var calcSHcoef=[];
-	for(var i=0;i<9;i++){
-		calcSHcoef.push(new Vec3());
-	}
-	var calcSH=function(color,normal,vertex,shcoefs,ratio){
-		var hitTriangle = vertex.hitTriangle;
-		if(!hitTriangle){
-			Vec3.set(color,0.5,0.5,0.5);
-			return;
-		}
-		if(shcoefs.length===0){
-			Vec3.set(color,0.5,0.5,0.5);
-			return;
-		}
+}
 
-		var pIdx=hitTriangle.pIdx;
+var calcSHcoef=[];
+for(var i=0;i<9;i++){
+	calcSHcoef.push(new Vec3());
+}
+var calcSH=function(color,normal,vertex,shcoefs,ratio){
+	var hitTriangle = vertex.hitTriangle;
+	if(!hitTriangle){
+		Vec3.set(color,0.5,0.5,0.5);
+		return;
+	}
+	if(shcoefs.length===0){
+		Vec3.set(color,0.5,0.5,0.5);
+		return;
+	}
+
+	var pIdx=hitTriangle.pIdx;
+	for(var i=0;i<calcSHcoef.length;i++){
+		Vec3.set(calcSHcoef[i],0,0,0);
+	}
+	for(var k=0;k<4;k++){
+		var shcoef=shcoefs[pIdx[k]];
+		var r=ratio[k];
 		for(var i=0;i<calcSHcoef.length;i++){
-			Vec3.set(calcSHcoef[i],0,0,0);
+			Vec3.madd(calcSHcoef[i],calcSHcoef[i],shcoef[i],r);
 		}
-		for(var k=0;k<4;k++){
-			var shcoef=shcoefs[pIdx[k]];
-			var r=ratio[k];
-			for(var i=0;i<calcSHcoef.length;i++){
-				Vec3.madd(calcSHcoef[i],calcSHcoef[i],shcoef[i],r);
-			}
-		}
-
 	}
+
+}

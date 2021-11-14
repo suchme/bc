@@ -83,8 +83,10 @@ export default class O3o{
 		this.scenes =[] ; //シーン情報
 		this.collections=[];
 		this.objects = []; //オブジェクト情報
+		this.objects_name_hash= []; 
 		this.materials = []; //マテリアル
 		this.meshes = []; //メッシュ
+		this.meshes_name_hash = []; //メッシュ(名前ハッシュ)
 		this.armatures = [];//スケルトン
 		this.actions = []; //アニメーション
 		this.lights = []; //照明
@@ -162,6 +164,13 @@ O3o.setOno3d = function(a){
 
 			}
 		}
+
+		o3o.objects.forEach((e)=>{
+			o3o.objects_name_hash[e.name] = e;
+		});
+		o3o.meshes.forEach((e)=>{
+			o3o.meshes_name_hash[e.name] = e;
+		});
 
 		for(i=o3o.scenes.length;i--;){
 			var scene = o3o.scenes[i]

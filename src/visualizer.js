@@ -20,6 +20,8 @@ var homingCamera=function(angle,target,camera){
 var primitives={};
 var base_model;
 var base_instance;
+var tmp_instance;
+var tmp_model;
 var o3o_head;
 var o3o_tmp;
 class Scene1 extends Scene{
@@ -50,6 +52,19 @@ class Scene1 extends Scene{
 
 				AssetManager.o3o("model/s"+i+".o3o",f);
 			}	
+			tmp_model = AssetManager.o3o("model/tmp.o3o",(o3o)=>{
+				o3o.objects.forEach((object,idx,arr)=>{
+					if(object.name==="Head"){
+						arr[idx] = base_model.objects_name_hash["Head"];
+						o3o.objects_name_hash[object.name] = base_model.objects_name_hash["Head"];
+					}
+				});
+				tmp_instance = o3o.createInstance();
+				o3o.collections["h1"].objects.forEach((object,idx,arr)=>{
+					tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
+				});
+				//tmp_instance.objectInstances["Head"].o3oInstance = base_instance;
+			});
 		});
 		this.t=0;
 		globalParam.autoExposure=false;
@@ -67,6 +82,7 @@ class Scene1 extends Scene{
 		//this.instance = primitives[values.shinki.cd];
 		//if(!this.instance)return;
 		if(!base_instance)return;
+		//if(!tmp_instance)return;
 
 		if(!this.hoge){
 			this.create();
@@ -86,7 +102,9 @@ class Scene1 extends Scene{
 		//	Mat44.copy(matrices[i],org_matrices[i]);
 		//}
 
-		base_instance.draw();
+		//base_instance.draw();
+		tmp_instance.drawCollections("h1");
+//		tmp_instance.objectInstances["Head"].draw();
 		//this.instances[0].draw();
 		//this.instance_tmp.draw("Arm");
 		

@@ -4,7 +4,7 @@ import DATA from "./data.js";
 import Binder from "./lib/binder.js";
 import Subselector from "./subselector.js";
 import SubLayout from "./sub_layout.js";
-//import Visualizer from "./visualizer.js";
+import Visualizer from "./visualizer.js";
 
 var values={total:{},subtotal:{},extra_passives:[],bonus:{},selected_tab:"main",extension:{}};
 window.values = values;
@@ -861,8 +861,8 @@ DATA.param_cd.forEach((e,idx)=>{
 	
 
 });
-//	var v = new Visualizer();
-//	v.main();
+	var v = new Visualizer();
+	v.main();
 
 
 document.querySelector("#shinki div.skill").appendChild(
