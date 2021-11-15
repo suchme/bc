@@ -62,7 +62,7 @@ class Scene1 extends Scene{
 	}
 	update(){
 		if(!tmp_model)return;
-		var target_o3o = primitives["s2"];
+		var target_o3o = primitives[values.shinki.cd];
 		var targets = ["Head","Body","Arm.L","Arm.R","Leg.L","Leg.R","Rear"];
 		tmp_model.objects.forEach((object,idx,arr)=>{
 			var name = object.name;
@@ -78,6 +78,15 @@ class Scene1 extends Scene{
 			tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
 		});
 		tmp_model.collections["b1"].objects.forEach((object,idx,arr)=>{
+			tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
+		});
+		tmp_model.collections["a1"].objects.forEach((object,idx,arr)=>{
+			tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
+		});
+		tmp_model.collections["l1"].objects.forEach((object,idx,arr)=>{
+			tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
+		});
+		tmp_model.collections["r1"].objects.forEach((object,idx,arr)=>{
 			tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
 		});
 
@@ -116,6 +125,9 @@ class Scene1 extends Scene{
 		//base_instance.draw();
 		tmp_instance.drawCollections("h1");
 		tmp_instance.drawCollections("b1");
+		tmp_instance.drawCollections("a1");
+		tmp_instance.drawCollections("l1");
+		tmp_instance.drawCollections("r1");
 //		tmp_instance.objectInstances["Head"].draw();
 		//this.instances[0].draw();
 		//this.instance_tmp.draw("Arm");
