@@ -235,18 +235,22 @@ export default class SceneObjectInstance{
 			var parent=obj.parent;
 			//var parentInstance = o3oInstance.objectInstances[parent.idx];
 			var parentInstance = o3oInstance.searchObject(parent.name);
+			if(parentInstance){
 
-			parentInstance.calcMatrix(dt,flg);
+				parentInstance.calcMatrix(dt,flg);
 
-			if(obj.parent_bone){
-				var i=this.parent_bone-1;
-				this.matrix[11]-=parent.data.bones[i].length;
-				Mat43.dot(matrix,parent.data.bones[i].matrix,mat);
-				Mat43.dot(matrix,parentInstance.boneMatrices[i],matrix);
+				if(obj.parent_bone){
+					var i=this.parent_bone-1;
+					this.matrix[11]-=parent.data.bones[i].length;
+					Mat43.dot(matrix,parent.data.bones[i].matrix,mat);
+					Mat43.dot(matrix,parentInstance.boneMatrices[i],matrix);
+				}else{
+					Mat43.dot(matrix,obj.iparentmatrix,matrix);
+				}
+				Mat43.dot(matrix,parentInstance.matrix,matrix);
 			}else{
-				Mat43.dot(matrix,obj.iparentmatrix,matrix);
+				Mat43.dotMat44Mat43(matrix,ono3d.worldMatrix,matrix);
 			}
-			Mat43.dot(matrix,parentInstance.matrix,matrix);
 		}else{
 			Mat43.dotMat44Mat43(matrix,ono3d.worldMatrix,matrix);
 		}

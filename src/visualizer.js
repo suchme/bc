@@ -4,6 +4,7 @@ import Util from "./lib/util.js"
 import Engine from "./engine/engine.js"
 import Scene from "./engine/scene.js"
 import O3o from "./engine/o3o/o3o.js"
+import O3oInstance from "./engine/o3o/o3oinstance.js"
 import SceneObjectInstance from "./engine/o3o/sceneobjectinstance.js"
 import AssetManager from "./engine/assetmanager.js"
 import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "./lib/vector.js"
@@ -50,7 +51,7 @@ class Scene1 extends Scene{
 				});
 				tmp_instance = o3o.createInstance();
 				o3o.collections["h1"].objects.forEach((object,idx,arr)=>{
-					tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
+					tmp_instance.objectInstances_hash[object.name].o3oInstance = base_instance;
 				});
 				//tmp_instance.objectInstances["Head"].o3oInstance = base_instance;
 			});
@@ -73,22 +74,25 @@ class Scene1 extends Scene{
 			tmp_model.objects_name_hash[object.name] = target_o3o.objects_name_hash[name];
 			
 		});
-		tmp_instance = tmp_model.createInstance();
-		tmp_model.collections["h1"].objects.forEach((object,idx,arr)=>{
-			tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
+		//tmp_instance = tmp_model.createInstance();
+		var list=tmp_model.getCollectionObjectList("h1");
+		list.push(base_model.objects_name_hash["Armature"]);
+		tmp_instance = new O3oInstance(null,list);
+		tmp_instance.objectInstances.forEach((object,idx,arr)=>{
+			object.o3oInstance = base_instance;
 		});
-		tmp_model.collections["b1"].objects.forEach((object,idx,arr)=>{
-			tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
-		});
-		tmp_model.collections["a1"].objects.forEach((object,idx,arr)=>{
-			tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
-		});
-		tmp_model.collections["l1"].objects.forEach((object,idx,arr)=>{
-			tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
-		});
-		tmp_model.collections["r1"].objects.forEach((object,idx,arr)=>{
-			tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
-		});
+//		tmp_model.collections["b1"].objects.forEach((object,idx,arr)=>{
+//			tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
+//		});
+//		tmp_model.collections["a1"].objects.forEach((object,idx,arr)=>{
+//			tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
+//		});
+//		tmp_model.collections["l1"].objects.forEach((object,idx,arr)=>{
+//			tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
+//		});
+//		tmp_model.collections["r1"].objects.forEach((object,idx,arr)=>{
+//			tmp_instance.objectInstances[object.name].o3oInstance = base_instance;
+//		});
 
 	}
 	create(){
@@ -123,11 +127,15 @@ class Scene1 extends Scene{
 		//}
 
 		//base_instance.draw();
-		tmp_instance.drawCollections("h1");
-		tmp_instance.drawCollections("b1");
-		tmp_instance.drawCollections("a1");
-		tmp_instance.drawCollections("l1");
-		tmp_instance.drawCollections("r1");
+		var list =tmp_model.getCollectionObjectList("h1");
+		list.forEach((e)=>{
+			tmp_instance.objectInstances_hash[e.name].draw();
+		});
+		//tmp_instance.drawCollections("h1");
+		//tmp_instance.drawCollections("b1");
+		//tmp_instance.drawCollections("a1");
+		//tmp_instance.drawCollections("l1");
+		//tmp_instance.drawCollections("r1");
 //		tmp_instance.objectInstances["Head"].draw();
 		//this.instances[0].draw();
 		//this.instance_tmp.draw("Arm");

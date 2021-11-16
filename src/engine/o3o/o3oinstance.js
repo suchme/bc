@@ -4,10 +4,12 @@ import SceneObjectInstance from "./sceneobjectinstance.js"
 export default class O3oInstance{
 	constructor(o3o,_objects){
 		this.objectInstances=[];
-		this.objectInstances_assoc={};
-		var objects = o3o.objects;
+		this.objectInstances_hash=[];
+		var objects;
 		if(_objects){
 			objects = _objects;
+		}else{
+			objects = o3o.objects;
 		}
 
 		for(var i=0;i<objects.length;i++){
@@ -17,7 +19,7 @@ export default class O3oInstance{
 			var instance = new SceneObjectInstance(object);
 			instance.o3oInstance= this;
 			this.objectInstances.push(instance);
-			this.objectInstances[object.name]=instance;
+			this.objectInstances_hash[object.name]=instance;
 		}
 
 		//オブジェクトインスタンス初期化
@@ -28,7 +30,7 @@ export default class O3oInstance{
 		for(var i=0;i<objects.length;i++){
 			//物理設定のあるオブジェクトは物理オブジェクト作成
 			var object=objects[i];
-			var instance = this.objectInstances[object.name];
+			var instance = this.objectInstances_hash[object.name];
 			instance.phyObj= O3o.createPhyObj(object,instance);
 
 		}
@@ -39,12 +41,10 @@ export default class O3oInstance{
 			var joint=createPhyJoint(objects[i],this.objectInstances);
 			this.objectInstances[i].joint=joint;
 		}
-		this.o3o= o3o;
 
-		o3o.scenes[0].setFrame(0);
-		for(i=0;i<o3o.objects.length;i++){
+		for(i=0;i<objects.length;i++){
 			//メッシュ変形のバインド
-			var object=o3o.objects[i];
+			var object=objects[i];
 			var instance = this.objectInstances[i];
 			for(var j=0;j<object.modifiers.length;j++){
 				if(object.modifiers[j].type==="MESH_DEFORM"){
@@ -79,44 +79,13 @@ export default class O3oInstance{
 
 	}
 
-	//コレクション内を描画
-	drawCollections(target){
-		var objects = this.o3o.getCollectionObjectList(target);
-
-		objects.forEach((object)=>{
-			if(object.hide_render){
+	draw(target){
+		this.objectInstances.forEach((e)=>{
+			if(e.object.hide_render){
 				return;
 			}
-			var instance = this.objectInstances[object.name];
-			if(instance){
-				instance.draw();
-			}
+			e.draw();
 		});
-
-	}
-
-	draw(target){
-		if(!target){
-			//指定なしの場合は全オブジェクト描画
-			var objects = this.o3o.objects;
-			for(var i=0;i<objects.length;i++){
-				if(objects[i].hide_render){
-					continue;
-				}
-				var instance = this.objectInstances[objects[i].name];
-				instance.draw();
-			}
-		}else{
-			if(this.o3o.collections.hasOwnProperty(target)){
-				//名称指定されている場合は一致してるコレクション以下を描画
-				this.drawCollections(target);
-			}else{
-				//該当コレクションがない場合は同名のオブジェクトを描画
-				var instance = this.objectInstances[target];
-				instance.draw();
-			}
-			
-		}
 	}
 
 	joinPhyObj(onoPhy){
