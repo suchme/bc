@@ -108,7 +108,11 @@ export default class O3o{
 			objects= objects.concat(children);
 		});
 
-		objects = objects.concat(collection.objects);
+		collection.objects.forEach((e)=>{
+			
+			objects.push(this.objects_name_hash[e]);
+		});
+		//objects = objects.concat(collection.objects);
 		return objects;
 
 	}
@@ -472,7 +476,7 @@ O3o.setOno3d = function(a){
 		//オブジェクトを連想配列
 
 		for(j=o3o.objects.length;j--;){
-			o3o.objects[o3o.objects[j].name]=o3o.objects[j] ;
+			//o3o.objects[o3o.objects[j].name]=o3o.objects[j] ;
 		}
 
 		//アクションを連想配列
@@ -486,9 +490,9 @@ O3o.setOno3d = function(a){
 			for(var i=0;i<obj.children.length;i++){
 				obj.children[i]= o3o.collections[obj.children[i]];
 			}
-			for(var i=0;i<obj.objects.length;i++){
-				obj.objects[i]= o3o.objects[obj.objects[i]];
-			}
+			//for(var i=0;i<obj.objects.length;i++){
+			//	obj.objects[i]= o3o.objects[obj.objects[i]];
+			//}
 			
 		};
 

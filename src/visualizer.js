@@ -51,7 +51,7 @@ class Scene1 extends Scene{
 				});
 				tmp_instance = o3o.createInstance();
 				o3o.collections["h1"].objects.forEach((object,idx,arr)=>{
-					tmp_instance.objectInstances_hash[object.name].o3oInstance = base_instance;
+					tmp_instance.objectInstances_hash[object].o3oInstance = base_instance;
 				});
 				//tmp_instance.objectInstances["Head"].o3oInstance = base_instance;
 			});
