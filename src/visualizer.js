@@ -1,4 +1,5 @@
 import Ono3d from "./lib/ono3d.js"
+import DATA from "./data.js";
 import Rastgl from "./lib/rastgl.js"
 import Util from "./lib/util.js"
 import Engine from "./engine/engine.js"
@@ -21,10 +22,31 @@ var homingCamera=function(angle,target,camera){
 var primitives={};
 var base_model;
 var base_instance;
-var tmp_instance;
-var tmp_model;
 var o3o_head;
 var o3o_tmp;
+	var getList=function(buso){
+		var cd = buso.cd;
+		var type = cd.substring(0,1);
+		var num = Number(cd.substring(1));
+		var o3opath = "model/base.o3o";
+		if(buso.class.length > 0 && buso.class[0]>0){
+			o3opath = DATA.class_shinki[buso.class[0]]
+
+			o3opath = "model/" + o3opath +".o3o";
+		}
+		if(num>1){
+			cd = type  + ((((num-2)>>2)<<2)+2);
+		}
+
+		var model=AssetManager.o3o(o3opath);
+		var list = model.getCollectionObjectList(cd);
+
+		if(list.length===0 && (cd!="r1")){
+			model=AssetManager.o3o("model/base.o3o");
+			list = model.getCollectionObjectList(type+"0");
+		}
+		return list;
+	}
 class Scene1 extends Scene{
 	constructor(){
 		super();
@@ -34,59 +56,41 @@ class Scene1 extends Scene{
 		this.target=new Vec3();
 		this.instances=[];
 
-		base_model = AssetManager.o3o("model/base.o3o",(o3o)=>{
-			base_instance = o3o.createInstance();
-			
-
-			for(var i=0;i<30;i++){
-
-				primitives["s"+i]=AssetManager.o3o("model/s"+i+".o3o");
-			}	
-			tmp_model = AssetManager.o3o("model/tmp.o3o",(o3o)=>{
-				o3o.objects.forEach((object,idx,arr)=>{
-					if(object.name==="Head"){
-						arr[idx] = base_model.objects_name_hash["Head"];
-						o3o.objects_name_hash[object.name] = base_model.objects_name_hash["Head"];
-					}
-				});
-				tmp_instance = o3o.createInstance();
-				o3o.collections["h1"].objects.forEach((object,idx,arr)=>{
-					tmp_instance.objectInstances_hash[object].o3oInstance = base_instance;
-				});
-			});
-		});
+		for(var i=0;i<30;i++){
+			primitives["s"+i]=AssetManager.o3o("model/s"+i+".o3o");
+		}	
+		base_model = AssetManager.o3o("model/base.o3o");
 		this.t=0;
 		globalParam.autoExposure=false;
-		globalParam.exposure_level = 0.2;
+		globalParam.exposure_level = 0.3;
 		globalParam.exposure_upper = 1;
 	}
+
 	update(){
-		if(!tmp_model)return;
+		if(base_model.objects.length===0){
+			setTimeout(this.update,1000);
+			return;
+		}
+
+
 		var target_o3o = primitives[values.shinki.cd];
 		var targets = ["Head","Body","Arm.L","Arm.R","Leg.L","Leg.R","Rear"];
-		//tmp_model.objects.forEach((object,idx,arr)=>{
-		//	var name = object.name;
-		//	if(!targets.includes(name))return;
-		//	if(!target_o3o.objects_name_hash[name])return;
 
-		//	arr[idx] = target_o3o.objects_name_hash[name];
-		//	tmp_model.objects_name_hash[object.name] = target_o3o.objects_name_hash[name];
-		//	
-		//});
-
-		var list=tmp_model.getCollectionObjectList("h1");
-		list.push(base_model.objects_name_hash["Armature"]);
-		list=list.concat(tmp_model.getCollectionObjectList("b1"));
-		list=list.concat(tmp_model.getCollectionObjectList("a1"));
-		list=list.concat(tmp_model.getCollectionObjectList("l1"));
-		//list=list.concat(tmp_model.getCollectionObjectList("r1"));
+		var list=[];
+		var armature=base_model.objects_name_hash["Armature"];
+		if(armature)list.push(armature);
+		list=list.concat(getList(values.head.org));
+		list=list.concat(getList(values.body.org));
+		list=list.concat(getList(values.arm.org));
+		list=list.concat(getList(values.leg.org));
+		list=list.concat(getList(values.rear.org));
 		list.forEach((e,idx,arr)=>{
 			if(targets.includes(e.name)){
 				arr[idx]=target_o3o.objects_name_hash[e.name];
 			}
 		});
-		tmp_instance = new O3oInstance(null,list);
-		tmp_instance.objectInstances.forEach((object,idx,arr)=>{
+		base_instance = new O3oInstance(null,list);
+		base_instance.objectInstances.forEach((object,idx,arr)=>{
 			object.o3oInstance = base_instance;
 		});
 
@@ -127,7 +131,7 @@ class Scene1 extends Scene{
 		//list.forEach((e)=>{
 		//	tmp_instance.objectInstances_hash[e.name].draw();
 		//});
-		tmp_instance.draw();
+		base_instance.draw();
 		//tmp_instance.drawCollections("h1");
 		//tmp_instance.drawCollections("b1");
 		//tmp_instance.drawCollections("a1");
@@ -171,10 +175,14 @@ class Scene1 extends Scene{
 		Mat44.dot(light.viewmatrix2,engine.ono3d.projectionMatrix,engine.ono3d.viewMatrix);
 
 		//this.instance = primitives[values.shinki.cd];
-		var scene= base_model.scenes[0];
-		scene.setFrame(this.t);
+		if(base_model){
+			var scene= base_model.scenes[0];
+			scene.setFrame(this.t);
+		}
 		//naked_instance.calcMatrix(1.0/globalParam.fps);
-		base_instance.calcMatrix(1.0/globalParam.fps);
+		if(base_instance){
+			base_instance.calcMatrix(1.0/globalParam.fps);
+		}
 
 		this.t++;
 	}

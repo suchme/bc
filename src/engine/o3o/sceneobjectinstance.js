@@ -438,10 +438,10 @@ export default class SceneObjectInstance{
 			dstvertex.pos[2]=srcvertex.pos[2];
 			dstvertex.pos[mrr]*=-1;
 			//dstvertex.groups=srcvertex.groups;
-			dstvertex.groupWeights=srcvertex.groupWeights;
+			//dstvertex.groupWeights=srcvertex.groupWeights;
 			for(var k=0;k<srcvertex.groups.length;k++){
 				dstvertex.groups[k]=srcvertex.groups[k];
-			//	dstvertex.groupWeights[k]=srcvertex.groupWeights[k];
+				dstvertex.groupWeights[k]=srcvertex.groupWeights[k];
 			}
 			
 		}
@@ -496,7 +496,7 @@ export default class SceneObjectInstance{
 		}
 		var jj=0;
 		for(var j =0;j<bufMesh.edgeSize;j++){
-			var dst=bufMesh.edges[jj+bufMesh.edgeSize]
+			var e_dst=bufMesh.edges[jj+bufMesh.edgeSize]
 			var src=bufMesh.edges[j];
 			if(abs(bufMeshVertices[src.vIndices[0]].pos[mrr])<0.01
 			 && abs(bufMeshVertices[src.vIndices[1]].pos[mrr])<0.01){
@@ -504,18 +504,20 @@ export default class SceneObjectInstance{
 
 				continue;
 			}
-			dst.vIndices[0]=src.vIndices[0]+vertexSize;
-			dst.vIndices[1]=src.vIndices[1]+vertexSize;
-			dst.fIndices[0]=src.fIndices[0]+faceSize;
+			e_dst.vIndices[0]=src.vIndices[0]+vertexSize;
+			e_dst.vIndices[1]=src.vIndices[1]+vertexSize;
+			e_dst.fIndices[0]=src.fIndices[0]+faceSize;
 			if(src.fIndices[1]>=0){
-				dst.fIndices[1]=src.fIndices[1]+faceSize;
+				e_dst.fIndices[1]=src.fIndices[1]+faceSize;
 			}else{
-				dst.fIndices[1]=-1;
+				e_dst.fIndices[1]=-1;
 			}
 			jj++;
 		}
 		bufMesh.edgeSize+=jj;
 
+
+		//LR表記のあるグループを逆にする
 		for(j=0;j<obj.groups.length;j++){
 			table[j]=j;
 			var groupName=obj.groups[j];
@@ -563,11 +565,12 @@ export default class SceneObjectInstance{
 		var ratio,pos,vertex;
 		var groups=obj.groups;
 
-		var bM = Mat43.poolAlloc();
-		var bM2 = Mat43.poolAlloc();
 		//var armature_instance= objectInstances[mod.object.name];
 		var armature_instance= this.o3oInstance.searchObject(mod.object.name);
 		if(!armature_instance)return;
+
+		var bM = Mat43.poolAlloc();
+		var bM2 = Mat43.poolAlloc();
 		Mat43.getInv(bM2,armature_instance.matrix);
 		Mat43.dot(bM,bM2,this.matrix);
 		Mat43.getInv(bM2,bM);
@@ -706,6 +709,21 @@ export default class SceneObjectInstance{
 					idx[0] = idx[2];
 					idx[2]= buf;
 				}
+				if(dst.uv_layerSize){
+					//uv指定ありの場合はレイヤを設定(0番固定)
+					var uv_layerdata=dst.uv_layers[0].data;
+
+					for(var i=0;i<dst.faceSize;i++){
+						var data=uv_layerdata[i];
+						var buf = data[0];
+						data[0] = data[4];
+						data[4]= buf;
+
+						buf = data[1];
+						data[1] = data[5];
+						data[5]= buf;
+					}
+				}
 			}
 		}
 
@@ -739,6 +757,7 @@ export default class SceneObjectInstance{
 		//マテリアルインデックステーブルにセット
 		materialTable[0]=setMaterial(defaultMaterial,"defaultMaterial");
 		var materials = o3o.materials;
+
 		for(var i=0;i<materials.length;i++){
 			materialTable[i+1]=setMaterial(materials[i],o3o.name+"_"+materials[i].name);
 		}

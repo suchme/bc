@@ -76,9 +76,6 @@ class Main {
 
 
 	reCalc(){
-		if(v.scene){
-			v.scene.update();
-		}
 		//計算処理
 		var passives=[];
 
@@ -380,6 +377,10 @@ class Main {
 		   / values.total.jump_cost).toFixed(2);
 
 //		binder.refresh();
+
+		if(v.scene){
+			v.scene.update();
+		}
 	}
 
 	onloadfunc=function(){
