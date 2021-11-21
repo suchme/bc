@@ -440,6 +440,8 @@ export default class Engine{
 			gl.disable(gl.BLEND);
 			gl.disable(gl.DEPTH_TEST);
 
+			console.log("A");
+
 
 			gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
 			gl.viewport(0,0,image.width,image.height);
