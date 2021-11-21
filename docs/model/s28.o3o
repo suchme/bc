@@ -1578,7 +1578,7 @@
   }
   ,"b210":{
     "children":[]
-    ,"objects":["a","Body"]
+    ,"objects":["b210b","a"]
   }
   ,"etc":{
     "children":[]
@@ -1598,7 +1598,7 @@
   }
   ,"maindata":{
     "children":[]
-    ,"objects":["b210","Head","Leg.L","Leg.R","Armature","Arm.L","Arm.R"]
+    ,"objects":["b210b","Head","Leg.L","Leg.R","Armature","Arm.L","Arm.R"]
   }
   ,"r326":{
     "children":[]
@@ -1769,24 +1769,7 @@
     ]
   }
   ,{
-    "name":"b210"
-    ,"groups":["Hip","Arm1.L","Body","Leg1.L","Arm1.R","Leg1.R","Head"]
-    ,"location":[ 0.000000, 0.000000, 0.000000]
-    ,"rotation":[ 0.000000, 0.000000, 0.000000]
-    ,"scale":[ 1.000000, 1.000000, 1.000000]
-    ,"parent":"Armature"
-    ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
-    ,"type":"MESH"
-    ,"data":"BodyMesh"
-    ,"bound_box":[-0.282505,-0.529685,-0.198551, 0.272688, 0.696482, 0.223046]
-    ,"bound_type":"BOX"
-    ,"modifiers":[
-      {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
-      ,{"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
-    ]
-  }
-  ,{
-    "name":"Body"
+    "name":"b210b"
     ,"groups":["Hip","Arm1.L","Body","Leg1.L","Arm1.R","Leg1.R","Head"]
     ,"location":[ 0.000000, 0.000000, 0.000000]
     ,"rotation":[ 0.000000, 0.000000, 0.000000]
@@ -2029,7 +2012,7 @@
     "name":"Scene"
     ,"frame_start":1
     ,"frame_end":120
-    ,"objects":["Cube","Arm.R.001","Arm.L.001","Cube.001","b210","Head","Leg.L","Leg.R","Armature","Arm.L","Arm.R","Camera","Light","anero","hair","a","Body","Leg.L.001","Leg.L.002","mount","wing.L","wing.R","tank.L","tank.L.001"]
+    ,"objects":["Cube","Arm.R.001","Arm.L.001","Cube.001","b210b","Head","Leg.L","Leg.R","Armature","Arm.L","Arm.R","Camera","Light","anero","hair","a","Leg.L.001","Leg.L.002","mount","wing.L","wing.R","tank.L","tank.L.001"]
     ,"world":{
       "name":"World"
     }
