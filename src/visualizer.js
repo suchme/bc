@@ -174,6 +174,7 @@ class Scene1 extends Scene{
 		var light = engine.ono3d.environments[0].sun;
 		Vec3.set(light.color,1,1,1);
 		Mat44.fromRotVector(light.matrix,Math.PI*0.7,1,1,0);
+		engine.calcLightMatrix();
 
 		Mat44.dot(light.viewmatrix2,engine.ono3d.projectionMatrix,engine.ono3d.viewMatrix);
 

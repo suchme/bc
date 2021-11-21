@@ -179,9 +179,6 @@ export default class Engine{
 
 		this.calcMatrix();
 		this.drawSub(0,0,this.WIDTH,this.HEIGHT);
-		//if(ono3d.envbufTexture.glTexture){
-		//Ono3d.drawCopy(ono3d.envbufTexture,0,0,1,1)
-		//}
 		
 
 
@@ -212,6 +209,9 @@ export default class Engine{
 		Engine.toneMapping(bufTexture,WIDTH/1024,HEIGHT/1024);
 		
 
+//		if(ono3d.shadowTexture.glTexture){
+//			Ono3d.drawCopy(ono3d.shadowTexture,0,0,1,1)
+//		}
 
 
 		//gl.getParameter(gl.VIEWPORT);

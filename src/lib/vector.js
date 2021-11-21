@@ -965,7 +965,7 @@ var Mat43=(function(){
 			-b[3]*b[1]*b[8]
 			-b[6]*b[4]*b[2];
 
-		if(Math.abs(det) < 0.0001){
+		if(Math.abs(det) === 0){
 			return
 		}
 		det = 1/det;
