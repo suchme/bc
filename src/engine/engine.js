@@ -91,12 +91,12 @@ export default class Engine{
 		
 
 
-		sigmaShader=Ono3d.loadShader("../lib/spherical_harmonics/sigma.shader");
-		shadow_gauss_shader=Ono3d.loadShader("../engine/gauss_shadow.shader");
-		Engine.basecolorShader=Ono3d.loadShader("../lib/shader/basecolor.shader");
+		sigmaShader=Ono3d.loadShader("./lib/spherical_harmonics/sigma.shader");
+		shadow_gauss_shader=Ono3d.loadShader("./engine/gauss_shadow.shader");
+		Engine.basecolorShader=Ono3d.loadShader("./lib/shader/basecolor.shader");
 
 		for(var i=0;i<9;i++){
-			shShader.push(Ono3d.loadShader("../lib/spherical_harmonics/sh"+i+".shader"));
+			shShader.push(Ono3d.loadShader("./lib/spherical_harmonics/sh"+i+".shader"));
 		}
 
 		O3o.setOno3d(ono3d)
