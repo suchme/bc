@@ -1,6 +1,6 @@
 {"format":"Ono3dObject Version 0.2"
 ,"materials":[
-    {"name": "maintex", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.05, "roughness": 0.11363636702299118, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
+    {"name": "maintex", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.05, "roughness": 0.11363636702299118, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s30.png"}
   ,  {"name": "maintex", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
 ]
 ,"meshes":[

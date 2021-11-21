@@ -22,9 +22,32 @@ var AssetManager=(function(){
 
 	ret.o3o=function(path,func){
 		if(!this.assetList[path]){
-			this.assetList[path]=O3o.load(path,func);
+			this.assetList[path] ={data:null,status:"loading"};
 		}
-		return this.assetList[path];
+		if(this.assetList[path].status !== "loaded"){
+			var _path = path;
+			var _func= func;
+			this.assetList[path].data=O3o.load(path,(e)=>{
+				if(!e){
+					this.assetList[path].status="failed";
+				}else{
+					this.assetList[path].status="loaded";
+
+				}
+				if(_func){
+					_func(e);
+				}
+			});
+		}
+		return this.assetList[path].data;
+	}
+
+	ret.getStatus = function(path){
+		var asset = this.assetList[path];
+		if(!asset){
+			return "noload";
+		}
+		return asset.status;
 	}
 
 

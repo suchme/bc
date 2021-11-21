@@ -59,6 +59,9 @@ import bufMesh from "./bufmesh.js"
 			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
 			Ono3d.copyImage(image,0,0,0,0,image.width,image.height);
 
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
+
 			gl.bindTexture(gl.TEXTURE_2D, null);
 			gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 			
@@ -83,8 +86,10 @@ export default class O3o{
 		this.scenes =[] ; //シーン情報
 		this.collections=[];
 		this.objects = []; //オブジェクト情報
+		this.objects_name_hash= []; 
 		this.materials = []; //マテリアル
 		this.meshes = []; //メッシュ
+		this.meshes_name_hash = []; //メッシュ(名前ハッシュ)
 		this.armatures = [];//スケルトン
 		this.actions = []; //アニメーション
 		this.lights = []; //照明
@@ -106,7 +111,11 @@ export default class O3o{
 			objects= objects.concat(children);
 		});
 
-		objects = objects.concat(collection.objects);
+		collection.objects.forEach((e)=>{
+			
+			objects.push(this.objects_name_hash[e]);
+		});
+		//objects = objects.concat(collection.objects);
 		return objects;
 
 	}
@@ -162,6 +171,13 @@ O3o.setOno3d = function(a){
 
 			}
 		}
+
+		o3o.objects.forEach((e)=>{
+			o3o.objects_name_hash[e.name] = e;
+		});
+		o3o.meshes.forEach((e)=>{
+			o3o.meshes_name_hash[e.name] = e;
+		});
 
 		for(i=o3o.scenes.length;i--;){
 			var scene = o3o.scenes[i]
@@ -463,7 +479,7 @@ O3o.setOno3d = function(a){
 		//オブジェクトを連想配列
 
 		for(j=o3o.objects.length;j--;){
-			o3o.objects[o3o.objects[j].name]=o3o.objects[j] ;
+			//o3o.objects[o3o.objects[j].name]=o3o.objects[j] ;
 		}
 
 		//アクションを連想配列
@@ -477,9 +493,9 @@ O3o.setOno3d = function(a){
 			for(var i=0;i<obj.children.length;i++){
 				obj.children[i]= o3o.collections[obj.children[i]];
 			}
-			for(var i=0;i<obj.objects.length;i++){
-				obj.objects[i]= o3o.objects[obj.objects[i]];
-			}
+			//for(var i=0;i<obj.objects.length;i++){
+			//	obj.objects[i]= o3o.objects[obj.objects[i]];
+			//}
 			
 		};
 
@@ -505,7 +521,7 @@ O3o.setOno3d = function(a){
 			object.parent=o3o.objects.find(function(a){return a.name === this;},object.parent)
 
 			for(k=0;k<object.modifiers.length;k++){
-				object.modifiers[k].object=o3o.objects.find(function(a){return a.name === this;},object.modifiers[k].object)
+				//object.modifiers[k].object=o3o.objects.find(function(a){return a.name === this;},object.modifiers[k].object)
 				var  name=object.modifiers[k].vertex_group;
 				object.modifiers[k].vertex_group=-1;
 				for(var l=0;l<object.groups.length;l++){

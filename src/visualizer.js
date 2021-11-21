@@ -1,9 +1,11 @@
 import Ono3d from "./lib/ono3d.js"
+import DATA from "./data.js";
 import Rastgl from "./lib/rastgl.js"
 import Util from "./lib/util.js"
 import Engine from "./engine/engine.js"
 import Scene from "./engine/scene.js"
 import O3o from "./engine/o3o/o3o.js"
+import O3oInstance from "./engine/o3o/o3oinstance.js"
 import SceneObjectInstance from "./engine/o3o/sceneobjectinstance.js"
 import AssetManager from "./engine/assetmanager.js"
 import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "./lib/vector.js"
@@ -22,6 +24,38 @@ var base_model;
 var base_instance;
 var o3o_head;
 var o3o_tmp;
+	var getList=function(buso){
+		var cd = buso.cd;
+		var type = cd.substring(0,1);
+		var num = Number(cd.substring(1));
+		var o3opath = "model/base.o3o";
+		if(buso.class.length > 0 && buso.class[0]>0){
+			o3opath = DATA.class_shinki[buso.class[0]]
+
+			o3opath = "model/" + o3opath +".o3o";
+		}
+		if(buso.name.indexOf("15th")>=0){
+			o3opath = "model/15th.o3o";
+		}
+		if(num>1){
+			cd = type  + ((((num-2)>>2)<<2)+2);
+		}
+
+		var model=AssetManager.o3o(o3opath);
+		var status = AssetManager.getStatus(o3opath);
+		if(status === "loading"){
+			throw "loading";
+		}
+		var list = model.getCollectionObjectList(cd);
+
+		if(list.length===0 && (cd!="r1")){
+			model=AssetManager.o3o("model/base.o3o");
+			list = model.getCollectionObjectList(type+"0");
+		}
+		return list;
+	}
+
+var update=null;
 class Scene1 extends Scene{
 	constructor(){
 		super();
@@ -31,30 +65,56 @@ class Scene1 extends Scene{
 		this.target=new Vec3();
 		this.instances=[];
 
-		base_model = AssetManager.o3o("model/base.o3o",(o3o)=>{
-			base_instance = o3o.createInstance();
-			
-
-			for(var i=0;i<30;i++){
-				var f=(function(){
-					var name = "s"+i;
-					return (o3o)=>{
-						if(o3o){
-						primitives[name]= o3o.createInstance();
-						}else{
-							primitives[name]= base_instance;
-							console.log("sippai");
-						}
-					}
-				})();
-
-				AssetManager.o3o("model/s"+i+".o3o",f);
-			}	
-		});
+		base_model = AssetManager.o3o("model/base.o3o");
 		this.t=0;
 		globalParam.autoExposure=false;
-		globalParam.exposure_level = 0.2;
+		globalParam.exposure_level = 0.3;
 		globalParam.exposure_upper = 1;
+	}
+
+	update(){
+		if(!update){
+			update = this.update;
+		}
+		if(base_model.objects.length===0){
+			setTimeout(update,1000);
+			return;
+		}
+
+		try{
+			var path = "model/"+values.shinki.cd+".o3o";
+			var target_o3o =AssetManager.o3o(path);
+			var status = AssetManager.getStatus(path);
+			if(status === "loading"){
+				throw "loading";
+			}
+			
+			var targets = ["Head","Body","Arm.L","Arm.R","Leg.L","Leg.R","Rear"];
+
+			var list=[];
+			var armature=base_model.objects_name_hash["Armature"];
+			if(armature)list.push(armature);
+			list=list.concat(getList(values.head.org));
+			list=list.concat(getList(values.body.org));
+			list=list.concat(getList(values.arm.org));
+			list=list.concat(getList(values.leg.org));
+			list=list.concat(getList(values.rear.org));
+			list.forEach((e,idx,arr)=>{
+				if(targets.includes(e.name)){
+					arr[idx]=target_o3o.objects_name_hash[e.name];
+				}
+			});
+			base_instance = new O3oInstance(null,list);
+			base_instance.objectInstances.forEach((object,idx,arr)=>{
+				object.o3oInstance = base_instance;
+			});
+		}catch(e){
+			if(e==="loading"){
+				setTimeout(update,1000);
+				return;
+			}
+		}
+
 	}
 	create(){
 
@@ -62,33 +122,25 @@ class Scene1 extends Scene{
 
 		engine.calcEnvironment();
 		this.a[1]=Math.PI;
+
+		var camera = engine.camera;
+		camera.p[0]=0;
+		camera.p[1]=0;
+		camera.p[2]=this.cameralen;
 	}
 	draw(){
-		//this.instance = primitives[values.shinki.cd];
-		//if(!this.instance)return;
-		if(!base_instance)return;
-
 		if(!this.hoge){
 			this.create();
 			this.hoge=true;
 		}
+		if(values.selected_tab!=="visualize"){
+			return;
+		}
+		if(!base_instance)return;
+
 
 		Mat44.setInit(ono3d.worldMatrix);
-//		ono3d.worldMatrix[13]=-1;
-	//	var org_matrices=naked_instance.objectInstances["Armature"].boneMatrices;
-		//var matrices=this.instance.objectInstances["Armature"].boneMatrices;
-		//for(var i=0;i<matrices.length;i++){
-		//	Mat44.copy(matrices[i],org_matrices[i]);
-		//}
-
-		//matrices=this.instance.objectInstances["Armature"].boneMatrices;
-		//for(var i=0;i<matrices.length;i++){
-		//	Mat44.copy(matrices[i],org_matrices[i]);
-		//}
-
 		base_instance.draw();
-		//this.instances[0].draw();
-		//this.instance_tmp.draw("Arm");
 		
 	}
 
@@ -124,10 +176,14 @@ class Scene1 extends Scene{
 		Mat44.dot(light.viewmatrix2,engine.ono3d.projectionMatrix,engine.ono3d.viewMatrix);
 
 		//this.instance = primitives[values.shinki.cd];
-		var scene= base_model.scenes[0];
-		scene.setFrame(this.t);
+		if(base_model){
+			var scene= base_model.scenes[0];
+			scene.setFrame(this.t*60/globalParam.fps);
+		}
 		//naked_instance.calcMatrix(1.0/globalParam.fps);
-		base_instance.calcMatrix(1.0/globalParam.fps);
+		if(base_instance){
+			base_instance.calcMatrix(1.0/globalParam.fps);
+		}
 
 		this.t++;
 	}
@@ -136,8 +192,6 @@ class Scene1 extends Scene{
 export default class Visualizer{
 	constructor(){
 		this.engine = new Engine();
-
-
 	}
 	main(){
 		if(Util.getLoadingCount()>0){
@@ -154,6 +208,8 @@ export default class Visualizer{
 			this.engine.scenes.push(scene1);
 			window.engine = this.engine;
 			window.ono3d = this.engine.ono3d;
+
+			this.scene=scene1;
 
 		}
 	}

@@ -202,36 +202,38 @@ export default class Util{
 				}
 			}
 		}
-		if(flg){
+		if(!flg){
+			return null;
+		}
 
-			var request = Util.createXMLHttpRequest()
-			request.open("GET", url, true)
-			request.onload = function(e){
-				if(request.status == 200 || request.status ==304){
-					var buf =request.responseText;
-					if(callback){
-						callback(buf);
-					}
-				}else{
-					if(callback){
-						callback(null);
-					}
+		var request = Util.createXMLHttpRequest()
+		request.open("GET", url, true)
+		request.onload = function(e){
+			if(request.status == 200 || request.status ==304){
+				var buf =request.responseText;
+				if(callback){
+					callback(buf);
 				}
-				loadingCount--;
-				console.log("loadtext end",loadingCount);
-			}
-			request.onerror=function(e){
+			}else{
 				if(callback){
 					callback(null);
 				}
-				loadingCount--;
-				console.log("loadtext failed",loadingCount);
 			}
-			console.log("loadtext start",url);
-			loadingCount++;
-			request.send("")
+			loadingCount--;
+			console.log("loadtext end",loadingCount);
 		}
-		return null;
+		request.onerror=function(e){
+			if(callback){
+				callback(null);
+			}
+			loadingCount--;
+			console.log("loadtext failed",loadingCount);
+		}
+		console.log("loadtext start",url);
+		loadingCount++;
+		request.send("")
+		
+		return request;
 	}
 
 	static loadFile(file,callback){

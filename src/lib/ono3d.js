@@ -1,4 +1,5 @@
 "use strict"
+import Engine from "../engine/engine.js"
 import Util from "./util.js"
 import Rastgl from "./rastgl.js"
 import Sort from "./sort.js"
@@ -569,16 +570,16 @@ var Ono3d = (function(){
 			//gl.vertexAttribPointer(shader.atts["aPos"], 3,gl.FLOAT, false,DEFAULT_VERTEX_DATA_SIZE , 0);
 			//gl.drawElements(gl.TRIANGLES, facesize*3, gl.UNSIGNED_SHORT, 0);
 
+			//Ono3d.copyImage(this.shadowTexture,0,0,0,0,1024,1024);
 			//gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
 			//this.setViewport(0,0,1024,1024);
 			//Engine.shadowGauss(1024,1024,1000,this.shadowTexture,0,0,1,1);
-			//Ono3d.copyImage(this.shadowTexture,0,0,0,0,1024,1024);
 		}
 		Ono3d.copyImage(this.shadowTexture,0,0,0,0,1024,1024);
-		gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
-		this.setViewport(0,0,1024,1024);
+	//	gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
+	//	this.setViewport(0,0,1024,1024);
 	//	Engine.shadowGauss(1024,1024,1000,this.shadowTexture,0,0,1,1);
-		Ono3d.copyImage(this.shadowTexture,0,0,0,0,1024,1024);
+	//	Ono3d.copyImage(this.shadowTexture,0,0,0,0,1024,1024);
 
 
 

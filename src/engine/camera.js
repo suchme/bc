@@ -11,14 +11,14 @@ var scope=[
 	,[1,1,1]
 	,[1,-1,1]
 ];
-//ƒJƒƒ‰
+//ã‚«ãƒ¡ãƒ©
 export default class Camera{
 	constructor(){
 		this.p=new Vec3();
 		this.a=new Vec3();
 		this.aov= 0.577;
-		this.znear=0.1;
-		this.zfar=100;
+		this.znear=1;
+		this.zfar=10;
 
 		this.cameracol=new Collider.ConvexHull();
 		this.cameracol2=new Collider.ConvexHull();

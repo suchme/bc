@@ -417,7 +417,7 @@ export default class Engine{
 		}
 
 		//デフォルト背景読み込み
-		this.skyTexture =this.loadEnvTexture("../engine/sky.jpg");
+		this.skyTexture =this.loadEnvTexture("../engine/back.png");
 
 		if(this.userInit){
 			//初期化処理が設定されていれば実行
@@ -488,6 +488,8 @@ export default class Engine{
 
 		var sin_r = Math.max(0.05,Math.abs(Vec3.dot(zup,cameraz)));
 		z_far = Math.max(20,100 * sin_r-50);
+//		z_near=1
+		z_far= 3;
 
 		if(sin_r<0.7){
 			Vec3.cross(cameraz,cameraz,xup);
@@ -672,7 +674,7 @@ var blit = function(tex,x,y,w,h,u,v,u2,v2){
 	globalParam.stereomode=0;
 	globalParam.stereoVolume=1;
 	globalParam.step=1;
-	globalParam.fps=60;
+	globalParam.fps=30;
 	globalParam.scene=0;
 	globalParam.shadow=1;
 	globalParam.model="./f1.o3o";

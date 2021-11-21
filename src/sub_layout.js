@@ -215,6 +215,7 @@ SubLayout.rear_html =`
 	<span class="rowheader">
 		<div>
 			<span class="part" column="part"></span>
+			<span column="flying" class="flying"></span>
 		</div>
 		<div>
 			<span class="class" column="class"></span>
@@ -240,7 +241,6 @@ SubLayout.rear_html =`
 			<span column="guard_cost" class="guard_cost cost status "></span>
 			<span column="jump_cost" class="jump_cost cost status "></span>
 			<span column="hover_cost" class="hover_cost cost status "></span>
-			<span column="flying" class="flying"></span>
 		</div>
 	</span>
 	<span class="sep"></span>

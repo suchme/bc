@@ -1,0 +1,104 @@
+<html style="background-color:black;">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="ja" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>武装神姫バトルコンダクターtips</title>
+<style>
+body{
+	padding:0px;
+	margin:0px;
+	background-color:gray;
+}
+div.header{
+	padding:10px;
+}
+div.header2{
+	background-color:gray;
+	color:white;
+}
+div.header2 div{
+	background-color:black;
+	width:400px;
+	margin:auto;
+	padding:2px;
+}
+div.body{
+	width:400px;
+	margin:auto;
+	background-color:white;
+}
+a{
+	color:white;
+	appearance: none;
+	background:none;
+	border:none;
+	text-decoration:underline;
+	padding:4px;
+}
+
+</style>
+<script>
+var changePage=function(tag){
+	document.querySelectorAll("div[class^='body_']").forEach((e)=>{
+		e.style.display="none";
+	});
+	document.querySelectorAll("div[class='body_" + tag + "']").forEach((e)=>{
+		e.style.display="inline-block";
+	});
+}
+var ona=function(e){
+	changePage(e.target.attributes.href.nodeValue);
+}
+var onl=function(){
+	var l=location.href;
+	var i = l.indexOf("#");
+	changePage(l.substring(i));
+
+}
+</script>
+
+</head>
+<body onload="onl()">
+<div class="header">
+	武装神姫バトルコンダクターtips
+</div>
+<div class="header2" onclick="ona(event)">
+	<div>
+<a href="#boostcost">ブースト消費</a>
+<a href="#b"> b </a>
+<a href="#c"> c </a>
+<br>
+<a href="#a"> a </a>
+<a href="#b"> b </a>
+<a href="#c"> c </a>
+	</div>
+</div>
+
+<div class="body">
+<div class="body_#boostcost" >
+	<h2>ブースト消費</h2>
+	ブーストゲージを消費する行動は以下の4種類
+	<ul>
+	<li>ダッシュ</li>
+	<p>一般的なN神姫の消費は85。</p>
+	<p>ダッシュ開始時に85消費し、その後継続すると消費1秒あたり85消費する。</p>
+	<li>防御</li>
+	一般的なN神姫の消費は70。
+	防御継続中1秒あたり70消費する。
+	<li>ジャンプ</li>
+	一般的なN神姫の消費は50。
+	ジャンプ開始時に50消費し、その後継続すると1秒あたり50消費する。
+	<li>ホバリング</li>
+	</ul>
+</div>
+<div class="body_#b"> {¶b </div>
+<div class="body_#c"> {¶c </div>
+</div>
+
+</body>
+</html>
