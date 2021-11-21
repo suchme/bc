@@ -129,7 +129,7 @@ class Scene1 extends Scene{
 		camera.p[2]=this.cameralen;
 	}
 	draw(){
-		if(!this.hoge && Util.getLoadingCount()===0){
+		if((!this.hoge) && Util.getLoadingCount()===0){
 			this.create();
 			this.hoge=true;
 		}
