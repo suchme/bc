@@ -127,10 +127,11 @@ class Scene1 extends Scene{
 		camera.p[0]=0;
 		camera.p[1]=0;
 		camera.p[2]=this.cameralen;
+
+		this.update();
 	}
 	draw(){
-		if((!this.hoge) && Util.getLoadingCount()===0 &&  engine.skyTexture){
-			console.log("B");
+		if((!this.hoge) && Util.getLoadingCount()===0){
 			this.create();
 			this.hoge=true;
 		}
@@ -190,28 +191,34 @@ class Scene1 extends Scene{
 	}
 };
 
+var visu_main;
 export default class Visualizer{
 	constructor(){
 		this.engine = new Engine();
+		visu_main= this;
 	}
 	main(){
+
 		if(Util.getLoadingCount()>0){
 			//初期ロードが未完了の場合はメイン処理は開始しない
-			setTimeout(this.main,100);
+			setTimeout(visu_main.main,100);
 		}else{
 			if(globalParam.debugMenu){
 				debugClose();
 			}
-			this.engine.init(document.getElementById("aaa"),400,460);
-			this.engine.start();
+			if(!visu_main.engine.ono3d){
+				visu_main.engine.init(document.getElementById("aaa"),400,460);
+				setTimeout(visu_main.main,100);
+			}else{
+				visu_main.engine.start();
 
-			var scene1 = new Scene1();
-			this.engine.scenes.push(scene1);
-			window.engine = this.engine;
-			window.ono3d = this.engine.ono3d;
+				var scene1 = new Scene1();
+				visu_main.engine.scenes.push(scene1);
+				window.engine = visu_main.engine;
+				window.ono3d = visu_main.engine.ono3d;
 
-			this.scene=scene1;
-
+				visu_main.scene=scene1;
+			}
 		}
 	}
 }
