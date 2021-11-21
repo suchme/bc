@@ -178,7 +178,7 @@ class Scene1 extends Scene{
 		//this.instance = primitives[values.shinki.cd];
 		if(base_model){
 			var scene= base_model.scenes[0];
-			scene.setFrame(this.t);
+			scene.setFrame(this.t*60/globalParam.fps);
 		}
 		//naked_instance.calcMatrix(1.0/globalParam.fps);
 		if(base_instance){

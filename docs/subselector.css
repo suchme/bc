@@ -105,9 +105,12 @@ tr .passive{
 tr .biko{
 	/*width:200px;*/
 }
+tr span.name{
+width:inherit;
+}
 tr .name{
-	width:400px;
-	/*font-size:larger;
+	/*width:400px;
+	font-size:larger;
 	font-weight:bold;
 	*/
 	white-space: nowrap;

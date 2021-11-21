@@ -576,10 +576,10 @@ var Ono3d = (function(){
 			//Engine.shadowGauss(1024,1024,1000,this.shadowTexture,0,0,1,1);
 		}
 		Ono3d.copyImage(this.shadowTexture,0,0,0,0,1024,1024);
-		gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
-		this.setViewport(0,0,1024,1024);
+	//	gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
+	//	this.setViewport(0,0,1024,1024);
 	//	Engine.shadowGauss(1024,1024,1000,this.shadowTexture,0,0,1,1);
-		Ono3d.copyImage(this.shadowTexture,0,0,0,0,1024,1024);
+	//	Ono3d.copyImage(this.shadowTexture,0,0,0,0,1024,1024);
 
 
 

@@ -84,7 +84,7 @@ span.setting{
 	background-color:rgba(0,0,0,0.4);
 	margin:1px;
 	z-index:1;
-	font-weight:bold;
+	/*font-weight:bold; */
 }
 .status::before{
 	position:absolute;
@@ -258,7 +258,7 @@ span.name{
 	width:220px;
 	display:inline-block;
 	overflow:hidden;
-	text-shadow:1px 1px 0 black;
+/**	text-shadow:0px 0px 1px black; */
 }
 span.outline{
 display:inline-block;
@@ -285,9 +285,10 @@ button.change{
 	width:64px;
 	height:20px;
 	border:1px solid black;
-	position:absolute;
+/*	position:absolute;
 	right:0px;
 	bottom:0px;
+	*/
 }
 div#armor>div{
 	padding-top:2px;
@@ -413,9 +414,6 @@ display:none;
 [content="+"]{
 	color:#3ee;
 }
-[content="-"]{
-	color:#c33;
-}
 .status.cost{
 	width:28px;
 	background-color:#111;
@@ -477,7 +475,7 @@ label.tabbutton{
 margin-left:1px;
 margin-top:1px;
 display:inline-block;
-width:64px;
+width:48px;
 height:20px;
 z-index:100;
 }
@@ -496,3 +494,10 @@ canvas{
 width:400px;
 }
 
+
+span.henko{
+position:absolute;
+	right:0px;
+bottom:0px;
+
+}
