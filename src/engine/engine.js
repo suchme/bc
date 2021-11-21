@@ -417,7 +417,7 @@ export default class Engine{
 		}
 
 		//デフォルト背景読み込み
-		this.skyTexture =this.loadEnvTexture("../engine/back.png");
+		this.skyTexture =this.loadEnvTexture("./engine/back.png");
 
 		if(this.userInit){
 			//初期化処理が設定されていれば実行
