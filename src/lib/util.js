@@ -433,6 +433,7 @@ static str2rgba(rgba,str){
 					relo(e,e.touches[0]);
 					rela(e);
 					func(e);
+					e.preventDefault();
 
 				});
 			}else{
