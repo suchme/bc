@@ -34,11 +34,18 @@ var o3o_tmp;
 
 			o3opath = "model/" + o3opath +".o3o";
 		}
+		if(buso.name.indexOf("15th")>=0){
+			o3opath = "model/15th.o3o";
+		}
 		if(num>1){
 			cd = type  + ((((num-2)>>2)<<2)+2);
 		}
 
 		var model=AssetManager.o3o(o3opath);
+		var status = AssetManager.getStatus(o3opath);
+		if(status === "loading"){
+			throw "loading";
+		}
 		var list = model.getCollectionObjectList(cd);
 
 		if(list.length===0 && (cd!="r1")){
@@ -47,6 +54,8 @@ var o3o_tmp;
 		}
 		return list;
 	}
+
+var update=null;
 class Scene1 extends Scene{
 	constructor(){
 		super();
@@ -56,9 +65,6 @@ class Scene1 extends Scene{
 		this.target=new Vec3();
 		this.instances=[];
 
-		for(var i=0;i<30;i++){
-			primitives["s"+i]=AssetManager.o3o("model/s"+i+".o3o");
-		}	
 		base_model = AssetManager.o3o("model/base.o3o");
 		this.t=0;
 		globalParam.autoExposure=false;
@@ -67,32 +73,47 @@ class Scene1 extends Scene{
 	}
 
 	update(){
+		if(!update){
+			update = this.update;
+		}
 		if(base_model.objects.length===0){
-			setTimeout(this.update,1000);
+			setTimeout(update,1000);
 			return;
 		}
 
-
-		var target_o3o = primitives[values.shinki.cd];
-		var targets = ["Head","Body","Arm.L","Arm.R","Leg.L","Leg.R","Rear"];
-
-		var list=[];
-		var armature=base_model.objects_name_hash["Armature"];
-		if(armature)list.push(armature);
-		list=list.concat(getList(values.head.org));
-		list=list.concat(getList(values.body.org));
-		list=list.concat(getList(values.arm.org));
-		list=list.concat(getList(values.leg.org));
-		list=list.concat(getList(values.rear.org));
-		list.forEach((e,idx,arr)=>{
-			if(targets.includes(e.name)){
-				arr[idx]=target_o3o.objects_name_hash[e.name];
+		try{
+			var path = "model/"+values.shinki.cd+".o3o";
+			var target_o3o =AssetManager.o3o(path);
+			var status = AssetManager.getStatus(path);
+			if(status === "loading"){
+				throw "loading";
 			}
-		});
-		base_instance = new O3oInstance(null,list);
-		base_instance.objectInstances.forEach((object,idx,arr)=>{
-			object.o3oInstance = base_instance;
-		});
+			
+			var targets = ["Head","Body","Arm.L","Arm.R","Leg.L","Leg.R","Rear"];
+
+			var list=[];
+			var armature=base_model.objects_name_hash["Armature"];
+			if(armature)list.push(armature);
+			list=list.concat(getList(values.head.org));
+			list=list.concat(getList(values.body.org));
+			list=list.concat(getList(values.arm.org));
+			list=list.concat(getList(values.leg.org));
+			list=list.concat(getList(values.rear.org));
+			list.forEach((e,idx,arr)=>{
+				if(targets.includes(e.name)){
+					arr[idx]=target_o3o.objects_name_hash[e.name];
+				}
+			});
+			base_instance = new O3oInstance(null,list);
+			base_instance.objectInstances.forEach((object,idx,arr)=>{
+				object.o3oInstance = base_instance;
+			});
+		}catch(e){
+			if(e==="loading"){
+				setTimeout(update,1000);
+				return;
+			}
+		}
 
 	}
 	create(){
@@ -101,45 +122,25 @@ class Scene1 extends Scene{
 
 		engine.calcEnvironment();
 		this.a[1]=Math.PI;
+
+		var camera = engine.camera;
+		camera.p[0]=0;
+		camera.p[1]=0;
+		camera.p[2]=this.cameralen;
 	}
 	draw(){
-		//this.instance = primitives[values.shinki.cd];
-		//if(!this.instance)return;
-		if(!base_instance)return;
-		//if(!tmp_instance)return;
-
 		if(!this.hoge){
 			this.create();
 			this.hoge=true;
 		}
+		if(values.selected_tab!=="visualize"){
+			return;
+		}
+		if(!base_instance)return;
+
 
 		Mat44.setInit(ono3d.worldMatrix);
-//		ono3d.worldMatrix[13]=-1;
-	//	var org_matrices=naked_instance.objectInstances["Armature"].boneMatrices;
-		//var matrices=this.instance.objectInstances["Armature"].boneMatrices;
-		//for(var i=0;i<matrices.length;i++){
-		//	Mat44.copy(matrices[i],org_matrices[i]);
-		//}
-
-		//matrices=this.instance.objectInstances["Armature"].boneMatrices;
-		//for(var i=0;i<matrices.length;i++){
-		//	Mat44.copy(matrices[i],org_matrices[i]);
-		//}
-
-		//base_instance.draw();
-		//var list =tmp_model.getCollectionObjectList("h1");
-		//list.forEach((e)=>{
-		//	tmp_instance.objectInstances_hash[e.name].draw();
-		//});
 		base_instance.draw();
-		//tmp_instance.drawCollections("h1");
-		//tmp_instance.drawCollections("b1");
-		//tmp_instance.drawCollections("a1");
-		//tmp_instance.drawCollections("l1");
-		//tmp_instance.drawCollections("r1");
-//		tmp_instance.objectInstances["Head"].draw();
-		//this.instances[0].draw();
-		//this.instance_tmp.draw("Arm");
 		
 	}
 

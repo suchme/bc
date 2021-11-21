@@ -566,7 +566,7 @@ export default class SceneObjectInstance{
 		var groups=obj.groups;
 
 		//var armature_instance= objectInstances[mod.object.name];
-		var armature_instance= this.o3oInstance.searchObject(mod.object.name);
+		var armature_instance= this.o3oInstance.searchObject(mod.object);
 		if(!armature_instance)return;
 
 		var bM = Mat43.poolAlloc();

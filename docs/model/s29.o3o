@@ -1,6 +1,6 @@
 {"format":"Ono3dObject Version 0.2"
 ,"materials":[
-    {"name": "anval", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s28_.png"}
+    {"name": "tex", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.05, "roughness": 0.12727272510528564, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s29_.png"}
 ]
 ,"meshes":[
   {
@@ -410,7 +410,7 @@
 ,"reflectionProbes":[
   ]
 ,"armatures":[
-{
+  {
     "name":"Armature" 
     ,"bones":[
       {

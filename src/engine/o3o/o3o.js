@@ -518,7 +518,7 @@ O3o.setOno3d = function(a){
 			object.parent=o3o.objects.find(function(a){return a.name === this;},object.parent)
 
 			for(k=0;k<object.modifiers.length;k++){
-				object.modifiers[k].object=o3o.objects.find(function(a){return a.name === this;},object.modifiers[k].object)
+				//object.modifiers[k].object=o3o.objects.find(function(a){return a.name === this;},object.modifiers[k].object)
 				var  name=object.modifiers[k].vertex_group;
 				object.modifiers[k].vertex_group=-1;
 				for(var l=0;l<object.groups.length;l++){
