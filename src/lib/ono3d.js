@@ -9,7 +9,7 @@ var Ono3d = (function(){
 	var _PI= 1.0/Math.PI;
 	var gl;
 	var shaders;
-	var currentpath = "../lib/";//Util.getCurrent();
+	var currentpath = "./lib/";//Util.getCurrent();
 	var
 		i
 		
