@@ -437,13 +437,16 @@ export default class Engine{
 	loadEnvTexture(path){
 		//環境マップ読み込み
 		return AssetManager.texture(path,(image)=>{
+
+			gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
 			gl.disable(gl.BLEND);
 			gl.disable(gl.DEPTH_TEST);
+			gl.clearColor(0., 0., 0.,0.0);
+			gl.clear(gl.COLOR_BUFFER_BIT);
 
 			console.log("A");
 
 
-			gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
 			gl.viewport(0,0,image.width,image.height);
 			Ono3d.postEffect(image,0,0 ,1,1,this.ono3d.shaders["envset"]); 
 			gl.bindTexture(gl.TEXTURE_2D, image.glTexture);
