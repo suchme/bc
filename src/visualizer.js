@@ -197,29 +197,34 @@ export default class Visualizer{
 	constructor(){
 		this.engine = new Engine();
 		visu_main= this;
+		this.step=0;
 	}
 	main(){
-
 		if(Util.getLoadingCount()>0){
 			//初期ロードが未完了の場合はメイン処理は開始しない
-			setTimeout(visu_main.main,100);
-		}else{
-			if(globalParam.debugMenu){
-				debugClose();
-			}
-			if(!visu_main.engine.ono3d){
-				visu_main.engine.init(document.getElementById("aaa"),400,460);
-				setTimeout(visu_main.main,100);
-			}else{
-				visu_main.engine.start();
-
-				var scene1 = new Scene1();
-				visu_main.engine.scenes.push(scene1);
-				window.engine = visu_main.engine;
-				window.ono3d = visu_main.engine.ono3d;
-
-				visu_main.scene=scene1;
-			}
+			setTimeout(visu_main.main,1000);
+			return;
 		}
+
+		switch(visu_main.step){
+		case 0:
+			visu_main.engine.init(document.getElementById("aaa"),400,460);
+			setTimeout(visu_main.main,1000);
+			visu_main.step++;
+			break;
+		case 1:
+			visu_main.step++;
+			visu_main.engine.start();
+
+			var scene1 = new Scene1();
+			visu_main.engine.scenes.push(scene1);
+			window.engine = visu_main.engine;
+			window.ono3d = visu_main.engine.ono3d;
+
+			visu_main.scene=scene1;
+			visu_main.step++;
+			break;
+		}
+		
 	}
 }
