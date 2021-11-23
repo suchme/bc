@@ -113,6 +113,7 @@ uniform lowp float uHeightBase;
 //uniform lowp float lightThreshold1; 
 //uniform lowp float lightThreshold2; 
 
+uniform sampler2D orgMap;  
 /*[lightmap]
 uniform sampler2D uLightMap;  
 varying lowp vec2 vUv2; 
@@ -209,7 +210,16 @@ void main(void){
 
 	/*ベースカラー*/ 
 	q= texture2D(uBaseColMap,uv); 
-	vec3 baseCol = uBaseCol * texture2D(uBaseColMap,uv).rgb; 
+
+	if(q ==vec4(0.0,1.0,1.0,1.0)){
+		//髪色
+		q= texture2D(orgMap,vec2(0.5,1.0)/32.0); 
+	}
+	if(q ==vec4(1.0,0.0,1.0,1.0)){
+		//肌色
+		q= texture2D(orgMap,vec2(0.5,2.0)/32.0); 
+	}
+	vec3 baseCol = uBaseCol * q.rgb; 
 
 /*[transmission]
 	float opacity = uOpacity * q.a;

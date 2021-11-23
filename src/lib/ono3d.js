@@ -924,8 +924,9 @@ var Ono3d = (function(){
 		if(dif<0.01){
 			dif=0.01;
 		}
-		gl.uniform1f(unis["lightThreshold1"],this.lightThreshold1);
-		gl.uniform1f(unis["lightThreshold2"],1./dif);
+
+//		gl.uniform1f(unis["lightThreshold1"],this.lightThreshold1);
+//		gl.uniform1f(unis["lightThreshold2"],1./dif);
 		while(i<start+size){
 			var j=i;
 			var env = arr[i].environments[envIdx];
@@ -1019,19 +1020,25 @@ var Ono3d = (function(){
 					gl.uniform1f(unis["uPbrPow"],0);
 				}
 
-				//ライトマップ
-				gl.activeTexture(gl.TEXTURE6);
-				if(material.lightMap){
-					gl.bindTexture(gl.TEXTURE_2D,material.lightMap.glTexture);
+				if(material.orgMap){
+					gl.activeTexture(gl.TEXTURE6);
+					gl.bindTexture(gl.TEXTURE_2D,material.orgMap.glTexture);
+					gl.uniform1i(unis["orgMap"],6);
 				}else{
-					//if(!environment.lightProbe){
-					//	i=j;
-					//	continue;
-					//}
-					//gl.bindTexture(gl.TEXTURE_2D,environment.lightProbe.glTexture); 
-					gl.bindTexture(gl.TEXTURE_2D,Rastgl.dummyTexture); //テクスチャ未指定の場合はダミーを設定
+					//ライトマップ
+					gl.activeTexture(gl.TEXTURE6);
+					if(material.lightMap){
+						gl.bindTexture(gl.TEXTURE_2D,material.lightMap.glTexture);
+					}else{
+						//if(!environment.lightProbe){
+						//	i=j;
+						//	continue;
+						//}
+						//gl.bindTexture(gl.TEXTURE_2D,environment.lightProbe.glTexture); 
+						gl.bindTexture(gl.TEXTURE_2D,Rastgl.dummyTexture); //テクスチャ未指定の場合はダミーを設定
+					}
+					gl.uniform1i(unis["uLightMap"],6);
 				}
-				gl.uniform1i(unis["uLightMap"],6);
 
 				var pvMatrix = this.pvMatrix;
 				this.stereoDraw(function(){

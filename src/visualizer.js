@@ -101,13 +101,26 @@ class Scene1 extends Scene{
 			list=list.concat(getList(values.rear.org));
 			list.forEach((e,idx,arr)=>{
 				if(targets.includes(e.name)){
+					if(!target_o3o.objects_name_hash[e.name]){
+						arr[idx]=null;
+						return;
+					}
 					arr[idx]=target_o3o.objects_name_hash[e.name];
 				}
+			});
+
+			list.forEach((e)=>{
+				var o3o = e.o3o;
+				o3o.materials.forEach((e)=>{
+					e.orgMap  = target_o3o.materials[0].baseColorMap;
+				});
+
 			});
 			base_instance = new O3oInstance(null,list);
 			base_instance.objectInstances.forEach((object,idx,arr)=>{
 				object.o3oInstance = base_instance;
 			});
+
 		}catch(e){
 			if(e==="loading"){
 				setTimeout(update,1000);
@@ -192,37 +205,38 @@ class Scene1 extends Scene{
 	}
 };
 
-var visu_main;
 export default class Visualizer{
 	constructor(){
 		this.engine = new Engine();
-		visu_main= this;
 		this.step=0;
 	}
 	main(){
 		if(Util.getLoadingCount()>0){
 			//初期ロードが未完了の場合はメイン処理は開始しない
-			setTimeout(visu_main.main,1000);
+			setTimeout(()=>{
+				this.main();
+			},1000);
 			return;
 		}
 
-		switch(visu_main.step){
+		switch(this.step){
 		case 0:
-			visu_main.engine.init(document.getElementById("aaa"),400,460);
-			setTimeout(visu_main.main,1000);
-			visu_main.step++;
+			this.engine.init(document.getElementById("aaa"),400,460);
+			setTimeout(()=>{
+				this.main();
+			},1000);
+			this.step++;
 			break;
 		case 1:
-			visu_main.step++;
-			visu_main.engine.start();
+			this.engine.start();
 
 			var scene1 = new Scene1();
-			visu_main.engine.scenes.push(scene1);
-			window.engine = visu_main.engine;
-			window.ono3d = visu_main.engine.ono3d;
+			this.engine.scenes.push(scene1);
+			window.engine = this.engine;
+			window.ono3d = this.engine.ono3d;
 
-			visu_main.scene=scene1;
-			visu_main.step++;
+			this.scene=scene1;
+			this.step++;
 			break;
 		}
 		

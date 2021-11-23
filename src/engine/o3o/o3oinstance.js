@@ -15,6 +15,9 @@ export default class O3oInstance{
 		for(var i=0;i<objects.length;i++){
 			//オブジェクトのインスタンスを作成
 			var object=objects[i];
+			if(object==null){
+				continue;
+			}
 			object.idx=i;
 			var instance = new SceneObjectInstance(object);
 			instance.o3oInstance= this;

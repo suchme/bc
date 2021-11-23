@@ -1144,6 +1144,7 @@ var setMaterial=function(material,name){
 	
 
 	renderMaterial.baseColorMap= material.baseColorMap; 
+	renderMaterial.orgMap= material.orgMap; 
 	renderMaterial.hightMap =material.hightMap;
 	renderMaterial.hightMapPower =material.hightMapPower;
 	renderMaterial.hightBase=material.hightBase;
