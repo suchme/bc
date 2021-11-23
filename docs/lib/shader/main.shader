@@ -261,8 +261,8 @@ void main(void){
 [transmission]*/
 	/*全反射*/ 
 	angle = reflect(eye,nrm); 
-	refx = floor(sqrt(roughness/0.06)); 
-	refa = (roughness -refx*refx*0.06)/((((1.0+refx)*(1.0+refx))-refx*refx)*0.06); 
+	refx = floor(sqrt(roughness/0.1)); 
+	refa = (roughness -refx*refx*0.1)/((((1.0+refx)*(1.0+refx))-refx*refx)*0.1); 
 	refa = min(refa,1.0); 
 	refV = angle2uv(angle) * vec2(1.0,0.5); 
 	vec3 refCol = textureTri(uEnvMap,vec2(256.0),refV,refx+refa) ;

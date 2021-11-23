@@ -34,8 +34,11 @@ var o3o_tmp;
 
 			o3opath = "model/" + o3opath +".o3o";
 		}
-		if(buso.name.indexOf("15th")>=0){
+		if(buso.name.indexOf("[15th]")>=0){
 			o3opath = "model/15th.o3o";
+		}
+		if(buso.name.indexOf("[S]")>=0){
+			o3opath = "model/silver.o3o";
 		}
 		if(num>1){
 			cd = type  + ((((num-2)>>2)<<2)+2);
@@ -99,15 +102,17 @@ class Scene1 extends Scene{
 			list=list.concat(getList(values.arm.org));
 			list=list.concat(getList(values.leg.org));
 			list=list.concat(getList(values.rear.org));
-			list.forEach((e,idx,arr)=>{
+
+			list = list.map((e)=>{
 				if(targets.includes(e.name)){
 					if(!target_o3o.objects_name_hash[e.name]){
-						arr[idx]=null;
-						return;
+						return null;
 					}
-					arr[idx]=target_o3o.objects_name_hash[e.name];
+					return target_o3o.objects_name_hash[e.name];
 				}
+				return e;
 			});
+			list = list.filter((e)=>{return e});
 
 			list.forEach((e)=>{
 				var o3o = e.o3o;
