@@ -1640,7 +1640,7 @@
   }
   ,"h6":{
     "children":[]
-    ,"objects":["Cylinder.001"]
+    ,"objects":["Cylinder.001","Head"]
   }
   ,"l2":{
     "children":[]
@@ -2042,7 +2042,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"//base.blend-BodyMesh"
-    ,"bound_box":[-0.279724,-0.544505,-0.198551, 0.271737, 0.684989, 0.223046]
+    ,"bound_box":[-0.000000,-0.577976,-0.226815, 0.298446, 0.647921, 0.194782]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2060,7 +2060,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"//base.blend-Head"
-    ,"bound_box":[-0.955373,-1.053998,-0.893955, 1.078748, 1.193779, 1.095002]
+    ,"bound_box":[-0.000000,-1.185833,-1.000000, 1.022707, 1.061944, 1.000000]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2078,7 +2078,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"//base.blend-LegMesh"
-    ,"bound_box":[-0.275543,-1.867113,-0.334960, 0.276141,-0.530604, 0.173842]
+    ,"bound_box":[ 0.028782,-1.872160,-0.375289, 0.275543,-0.571591, 0.133212]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2096,7 +2096,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"//base.blend-ArmMesh"
-    ,"bound_box":[-0.749134,-0.687894,-0.248695, 0.708047, 0.399535, 0.237684]
+    ,"bound_box":[ 0.307769, 0.365322,-0.164644, 1.454407, 0.497563, 0.079308]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2177,7 +2177,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"//base.blend-Cube.006"
-    ,"bound_box":[-0.202029,-0.074865,-0.011926, 0.202372, 0.507992, 0.144782]
+    ,"bound_box":[-0.000000,-0.111930,-0.039802, 0.202202, 0.470923, 0.115921]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2191,7 +2191,7 @@
     "name":"Scene"
     ,"frame_start":1
     ,"frame_end":120
-    ,"objects":["Cube.004","_arm","Cylinder","Cylinder.001","Cube","Cube.001","Cube.003","Body.001","Cube.002","Cube.005","_leg","Cube.006","Cube.007","Cube.008","Body","Head","Leg.L","Arm.L","Armature","mount"]
+    ,"objects":["Cube.004","_arm","Cylinder","Cylinder.001","Head","Cube","Cube.001","Cube.003","Body.001","Cube.002","Cube.005","_leg","Cube.006","Cube.007","Cube.008","Body","Leg.L","Arm.L","Armature","mount"]
     ,"world":{
       "name":"World"
     }
