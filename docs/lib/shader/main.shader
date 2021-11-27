@@ -211,13 +211,9 @@ void main(void){
 	/*ベースカラー*/ 
 	q= texture2D(uBaseColMap,uv); 
 
-	if(q ==vec4(0.0,1.0,1.0,1.0)){
-		//髪色
-		q= texture2D(orgMap,vec2(0.5,1.0)/32.0); 
-	}
-	if(q ==vec4(1.0,0.0,1.0,1.0)){
-		//肌色
-		q= texture2D(orgMap,vec2(0.5,2.0)/32.0); 
+
+	if( q.rb == vec2(0.0,1.0)){
+		q= texture2D(orgMap,vec2(31.5,pow(q.g,1.0/2.2)*32.0-0.5)/32.0); 
 	}
 	vec3 baseCol = uBaseCol * q.rgb; 
 

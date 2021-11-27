@@ -758,8 +758,20 @@ export default class SceneObjectInstance{
 		materialTable[0]=setMaterial(defaultMaterial,"defaultMaterial");
 		var materials = o3o.materials;
 
-		for(var i=0;i<materials.length;i++){
-			materialTable[i+1]=setMaterial(materials[i],o3o.name+"_"+materials[i].name);
+
+		var material_slots = obj.material_slots;
+		if(material_slots){
+			var i=1;
+			material_slots.forEach((e)=>{
+				var na = e;
+				var mat = materials.find((e)=>{return e.name == na;});
+				materialTable[i]=setMaterial(mat,o3o.name+"_"+mat.name);
+				i++;
+			});
+		}else{
+			for(var i=0;i<materials.length;i++){
+				materialTable[i+1]=setMaterial(materials[i],o3o.name+"_"+materials[i].name);
+			}
 		}
 
 		if(!environment){

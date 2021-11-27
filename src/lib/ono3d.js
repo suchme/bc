@@ -408,6 +408,9 @@ var Ono3d = (function(){
 				}
 			}
 		}
+		if(material["metallic"]){
+			num|=(1<<2);
+		}
 		if(!shaders["main_"+num]){
 			ret.createMainShader(num);
 		}
