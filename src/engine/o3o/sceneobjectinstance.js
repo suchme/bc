@@ -565,7 +565,7 @@ export default class SceneObjectInstance{
 		var ratio,pos,vertex;
 		var groups=obj.groups;
 
-		//var armature_instance= objectInstances[mod.object.name];
+		if(!mod.object)return;
 		var armature_instance= this.o3oInstance.searchObject(mod.object);
 		if(!armature_instance)return;
 
@@ -764,8 +764,8 @@ export default class SceneObjectInstance{
 			var i=1;
 			material_slots.forEach((e)=>{
 				var na = e;
-				var mat = materials.find((e)=>{return e.name == na;});
-				materialTable[i]=setMaterial(mat,o3o.name+"_"+mat.name);
+				var mat = materials.find((e)=>{return e.name_full == na;});
+				materialTable[i]=setMaterial(mat,o3o.name+"_"+mat.name_full);
 				i++;
 			});
 		}else{

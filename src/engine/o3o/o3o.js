@@ -173,10 +173,10 @@ O3o.setOno3d = function(a){
 		}
 
 		o3o.objects.forEach((e)=>{
-			o3o.objects_name_hash[e.name] = e;
+			o3o.objects_name_hash[e.name_full] = e;
 		});
 		o3o.meshes.forEach((e)=>{
-			o3o.meshes_name_hash[e.name] = e;
+			o3o.meshes_name_hash[e.name_full] = e;
 		});
 
 		for(i=o3o.scenes.length;i--;){
@@ -512,7 +512,14 @@ O3o.setOno3d = function(a){
 			var typedata = typedatas[object.type];
 			if(typedata){
 				object.objecttype=typedata.objecttype;
-				object.data=o3o[typedata.target].find(function(a){return a.name === this;},object.data)
+				var data=null;
+				
+				data = o3o[typedata.target].find(function(a){return a.name_full === this;},object.data)
+				
+				if(!data){
+					data=o3o[typedata.target].find(function(a){return a.name === this;},object.data)
+				}
+				object.data = data;
 			}else{
 				object.objecttype="";
 				object.data=null;

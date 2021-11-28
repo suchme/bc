@@ -1,11 +1,12 @@
 {"format":"Ono3dObject Version 0.2"
 ,"materials":[
-    {"name": "kari", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//kari.png"}
-  ,  {"name": "maintex", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
+    {"name": "kari", "name_full": "kari", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//kari.png"}
+  ,  {"name": "maintex", "name_full": "maintex", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
 ]
 ,"meshes":[
   {
     "name":"ArmMesh"
+    ,"name_full":"ArmMesh"
     ,"use_auto_smooth":0
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
@@ -114,6 +115,7 @@
   }
   ,{
     "name":"BodyMesh"
+    ,"name_full":"BodyMesh"
     ,"use_auto_smooth":0
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
@@ -226,6 +228,7 @@
   }
   ,{
     "name":"Cube.006"
+    ,"name_full":"Cube.006"
     ,"use_auto_smooth":0
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
@@ -300,6 +303,7 @@
   }
   ,{
     "name":"Head"
+    ,"name_full":"Head"
     ,"use_auto_smooth":0
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
@@ -414,6 +418,7 @@
   }
   ,{
     "name":"karimesh"
+    ,"name_full":"karimesh"
     ,"use_auto_smooth":0
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
@@ -450,6 +455,7 @@
   }
   ,{
     "name":"LegMesh"
+    ,"name_full":"LegMesh"
     ,"use_auto_smooth":0
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
@@ -915,6 +921,7 @@
 ,"objects":[
   {
     "name":"Arm.L"
+    ,"name_full":"Arm.L"
     ,"groups":["Arm1.L","Arm2.L","Hand.L","Arm1.R","Arm2.R","Hand.R"]
     ,"material_slots":["maintex"]
     ,"location":[ 0.000000, 0.000000, 0.000000]
@@ -933,6 +940,7 @@
   }
   ,{
     "name":"Armature"
+    ,"name_full":"Armature"
     ,"groups":[]
     ,"material_slots":[]
     ,"poseBones":[
@@ -998,6 +1006,7 @@
   }
   ,{
     "name":"Body"
+    ,"name_full":"Body"
     ,"groups":["Hip","Arm1.L","Body","Leg1.L","Arm1.R","Leg1.R","Head"]
     ,"material_slots":["maintex"]
     ,"location":[ 0.000000, 0.000000, 0.000000]
@@ -1016,6 +1025,7 @@
   }
   ,{
     "name":"Camera"
+    ,"name_full":"Camera"
     ,"groups":[]
     ,"material_slots":[]
     ,"location":[ 7.358891, 4.958310, 6.925791]
@@ -1030,6 +1040,7 @@
   }
   ,{
     "name":"Head"
+    ,"name_full":"Head"
     ,"groups":["Hip","Head","Arm1.L","Arm2.L","Hand.L","Body","Leg1.L","Leg2.L","Foot.L","Leg1.R","Leg2.R","Foot.R","Rear","Arm1.R","Arm2.R","Hand.R"]
     ,"material_slots":["maintex"]
     ,"location":[ 0.000000, 0.918874,-0.000000]
@@ -1048,6 +1059,7 @@
   }
   ,{
     "name":"kari"
+    ,"name_full":"kari"
     ,"groups":["Arm2.L"]
     ,"material_slots":["kari"]
     ,"location":[ 0.929704, 0.620232,-0.000000]
@@ -1063,6 +1075,7 @@
   }
   ,{
     "name":"kari.001"
+    ,"name_full":"kari.001"
     ,"groups":["Arm2.R"]
     ,"material_slots":["kari"]
     ,"location":[-0.950587, 0.613822,-0.000000]
@@ -1078,6 +1091,7 @@
   }
   ,{
     "name":"kari.002"
+    ,"name_full":"kari.002"
     ,"groups":["Rear"]
     ,"material_slots":["kari"]
     ,"location":[-0.002964, 0.231609,-0.382054]
@@ -1093,6 +1107,7 @@
   }
   ,{
     "name":"kari.003"
+    ,"name_full":"kari.003"
     ,"groups":["Leg2.R"]
     ,"material_slots":["kari"]
     ,"location":[ 0.361826,-1.266867, 0.079111]
@@ -1108,6 +1123,7 @@
   }
   ,{
     "name":"kari.004"
+    ,"name_full":"kari.004"
     ,"groups":["Leg2.L"]
     ,"material_slots":["kari"]
     ,"location":[-0.398750,-1.250145, 0.061608]
@@ -1123,6 +1139,7 @@
   }
   ,{
     "name":"kari.005"
+    ,"name_full":"kari.005"
     ,"groups":["Head"]
     ,"material_slots":["kari"]
     ,"location":[-0.034187, 1.305337,-0.000000]
@@ -1138,6 +1155,7 @@
   }
   ,{
     "name":"kari.006"
+    ,"name_full":"kari.006"
     ,"groups":["Body"]
     ,"material_slots":["kari"]
     ,"location":[-0.039423, 0.192914, 0.331443]
@@ -1153,6 +1171,7 @@
   }
   ,{
     "name":"Leg.L"
+    ,"name_full":"Leg.L"
     ,"groups":["Leg1.L","Leg2.L","Foot.L","Leg1.R","Leg2.R","Foot.R"]
     ,"material_slots":["maintex"]
     ,"location":[ 0.000000, 0.000000, 0.000000]
@@ -1171,6 +1190,7 @@
   }
   ,{
     "name":"Light"
+    ,"name_full":"Light"
     ,"groups":[]
     ,"material_slots":[]
     ,"location":[-1.462102, 2.533174, 1.243812]
@@ -1185,6 +1205,7 @@
   }
   ,{
     "name":"mount"
+    ,"name_full":"mount"
     ,"groups":["Rear"]
     ,"material_slots":["maintex"]
     ,"location":[ 0.000000,-0.000000,-0.174930]

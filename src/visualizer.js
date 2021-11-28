@@ -29,20 +29,22 @@ var o3o_tmp;
 		var type = cd.substring(0,1);
 		var num = Number(cd.substring(1));
 		var o3opath = "model/base.o3o";
-		if(buso.class.length > 0 && buso.class[0]>0){
-			o3opath = DATA.class_shinki[buso.class[0]]
-
-			o3opath = "model/" + o3opath +".o3o";
-		}
 		if(buso.name.indexOf("[15th]")>=0){
 			o3opath = "model/15th.o3o";
-		}
-		if(buso.name.indexOf("[S]")>=0){
+		}else if(buso.name.indexOf("[S]")>=0){
 			o3opath = "model/silver.o3o";
+		}else if(buso.name.indexOf("[G]")>=0){
+			o3opath = "model/gold.o3o";
+		}else{
+			if(buso.class.length > 0 && buso.class[0]>0){
+				o3opath = DATA.class_shinki[buso.class[0]]
+				o3opath = "model/" + o3opath +".o3o";
+			}
 		}
 		if(num>1){
 			cd = type  + ((((num-2)>>2)<<2)+2);
 		}
+		
 
 		var model=AssetManager.o3o(o3opath);
 		var status = AssetManager.getStatus(o3opath);
