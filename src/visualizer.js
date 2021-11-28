@@ -36,9 +36,14 @@ var o3o_tmp;
 		}else if(buso.name.indexOf("[G]")>=0){
 			o3opath = "model/gold.o3o";
 		}else{
-			if(buso.class.length > 0 && buso.class[0]>0){
-				o3opath = DATA.class_shinki[buso.class[0]]
-				o3opath = "model/" + o3opath +".o3o";
+			var m=DATA.class.indexOf("水着");
+			if(buso.class.indexOf(m)>=0){
+				o3opath = "model/swimsuit.o3o";
+			}else{
+				if(buso.class.length > 0 && buso.class[0]>0){
+					o3opath = DATA.class_shinki[buso.class[0]]
+					o3opath = "model/" + o3opath +".o3o";
+				}
 			}
 		}
 		if(num>1){
@@ -51,12 +56,14 @@ var o3o_tmp;
 		if(status === "loading"){
 			throw "loading";
 		}
-		var list = model.getCollectionObjectList(cd);
-
-		if(list.length===0 && (cd!="r1")){
+		if(!model.collections[cd]){
 			model=AssetManager.o3o("model/base.o3o");
-			list = model.getCollectionObjectList(type+"0");
+			var list = model.getCollectionObjectList(type+"0");
+			return list;
+
 		}
+
+		var list = model.getCollectionObjectList(cd);
 		return list;
 	}
 

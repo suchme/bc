@@ -213,7 +213,7 @@ void main(void){
 
 
 	if( q.rb == vec2(0.0,1.0)){
-		q= texture2D(orgMap,vec2(31.5,pow(q.g,1.0/2.2)*32.0-0.5)/32.0); 
+		q= texture2D(orgMap,vec2(31.5,pow(q.g,1.0/2.2)*31.0+0.5)/32.0); 
 	}
 	vec3 baseCol = uBaseCol * q.rgb; 
 
