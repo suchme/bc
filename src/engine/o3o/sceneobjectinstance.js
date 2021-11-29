@@ -1142,6 +1142,12 @@ var setMaterial=function(material,name){
 	renderMaterial = renderMaterials[i];
 	ono3d.materials_index++;
 
+	if(material.blend_method !="OPAQUE"){
+		renderMaterial.blend_method=1;
+	}else{
+		renderMaterial.blend_method=0;
+	}
+
 	renderMaterial.offsetx=0;
 	renderMaterial.offsety=0;
 	renderMaterial.name =name;

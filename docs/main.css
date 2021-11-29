@@ -296,8 +296,9 @@ div#armor>div{
 
 
 div#armor>div:nth-child(odd){
-	background-color:#666;
+	background-color:rgba(0,0,0,0.2);
 }
+
 
 .name{
 font-weight:bold;
@@ -390,6 +391,9 @@ color:white;
 	background-size:contain;
 }
 
+#form{
+position:relative;
+}
 /*
 #form .extend{
 display:none;
@@ -433,7 +437,7 @@ div.other_calc{
 }
 
 div.tabmain{
-	background-color:#888;
+	background-color:#666;
 height:490px;
 	   z-index:-1;
 }

@@ -208,12 +208,19 @@ void main(void){
 	float refractPower = q.w; 
 
 
+/*[reflect]
+	float metallic = uMetallic; 
+[reflect]*/
 	/*ベースカラー*/ 
 	q= texture2D(uBaseColMap,uv); 
 
 
 	if( q.rb == vec2(0.0,1.0)){
 		q= texture2D(orgMap,vec2(31.5,pow(q.g,1.0/2.2)*31.0+0.5)/32.0); 
+
+		/*[reflect]
+			metallic = 0.0;
+		[reflect]*/
 	}
 	vec3 baseCol = uBaseCol * q.rgb; 
 
@@ -264,7 +271,7 @@ void main(void){
 	vec3 refCol = textureTri(uEnvMap,vec2(256.0),refV,refx+refa) ;
 
 	/*全反射合成*/ 
-	vColor2 = mix(mix(vColor2,baseCol *refCol ,uMetallic),refCol,specular); 
+	vColor2 = mix(mix(vColor2,baseCol *refCol ,metallic),refCol,specular); 
 [reflect]*/
 
 

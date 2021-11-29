@@ -1,7 +1,7 @@
 {"format":"Ono3dObject Version 0.2"
 ,"materials":[
-    {"name": "maintex", "name_full": "maintex", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.05, "roughness": 0.21818199753761292, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s28_.png"}
-  ,  {"name": "maintex", "name_full": "maintex [base.blend]", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
+    {"name": "maintex", "name_full": "maintex", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.05, "roughness": 0.21818199753761292, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s28_.png"}
+  ,  {"name": "maintex", "name_full": "maintex [base.blend]", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
 ]
 ,"meshes":[
   {
@@ -1667,7 +1667,7 @@
   }
   ,"maindata.001":{
     "children":[]
-    ,"objects":["Body","Head","Leg.L","_Arm","Armature","mount.001"]
+    ,"objects":["Body","Head","Leg.L","Arm.L","mount.001","mount.001"]
   }
   ,"r326":{
     "children":[]
@@ -1695,7 +1695,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"ArmMesh [base.blend]"
-    ,"bound_box":[-0.648981,-0.779896,-0.206833, 0.589292, 0.342383, 0.178227]
+    ,"bound_box":[ 0.307769, 0.365322,-0.164644, 1.454407, 0.497563, 0.079308]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -1713,7 +1713,7 @@
     ,"scale":[ 0.098027, 0.098027, 0.098027]
     ,"type":"MESH"
     ,"data":"Cube.003"
-    ,"bound_box":[-2.523007,-1.718992, 0.108593, 2.361104, 1.037979, 1.154548]
+    ,"bound_box":[-0.012700,-1.602167,-0.154562, 2.444295, 1.154803, 0.823962]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -1730,12 +1730,32 @@
     ,"scale":[ 0.269965, 0.269965, 0.269965]
     ,"type":"MESH"
     ,"data":"Cube.004"
-    ,"bound_box":[-1.129887,-2.044628,-1.147064, 1.124639, 1.241136, 0.531948]
+    ,"bound_box":[-0.000000,-2.002208,-1.252906, 1.128297, 1.283556, 0.423178]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
       ,{"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
     ]
+  }
+  ,{
+    "name":"Arm.L"
+    ,"name_full":"Arm.L"
+    ,"groups":["Arm1.L","Arm2.L","Hand.L","Arm1.R","Arm2.R","Hand.R"]
+    ,"material_slots":["maintex"]
+    ,"location":[ 0.000000, 0.000000, 0.000000]
+    ,"rotation":[ 0.000000, 0.000000, 0.000000]
+    ,"scale":[ 1.000000, 1.000000, 1.000000]
+    ,"parent":"Armature"
+    ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
+    ,"type":"MESH"
+    ,"data":"ArmMesh [base.blend]"
+    ,"bound_box":[-0.648981,-0.779896,-0.206833, 0.589292, 0.342383, 0.178227]
+    ,"bound_type":"BOX"
+    ,"modifiers":[
+      {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
+      ,{"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
+    ]
+    ,"cycles_visibility": []
   }
   ,{
     "name":"Armature"
@@ -1814,7 +1834,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"BodyMesh"
-    ,"bound_box":[-0.271096,-0.604585,-0.198551, 0.274329, 0.636469, 0.223046]
+    ,"bound_box":[-0.000000,-0.577976,-0.226815, 0.298446, 0.647921, 0.194782]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -1898,7 +1918,7 @@
     ,"scale":[ 0.276798, 0.276798, 0.276798]
     ,"type":"MESH"
     ,"data":"Cube.005"
-    ,"bound_box":[-1.070148,-3.376244,-1.169329, 1.154473, 0.626536, 0.353341]
+    ,"bound_box":[-0.000000,-3.294880,-1.232863, 1.100477, 0.694945, 0.280853]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -1955,7 +1975,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"LegMesh.001"
-    ,"bound_box":[-0.441328,-1.028671,-0.374326, 0.442428, 0.485451, 0.473944]
+    ,"bound_box":[ 0.022901,-1.019837,-0.348661, 0.441328, 0.451283, 0.528197]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -1987,7 +2007,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"Cube.006"
-    ,"bound_box":[-0.200972,-0.123397,-0.014125, 0.203293, 0.459489, 0.148217]
+    ,"bound_box":[-0.000000,-0.111930,-0.039802, 0.202202, 0.470923, 0.115921]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2022,7 +2042,7 @@
     ,"scale":[ 0.178073, 0.793059, 0.178073]
     ,"type":"MESH"
     ,"data":"Cube.009"
-    ,"bound_box":[-6.353826,-2.040595, 1.659578, 6.329621, 0.116214, 3.987309]
+    ,"bound_box":[ 1.949614,-2.025966, 1.665154, 6.343921, 0.130496, 3.665154]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2039,7 +2059,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"Cube.007"
-    ,"bound_box":[-2.334384,-0.381575, 0.231568, 2.332142, 1.245864, 0.448457]
+    ,"bound_box":[ 0.186486,-0.369965, 0.228743, 2.333145, 1.257218, 0.394791]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2124,6 +2144,7 @@
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
       ,{"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
     ]
+    ,"cycles_visibility": []
   }
   ,{
     "name":"Armature"
@@ -2216,7 +2237,7 @@
     "name":"Scene"
     ,"frame_start":1
     ,"frame_end":120
-    ,"objects":["Cube","_Arm","Cube.001","Camera","Light","anero","Head","hair","b210b","a","Leg.L.001","mount","wing.L","tank.L","Body","Leg.L","Armature","mount.001"]
+    ,"objects":["Cube","_Arm","Cube.001","Camera","Light","anero","Head","hair","b210b","a","Leg.L.001","mount","wing.L","tank.L","Body","Leg.L","Arm.L","mount.001"]
     ,"world":{
       "name":"World"
     }

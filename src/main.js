@@ -719,9 +719,10 @@ class Main {
 
 
 		var dt=new Date(DATA.date);
-		values.version="code2021/11/21\n"
+		values.version="code2021/11/30\n"
 			+ "data"+ dt.getFullYear() +"/"+("0"+(dt.getMonth()+1)).slice(-2)
 			+"/" +("0"+dt.getDate()).slice(-2);
+		globalParam.version=20211130;
 
 		//初期値セット
 		if(location.search===""){
@@ -848,9 +849,9 @@ DATA.part_cd.forEach(function(e,i){
 	stylesheet.insertRule(` 
 		span.armor.${e}{
 			background-image:url(icon/${e}_back.svg);
-			background-position-x:${i*10}px;
 		}
 	`, stylesheet.cssRules.length);
+			//background-position-x:${(i&1)*10}px;
 	//stylesheet.insertRule(` 
 	//	.part.${e}::before{
 	//		content:url(icon/${e}.svg);
@@ -882,6 +883,14 @@ document.querySelector("#shinki div.skill").appendChild(
 
 }
 
+window.visualizesw=function(){
+	if(values.visualize){
+		document.querySelector("div#aaa").style.display="block";
+	}else{
+		document.querySelector("div#aaa").style.display="none";
+	}
+	main.reCalc();
+}
 window.lvmax=function(){
 	if(values.shinki.lv !== 100){
 		values.shinki.lv=100;

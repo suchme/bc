@@ -68,6 +68,7 @@ var o3o_tmp;
 	}
 
 var update=null;
+var update_flg = true;
 class Scene1 extends Scene{
 	constructor(){
 		super();
@@ -85,11 +86,17 @@ class Scene1 extends Scene{
 	}
 
 	update(){
-		if(!update){
-			update = this.update;
+		update_flg=true;
+	}
+	update_(){
+		if(!update_flg){
+			return;
 		}
+//		if(!update){
+//			update = this.update;
+//		}
 		if(base_model.objects.length===0){
-			setTimeout(update,1000);
+//			setTimeout(update,1000);
 			return;
 		}
 
@@ -134,10 +141,12 @@ class Scene1 extends Scene{
 			base_instance.objectInstances.forEach((object,idx,arr)=>{
 				object.o3oInstance = base_instance;
 			});
+		
+			update_flg=false;
 
 		}catch(e){
 			if(e==="loading"){
-				setTimeout(update,1000);
+	//			setTimeout(update,1000);
 				return;
 			}
 		}
@@ -155,16 +164,17 @@ class Scene1 extends Scene{
 		camera.p[1]=0;
 		camera.p[2]=this.cameralen;
 
-		this.update();
+		update_flg=true;
+		this.update_();
 	}
 	draw(){
 		if((!this.hoge) && Util.getLoadingCount()===0){
 			this.create();
 			this.hoge=true;
 		}
-		if(values.selected_tab!=="visualize"){
-			return;
-		}
+//		if(values.selected_tab!=="visualize"){
+//			return;
+//		}
 		if(!base_instance)return;
 
 
@@ -174,6 +184,7 @@ class Scene1 extends Scene{
 	}
 
 	move(){
+		this.update_();
 
 		if(Util.pressOn){
 			//クリックされていた場合は視点変更

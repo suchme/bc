@@ -9,13 +9,13 @@ var AssetManager=(function(){
 	ret.assetList=[];
 	ret.texture=function(path,func){
 		if(!this.assetList[path]){
-			this.assetList[path]=Ono3d.loadTexture(path,func);
+			this.assetList[path]=Ono3d.loadTexture(path+"?"+globalParam.version,func);
 		}
 		return this.assetList[path];
 	}
 	ret.bumpTexture=function(path,func){
 		if(!this.assetList[path]){
-			this.assetList[path]=Ono3d.loadBumpTexture(path,func);
+			this.assetList[path]=Ono3d.loadBumpTexture(path+"?"+globalParam.version,func);
 		}
 		return this.assetList[path];
 	}
@@ -27,7 +27,7 @@ var AssetManager=(function(){
 		if(this.assetList[path].status !== "loaded"){
 			var _path = path;
 			var _func= func;
-			this.assetList[path].data=O3o.load(path,(e)=>{
+			this.assetList[path].data=O3o.load(path+"?"+globalParam.version,(e)=>{
 				if(!e){
 					this.assetList[path].status="failed";
 				}else{

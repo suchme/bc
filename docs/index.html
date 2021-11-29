@@ -22,7 +22,11 @@
 		<div style="position:fixed;bottom:2px;right:2px;font-size:8pt;white-space:pre-wrap;" bind:="version"></div>
 <div class="tabmain">
 
-<div class="tab_body tab_main" bind:hoge="selected_tab">
+<div class="tab_body tab_main" bind:hoge="selected_tab" style="position:relative;">
+<div id="aaa" style="position:absolute;display:none;">
+<div id="bbb" style="position:absolute;z-index:100;width:50%;height:100%">
+</div>
+</div>
 	<div id="form">
 
 		<div><span class="shinki template_part" id="shinki" ></span>
@@ -60,7 +64,12 @@
 				<span class="param" bind:="total"></span>
 			</div>
 		</div>
+
 	</div>
+				<button onclick="lvmax()" style="position:absolute;bottom:0px;" >LvSw</button>
+				<label style="position:absolute;bottom:0px;right:0px;color:black;" >
+				<input type="checkbox" bind:="visualize" onclick="values.visualize = this.checked;visualizesw(event)" >visualize(WIP)
+				</label>
 </div>
 
 <div class="tab_body tab_extension" bind:hoge="selected_tab">
@@ -105,10 +114,6 @@
 <div class="tab_body tab_export" bind:hoge="selected_tab">
 	<textarea class="export" wrap="off" bind:="export_text">aaa</textarea>
 </div>
-<div class="tab_body tab_visualize" bind:hoge="selected_tab">
-<div id="aaa">
-</div>
-</div>
 
 <div class="tab_body tab_about" bind:hoge="selected_tab">
 	<div class="info">
@@ -127,11 +132,9 @@
 <label class="tabbutton"><input type="radio" name="tab" value="extension" bind:="selected_tab" feedback><span>ext</span></label>
 <label class="tabbutton"><input type="radio" name="tab" value="export" bind:="selected_tab" feedback><span>export</span></label>
 
-<label class="tabbutton" style=""><input type="radio" name="tab" value="visualize" bind:="selected_tab" feedback><span >WIP</span></label>
 
 <label class="tabbutton"><input type="radio" name="tab" value="about" bind:="selected_tab" feedback><span>about</span></label>
 
-				<button onclick="lvmax()" >LvSw</button>
 </div>
 
 </div>

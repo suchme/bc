@@ -436,8 +436,8 @@ var Ono3d = (function(){
 
 		//マテリアルリストをシェーダごとに分ける
 		Sort.qSort(this.materials,this.materials_static_index,this.materials_index-1
-			,function(a,b){return ((a.opacity === 1.0) && (b.opacity !== 1.0) || (a.shader < b.shader))?-1
-				:((a.opacity !==1.0) && (b.opacity ===1.0) || (a.shader > b.shader))?1:0;})
+			,function(a,b){return ((a.blend_method < b.blend_method ) || (a.shader < b.shader))?-1
+				:((a.blend_method > b.blend_method) || (a.shader > b.shader))?1:0;})
 
 
 		//描画ポリゴンをマテリアル,環境 順に並べる

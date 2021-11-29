@@ -3,6 +3,7 @@ export default class Material{
 	constructor(){
 		//マテリアル
 		this.name="";
+		this.blend_method="OPAQUE";
 		this.baseColor=new Vec3();
 		Vec3.set(this.baseColor,1,1,1);
 		this.baseColorMap="";
