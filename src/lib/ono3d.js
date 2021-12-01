@@ -190,7 +190,7 @@ var Ono3d = (function(){
 			this.shaders=[];
 			shaders = this.shaders;
 
-			var filenames=[ "shadow","plain","half","multiadd","fill","add"
+			var filenames=[ "shadow_dec","shadow","plain","half","multiadd","fill","add"
 				,"average","average2","average3","decode"
 				,"rough","celestialsphere","envset","gauss","normal"
 				,"cube2polar"
@@ -543,7 +543,7 @@ var Ono3d = (function(){
 			gl.useProgram(shader.program);
 			gl.depthMask(true);
 			gl.enable(gl.DEPTH_TEST);
-			gl.cullFace(gl.BACK);
+			gl.cullFace(gl.FRONT);
 			gl.disable(gl.BLEND);
 
 			//for(var i=0;i<16;i++){
@@ -578,11 +578,12 @@ var Ono3d = (function(){
 			//this.setViewport(0,0,1024,1024);
 			//Engine.shadowGauss(1024,1024,1000,this.shadowTexture,0,0,1,1);
 		}
+			gl.cullFace(gl.BACK);
 		Ono3d.copyImage(this.shadowTexture,0,0,0,0,1024,1024);
-	//	gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
-	//	this.setViewport(0,0,1024,1024);
-	//	Engine.shadowGauss(1024,1024,1000,this.shadowTexture,0,0,1,1);
-	//	Ono3d.copyImage(this.shadowTexture,0,0,0,0,1024,1024);
+		gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
+		this.setViewport(0,0,1024,1024);
+		Engine.shadowGauss(1024,1024,1000,this.shadowTexture,0,0,1,1);
+		Ono3d.copyImage(this.shadowTexture,0,0,0,0,1024,1024);
 
 
 

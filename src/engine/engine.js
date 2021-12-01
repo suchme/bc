@@ -209,9 +209,11 @@ export default class Engine{
 		Engine.toneMapping(bufTexture,WIDTH/1024,HEIGHT/1024);
 		
 
-//		if(ono3d.shadowTexture.glTexture){
-//			Ono3d.drawCopy(ono3d.shadowTexture,0,0,1,1)
-//		}
+		if(ono3d.shadowTexture.glTexture){
+		//	Ono3d.drawCopy(ono3d.shadowTexture,0,0,1,1)
+		//ono3d.setViewport(0,0,WIDTH,HEIGHT);
+//			Ono3d.postEffect(ono3d.shadowTexture,0,0 ,1,1,this.ono3d.shaders["shadow_dec"]); 
+		}
 
 
 		//gl.getParameter(gl.VIEWPORT);
@@ -477,7 +479,7 @@ export default class Engine{
 		var cameraz=new Vec3();
 
 		//ライト向きとカメラ向きからライトレンダリング向き決める
-		Vec3.set(yup,-light.matrix[8],-light.matrix[9],-light.matrix[10]);
+		Vec3.set(yup,light.matrix[8],light.matrix[9],light.matrix[10]);
 		Vec3.set(cameraz,camera.matrix[6],camera.matrix[7],camera.matrix[8]);
 
 		Vec3.cross(xup,yup,cameraz);
@@ -545,6 +547,10 @@ export default class Engine{
 		Vec3.madd(light_anchor_pos,light_anchor_pos,zup
 			,calcSupport(zup,poses,1) +offset);
 
+		offset=4;
+//		Vec3.mul(light_anchor_pos,zup,-15);
+		Vec3.mul(light_anchor_pos,zup,offset+1);
+//				light_anchor_pos[1]+=1;
 		//シャドウマップ用行列計算
 		var view_matrix = light.viewmatrix;
 		Mat44.set(view_matrix
@@ -556,18 +562,20 @@ export default class Engine{
 		Mat44.getInv(view_matrix,view_matrix);
 
 		ono3d.calcPerspectiveMatrix(projection_matrix
-			,calcSupportAngle(xup,poses,light_anchor_pos,0,zup)   * offset 
-			,calcSupportAngle(xup,poses,light_anchor_pos,1,zup) * offset 
-			,30//calcSupportAngle(yup,poses,light_anchor_pos,1) * offset 
-			,-30//calcSupportAngle(yup,poses,light_anchor_pos)   * offset 
-			,offset,(calcSupport(zup,poses,1)-calcSupport(zup,poses))+offset);
+			,-0.5*offset
+			,0.5*offset
+			,-0.5*offset//calcSupportAngle(yup,poses,light_anchor_pos,1) * offset 
+			,0.5*offset//calcSupportAngle(yup,poses,light_anchor_pos)   * offset 
+			//,offset,(calcSupport(zup,poses,1)-calcSupport(zup,poses))+offset);
+			,offset,offset+3);
 
-		projection_matrix[5]/= offset;
-		projection_matrix[13]= projection_matrix[9];
-		projection_matrix[9]=0;
-
+//		projection_matrix[5]/= offset;
+//		projection_matrix[13]= projection_matrix[9];
+//		projection_matrix[9]=0;
+//
+//		Mat44.dot(view_matrix,projection_matrix,view_matrix);
+//
 		Mat44.dot(view_matrix,projection_matrix,view_matrix);
-
 		Mat44.setInit(projection_matrix);
 		projection_matrix[5]=0;
 		projection_matrix[9]=-1;
