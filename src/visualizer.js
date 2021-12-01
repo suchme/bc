@@ -188,8 +188,8 @@ class Scene1 extends Scene{
 
 		if(Util.pressOn){
 			//クリックされていた場合は視点変更
-			this.a[1]-=(Util.cursorX-Util.oldcursorX)/engine.WIDTH;
-			this.a[0]-=((Util.cursorY-Util.oldcursorY)/engine.HEIGHT);
+			this.a[1]-=(Util.cursorX-Util.oldcursorX)/engine.WIDTH*2;
+			this.a[0]-=((Util.cursorY-Util.oldcursorY)/engine.HEIGHT)*2;
 		}
 		this.a[0] =Math.min(this.a[0],Math.PI/2);
 		this.a[0] =Math.max(this.a[0],-Math.PI/2);
