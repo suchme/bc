@@ -65,7 +65,7 @@ var o3o_tmp;
 			throw "loading";
 		}
 		if(!model.collections[cd]){
-			var list=null;
+			var list=[];
 			if(num === 1){
 				var path = "model/"+values.shinki.cd+".o3o";
 				model =AssetManager.o3o(path);
