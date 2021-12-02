@@ -871,11 +871,11 @@
 ,"collections":{
   "a0":{
     "children":[]
-    ,"objects":["Arm.L","kari","kari.001"]
+    ,"objects":["kari","kari.001"]
   }
   ,"b0":{
     "children":[]
-    ,"objects":["kari.006","Body"]
+    ,"objects":["kari.006"]
   }
   ,"Collection 2":{
     "children":[]
@@ -883,11 +883,11 @@
   }
   ,"h0":{
     "children":[]
-    ,"objects":["Head","kari.005"]
+    ,"objects":["kari.005"]
   }
   ,"l0":{
     "children":[]
-    ,"objects":["kari.003","kari.004","Leg.L"]
+    ,"objects":["kari.003","kari.004"]
   }
   ,"maindata":{
     "children":[]
@@ -1079,7 +1079,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"karimesh"
-    ,"bound_box":[-0.263070,-0.062708,-0.027520, 0.263070, 0.062708, 0.027520]
+    ,"bound_box":[-0.264651,-0.045069,-0.002201, 0.262074, 0.080388, 0.058648]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
@@ -1095,7 +1095,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"karimesh"
-    ,"bound_box":[-0.263070,-0.062708,-0.027520, 0.263070, 0.062708, 0.027520]
+    ,"bound_box":[-0.277897,-0.062708,-0.075204, 0.251110, 0.062708, 0.032306]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
@@ -1111,7 +1111,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"karimesh"
-    ,"bound_box":[-0.263070,-0.062708,-0.027520, 0.263070, 0.062708, 0.027520]
+    ,"bound_box":[-0.246904,-0.065925,-0.063034, 0.282393, 0.061665, 0.032711]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
@@ -1127,7 +1127,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"karimesh"
-    ,"bound_box":[-0.263070,-0.062708,-0.027520, 0.263070, 0.062708, 0.027520]
+    ,"bound_box":[-0.264335,-0.045049,-0.018836, 0.264588, 0.080368, 0.081242]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
@@ -1143,7 +1143,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"karimesh"
-    ,"bound_box":[-0.263070,-0.062708,-0.027520, 0.263070, 0.062708, 0.027520]
+    ,"bound_box":[-0.292816,-0.045049,-0.017158, 0.236108, 0.080368, 0.082920]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
