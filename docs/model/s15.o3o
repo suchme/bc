@@ -1,7 +1,7 @@
 {"format":"Ono3dObject Version 0.2"
 ,"materials":[
-    {"name": "maintex", "name_full": "maintex", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.05, "roughness": 0.13636364042758942, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s15_.png"}
-  ,  {"name": "maintex", "name_full": "maintex [base.blend]", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
+    {"name": "maintex", "name_full": "maintex", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.05, "roughness": 0.13636364042758942, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s15_.png"}
+  ,  {"name": "maintex", "name_full": "maintex [base.blend]", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
 ]
 ,"meshes":[
   {
@@ -1685,11 +1685,11 @@
   }
   ,"h2":{
     "children":[]
-    ,"objects":["Cylinder"]
+    ,"objects":["Cylinder","Head"]
   }
   ,"h6":{
     "children":[]
-    ,"objects":["Cylinder.001","Head"]
+    ,"objects":["Cylinder.001"]
   }
   ,"l2":{
     "children":[]
@@ -1697,7 +1697,7 @@
   }
   ,"maindata":{
     "children":[]
-    ,"objects":["Body","Head","Leg.L","Arm.L","Armature","mount"]
+    ,"objects":["Body","Head.001","Leg.L","Arm.L","Armature","mount"]
   }
   ,"r2":{
     "children":[]
@@ -2047,8 +2047,8 @@
     ]
   }
   ,{
-    "name":"Head"
-    ,"name_full":"Head"
+    "name":"Head.001"
+    ,"name_full":"Head.001"
     ,"groups":["Hip","Head","Arm1.L","Arm2.L","Hand.L","Body","Leg1.L","Leg2.L","Foot.L","Leg1.R","Leg2.R","Foot.R","Rear","Arm1.R","Arm2.R","Hand.R"]
     ,"material_slots":["maintex"]
     ,"location":[ 0.000000, 0.918874,-0.000000]
@@ -2103,6 +2103,20 @@
       ,{"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
     ]
     ,"cycles_visibility": []
+  }
+  ,{
+    "name":"Head"
+    ,"name_full":"Head"
+    ,"groups":[]
+    ,"material_slots":[]
+    ,"location":[ 0.000000, 1.000000,-0.000000]
+    ,"rotation":[ 0.000000, 0.000000, 0.000000]
+    ,"scale":[ 1.000000, 1.000000, 1.000000]
+    ,"type":"EMPTY"
+    ,"bound_box":[ 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000]
+    ,"bound_type":"BOX"
+    ,"modifiers":[
+    ]
   }
   ,{
     "name":"Body"
@@ -2275,7 +2289,7 @@
     "name":"Scene"
     ,"frame_start":1
     ,"frame_end":120
-    ,"objects":["Cube.004","_arm","Cylinder","Cylinder.001","Head","Cube","Cube.001","Body.001","Cube.002","Cube.005","_leg","Cube.006","Cube.007","Cube.008","Body","Leg.L","Arm.L","Armature","mount"]
+    ,"objects":["Cube.004","_arm","Cylinder","Head","Cylinder.001","Cube","Cube.001","Body.001","Cube.002","Cube.005","_leg","Cube.006","Cube.007","Cube.008","Body","Head.001","Leg.L","Arm.L","Armature","mount"]
     ,"world":{
       "name":"World"
     }

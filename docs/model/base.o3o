@@ -1,7 +1,7 @@
 {"format":"Ono3dObject Version 0.2"
 ,"materials":[
-    {"name": "kari", "name_full": "kari", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//kari.png"}
-  ,  {"name": "maintex", "name_full": "maintex", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
+    {"name": "kari", "name_full": "kari", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//kari.png"}
+  ,  {"name": "maintex", "name_full": "maintex", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
 ]
 ,"meshes":[
   {
@@ -873,17 +873,9 @@
     "children":[]
     ,"objects":["Arm.L","kari","kari.001"]
   }
-  ,"a1":{
-    "children":[]
-    ,"objects":["Arm.L"]
-  }
   ,"b0":{
     "children":[]
     ,"objects":["kari.006","Body"]
-  }
-  ,"b1":{
-    "children":[]
-    ,"objects":["Body"]
   }
   ,"Collection 2":{
     "children":[]
@@ -893,17 +885,9 @@
     "children":[]
     ,"objects":["Head","kari.005"]
   }
-  ,"h1":{
-    "children":[]
-    ,"objects":["Head"]
-  }
   ,"l0":{
     "children":[]
     ,"objects":["kari.003","kari.004","Leg.L"]
-  }
-  ,"l1":{
-    "children":[]
-    ,"objects":["Leg.L"]
   }
   ,"maindata":{
     "children":[]
@@ -912,10 +896,6 @@
   ,"r0":{
     "children":[]
     ,"objects":["kari.002"]
-  }
-  ,"r1":{
-    "children":[]
-    ,"objects":[]
   }
 }
 ,"objects":[
@@ -1067,7 +1047,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"karimesh"
-    ,"bound_box":[-0.263070,-0.062708,-0.027520, 0.263070, 0.062708, 0.027520]
+    ,"bound_box":[-0.483189,-1.063403,-0.107747,-0.184926,-0.523919,-0.004398]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
@@ -1083,7 +1063,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"karimesh"
-    ,"bound_box":[-0.263070,-0.062708,-0.027520, 0.263070, 0.062708, 0.027520]
+    ,"bound_box":[ 0.167237,-1.058813, 0.063170, 0.484477,-0.522327, 0.167579]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}

@@ -1,7 +1,7 @@
 {"format":"Ono3dObject Version 0.2"
 ,"materials":[
-    {"name": "maintex", "name_full": "maintex", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.05, "roughness": 0.10454545170068741, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s1_.png"}
-  ,  {"name": "maintex", "name_full": "maintex [base.blend]", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
+    {"name": "maintex", "name_full": "maintex", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.05, "roughness": 0.10454545170068741, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s1_.png"}
+  ,  {"name": "maintex", "name_full": "maintex [base.blend]", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
 ]
 ,"meshes":[
   {
@@ -2118,7 +2118,7 @@
   }
   ,"h90":{
     "children":[]
-    ,"objects":["denwa","立方体","Head"]
+    ,"objects":["denwa","立方体"]
   }
   ,"l58":{
     "children":[]
@@ -2315,7 +2315,7 @@
     ,"scale":[ 0.130390, 0.130390, 0.130390]
     ,"type":"MESH"
     ,"data":"立方体"
-    ,"bound_box":[ 0.000000,-0.733363,-0.649654, 2.404722, 0.674833, 0.649654]
+    ,"bound_box":[-2.401020,-0.755439,-0.574512, 2.476602, 0.652756, 1.005808]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2530,7 +2530,7 @@
     ,"scale":[ 0.103574, 0.103574, 0.103574]
     ,"type":"MESH"
     ,"data":"立方体.001"
-    ,"bound_box":[-0.000000,-1.596011,-2.378393, 6.621092, 2.846844, 0.413939]
+    ,"bound_box":[-6.633977,-1.623805,-2.126088, 6.633977, 2.819051, 1.076072]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}

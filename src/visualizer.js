@@ -28,7 +28,8 @@ var o3o_tmp;
 
 	var getPath=function(buso){
 		var o3opath = "model/base.o3o";
-		if(buso.name.indexOf("[15th]")>=0){
+		if(buso.cd === 1){
+		}else if(buso.name.indexOf("[15th]")>=0){
 			o3opath = "model/15th.o3o";
 		}else if(buso.name.indexOf("[S]")>=0){
 			o3opath = "model/silver.o3o";
@@ -57,7 +58,6 @@ var o3o_tmp;
 		if(num>1){
 			cd = type  + ((((num-2)>>2)<<2)+2);
 		}
-		
 
 		var model=AssetManager.o3o(o3opath);
 		var status = AssetManager.getStatus(o3opath);
@@ -65,10 +65,42 @@ var o3o_tmp;
 			throw "loading";
 		}
 		if(!model.collections[cd]){
-			model=AssetManager.o3o("model/base.o3o");
-			var list = model.getCollectionObjectList(type+"0");
+			var list=null;
+			if(num === 1){
+				var path = "model/"+values.shinki.cd+".o3o";
+				model =AssetManager.o3o(path);
+				var status = AssetManager.getStatus(path);
+				if(status === "loading"){
+					throw "loading";
+				}
+				//バトルスキン
+				var name ="";
+				switch(type){
+				case 'h':
+					name="Head";
+					break;
+				case 'b':
+					name="Body";
+					break;
+				case 'a':
+					name="Arm.L";
+					break;
+				case 'l':
+					name="Leg.L";
+					break;
+				case 'r':
+					name="Leg.L";
+					break;
+				}
+				var obj = model.objects_name_hash[name];
+				if(obj){
+					list=[obj];
+				}
+			}else{
+				model=AssetManager.o3o("model/base.o3o");
+				list = model.getCollectionObjectList(type+"0");
+			}
 			return list;
-
 		}
 
 		var list = model.getCollectionObjectList(cd);
@@ -110,19 +142,28 @@ class Scene1 extends Scene{
 
 		try{
 			var path = "model/"+values.shinki.cd+".o3o";
-			var target_o3o =AssetManager.o3o(path);
+			var target_o3o=AssetManager.o3o(path);
 			var status = AssetManager.getStatus(path);
 			if(status === "loading"){
 				throw "loading";
 			}
-			
-			var targets = ["Head","Body","Arm.L","Arm.R","Leg.L","Leg.R","Rear"];
 
 			var list=[];
+			var headlist=getList(values.head.org);
+			if(target_o3o.collections["h1"]){
+				list = target_o3o.collections["h1"];
+			}else{
+				list = [target_o3o.objects_name_hash["Head"]];
+			}
+			list = list.filter((e)=>{
+				var name = e.name;
+				var reg=/^([^|]*)/
+				return headlist.findIndex((e)=>{return reg.exec(e.name)[0] ==name}) <0;
+			});
+			list=list.concat(headlist);
 			var armature=base_model.objects_name_hash["Armature"];
 			if(armature)list.push(armature);
-			var headlist=getList(values.head.org);
-			list=list.concat(headlist);
+
 			list=list.concat(getList(values.body.org));
 			list=list.concat(getList(values.arm.org));
 			list=list.concat(getList(values.leg.org));
@@ -133,16 +174,15 @@ class Scene1 extends Scene{
 //				return list.findIndex((e)=>{return e.name.indexOf(name) >= 0}) == 0;
 //			});
 //			list = list2.concat(list);
-			list = list.map((e)=>{
-				if(targets.includes(e.name)){
-					if(!target_o3o.objects_name_hash[e.name]){
-						return null;
-					}
-					return target_o3o.objects_name_hash[e.name];
-				}
-				return e;
-			});
-			list = list.filter((e)=>{return e});
+//			list = list.map((e)=>{
+//				if(targets.includes(e.name)){
+//					if(!target_o3o.objects_name_hash[e.name]){
+//						return null;
+//					}
+//					return target_o3o.objects_name_hash[e.name];
+//				}
+//				return e;
+//			});
 
 
 			//パレットセット

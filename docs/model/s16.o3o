@@ -1,9 +1,9 @@
 {"format":"Ono3dObject Version 0.2"
 ,"materials":[
-    {"name": "maintex", "name_full": "maintex", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.005000000074505806, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s16_.png"}
-  ,  {"name": "maintex.001", "name_full": "maintex.001", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.05, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s16_.png"}
-  ,  {"name": "maintex.002", "name_full": "maintex.002", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
-  ,  {"name": "maintex", "name_full": "maintex [base.blend]", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
+    {"name": "maintex", "name_full": "maintex", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.005000000074505806, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s16_.png"}
+  ,  {"name": "maintex.001", "name_full": "maintex.001", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.05, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s16_.png"}
+  ,  {"name": "maintex.002", "name_full": "maintex.002", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
+  ,  {"name": "maintex", "name_full": "maintex [base.blend]", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
 ]
 ,"meshes":[
   {
@@ -3280,15 +3280,15 @@
   }
   ,"h10":{
     "children":[]
-    ,"objects":["helm","Heada"]
+    ,"objects":["helm"]
   }
   ,"h14":{
     "children":[]
-    ,"objects":["helm","face","Heada"]
+    ,"objects":["helm","face"]
   }
   ,"h18":{
     "children":[]
-    ,"objects":["face","helm","ago","Heada"]
+    ,"objects":["face","helm","ago"]
   }
   ,"l6":{
     "children":[]
@@ -3318,7 +3318,7 @@
     ,"scale":[ 0.165994, 0.165994, 0.165994]
     ,"type":"MESH"
     ,"data":"立方体.002"
-    ,"bound_box":[-0.000000,-0.688017,-1.649263, 1.048236, 1.470175,-0.821574]
+    ,"bound_box":[-0.974344,-0.741052,-1.500981, 1.126302, 1.417140,-0.612463]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -3512,7 +3512,7 @@
     ,"scale":[ 0.240302, 0.240302, 0.240302]
     ,"type":"MESH"
     ,"data":"立方体.001"
-    ,"bound_box":[ 0.000000,-0.178700,-1.095463, 1.048734, 1.097376,-0.563218]
+    ,"bound_box":[-1.013445,-0.215336,-0.976252, 1.089516, 1.060740,-0.394355]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -3537,25 +3537,6 @@
     ]
   }
   ,{
-    "name":"Heada"
-    ,"name_full":"Heada"
-    ,"groups":["Hip","Head","Arm1.L","Arm2.L","Hand.L","Body","Leg1.L","Leg2.L","Foot.L","Leg1.R","Leg2.R","Foot.R","Rear","Arm1.R","Arm2.R","Hand.R"]
-    ,"material_slots":["maintex [base.blend]"]
-    ,"location":[ 0.000000, 0.918874,-0.000000]
-    ,"rotation":[ 0.000000, 0.000000, 0.000000]
-    ,"scale":[ 1.000000, 1.000000, 1.000000]
-    ,"parent":"Armature"
-    ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
-    ,"type":"MESH"
-    ,"data":"Head [base.blend]"
-    ,"bound_box":[-0.000000,-0.301251,-0.254042, 0.259811, 0.269778, 0.254042]
-    ,"bound_type":"BOX"
-    ,"modifiers":[
-      {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
-      ,{"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
-    ]
-  }
-  ,{
     "name":"helm"
     ,"name_full":"helm"
     ,"groups":["Head"]
@@ -3565,7 +3546,7 @@
     ,"scale":[ 0.266297, 0.266297, 0.266297]
     ,"type":"MESH"
     ,"data":"立方体"
-    ,"bound_box":[-0.005124,-1.127524,-0.977659, 1.620753, 2.238209, 1.592476]
+    ,"bound_box":[-1.600570,-1.160583,-0.870358, 1.639002, 2.205151, 1.696314]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -3886,7 +3867,7 @@
     "name":"Scene"
     ,"frame_start":1
     ,"frame_end":120
-    ,"objects":["Arm.L","Armature","Leg.L.001","Body","Head","helm","Heada","face","ago","muneate","haori","Body.002","muneate.001","立方体.001","Arm.L.002","立方体","Arm.L.001","kosi","tare","立方体.003","立方体.004","立方体.002","tare.001"]
+    ,"objects":["Arm.L","Armature","Leg.L.001","Body","Head","helm","face","ago","muneate","haori","Body.002","muneate.001","立方体.001","Arm.L.002","立方体","Arm.L.001","kosi","tare","立方体.003","立方体.004","立方体.002","tare.001"]
     ,"world":{
       "name":"World"
     }
