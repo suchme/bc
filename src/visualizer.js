@@ -146,11 +146,15 @@ class Scene1 extends Scene{
 
 
 			//パレットセット
-			if(target_o3o.materials[0].baseColorMap){
+			var map = target_o3o.materials[0].baseColorMap;
+			if(map){
+				if(!map.glTexture){
+					throw "loading";
+				}
 				ono3d.setViewport(0,0,4,4);
 				var gl = globalParam.gl;
 				gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
-				Ono3d.drawCopy(0,0,1,1,target_o3o.materials[0].baseColorMap,31.5/32,0,0/32,1);
+				Ono3d.drawCopy(0,0,1,1,map,31.5/32,0,0/32,1);
 				Ono3d.copyImage(palette,0,0,0,0,4,4);
 				globalParam.palette=palette;
 			}
@@ -159,7 +163,11 @@ class Scene1 extends Scene{
 				var gl = globalParam.gl;
 				gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
 				var model=headlist[0].o3o;
-				Ono3d.drawCopy(0,0,1,1,model.materials[0].baseColorMap,31.5/32,0,0/32,1);
+				var map = model.materials[0].baseColorMap;
+				if(!map.glTexture){
+					throw "loading";
+				}
+				Ono3d.drawCopy(0,0,1,1,map,31.5/32,0,0/32,1);
 				Ono3d.copyImage(palette,0,2,0,2,4,1);
 			}
 
