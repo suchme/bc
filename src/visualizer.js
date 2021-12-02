@@ -162,8 +162,11 @@ class Scene1 extends Scene{
 				ono3d.setViewport(0,0,4,4);
 				var gl = globalParam.gl;
 				gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
-				var model=headlist[0].o3o;
-				var map = model.materials[0].baseColorMap;
+				var matname=headlist[0].material_slots[0];
+				var materials=headlist[0].o3o.materials;
+				var mat = materials.find((e)=>{return e.name_full == matname;});
+				var map = mat.baseColorMap;
+				//var map = model.materials[0].baseColorMap;
 				if(!map.glTexture){
 					throw "loading";
 				}
