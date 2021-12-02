@@ -89,7 +89,7 @@ var o3o_tmp;
 					name="Leg.L";
 					break;
 				case 'r':
-					name="Leg.L";
+					name="Rear";
 					break;
 				}
 				var obj = model.objects_name_hash[name];
