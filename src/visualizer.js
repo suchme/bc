@@ -19,15 +19,14 @@ var homingCamera=function(angle,target,camera){
 		angle[2]=0;
 		
 	}
+var palette=null;
 var primitives={};
 var base_model;
 var base_instance;
 var o3o_head;
 var o3o_tmp;
-	var getList=function(buso){
-		var cd = buso.cd;
-		var type = cd.substring(0,1);
-		var num = Number(cd.substring(1));
+
+	var getPath=function(buso){
 		var o3opath = "model/base.o3o";
 		if(buso.name.indexOf("[15th]")>=0){
 			o3opath = "model/15th.o3o";
@@ -46,6 +45,15 @@ var o3o_tmp;
 				}
 			}
 		}
+
+		return o3opath;
+	}
+	var getList=function(buso){
+		var cd = buso.cd;
+		var type = cd.substring(0,1);
+		var num = Number(cd.substring(1));
+		var o3opath = getPath(buso);
+
 		if(num>1){
 			cd = type  + ((((num-2)>>2)<<2)+2);
 		}
@@ -113,12 +121,18 @@ class Scene1 extends Scene{
 			var list=[];
 			var armature=base_model.objects_name_hash["Armature"];
 			if(armature)list.push(armature);
-			list=list.concat(getList(values.head.org));
+			var headlist=getList(values.head.org);
+			list=list.concat(headlist);
 			list=list.concat(getList(values.body.org));
 			list=list.concat(getList(values.arm.org));
 			list=list.concat(getList(values.leg.org));
 			list=list.concat(getList(values.rear.org));
-
+//			var list2=target_o3o.collections["maindata"].objects;
+//			list2 = list2.filter((e)=>{
+//				var name = e.name;
+//				return list.findIndex((e)=>{return e.name.indexOf(name) >= 0}) == 0;
+//			});
+//			list = list2.concat(list);
 			list = list.map((e)=>{
 				if(targets.includes(e.name)){
 					if(!target_o3o.objects_name_hash[e.name]){
@@ -130,10 +144,29 @@ class Scene1 extends Scene{
 			});
 			list = list.filter((e)=>{return e});
 
+
+			//パレットセット
+			if(target_o3o.materials[0].baseColorMap){
+				ono3d.setViewport(0,0,4,4);
+				var gl = globalParam.gl;
+				gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
+				Ono3d.drawCopy(0,0,1,1,target_o3o.materials[0].baseColorMap,31.5/32,0,0/32,1);
+				Ono3d.copyImage(palette,0,0,0,0,4,4);
+				globalParam.palette=palette;
+			}
+			if(values.head.org.name.indexOf("オリジナル")>=0){
+				ono3d.setViewport(0,0,4,4);
+				var gl = globalParam.gl;
+				gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
+				var model=headlist[0].o3o;
+				Ono3d.drawCopy(0,0,1,1,model.materials[0].baseColorMap,31.5/32,0,0/32,1);
+				Ono3d.copyImage(palette,0,2,0,2,4,1);
+			}
+
 			list.forEach((e)=>{
 				var o3o = e.o3o;
 				o3o.materials.forEach((e)=>{
-					e.orgMap  = target_o3o.materials[0].baseColorMap;
+					e.orgMap  = palette;//target_o3o.materials[0].baseColorMap;
 				});
 
 			});
@@ -149,6 +182,8 @@ class Scene1 extends Scene{
 	//			setTimeout(update,1000);
 				return;
 			}
+			throw e;
+			
 		}
 
 	}
@@ -220,7 +255,7 @@ class Scene1 extends Scene{
 		Mat44.dot(light.viewmatrix2,engine.ono3d.projectionMatrix,engine.ono3d.viewMatrix);
 
 		//this.instance = primitives[values.shinki.cd];
-		if(base_model){
+		if(base_model.scenes[0]){
 			var scene= base_model.scenes[0];
 			scene.setFrame(this.t*60/globalParam.fps);
 		}
@@ -257,6 +292,7 @@ export default class Visualizer{
 			break;
 		case 1:
 			this.engine.start();
+			palette =Ono3d.createTexture(4,4);
 
 			var scene1 = new Scene1();
 			this.engine.scenes.push(scene1);

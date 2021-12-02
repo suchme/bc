@@ -2411,10 +2411,7 @@
     "children":[]
     ,"objects":["立方体.010","shield.002","wing.001","kibu","shield.003","wing.002","立方体.005"]
   }
-  ,"maindata":{
-    "children":[]
-    ,"objects":["Body [base.blend]","Head [base.blend]","Leg.L [base.blend]","Arm.L [base.blend]","Armature [base.blend]","mount [base.blend]"]
-  }
+  
 }
 ,"objects":[
   {

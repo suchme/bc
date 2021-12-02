@@ -111,9 +111,9 @@ export default class Util{
 			Util.pressCountRight =0
 		}
 
-		if(loadingCount ==0){
+		//if(loadingCount ==0){
 			mainfunc()
-		}
+		//}
 		Util.oldcursorX = Util.cursorX
 		Util.oldcursorY = Util.cursorY
 		

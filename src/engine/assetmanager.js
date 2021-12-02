@@ -22,9 +22,8 @@ var AssetManager=(function(){
 
 	ret.o3o=function(path,func){
 		if(!this.assetList[path]){
-			this.assetList[path] ={data:null,status:"loading"};
-		}
-		if(this.assetList[path].status !== "loaded"){
+			this.assetList[path] ={data:null,status:""};
+
 			var _path = path;
 			var _func= func;
 			this.assetList[path].data=O3o.load(path+"?"+globalParam.version,(e)=>{
@@ -38,6 +37,7 @@ var AssetManager=(function(){
 					_func(e);
 				}
 			});
+			this.assetList[path].status="loading";
 		}
 		return this.assetList[path].data;
 	}

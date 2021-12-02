@@ -725,6 +725,7 @@ var Ono3d = (function(){
 			//透明ポリゴンがない場合は終了
 			return;
 		}
+		gl.depthMask(false);
 
 		//不透明レンダリング結果からラフネス別テクスチャ作成
 		var transTexture = this.transTextures[this.transTextureIndex];
@@ -1282,7 +1283,7 @@ ret.calcST = function(s,t,p0,p1,p2,u0,v0,u1,v1,u2,v2){
 
 	/** 単純な画像コピー **/
 	ret.drawCopy= function(dx,dy,dw,dh,image,sx,sy,sw,sh){
-		if(!sw){
+		if(sw == null){
 			sh = image;
 			image = dx;
 			sx = dx = dy;
