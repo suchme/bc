@@ -1997,7 +1997,7 @@
     ,"type":"ARMATURE"
     ,"data":"Armature"
     ,"action":"standard"
-    ,"bound_box":[-0.657237,-1.833721,-0.255053, 0.607126, 1.217659, 0.291724]
+    ,"bound_box":[-0.695487,-1.824029,-0.245170, 0.652807, 1.237067, 0.291724]
     ,"bound_type":"BOX"
     ,"modifiers":[
     ]
@@ -2303,7 +2303,7 @@
     "name":"Leg.L.001"
     ,"name_full":"Leg.L.001"
     ,"groups":["Leg1.L","Leg2.L","Foot.L","Leg1.R","Leg2.R","Foot.R"]
-    ,"material_slots":["tomei","tomei"]
+    ,"material_slots":["maintex","tomei"]
     ,"location":[ 0.000000, 0.000000, 0.000000]
     ,"rotation":[ 0.000000, 0.000000, 0.000000]
     ,"scale":[ 1.000000, 1.000000, 1.000000]
@@ -2311,11 +2311,11 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"LegMesh.001 [s21.blend]"
-    ,"bound_box":[ 0.003805,-2.199368,-0.425870, 0.327303,-0.532843, 0.165113]
+    ,"bound_box":[-0.327303,-2.210151,-0.421915, 0.329522,-0.504620, 0.188674]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
-      ,{"name":"Armature","type":"ARMATURE","object":"Armature.001","vertex_group":""}
+      ,{"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
     ]
     ,"cycles_visibility": []
   }
