@@ -83,6 +83,7 @@ ret.init=function(_gl){
 	ret.gl = _gl;
 	try{
 
+		//メインフレームバッファ
 		gl.clearColor(0.0, 0.0, 0.0, 0.0);
 		gl.clearDepth(1.0);
 		gl.enable(gl.DEPTH_TEST);
@@ -90,7 +91,7 @@ ret.init=function(_gl){
 		gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
 		gl.enable(gl.CULL_FACE);
 
-
+		//作業用フレームバッファ
 		ret.frameBuffer =frameBuffer=gl.createFramebuffer();
 		gl.bindFramebuffer(gl.FRAMEBUFFER, frameBuffer);
 		renderBuffer = gl.createRenderbuffer();
@@ -98,6 +99,7 @@ ret.init=function(_gl){
 		gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, 1024, 1024);
 		gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, renderBuffer);
 
+		//作業用テクスチャ
 		ret.fTexture=fTexture = createTexture(null,1024,1024);
 		gl.bindTexture(gl.TEXTURE_2D, fTexture);
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
@@ -107,6 +109,7 @@ ret.init=function(_gl){
 		gl.bindTexture(gl.TEXTURE_2D, null);
 		gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 	    gl.bindRenderbuffer(gl.RENDERBUFFER, null);
+		console.log(gl.getRenderbufferParameter(gl.RENDERBUFFER,gl.RENDERBUFFER_DEPTH));
 
 		gl.clearColor(1.0, 1.0, 1.0, 1.0);
 		gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);

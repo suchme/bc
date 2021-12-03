@@ -168,22 +168,6 @@ class Scene1 extends Scene{
 			list=list.concat(getList(values.arm.org));
 			list=list.concat(getList(values.leg.org));
 			list=list.concat(getList(values.rear.org));
-//			var list2=target_o3o.collections["maindata"].objects;
-//			list2 = list2.filter((e)=>{
-//				var name = e.name;
-//				return list.findIndex((e)=>{return e.name.indexOf(name) >= 0}) == 0;
-//			});
-//			list = list2.concat(list);
-//			list = list.map((e)=>{
-//				if(targets.includes(e.name)){
-//					if(!target_o3o.objects_name_hash[e.name]){
-//						return null;
-//					}
-//					return target_o3o.objects_name_hash[e.name];
-//				}
-//				return e;
-//			});
-
 
 			//パレットセット
 			var map = target_o3o.materials[0].baseColorMap;
@@ -192,7 +176,7 @@ class Scene1 extends Scene{
 					throw "loading";
 				}
 				ono3d.setViewport(0,0,4,4);
-				var gl = globalParam.gl;
+				var gl = ono3d.gl;
 				gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
 				Ono3d.drawCopy(0,0,1,1,map,31.5/32,0,0/32,1);
 				Ono3d.copyImage(palette,0,0,0,0,4,4);

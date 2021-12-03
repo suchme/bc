@@ -5,7 +5,14 @@ import Rastgl from "./rastgl.js"
 import Sort from "./sort.js"
 import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "./vector.js"
 
-var Ono3d = (function(){
+	var vAP=function(gl,a,b,c,d,e,f){
+		if(a>=0)gl.vertexAttribPointer(a, b,c,d,e,f);
+	}
+
+	var fa16 =new Float32Array(16);
+	var mat=new Float32Array(9);
+	var fa =new Float32Array(3);
+
 	var _PI= 1.0/Math.PI;
 	var gl;
 	var shaders;
@@ -58,6 +65,7 @@ var Ono3d = (function(){
 
 		this.shader = ""; //シェーダ
 
+
 	}
 	var Face = function(){
 		this.vertices=new Uint16Array(3);
@@ -73,9 +81,9 @@ var Ono3d = (function(){
 		this.pos[1]=new Vec3();
 		this.material=0;
 	};
-
-
-	var Ono3d = function(){
+//var Ono3d = (function(){
+export default class Ono3d {
+	constructor(){
 		this.rf = 0
 		this.smoothing = 0
 		this.viewMatrix=new Mat44()
@@ -131,209 +139,15 @@ var Ono3d = (function(){
 		this.stackIndex=0
 		for(var i=32;i--;)this.stackTransMatrix.push(new Mat44())
 
-		this.clear();
+		//this.clear();
+		this.faces_index=this.faces_static_index;
+		this.lines_index=0;
+		this.vertices_index=this.vertices_static_index;
+		this.materials_index=this.materials_static_index;
 
 	}
-	var ret = Ono3d;
 
-	ret.Material = Material;
-	ret.Face = Face;
-
-
-	ret.RF_OUTLINE=RF_OUTLINE
-	ret.RF_DOUBLE_SIDED=RF_DOUBLE_SIDED
-
-	
-	//-x~x,-y~y,zn~zf
-	ret.calcOrthoMatrix = function(mat,x,y,zn,zf){
-		Mat44.set(mat
-		,-1.0/x,0,0,0
-		,0,1.0/y,0,0.0
-		,0,0,2.0/(zf-zn),0.0
-		,0,0,-(zf+zn)/(zf-zn),1.0);
-	}
-	ret.prototype= {
-
-		getPos:function(pos,x,y,z){
-			pos[0]=x
-			pos[1]=y
-			pos[2]=z
-			Mat44.dotMat44Vec3(pos,this.targetMatrix,pos)
-
-			pos[0] = -pos[0]/(pos[2]*this.persx)+0.5
-			pos[1] = -pos[1]/(pos[2]*this.persy)+0.5
-			
-		}
-		,LightSource:LightSource
-		,framebuffer:function(){
-			Rastgl.framebuffer(this);
-		}
-		,init:function(_canvas,_ctx){
-			gl = Rastgl.gl;
-			this.clear()
-
-			this.renderTarget=_ctx
-			this.canvasTarget=_canvas
-
-			this.transTextures[0] = Ono3d.createTexture(TEXSIZE,TEXSIZE);
-			this.transTextures[1] = Ono3d.createTexture(TEXSIZE,TEXSIZE);
-			this.env2Texture= Ono3d.createTexture(TEXSIZE,TEXSIZE);
-			this.shadowTexture = Ono3d.createTexture(TEXSIZE,TEXSIZE);
-			gl.bindTexture(gl.TEXTURE_2D, this.shadowTexture.glTexture);
-			//gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-			//gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-
-			this.envbufTexture = Ono3d.createTexture(1024,512);
-			this.indexBuffer = new Uint16Array(Rastgl.VERTEX_MAX);
-			this.verticesFloat32Array= new Float32Array(Rastgl.VERTEX_MAX*20);
-
-			this.shaders=[];
-			shaders = this.shaders;
-
-			var filenames=[ "shadow_dec","shadow","plain","half","multiadd","fill","add"
-				,"average","average2","average3","decode"
-				,"rough","celestialsphere","envset","gauss","normal"
-				,"cube2polar"
-				//,"cube2lightfield","cube2lightfield2","cube2lightfield3"
-				];
-			for(var i=0;i<filenames.length;i++){
-				var filename = filenames[i];
-				this.shaders[filename]=Ono3d.loadShader(currentpath+"shader/"+filename + ".shader");
-			}
-
-
-			Ono3d.loadMainShader();
-
-			for(var i=0;i<6;i++){
-				gl.activeTexture(gl.TEXTURE0+i);
-			}
-			   
-
-		}
-		,setTargetMatrix:function(target){
-			if(target===0){
-				this.targetMatrix = this.worldMatrix
-			}else{
-				this.targetMatrix = this.viewMatrix
-			}
-		}
-		,setViewport:function(x,y,width,height){
-			this.viewport[0]=x;
-			this.viewport[1]=y;
-			this.viewport[2]=width;
-			this.viewport[3]=height;
-			gl.viewport(x,y,width,height);
-		}
-		,setNearFar:function(zn,zf){
-			this.znear=zn;
-			this.zfar=zf;
-		}
-		,setAov:function(aov){
-			this.aov=aov;
-		}
-		,calcProjectionMatrix:function(mat,x,y,zn,zf){
-			Mat44.set(mat
-				,zn/x,0,0,0
-				,0,zn/y,0,0
-				,0,0,-(zn+zf)/(zf-zn),-1.0
-				,0,0,-2*zn*zf/(zf-zn),0);
-
-		}
-		,setOrtho:function(x,y,zn,zf){
-			if(zn != null){
-				this.znear=zn;
-				this.zfar=zf;
-			}
-			
-			ret.calcOrthoMatrix(this.projectionMatrix
-				,x,y
-				,this.znear,this.zfar);
-		}
-		,push:function(){
-			if(this.stackIndex>=32)return
-			var stm=this.stackTransMatrix[this.stackIndex]
-			var tm=this.targetMatrix
-			stm[0]=tm[0]
-			stm[1]=tm[1]
-			stm[2]=tm[2]
-			stm[4]=tm[4]
-			stm[5]=tm[5]
-			stm[6]=tm[6]
-			stm[8]=tm[8]
-			stm[9]=tm[9]
-			stm[10]=tm[10]
-			stm[12]=tm[12]
-			stm[13]=tm[13]
-			stm[14]=tm[14]
-			this.stackIndex++
-		}
-		,pop:function(){
-			if(this.stackIndex<=0)return
-			this.stackIndex--
-			var stm=this.stackTransMatrix[this.stackIndex]
-			var tm=this.targetMatrix
-			tm[0]=stm[0]
-			tm[1]=stm[1]
-			tm[2]=stm[2]
-			tm[4]=stm[4]
-			tm[5]=stm[5]
-			tm[6]=stm[6]
-			tm[8]=stm[8]
-			tm[9]=stm[9]
-			tm[10]=stm[10]
-			tm[12]=stm[12]
-			tm[13]=stm[13]
-			tm[14]=stm[14]
-		}
-		,loadIdentity:function(){
-			var mat = this.targetMatrix
-			mat[0] = 1.0
-			mat[1] = 0
-			mat[2] = 0
-			mat[4] = 0
-			mat[5] = 1.0
-			mat[6] = 0
-			mat[8] = 0
-			mat[9] = 0
-			mat[10] = 1.0
-			mat[12] = 0
-			mat[13] = 0
-			mat[14] = 0
-		}
-		,rotate:function(r,x,y,z){
-			var SIN=Math.sin(r)
-			var COS=Math.cos(r)
-			var a = Mat44.poolAlloc();
-			a[0]=x*x*(1-COS)+COS;a[4]=x*y*(1-COS)-z*SIN;a[8]=z*x*(1-COS)+y*SIN;a[12]=0
-			a[1]=x*y*(1-COS)+z*SIN;a[5]=y*y*(1-COS)+COS;a[9]=y*z*(1-COS)-x*SIN;a[13]=0
-			a[2]=z*x*(1-COS)-y*SIN;a[6]=y*z*(1-COS)+x*SIN;a[10]=z*z*(1-COS)+COS;a[14]=0
-			a[3]=a[7]=a[11]=0;a[15]=1;
-			Mat44.dot(this.targetMatrix,this.targetMatrix,a)
-			Mat44.poolFree(1);
-		}
-		,scale:function(x,y,z){
-			var m = this.targetMatrix;
-			m[0]=m[0]*x;
-			m[1]*=x;
-			m[2]*=x;
-			m[4]*=y;
-			m[5]*=y;
-			m[6]*=y;
-			m[8]*=z;
-			m[9]*=z;
-			m[10]*=z;
-		}
-		,translate:function(x,y,z){
-			var m = this.targetMatrix
-			m[12]=m[0]*x+m[4]*y+m[8]*z+m[12]
-			m[13]=m[1]*x+m[5]*y+m[9]*z+m[13]
-			m[14]=m[2]*x+m[6]*y+m[10]*z+m[14]
-		}
-		,transmat:function(m){
-			Mat44.dot(this.targetMatrix,this.targetMatrix,m);
-		}
-	};
-	ret.prototype.calcPerspectiveMatrix = function(mat,left,right,top,bottom,zn,zf){
+	calcPerspectiveMatrix(mat,left,right,top,bottom,zn,zf){
 		//透視行列を作る 
 		Mat44.set(mat
 			,2*zn/(right-left),0,0,0
@@ -343,12 +157,12 @@ var Ono3d = (function(){
 
 	}
 
-	ret.prototype.setStatic=function(){
+	setStatic(){
 		this.faces_static_index=0;//this.faces_index;
 		this.vertices_static_index=this.vertices_index;
 		this.materials_static_index=this.materials_index;
 	}
-	ret.prototype.clear= function(){
+	clear(){
 		this.faces_index=this.faces_static_index;
 		this.lines_index=0;
 		this.vertices_index=this.vertices_static_index;
@@ -356,7 +170,7 @@ var Ono3d = (function(){
 	};
 
 	
-	ret.prototype.stereoDraw = function(func){
+	stereoDraw(func){
 		var x=this.viewport[0];
 		var y=this.viewport[1];
 		var WIDTH=this.viewport[2];
@@ -389,34 +203,8 @@ var Ono3d = (function(){
 		}
 	}
 
-	var fa16 =new Float32Array(16);
-	var mat=new Float32Array(9);
-	var fa =new Float32Array(3);
 
-	ret.calcMainShaderName=function(material){
-		//マテリアルの各種設定を有効化したシェーダを取得
-		var options=["lightMap","opacity","specular","hightMapPower","pbrMap"];
-		var num=0;
-		for(var oi=0;oi<options.length;oi++){
-			if(options[oi]==="opacity"){
-				if(material[options[oi]] !== 1.0){
-					num|=(1<<oi);
-				}
-			}else{
-				if(material[options[oi]]){
-					num|=(1<<oi);
-				}
-			}
-		}
-		if(material["metallic"]){
-			num|=(1<<2);
-		}
-		if(!shaders["main_"+num]){
-			ret.createMainShader(num);
-		}
-		return "main_"+num;
-	}
-	ret.prototype.render = function(camerap){
+	render(camerap){
 		var ono3d = this;
 
 		var viewx,viewy,vieww,viewh;
@@ -546,37 +334,10 @@ var Ono3d = (function(){
 			gl.cullFace(gl.FRONT);
 			gl.disable(gl.BLEND);
 
-			//for(var i=0;i<16;i++){
-			//	f32a[i] = lightSource.viewmatrix[i];
-			//}
-
 			gl.uniformMatrix4fv(shader.unis["projectionMatrix"],false,lightSource.viewmatrix);
 			gl.vertexAttribPointer(shader.atts["aPos"], 3,gl.FLOAT, false,DEFAULT_VERTEX_DATA_SIZE , 0);
 			gl.drawElements(gl.TRIANGLES, facesize*3, gl.UNSIGNED_SHORT, 0);
 
-			//Ono3d.copyImage(this.shadowTexture,0,0,0,0,1024,1024);
-
-			//gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-			//shader =  this.shaders["shadow_only"];
-			//gl.useProgram(shader.program);
-			//var WIDTH=1024;
-			//var HEIGHT=512;
-			//this.calcProjectionMatrix(this.projectionMatrix,this.aov*this.znear,this.aov*HEIGHT/WIDTH*this.znear
-			//	,this.znear,this.zfar);
-			//Mat44.dot(this.pvMatrix,this.projectionMatrix,this.viewMatrix);
-			//gl.uniformMatrix4fv(shader.unis["projectionMatrix"],false,this.pvMatrix);
-			//gl.uniformMatrix4fv(shader.unis["lightMat"],false,lightSource.viewmatrix);
-			//gl.uniform1i(shader.unis["uShadowmap"],1);
-			//gl.activeTexture(gl.TEXTURE1);
-			//gl.bindTexture(gl.TEXTURE_2D,this.shadowTexture.glTexture);
-
-			//gl.vertexAttribPointer(shader.atts["aPos"], 3,gl.FLOAT, false,DEFAULT_VERTEX_DATA_SIZE , 0);
-			//gl.drawElements(gl.TRIANGLES, facesize*3, gl.UNSIGNED_SHORT, 0);
-
-			//Ono3d.copyImage(this.shadowTexture,0,0,0,0,1024,1024);
-			//gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
-			//this.setViewport(0,0,1024,1024);
-			//Engine.shadowGauss(1024,1024,1000,this.shadowTexture,0,0,1,1);
 		}
 			gl.cullFace(gl.BACK);
 		Ono3d.copyImage(this.shadowTexture,0,0,0,0,1024,1024);
@@ -750,11 +511,9 @@ var Ono3d = (function(){
 		}
 		size>>=1;
 		var s=Math.pow(0.5,4);
-		//gl.viewport(0,0,vieww*s,viewh*s*0.5);
 		gl.viewport(0,0,TEXSIZE*s,TEXSIZE*s*0.5);
 
 		var environment=this.environments[0];
-		//Env2D.draw(environment.envTexture.glTexture,0,1-s,s,s*0.5);
 		this.drawCelestialSphere(environment.envTexture,0,1-s,s,s*0.5);
 		Ono3d.copyImage(transTexture,0,(1-s)*TEXSIZE,0,0,TEXSIZE*s,TEXSIZE*s*0.5);
 		
@@ -809,86 +568,9 @@ var Ono3d = (function(){
 		}
 	}
 
-	ret.loadTexture = function(path,func){
-		return  Util.loadImage(path,0
-			,function(image){
-				if(!image.glTexture){
-					image.glTexture = Rastgl.createTexture(image);
-				}
-				if(func){
-					func(image);
-				}
-			}
-		);
-	}
-	ret.createTexture= function(width,height){
-		var image = {};
-		image.width=width;
-		image.height=height;
-		image.glTexture = Rastgl.createTexture(null,width,height);
-		return image;
-	}
-	ret.loadBumpTexture = function(path,func){
-		return Ono3d.loadTexture(path,function(image){
-			if(!image.bumpInitFlg){
-				gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
-				gl.viewport(0,0,image.width,image.height);
-				Ono3d.initNormal(image);
-				Ono3d.copyImage(image,0,0,0,0,image.width,image.height);
 
-			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-				gl.bindTexture(gl.TEXTURE_2D, null);
-				image.bumpInitFlg=true;
-			}
 
-			if(func){
-				func(image);
-			}
-		});
-	}
-	ret.createShader= function(txt){
-		var shader={};
-		
-		txt=txt.replace("[common]","");
-		txt = " \n \
-			#pragma optionNV(inline all) \n \
-			#pragma optionNV(unroll all)  \n" +txt;
-		var sss=txt.match(/\[vertexshader\]([\s\S]*)\[fragmentshader\]([\s\S]*)/);
-		var vs = sss[1];
-		var fs = sss[2];
-		fs=(Rastgl.commonFunction + Rastgl.textureRGBE) + "\n" + fs;
-		var unis = txt.match(/uniform .+?;/g)
-		var atts = (vs+fs).match(/attribute .+?;/g)
-		var gl = Rastgl.gl;
-
-		var program = shader.program=Rastgl.setShaderProgram(vs,fs);
-
-		shader.atts={};
-		for(var i=0;i<atts.length;i++){
-			var nam = atts[i].match(/(\S+)\s*;/)[1];
-
-			var att=gl.getAttribLocation(program,nam); 
-			shader.atts[nam]=att;
-			if(att>=0){
-				gl.enableVertexAttribArray(att);
-				gl.vertexAttribPointer(att, 1,gl.FLOAT, false, 0, 0);
-			}
-		}
-		shader.unis={};
-		for(var i=0;i<unis.length;i++){
-			var nam = unis[i].match(/(\S+)\s*;/)[1];
-			nam = nam.match(/^([^\[]+)/)[1];
-			shader.unis[nam]=gl.getUniformLocation(shader.program,nam);
-		}
-		return shader;
-	}
-
-	var vAP=function(gl,a,b,c,d,e,f){
-		if(a>=0)gl.vertexAttribPointer(a, b,c,d,e,f);
-	}
-
-	ret.prototype.renderShader=function(start,size,envIdx){
+	renderShader(start,size,envIdx){
 		var arr = this.faces;
 		var i=start;
 		var material = arr[start].material;
@@ -1057,100 +739,8 @@ var Ono3d = (function(){
 		}
 	}
 
-ret.calcST = function(s,t,p0,p1,p2,u0,v0,u1,v1,u2,v2){
-	var du1=u1-u0;
-	var dv1=v1-v0;
-	var du2=u2-u0;
-	var dv2=v2-v0;
-	var dx1=p1[0]-p0[0];
-	var dy1=p1[1]-p0[1];
-	var dz1=p1[2]-p0[2];
-	var dx2=p2[0]-p0[0];
-	var dy2=p2[1]-p0[1];
-	var dz2=p2[2]-p0[2];
 
-	var d2=du1*dv2-du2*dv1;
-	if(d2===0){
-	}else{
-		d2=1/d2;
-		s[0]=-(dv1*dx2-dv2*dx1)*d2;
-		s[1]=-(dv1*dy2-dv2*dy1)*d2;
-		s[2]=-(dv1*dz2-dv2*dz1)*d2;
-		t[0]=(du1*dx2-du2*dx1)*d2;
-		t[1]=(du1*dy2-du2*dy1)*d2;
-		t[2]=(du1*dz2-du2*dz1)*d2;
-	}
-	return false;
-}
-
-	ret.loadShader=function(path,func){
-		var s={};
-		Util.loadText(path,function(txt){
-			try{
-				
-				var shader = Ono3d.createShader(txt);
-				shader.name = path;
-				var keys =Object.keys(shader);
-				for(var i=0;i<keys.length;i++){
-					s[keys[i]] =shader[keys[i]]
-				}
-				
-			}catch(e){
-				alert(path+"\n"+e.message);
-			}
-		});
-		return s;
-	}
-
-	ret.createMainShader=function(num){
-		var path=currentpath+"shader/main.shader"
-		var shader=null;
-		try{
-			var options=["lightmap","transmission","reflect","height","pbr"];
-			var txt = ret.main_shader_org;
-			for(var j=0;j<options.length;j++){
-				//各種機能を有効/無効化
-				if(num&(1<<j)){
-					var re = new RegExp("/\\*\\[" + options[j] +"\\]","g");
-					txt=txt.replace(re,"");
-					re = new RegExp("\\[" + options[j] +"\\]\\*/","g");
-					txt=txt.replace(re,"");
-					
-				}else{
-					var re = new RegExp("/\\*\\[" + options[j] +"\\][\\s\\S]*?\\[" + options[j] +"\\]\\*/","g");
-
-					txt=txt.replace(re,"");
-				}
-			}
-			if(!(num&1)){
-				//ライトマップが有効ではない場合は
-				//ライトプローブ関連行を有効化
-				var re = new RegExp("/\\*\\[" + "lightprobe" +"\\]","g");
-				txt=txt.replace(re,"");
-				re = new RegExp("\\[" + "lightprobe" +"\\]\\*/","g");
-				txt=txt.replace(re,"");
-				
-			}else{
-				//ライトプローブ関連行を無効化
-				var re = new RegExp("/\\*\\[lightprobe\\][\\s\\S]*?\\[lightprobe\\]\\*/","g");
-				txt=txt.replace(re,"");
-			}
-			shader=Ono3d.createShader(txt);
-			shaders["main_"+num] = shader;
-		}catch(e){
-			alert(path+"\n"+e.message);
-		}
-		return shader;
-	}
-	ret.loadMainShader=function(){
-		var path=currentpath+"shader/main.shader?4"
-		Util.loadText(path,function(txt_org){
-			ret.main_shader_org=txt_org;
-		});
-		return ;
-	}
-
-	ret.prototype.drawLine=function(start,size){
+	drawLine=function(start,size){
 		if(size===0)return;
 
 		var ono3d = this;
@@ -1180,77 +770,9 @@ ret.calcST = function(s,t,p0,p1,p2,u0,v0,u1,v1,u2,v2){
 		Vec4.poolFree(1);
 	}
 
-	ret.copyImage= function(target,tx,ty,x,y,w,h){
-		gl.bindTexture(gl.TEXTURE_2D, target.glTexture);
-		gl.copyTexSubImage2D(gl.TEXTURE_2D,0,tx,ty,x,y,w,h);
-	}
-	ret.postEffect =function(src,u,v,w,h,sh){
-		gl.disable(gl.DEPTH_TEST);
-		gl.depthMask(false);
-
-		if(!sh.program){
-			return;
-		}
-		gl.useProgram(sh.program);
-
-		var unis = sh.unis;
-		var atts = sh.atts;
-
-		if(unis["uUvScale"])gl.uniform2f(unis["uUvScale"],w,h);
-		if(unis["uUvOffset"])gl.uniform2f(unis["uUvOffset"],u,v);
-		if(unis["uUnit"])gl.uniform2f(unis["uUnit"],1.0/src.width,1.0/src.height);
-
-		gl.activeTexture(gl.TEXTURE0);
-		gl.bindTexture(gl.TEXTURE_2D,src.glTexture);
-		gl.uniform1i(unis["uSampler"],0);
-
-				
-		gl.bindBuffer(gl.ARRAY_BUFFER, Rastgl.fullposbuffer);
-		gl.vertexAttribPointer(atts["aPos"], 2,gl.FLOAT, false,0 , 0);
-
-		gl.bindBuffer(gl.ARRAY_BUFFER, Rastgl.fullposbuffer);
-
-		gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
-	}
-
-	ret.packFloat = function (dst,src){ 
-		var m = Math.max(src[0],Math.max(src[1],src[2])); 
-		var idx = Math.ceil(Math.log(m+0.01)/Math.log(2.0)); 
-		m = 1.0/Math.pow(2.0,idx);
-		dst[0]=src[0]* m;
-		dst[1]=src[1]* m;
-		dst[2]=src[2]* m;
-		dst[3]=(idx+128.0)/255.0; 
-	} 
-	ret.unpackFloat = function(dst,src){ 
-		dst[0] = src[0] * (1 - (((src[3]>>7)&1)<<1));
-		dst[1] = src[1] * (1 - (((src[3]>>6)&1)<<1));
-		dst[2] = src[2]  *(1 - (((src[3]>>5)&1)<<1));
-		var idx= Math.floor((src[3]&0x1f)  - 16.0); 
-		var m = Math.pow(2.0,idx);
-		dst[0] = dst[0]*m;
-		dst[1] = dst[1]*m;
-		dst[2] = dst[2]*m;
-	} 
-	ret.encode = function (dst,src){ 
-		var m = Math.max(src[0],Math.max(src[1],src[2])); 
-		var idx = Math.ceil(Math.log(m+0.01)/Math.log(2.0)); 
-		m = 1.0/Math.pow(2.0,idx);
-		dst[0]=src[0]* m;
-		dst[1]=src[1]* m;
-		dst[2]=src[2]* m;
-		dst[3]=(idx+128.0)/255.0; 
-	} 
-	ret.decode2 = function(dst,src){ 
-		var idx= Math.floor(src[2] * 256.0 - 128.0); 
-		var idx2= Math.floor(src[3] * 256.0 - 128.0); 
-		var m = Math.pow(2.0,idx);
-		dst[0] = src[0]*Math.pow(2.0,idx);
-		dst[1] = src[1]*Math.pow(2.0,idx2);
-	} 
 
 	/** 環境マップを背景として描画 **/
-	ret.prototype.drawCelestialSphere= function(image,x,y,w,h){
+	drawCelestialSphere(image,x,y,w,h){
 		if(!w){
 			x=0;
 			y=0;
@@ -1281,28 +803,9 @@ ret.calcST = function(s,t,p0,p1,p2,u0,v0,u1,v1,u2,v2){
 		Ono3d.postEffect(image,x,y,w,h,shader); 
 	}
 
-	/** 単純な画像コピー **/
-	ret.drawCopy= function(dx,dy,dw,dh,image,sx,sy,sw,sh){
-		if(sw == null){
-			sh = image;
-			image = dx;
-			sx = dx = dy;
-			sy = sy = dw;
-			sw = dw = dh;
-			dh = sh;
-		}
-		var shader = Rastgl.plainShader;
-		var unis = shader.unis;
-
-		gl.useProgram(shader.program);
-		gl.uniform2f(unis["uPosScale"],dw,dh);
-		gl.uniform2f(unis["uPosOffset"],dx,dy);
-
-		Ono3d.postEffect(image,sx,sy,sw,sh,shader); 
-	}
 
 	/** 環境マップから拡散環境マップをつくる **/
-	ret.prototype.rough=function(dst,rough,src,x,y,w,h){
+	rough(dst,rough,src,x,y,w,h){
 		if(x==null){ x=0;y=0;w=1;h=1; }
 		var shader=this.shaders["rough"];
 
@@ -1349,67 +852,9 @@ ret.calcST = function(s,t,p0,p1,p2,u0,v0,u1,v1,u2,v2){
 
 	}
 
-	/** ガウスぼかし **/
-	ret.gauss=function(width,height,d,src,x,y,w,h){
-		//係数作成
-		var weight = new Array(5);
-		var t = 0.0;
-		for(var i = 0; i < weight.length; i++){
-			var r = 1.0 + 2.0 * i;
-			var we = Math.exp(-0.5 * (r * r) / d);
-			weight[i] = we;
-			if(i > 0){we *= 2.0;}
-			t += we;
-		}
-		for(i = 0; i < weight.length; i++){
-			weight[i] /= t;
-		}
-		var shader = shaders["gauss"];
-		var args=shader.unis;
-
-		gl.useProgram(shader.program);
-
-		gl.uniform1fv(args["weight"],weight);
-		gl.bindBuffer(gl.ARRAY_BUFFER, Rastgl.fullposbuffer);
-
-		//横ぼかし
-		gl.uniform2f(args["uAxis"],1/width*w,0);
-		Ono3d.postEffect(src,x,y,w,h,shader); 
-
-		Ono3d.copyImage(src,0,0,0,0,width,height);
-
-
-		//縦ぼかし
-		gl.uniform2f(args["uAxis"],0,1/src.height);
-		Ono3d.postEffect(src,0,0,width/src.width,height/src.height,shader); 
-	}
-
-	/** 法線マップ初期設定 (ハイトマップから法線マップに変換する)**/
-	ret.initNormal=function(src){
-		var shader = shaders["normal"];
-		
-
-		gl.bindTexture(gl.TEXTURE_2D, src.glTexture);
-		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-
-		gl.disable(gl.BLEND);
-		gl.disable(gl.DEPTH_TEST);
-
-		gl.useProgram(shader.program);
-
-		Ono3d.postEffect(src,0,0,1,1,shader); 
-		Ono3d.copyImage(src,0,0,0,0,src.width,src.height);
-		//this.setViewport(0,0,512,1024);
-		//Ono3d.gauss(src.width,src.height,100
-		//	,src,0,0,1.0,1.0,src.width,src.height); 
-		//Ono3d.copyImage(transTexture,0,0,0,0,512,1024);
-
-	}
-
 
 	/** (x,y,z)座標でキューブマップ作成 **/
-	ret.prototype.createCubeMap= function(image,x,y,z,size,func){
+	createCubeMap(image,x,y,z,size,func){
 		this.setViewport(0,0,size,size);
 		gl.bindFramebuffer(gl.FRAMEBUFFER,null);
 
@@ -1451,7 +896,7 @@ ret.calcST = function(s,t,p0,p1,p2,u0,v0,u1,v1,u2,v2){
 
 		
 	}
-	ret.prototype.createEnv = function(tex,x,y,z,func){
+	createEnv(tex,x,y,z,func){
 		var size = 256;
 		if(!tex){
 			tex =Ono3d.createTexture(size,size);
@@ -1508,7 +953,7 @@ ret.calcST = function(s,t,p0,p1,p2,u0,v0,u1,v1,u2,v2){
 
 		return tex;
 	}
-	ret.prototype.setLine=function(p0,p1,material){
+	setLine(p0,p1,material){
 		//線追加
 		var renderLine =this.lines[this.lines_index];
 		renderLine.material=material;
@@ -1518,8 +963,478 @@ ret.calcST = function(s,t,p0,p1,p2,u0,v0,u1,v1,u2,v2){
 	}
 		
 		
-	return ret
+		init(_canvas,_ctx){
+			gl = Rastgl.gl;
+			this.gl = gl;
+			this.clear()
 
-})()
+			this.renderTarget=_ctx
+			this.canvasTarget=_canvas
 
-export default Ono3d;
+			this.transTextures[0] = Ono3d.createTexture(TEXSIZE,TEXSIZE);
+			this.transTextures[1] = Ono3d.createTexture(TEXSIZE,TEXSIZE);
+			this.env2Texture= Ono3d.createTexture(TEXSIZE,TEXSIZE);
+			this.shadowTexture = Ono3d.createTexture(TEXSIZE,TEXSIZE);
+			gl.bindTexture(gl.TEXTURE_2D, this.shadowTexture.glTexture);
+			//gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+			//gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+
+			this.envbufTexture = Ono3d.createTexture(1024,512);
+			this.indexBuffer = new Uint16Array(Rastgl.VERTEX_MAX);
+			this.verticesFloat32Array= new Float32Array(Rastgl.VERTEX_MAX*20);
+
+			this.shaders=[];
+			shaders = this.shaders;
+
+			var filenames=[ "shadow_dec","shadow","plain","half","multiadd","fill","add"
+				,"average","average2","average3","decode"
+				,"rough","celestialsphere","envset","gauss","normal"
+				,"cube2polar"
+				//,"cube2lightfield","cube2lightfield2","cube2lightfield3"
+				];
+			for(var i=0;i<filenames.length;i++){
+				var filename = filenames[i];
+				this.shaders[filename]=Ono3d.loadShader(currentpath+"shader/"+filename + ".shader");
+			}
+
+
+			Ono3d.loadMainShader();
+
+			for(var i=0;i<6;i++){
+				gl.activeTexture(gl.TEXTURE0+i);
+			}
+			   
+
+		}
+		setViewport(x,y,width,height){
+			this.viewport[0]=x;
+			this.viewport[1]=y;
+			this.viewport[2]=width;
+			this.viewport[3]=height;
+			gl.viewport(x,y,width,height);
+		}
+		setNearFar(zn,zf){
+			this.znear=zn;
+			this.zfar=zf;
+		}
+		setAov(aov){
+			this.aov=aov;
+		}
+		calcProjectionMatrix(mat,x,y,zn,zf){
+			Mat44.set(mat
+				,zn/x,0,0,0
+				,0,zn/y,0,0
+				,0,0,-(zn+zf)/(zf-zn),-1.0
+				,0,0,-2*zn*zf/(zf-zn),0);
+
+		}
+		setOrtho(x,y,zn,zf){
+			if(zn != null){
+				this.znear=zn;
+				this.zfar=zf;
+			}
+			
+			Ono3d.calcOrthoMatrix(this.projectionMatrix
+				,x,y
+				,this.znear,this.zfar);
+		}
+		loadIdentity(){
+			var mat = this.targetMatrix
+			mat[0] = 1.0
+			mat[1] = 0
+			mat[2] = 0
+			mat[4] = 0
+			mat[5] = 1.0
+			mat[6] = 0
+			mat[8] = 0
+			mat[9] = 0
+			mat[10] = 1.0
+			mat[12] = 0
+			mat[13] = 0
+			mat[14] = 0
+		}
+		rotate(r,x,y,z){
+			var SIN=Math.sin(r)
+			var COS=Math.cos(r)
+			var a = Mat44.poolAlloc();
+			a[0]=x*x*(1-COS)+COS;a[4]=x*y*(1-COS)-z*SIN;a[8]=z*x*(1-COS)+y*SIN;a[12]=0
+			a[1]=x*y*(1-COS)+z*SIN;a[5]=y*y*(1-COS)+COS;a[9]=y*z*(1-COS)-x*SIN;a[13]=0
+			a[2]=z*x*(1-COS)-y*SIN;a[6]=y*z*(1-COS)+x*SIN;a[10]=z*z*(1-COS)+COS;a[14]=0
+			a[3]=a[7]=a[11]=0;a[15]=1;
+			Mat44.dot(this.targetMatrix,this.targetMatrix,a)
+			Mat44.poolFree(1);
+		}
+		scale(x,y,z){
+			var m = this.targetMatrix;
+			m[0]=m[0]*x;
+			m[1]*=x;
+			m[2]*=x;
+			m[4]*=y;
+			m[5]*=y;
+			m[6]*=y;
+			m[8]*=z;
+			m[9]*=z;
+			m[10]*=z;
+		}
+		translate(x,y,z){
+			var m = this.targetMatrix
+			m[12]=m[0]*x+m[4]*y+m[8]*z+m[12]
+			m[13]=m[1]*x+m[5]*y+m[9]*z+m[13]
+			m[14]=m[2]*x+m[6]*y+m[10]*z+m[14]
+		}
+		transmat(m){
+			Mat44.dot(this.targetMatrix,this.targetMatrix,m);
+		}
+}
+	Ono3d.Material = Material;
+	Ono3d.Face = Face;
+
+	Ono3d.RF_OUTLINE=RF_OUTLINE
+	Ono3d.RF_DOUBLE_SIDED=RF_DOUBLE_SIDED
+
+	
+	//-x~x,-y~y,zn~zf
+	Ono3d.calcOrthoMatrix = function(mat,x,y,zn,zf){
+		Mat44.set(mat
+		,-1.0/x,0,0,0
+		,0,1.0/y,0,0.0
+		,0,0,2.0/(zf-zn),0.0
+		,0,0,-(zf+zn)/(zf-zn),1.0);
+	}
+
+
+	Ono3d.calcMainShaderName=function(material){
+		//マテリアルの各種設定を有効化したシェーダを取得
+		var options=["lightMap","opacity","specular","hightMapPower","pbrMap"];
+		var num=0;
+		for(var oi=0;oi<options.length;oi++){
+			if(options[oi]==="opacity"){
+				if(material[options[oi]] !== 1.0){
+					num|=(1<<oi);
+				}
+			}else{
+				if(material[options[oi]]){
+					num|=(1<<oi);
+				}
+			}
+		}
+		if(material["metallic"]){
+			num|=(1<<2);
+		}
+		if(!shaders["main_"+num]){
+			Ono3d.createMainShader(num);
+		}
+		return "main_"+num;
+	}
+	Ono3d.loadTexture = function(path,func){
+		return  Util.loadImage(path,0
+			,function(image){
+				if(!image.glTexture){
+					image.glTexture = Rastgl.createTexture(image);
+				}
+				if(func){
+					func(image);
+				}
+			}
+		);
+	}
+	Ono3d.createTexture= function(width,height){
+		var image = {};
+		image.width=width;
+		image.height=height;
+		image.glTexture = Rastgl.createTexture(null,width,height);
+		return image;
+	}
+	Ono3d.loadBumpTexture = function(path,func){
+		return Ono3d.loadTexture(path,function(image){
+			if(!image.bumpInitFlg){
+				gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
+				gl.viewport(0,0,image.width,image.height);
+				Ono3d.initNormal(image);
+				Ono3d.copyImage(image,0,0,0,0,image.width,image.height);
+
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+				gl.bindTexture(gl.TEXTURE_2D, null);
+				image.bumpInitFlg=true;
+			}
+
+			if(func){
+				func(image);
+			}
+		});
+	}
+	Ono3d.createShader= function(txt){
+		var shader={};
+		
+		txt=txt.replace("[common]","");
+		txt = " \n \
+			#pragma optionNV(inline all) \n \
+			#pragma optionNV(unroll all)  \n" +txt;
+		var sss=txt.match(/\[vertexshader\]([\s\S]*)\[fragmentshader\]([\s\S]*)/);
+		var vs = sss[1];
+		var fs = sss[2];
+		fs=(Rastgl.commonFunction + Rastgl.textureRGBE) + "\n" + fs;
+		var unis = txt.match(/uniform .+?;/g)
+		var atts = (vs+fs).match(/attribute .+?;/g)
+		var gl = Rastgl.gl;
+
+		var program = shader.program=Rastgl.setShaderProgram(vs,fs);
+
+		shader.atts={};
+		for(var i=0;i<atts.length;i++){
+			var nam = atts[i].match(/(\S+)\s*;/)[1];
+
+			var att=gl.getAttribLocation(program,nam); 
+			shader.atts[nam]=att;
+			if(att>=0){
+				gl.enableVertexAttribArray(att);
+				gl.vertexAttribPointer(att, 1,gl.FLOAT, false, 0, 0);
+			}
+		}
+		shader.unis={};
+		for(var i=0;i<unis.length;i++){
+			var nam = unis[i].match(/(\S+)\s*;/)[1];
+			nam = nam.match(/^([^\[]+)/)[1];
+			shader.unis[nam]=gl.getUniformLocation(shader.program,nam);
+		}
+		return shader;
+	}
+Ono3d.calcST = function(s,t,p0,p1,p2,u0,v0,u1,v1,u2,v2){
+	var du1=u1-u0;
+	var dv1=v1-v0;
+	var du2=u2-u0;
+	var dv2=v2-v0;
+	var dx1=p1[0]-p0[0];
+	var dy1=p1[1]-p0[1];
+	var dz1=p1[2]-p0[2];
+	var dx2=p2[0]-p0[0];
+	var dy2=p2[1]-p0[1];
+	var dz2=p2[2]-p0[2];
+
+	var d2=du1*dv2-du2*dv1;
+	if(d2===0){
+	}else{
+		d2=1/d2;
+		s[0]=-(dv1*dx2-dv2*dx1)*d2;
+		s[1]=-(dv1*dy2-dv2*dy1)*d2;
+		s[2]=-(dv1*dz2-dv2*dz1)*d2;
+		t[0]=(du1*dx2-du2*dx1)*d2;
+		t[1]=(du1*dy2-du2*dy1)*d2;
+		t[2]=(du1*dz2-du2*dz1)*d2;
+	}
+	return false;
+}
+
+	Ono3d.loadShader=function(path,func){
+		var s={};
+		Util.loadText(path,function(txt){
+			try{
+				
+				var shader = Ono3d.createShader(txt);
+				shader.name = path;
+				var keys =Object.keys(shader);
+				for(var i=0;i<keys.length;i++){
+					s[keys[i]] =shader[keys[i]]
+				}
+				
+			}catch(e){
+				alert(path+"\n"+e.message);
+			}
+		});
+		return s;
+	}
+
+	Ono3d.createMainShader=function(num){
+		var path=currentpath+"shader/main.shader"
+		var shader=null;
+		try{
+			var options=["lightmap","transmission","reflect","height","pbr"];
+			var txt = Ono3d.main_shader_org;
+			for(var j=0;j<options.length;j++){
+				//各種機能を有効/無効化
+				if(num&(1<<j)){
+					var re = new RegExp("/\\*\\[" + options[j] +"\\]","g");
+					txt=txt.replace(re,"");
+					re = new RegExp("\\[" + options[j] +"\\]\\*/","g");
+					txt=txt.replace(re,"");
+					
+				}else{
+					var re = new RegExp("/\\*\\[" + options[j] +"\\][\\s\\S]*?\\[" + options[j] +"\\]\\*/","g");
+
+					txt=txt.replace(re,"");
+				}
+			}
+			if(!(num&1)){
+				//ライトマップが有効ではない場合は
+				//ライトプローブ関連行を有効化
+				var re = new RegExp("/\\*\\[" + "lightprobe" +"\\]","g");
+				txt=txt.replace(re,"");
+				re = new RegExp("\\[" + "lightprobe" +"\\]\\*/","g");
+				txt=txt.replace(re,"");
+				
+			}else{
+				//ライトプローブ関連行を無効化
+				var re = new RegExp("/\\*\\[lightprobe\\][\\s\\S]*?\\[lightprobe\\]\\*/","g");
+				txt=txt.replace(re,"");
+			}
+			shader=Ono3d.createShader(txt);
+			shaders["main_"+num] = shader;
+		}catch(e){
+			alert(path+"\n"+e.message);
+		}
+		return shader;
+	}
+	Ono3d.loadMainShader=function(){
+		var path=currentpath+"shader/main.shader"
+		Util.loadText(path,function(txt_org){
+			Ono3d.main_shader_org=txt_org;
+		});
+		return ;
+	}
+	Ono3d.copyImage= function(target,tx,ty,x,y,w,h){
+		gl.bindTexture(gl.TEXTURE_2D, target.glTexture);
+		gl.copyTexSubImage2D(gl.TEXTURE_2D,0,tx,ty,x,y,w,h);
+	}
+	Ono3d.postEffect =function(src,u,v,w,h,sh){
+		gl.disable(gl.DEPTH_TEST);
+		gl.depthMask(false);
+
+		if(!sh.program){
+			return;
+		}
+		gl.useProgram(sh.program);
+
+		var unis = sh.unis;
+		var atts = sh.atts;
+
+		if(unis["uUvScale"])gl.uniform2f(unis["uUvScale"],w,h);
+		if(unis["uUvOffset"])gl.uniform2f(unis["uUvOffset"],u,v);
+		if(unis["uUnit"])gl.uniform2f(unis["uUnit"],1.0/src.width,1.0/src.height);
+
+		gl.activeTexture(gl.TEXTURE0);
+		gl.bindTexture(gl.TEXTURE_2D,src.glTexture);
+		gl.uniform1i(unis["uSampler"],0);
+
+				
+		gl.bindBuffer(gl.ARRAY_BUFFER, Rastgl.fullposbuffer);
+		gl.vertexAttribPointer(atts["aPos"], 2,gl.FLOAT, false,0 , 0);
+
+		gl.bindBuffer(gl.ARRAY_BUFFER, Rastgl.fullposbuffer);
+
+		gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
+	}
+
+	Ono3d.packFloat = function (dst,src){ 
+		var m = Math.max(src[0],Math.max(src[1],src[2])); 
+		var idx = Math.ceil(Math.log(m+0.01)/Math.log(2.0)); 
+		m = 1.0/Math.pow(2.0,idx);
+		dst[0]=src[0]* m;
+		dst[1]=src[1]* m;
+		dst[2]=src[2]* m;
+		dst[3]=(idx+128.0)/255.0; 
+	} 
+	Ono3d.unpackFloat = function(dst,src){ 
+		dst[0] = src[0] * (1 - (((src[3]>>7)&1)<<1));
+		dst[1] = src[1] * (1 - (((src[3]>>6)&1)<<1));
+		dst[2] = src[2]  *(1 - (((src[3]>>5)&1)<<1));
+		var idx= Math.floor((src[3]&0x1f)  - 16.0); 
+		var m = Math.pow(2.0,idx);
+		dst[0] = dst[0]*m;
+		dst[1] = dst[1]*m;
+		dst[2] = dst[2]*m;
+	} 
+	Ono3d.encode = function (dst,src){ 
+		var m = Math.max(src[0],Math.max(src[1],src[2])); 
+		var idx = Math.ceil(Math.log(m+0.01)/Math.log(2.0)); 
+		m = 1.0/Math.pow(2.0,idx);
+		dst[0]=src[0]* m;
+		dst[1]=src[1]* m;
+		dst[2]=src[2]* m;
+		dst[3]=(idx+128.0)/255.0; 
+	} 
+	Ono3d.decode2 = function(dst,src){ 
+		var idx= Math.floor(src[2] * 256.0 - 128.0); 
+		var idx2= Math.floor(src[3] * 256.0 - 128.0); 
+		var m = Math.pow(2.0,idx);
+		dst[0] = src[0]*Math.pow(2.0,idx);
+		dst[1] = src[1]*Math.pow(2.0,idx2);
+	} 
+	/** 単純な画像コピー **/
+	Ono3d.drawCopy= function(dx,dy,dw,dh,image,sx,sy,sw,sh){
+		if(sw == null){
+			sh = image;
+			image = dx;
+			sx = dx = dy;
+			sy = sy = dw;
+			sw = dw = dh;
+			dh = sh;
+		}
+		var shader = Rastgl.plainShader;
+		var unis = shader.unis;
+
+		gl.useProgram(shader.program);
+		gl.uniform2f(unis["uPosScale"],dw,dh);
+		gl.uniform2f(unis["uPosOffset"],dx,dy);
+
+		Ono3d.postEffect(image,sx,sy,sw,sh,shader); 
+	}
+	/** ガウスぼかし **/
+	Ono3d.gauss=function(width,height,d,src,x,y,w,h){
+		//係数作成
+		var weight = new Array(5);
+		var t = 0.0;
+		for(var i = 0; i < weight.length; i++){
+			var r = 1.0 + 2.0 * i;
+			var we = Math.exp(-0.5 * (r * r) / d);
+			weight[i] = we;
+			if(i > 0){we *= 2.0;}
+			t += we;
+		}
+		for(i = 0; i < weight.length; i++){
+			weight[i] /= t;
+		}
+		var shader = shaders["gauss"];
+		var args=shader.unis;
+
+		gl.useProgram(shader.program);
+
+		gl.uniform1fv(args["weight"],weight);
+		gl.bindBuffer(gl.ARRAY_BUFFER, Rastgl.fullposbuffer);
+
+		//横ぼかし
+		gl.uniform2f(args["uAxis"],1/width*w,0);
+		Ono3d.postEffect(src,x,y,w,h,shader); 
+
+		Ono3d.copyImage(src,0,0,0,0,width,height);
+
+
+		//縦ぼかし
+		gl.uniform2f(args["uAxis"],0,1/src.height);
+		Ono3d.postEffect(src,0,0,width/src.width,height/src.height,shader); 
+	}
+
+	/** 法線マップ初期設定 (ハイトマップから法線マップに変換する)**/
+	Ono3d.initNormal=function(src){
+		var shader = shaders["normal"];
+		
+
+		gl.bindTexture(gl.TEXTURE_2D, src.glTexture);
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+
+		gl.disable(gl.BLEND);
+		gl.disable(gl.DEPTH_TEST);
+
+		gl.useProgram(shader.program);
+
+		Ono3d.postEffect(src,0,0,1,1,shader); 
+		Ono3d.copyImage(src,0,0,0,0,src.width,src.height);
+		//this.setViewport(0,0,512,1024);
+		//Ono3d.gauss(src.width,src.height,100
+		//	,src,0,0,1.0,1.0,src.width,src.height); 
+		//Ono3d.copyImage(transTexture,0,0,0,0,512,1024);
+
+	}
+	Ono3d.LightSource = LightSource;
+

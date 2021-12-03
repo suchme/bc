@@ -47,23 +47,23 @@ export default class Engine{
 		}
 		var ctx=canvas.getContext("2d");
 		gl = canvasgl.getContext('webgl') || canvasgl.getContext('experimental-webgl');
+		this.gl = gl;
 
 		Util.enableVirtualPad=true;
 		Util.init(canvas,canvasgl,parentnode);
 
 		if(gl){
-			globalParam.enableGL=true;
+			this.enableGL=true;
 		}else{
-			globalParam.enableGL=false;
+			this.enableGL=false;
 		}
 		globalParam.gl=gl;
 
 
-		if(globalParam.enableGL){
+		if(this.enableGL){
 			Rastgl.init(gl);
 			canvas.style.width="0px";
 			canvasgl.style.display="inline";
-			//Ono3d.setDrawMethod(3);
 		}else{
 			canvasgl.style.display="none";
 			canvas.style.display="inline";
@@ -79,14 +79,13 @@ export default class Engine{
 		tex512 = Ono3d.createTexture(512,512);
 		averageTexture = Ono3d.createTexture(512,512);
 
+		//物理エンジン
 		onoPhy = new OnoPhy();
 		this.onoPhy = onoPhy;
 		
-		Rastgl.ono3d = ono3d;
 
 		inittime=Date.now();
 
-		span=document.getElementById("cons");
 
 		
 
@@ -294,8 +293,8 @@ export default class Engine{
 			}
 		}
 		
-		Engine.output_text = 
-			span,fps.toFixed(2) + "fps " 
+		this.output_text = 
+			fps.toFixed(2) + "fps " 
 			+"\nmainloop " + entr("mainloop") +"ms"	
 			+"\n Phyisics " + entr("physics") +"ms"
 			+"\n  AABB " + entr("aabb")+"ms (Object " + onoPhy.collider.collisions.length + ")"
@@ -648,7 +647,6 @@ var blit = function(tex,x,y,w,h,u,v,u2,v2){
 
 
 var physicsTime;
-var span;
 var oldTime = 0;
 var nowTime =0;
 var drawgeometryTime=0;
