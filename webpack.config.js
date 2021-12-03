@@ -14,7 +14,8 @@ path:  __dirname + "/docs"
   devServer: {
     contentBase: "docs",
     open: true,
-	port:8081
+	port:8081,
+	host: '0.0.0.0'
   },
   module: {
     rules: [

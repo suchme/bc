@@ -487,6 +487,7 @@ export default class Ono3d {
 			return;
 		}
 		gl.depthMask(false);
+		gl.disable(gl.DEPTH_TEST);
 
 		//不透明レンダリング結果からラフネス別テクスチャ作成
 		var transTexture = this.transTextures[this.transTextureIndex];
