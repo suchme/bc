@@ -145,23 +145,6 @@ ret.init=function(_gl){
 	buffer[7]=1;
 	gl.bufferData(gl.ARRAY_BUFFER, buffer, gl.STATIC_DRAW);
 
-	this.plainShader =  createShader(" \
-	[vertexshader] \
-	attribute vec2 aPos; \
-	uniform vec2 uPosScale; \
-	uniform vec2 uPosOffset; \ uniform vec2 uUvScale; \
-	uniform vec2 uUvOffset; \
-	varying vec2 vUv; \
-	void main(void){ \
-		gl_Position = vec4(aPos * uPosScale + uPosOffset,1.0,1.0); \
-		vUv = (aPos+ 1.0) * 0.5 * uUvScale +  uUvOffset; \
-	} \
-	[fragmentshader] \
-	varying lowp vec2 vUv; \
-	uniform sampler2D uSampler; \
-	void main(void){ \
-		gl_FragColor= texture2D(uSampler,vUv); \
-	} ");
 
 
 
@@ -171,6 +154,7 @@ ret.init=function(_gl){
 	var idx=new Vec3();
 	var num=new Vec3();
 	ret.packR11G11B10=function(result,raw){
+		//浮動小数をR11G11B10にパック
 		idx[0]= Math.floor(Math.log(Math.max(raw[0],0.00001)));
 		idx[1]= Math.floor(Math.log(Math.max(raw[1],0.00001)));
 		idx[2]= Math.floor(Math.log(Math.max(raw[2],0.00001)));
@@ -187,9 +171,6 @@ ret.init=function(_gl){
 		result[2] = ((idx[2]+geta)<<3) + Math.floor(Math.fract(num[0]*8)*8);
 		result[3] = ((num[2]*32)<<3) + Math.floor(Math.fract(num[1]*8)*8);
 		Vec4.mul(result,result,1/255);
-		//return (vec4((idx +geta),floor(num.b * 32.0))*8.0
-		//+ floor(vec4(num.rg,fract(num.rg * 8.0))*8.0) 
-		//)/255.0; 
 	}
 
 	ret.commonFunction=" \n \
@@ -338,42 +319,6 @@ ret.init=function(_gl){
 	return ret;
 })();
 
-	var createShader= function(txt){
-		var shader={};
-		
-		txt=txt.replace("[common]","");
-		txt = " \n \
-			#pragma optionNV(inline all) \n \
-			#pragma optionNV(unroll all)  \n" +txt;
-		var sss=txt.match(/\[vertexshader\]([\s\S]*)\[fragmentshader\]([\s\S]*)/);
-		var vs = sss[1];
-		var fs = sss[2];
-		fs=(Rastgl.commonFunction + Rastgl.textureRGBE) + "\n" + fs;
-		var unis = txt.match(/uniform .+?;/g)
-		var atts = (vs+fs).match(/attribute .+?;/g)
-		var gl = Rastgl.gl;
-
-		var program = shader.program=Rastgl.setShaderProgram(vs,fs);
-
-		shader.atts={};
-		for(var i=0;i<atts.length;i++){
-			var nam = atts[i].match(/(\S+)\s*;/)[1];
-
-			var att=gl.getAttribLocation(program,nam); 
-			shader.atts[nam]=att;
-			if(att>=0){
-				gl.enableVertexAttribArray(att);
-				gl.vertexAttribPointer(att, 1,gl.FLOAT, false, 0, 0);
-			}
-		}
-		shader.unis={};
-		for(var i=0;i<unis.length;i++){
-			var nam = unis[i].match(/(\S+)\s*;/)[1];
-			nam = nam.match(/^([^\[]+)/)[1];
-			shader.unis[nam]=gl.getUniformLocation(shader.program,nam);
-		}
-		return shader;
-	}
 
 export default Rastgl;
 

@@ -208,11 +208,12 @@ export default class Engine{
 		Engine.toneMapping(bufTexture,WIDTH/1024,HEIGHT/1024);
 		
 
-		if(ono3d.shadowTexture.glTexture){
-			ono3d.setViewport(0,0,WIDTH/2,HEIGHT/2);
-			//	Ono3d.drawCopy(ono3d.shadowTexture,0,0,1,1)
-			//Ono3d.postEffect(ono3d.shadowTexture,0,0 ,1,1,this.ono3d.shaders["shadow_dec"]); 
-		}
+//		if(ono3d.shadowTexture){
+//			ono3d.setViewport(0,0,WIDTH/2,HEIGHT/2);
+////	var tex=	ono3d.environments[0].envTexture
+//			Ono3d.postEffect(ono3d.shadowTexture,0,0 ,1,1,ono3d.shaders["shadow_dec"]); 
+////				Ono3d.drawCopy(tex,0,0,1,1)
+//		}
 
 
 		//gl.getParameter(gl.VIEWPORT);
@@ -326,7 +327,7 @@ export default class Engine{
 
 		var persx = camera.aov;
 		var persy = camera.aov * ono3d.viewport[3]/ono3d.viewport[2];
-		ono3d.calcProjectionMatrix(camera.pvMatrix,persx*camera.znear,persy*camera.znear,camera.znear,camera.zfar);
+		Ono3d.perspectiveMatrix(camera.pvMatrix,persx,persy,camera.znear,camera.zfar);
 
 		Mat44.dotMat43(camera.pvMatrix,camera.pvMatrix,m);
 		ono3d.znear=camera.znear;
@@ -363,9 +364,8 @@ export default class Engine{
 
 					ono3d.drawCelestialSphere(skyTexture);
 				}else{
-					ono3d.calcProjectionMatrix(
-						ono3d.projectionMatrix,camera.aov * camera.znear,camera.aov*HEIGHT/WIDTH*2 * camera.znear
-					,camera.znear,camera.zfar);
+					Ono3d.perspectiveMatrix(
+						ono3d.projectionMatrix,camera.aov ,camera.aov*HEIGHT/WIDTH*2 ,camera.znear,camera.zfar);
 					ono3d.setViewport(0,0,WIDTH/2,HEIGHT);
 					ono3d.drawCelestialSphere(skyTexture);
 					ono3d.setViewport(WIDTH/2,0,WIDTH/2,HEIGHT);
@@ -496,7 +496,7 @@ export default class Engine{
 		);
 		Mat44.getInv(view_matrix,view_matrix);
 
-		ono3d.calcPerspectiveMatrix(projection_matrix
+		Ono3d.perspectiveMatrix(projection_matrix
 			,-0.5*offset
 			,0.5*offset
 			,-1*offset
@@ -634,7 +634,7 @@ var blit = function(tex,x,y,w,h,u,v,u2,v2){
 
 //カメラ露光
 	globalParam.autoExposure=1;
-	globalParam.exposure_level=0.18;
+	globalParam.exposure_level=0.5;
 	globalParam.exposure_upper=1;
 	globalParam.exposure_bloom=0.1;
 	
@@ -730,11 +730,11 @@ Engine.bloom = function(image,exposure_bloom){
 	gl.bindFramebuffer(gl.FRAMEBUFFER,null );
 
 	gl.useProgram(addShader.program);
-	gl.uniform1i(addShader.unis["uSampler2"],1);
+	gl.uniform1i(addShader.unis["uSampler2"].location,1);
 	gl.activeTexture(gl.TEXTURE1);
 	gl.bindTexture(gl.TEXTURE_2D,tex512.glTexture);
-	gl.uniform1f(addShader.unis["v1"],1.0);
-	gl.uniform1f(addShader.unis["v2"],exposure_bloom);
+	gl.uniform1f(addShader.unis["v1"].location,1.0);
+	gl.uniform1f(addShader.unis["v2"].location,exposure_bloom);
 
 	ono3d.setViewport(0,0,WIDTH,HEIGHT);
 	Ono3d.postEffect(image,0,0 ,WIDTH/image.width,HEIGHT/image.height,addShader);
@@ -797,7 +797,7 @@ Engine.setExpose = function(level,upper){
 	packUFP16(a,level);
 	packUFP16(b,upper);
 	//encode2(a,a);
-	gl.uniform4f(shaders["fill"].unis["uColor"]
+	gl.uniform4f(shaders["fill"].unis["uColor"].location
 		,a[0],a[1],b[0],b[1]);
 		
 	Ono3d.postEffect(averageTexture,0,0,0,0,shaders["fill"]); 
@@ -807,7 +807,7 @@ Engine.toneMapping = function(image,w,h){
 	var shaders=ono3d.shaders;
 	var decodeShader = shaders["decode"];
 	gl.useProgram(decodeShader.program);
-	gl.uniform1i(decodeShader.unis["uSampler2"],1);
+	gl.uniform1i(decodeShader.unis["uSampler2"].location,1);
 	gl.activeTexture(gl.TEXTURE1);
 	gl.bindTexture(gl.TEXTURE_2D,averageTexture.glTexture);
 	Ono3d.postEffect(image,0,0 ,w,h,decodeShader); 
@@ -825,12 +825,15 @@ Engine.createSHcoeff= function(x,y,z,size,func){
 	gl.bindTexture(gl.TEXTURE_2D, null);
 	gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 	//キューブマップ作成
-	ono3d.setNearFar(0.01,80.0);
 	ono3d.createCubeMap(envBuf,x,y,z,256,func);
+	gl.bindFramebuffer(gl.FRAMEBUFFER, Rastgl.frameBuffer);
+		//gl.clearColor(0,0,0,1);
+		//gl.clear(gl.COLOR_BUFFER_BIT);
+		//Ono3d.copyImage(envBuf,0,0,0,0,1024,512);
+	
 
 	gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-	gl.clearColor(0,0,0,1);
-	gl.clear(gl.COLOR_BUFFER_BIT);
+
 
 	for(var i=0;i<9;i++){
 		//係数の数だけループ
@@ -904,17 +907,17 @@ Engine.shadowGauss=function(width,height,d,src,x,y,w,h){
 
 	gl.useProgram(shader.program);
 
-	gl.uniform1fv(args["weight"],weight);
-	gl.bindBuffer(gl.ARRAY_BUFFER, Rastgl.fullposbuffer);
+//	gl.uniform1fv(args["weight"].location,weight);
+//	gl.bindBuffer(gl.ARRAY_BUFFER, Rastgl.fullposbuffer);
 
 	//横ぼかし
-	gl.uniform2f(args["uAxis"],1/width,0);
+	gl.uniform2f(args["uAxis"].location,1/width,0);
 	Ono3d.postEffect(src,x,y,w,h,shader); 
 
 	Ono3d.copyImage(src,0,0,0,0,width,height);
 
 
 	//縦ぼかし
-	gl.uniform2f(args["uAxis"],0,1/height);
+	gl.uniform2f(args["uAxis"].location,0,1/height);
 	Ono3d.postEffect(src,0,0,width/src.width,height/src.height,shader); 
 }

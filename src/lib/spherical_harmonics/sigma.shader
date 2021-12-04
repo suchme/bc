@@ -22,5 +22,4 @@ void main(void){
 		+ unpackFloat(texture2D(uSampler,uv-vec2(0.0,1.0)*unit))
 		+ unpackFloat(texture2D(uSampler,uv-unit))
 	);
-}
 
