@@ -3,6 +3,7 @@ html{
 
 	font-size:14px;
 	line-height:100%;
+	font-family:sans-serif;
 }
 body{
 	text-align:center;
@@ -47,8 +48,12 @@ button.armor{
 	height:28px;
 	
 }
-select{
+select,button{
 	appearance: none;
+	position:relative;
+	z-index:30;
+	border:none;
+
 }
 select.rarelity{
 	width:30px;
@@ -78,6 +83,7 @@ span.setting{
 	width:160px;
 }
 .status{
+	font-family:monospace;
 	text-align:right;
 	width:32px;
 	position:relative;

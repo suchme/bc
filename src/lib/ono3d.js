@@ -5,11 +5,52 @@ import Rastgl from "./rastgl.js"
 import Sort from "./sort.js"
 import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "./vector.js"
 
-	var vAP=function(gl,a,b,c,d,e,f){
-		if(a>=0)gl.vertexAttribPointer(a, b,c,d,e,f);
-	}
+var att_types={};
+var uni_types={};
 
-	var fa16 =new Float32Array(16);
+var setUniform=function(gl,uni,value,num){
+	if(!uni)return;
+	var l=uni.location;
+
+
+	switch(uni.type){
+		case "int":
+			gl.uniform1i(l,value);
+			break;
+		case "float":
+			gl.uniform1f(l,value);
+			break;
+		case "float[]":
+			gl.uniform1fv(l,value);
+		case "vec3":
+			gl.uniform3fv(l,value);
+			break;
+		case "mat3":
+			gl.uniformMatrix3fv(l,false,value);
+			break;
+		case "mat4":
+			gl.uniformMatrix4fv(l,false,value);
+			break;
+		case "sampler2D":
+			if(num==2){
+				gl.activeTexture(gl.TEXTURE2); 
+			}else if(num==5){
+				gl.activeTexture(gl.TEXTURE5); 
+			}else{
+				gl.activeTexture(gl.TEXTURE0 + num); 
+			}
+			gl.uniform1i(uni.location,num);
+			if(value){
+				gl.bindTexture(gl.TEXTURE_2D,value.glTexture);
+			}else{
+				gl.bindTexture(gl.TEXTURE_2D,Rastgl.dummyTexture); //テクスチャ未指定の場合はダミーを設定
+			}
+			break;
+		default:
+			break;
+	}
+}
+
 	var mat=new Float32Array(9);
 	var fa =new Float32Array(3);
 
@@ -75,13 +116,29 @@ import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "./vector.js"
 	}
 	var Line = function(){
 		this.bold=1;
-		//this.vertices=new Uint16Array(2);
 		this.pos=[];
 		this.pos[0]=new Vec3();
 		this.pos[1]=new Vec3();
 		this.material=0;
 	};
-//var Ono3d = (function(){
+	var perspectiveMatrix = function(mat,left,right,top,bottom,zn,zf){
+		if(zn==null){
+			//省略されている場合
+			zf=bottom;
+			zn=top;
+			top =right*zn;
+			bottom=-top;
+			right=left*zn;
+			left=-right;
+		}
+		//透視行列を作る 
+		Mat44.set(mat
+			,2*zn/(right-left),0,0,0
+			,0,2*zn/(top-bottom),0,0
+			,(right+left)/(right-left),(top+bottom)/(top-bottom),-(zn+zf)/(zf-zn),-1.0
+			,0,0,-2*zn*zf/(zf-zn),0);
+
+	}
 export default class Ono3d {
 	constructor(){
 		this.rf = 0
@@ -147,15 +204,6 @@ export default class Ono3d {
 
 	}
 
-	calcPerspectiveMatrix(mat,left,right,top,bottom,zn,zf){
-		//透視行列を作る 
-		Mat44.set(mat
-			,2*zn/(right-left),0,0,0
-			,0,2*zn/(top-bottom),0,0
-			,(right+left)/(right-left),(top+bottom)/(top-bottom),-(zn+zf)/(zf-zn),-1.0
-			,0,0,-2*zn*zf/(zf-zn),0);
-
-	}
 
 	setStatic(){
 		this.faces_static_index=0;//this.faces_index;
@@ -178,7 +226,7 @@ export default class Ono3d {
 
 		if(globalParam.stereomode==0){
 			globalParam.gl.viewport(x,y,WIDTH,HEIGHT);
-			this.calcProjectionMatrix(this.projectionMatrix,this.aov*this.znear,this.aov*HEIGHT/WIDTH*this.znear
+			perspectiveMatrix(this.projectionMatrix,this.aov,this.aov*HEIGHT/WIDTH
 				,this.znear,this.zfar);
 			Mat44.dot(this.pvMatrix,this.projectionMatrix,this.viewMatrix);
 			func();
@@ -189,7 +237,7 @@ export default class Ono3d {
 			WIDTH =WIDTH/2;
 			globalParam.gl.viewport(WIDTH*q,HEIGHT*q,WIDTH*p,HEIGHT*p);
 			stereo=globalParam.stereo;
-			this.calcProjectionMatrix(this.projectionMatrix,this.aov*this.znear,this.aov*HEIGHT/WIDTH*this.znear
+			perspectiveMatrix(this.projectionMatrix,this.aov,this.aov*HEIGHT/WIDTH
 				,this.znear,this.zfar);
 			this.projectionMatrix[8]=0;//stereo/10;
 			this.projectionMatrix[12]=stereo;
@@ -326,7 +374,6 @@ export default class Ono3d {
 		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 		if(lightSource && facesize){
 			var shader =  this.shaders["shadow"];
-			var f32a = new Float32Array(16);
 
 			gl.useProgram(shader.program);
 			gl.depthMask(true);
@@ -334,8 +381,9 @@ export default class Ono3d {
 			gl.cullFace(gl.FRONT);
 			gl.disable(gl.BLEND);
 
-			gl.uniformMatrix4fv(shader.unis["projectionMatrix"],false,lightSource.viewmatrix);
-			gl.vertexAttribPointer(shader.atts["aPos"], 3,gl.FLOAT, false,DEFAULT_VERTEX_DATA_SIZE , 0);
+			
+			setUniform(gl,shader.unis["projectionMatrix"],lightSource.viewmatrix);
+			gl.vertexAttribPointer(shader.atts["aPos"].location, 3,gl.FLOAT, false,DEFAULT_VERTEX_DATA_SIZE , 0);
 			gl.drawElements(gl.TRIANGLES, facesize*3, gl.UNSIGNED_SHORT, 0);
 
 		}
@@ -445,11 +493,9 @@ export default class Ono3d {
 			var addShader = this.shaders["add"];
 
 			gl.useProgram(addShader.program);
-			gl.uniform1i(addShader.unis["uSampler2"],1);
-			gl.activeTexture(gl.TEXTURE1);
-			gl.bindTexture(gl.TEXTURE_2D,this.env2Texture.glTexture);
-			gl.uniform1f(addShader.unis["v1"],1.0);
-			gl.uniform1f(addShader.unis["v2"],1.0);
+			setUniform(gl,addShader.unis["uSampler2"],this.env2Texture,1);
+			setUniform(gl,addShader.unis["v1"],1.0);
+			setUniform(gl,addShader.unis["v2"],1.0);
 			
 			gl.viewport(viewx,viewy,vieww,viewh);
 			Ono3d.postEffect({glTexture:Rastgl.fTexture},0,0 ,vieww/1024,viewh/1024,addShader); 
@@ -466,7 +512,7 @@ export default class Ono3d {
 		gl.enable(gl.DEPTH_TEST);
 		gl.disable(gl.BLEND);
 		gl.useProgram(shader.program);
-		gl.vertexAttribPointer(shader.atts["aPos"], 3,gl.FLOAT, false,0 , ono3d.faces_index * DEFAULT_VERTEX_DATA_SIZE*3); 
+		gl.vertexAttribPointer(shader.atts["aPos"].location, 3,gl.FLOAT, false,0 , ono3d.faces_index * DEFAULT_VERTEX_DATA_SIZE*3); 
 
 		while(i<linesize){
 			if(lines[i].material.opacity !==1.0){
@@ -557,7 +603,7 @@ export default class Ono3d {
 		gl.disable(gl.BLEND);
 		var shader = this.shaders["plain"];
 		gl.useProgram(shader.program);
-		gl.vertexAttribPointer(shader.atts["aPos"], 3,gl.FLOAT, false,0 , ono3d.faces_index * DEFAULT_VERTEX_DATA_SIZE*3); 
+		gl.vertexAttribPointer(shader.atts["aPos"].location, 3,gl.FLOAT, false,0 , ono3d.faces_index * DEFAULT_VERTEX_DATA_SIZE*3); 
 		while(i<linesize){
 			materialIndex = lines[i].materialIndex;
 			var j=i+1;
@@ -590,151 +636,132 @@ export default class Ono3d {
 
 		gl.useProgram(shader.program);
 
-		var offset = DEFAULT_VERTEX_DATA_SIZE ;
+		var attribPointerList =[
+			{name:"aPos",size:3}
+			,{name:"aNormal",size:3}
+			,{name:"aSvec",size:3}
+			,{name:"aTvec",size:3}
+			,{name:"aUv",size:2}
+			,{name:"aEnvRatio",size:1}
+			,{name:"aUv2",size:2}
+			,{name:"aLightProbe",size:3}
+		];
 
-		vAP(gl,atts["aPos"], 3,gl.FLOAT, false, offset, 0);
-		vAP(gl,atts["aNormal"], 3,gl.FLOAT, false, offset, 3*4);
-		vAP(gl,atts["aSvec"], 3,gl.FLOAT, false, offset, 6*4);
-		vAP(gl,atts["aTvec"], 3,gl.FLOAT, false, offset, 9*4);
-		vAP(gl,atts["aUv"], 2,gl.FLOAT, false, offset, 12*4);
-		vAP(gl,atts["aEnvRatio"], 1,gl.FLOAT, false, offset, 14*4);
-		vAP(gl,atts["aUv2"], 2,gl.FLOAT, false, offset, 15*4);
-		vAP(gl,atts["aLightProbe"], 3,gl.FLOAT, false, offset, 17*4);
+		setUniform(gl,unis["anglePos"],fa);
+		//setUniform(gl,unis["uViewMat"],mat);
 
-		gl.uniform1i(unis["uEnvIndex"],envIdx);
+		//attribute設定
+		var offset=0;
+		attribPointerList.forEach((e)=>{
+			var att = atts[e.name];
+			if(att){
+				var att_type = att.type;
+				gl.vertexAttribPointer(att.location, att_type.size,att_type.type, false, DEFAULT_VERTEX_DATA_SIZE, offset*4);
+			}
+			offset+=e.size;
+
+		});
+
+
+		setUniform(gl,unis["uEnvIndex"],envIdx);
 
 		var oldEnv=null;
-		var transTexture = this.transTextures[this.transTextureIndex];
 
-		gl.uniform3fv(unis["anglePos"],fa);
-		gl.uniformMatrix3fv(unis["uViewMat"],false,mat);
-		var dif=(this.lightThreshold2-this.lightThreshold1);
-		if(dif<0.01){
-			dif=0.01;
+		//シャドウマップ
+		if(globalParam.shadow){
+			setUniform(gl,unis["uShadowmap"],this.shadowTexture,1);
+		}else{
+			setUniform(gl,unis["uShadowmap"],Rastgl.dummyTexture,1);
 		}
 
-//		gl.uniform1f(unis["lightThreshold1"],this.lightThreshold1);
-//		gl.uniform1f(unis["lightThreshold2"],1./dif);
+		//透過マップ
+		var transTexture = this.transTextures[this.transTextureIndex];
+		setUniform(gl,unis["uTransMap"],transTexture,4);
+
+
 		while(i<start+size){
 			var j=i;
 			var env = arr[i].environments[envIdx];
 
 			if(i==start || arr[i].environments[envIdx] != arr[Math.max(i-1,0)].environments[envIdx]){
+				//レンダリング環境が変わるタイミングで関連の変数をセット
+				
 				var environment = arr[i].environments[envIdx];
-				gl.uniform3f(unis["uLight"],environment.sun.matrix[8],environment.sun.matrix[9],environment.sun.matrix[10]);
-				gl.uniform3fv(unis["uLightColor"],environment.sun.color);
+				gl.uniform3f(unis["uLight"].location,environment.sun.matrix[8],environment.sun.matrix[9],environment.sun.matrix[10]);
+				setUniform(gl,unis["uLightColor"],environment.sun.color);
+				//gl.uniform3fv(unis["uLightColor"].location,environment.sun.color);
 
-			//	Mat44.copy(fa16,environment.sun.viewmatrix);
-
-				gl.uniform3fv(unis["uAmbColor"],new Float32Array(environment.area.color));
+				setUniform(gl,unis["uAmbColor"],new Float32Array(environment.area.color));
 
 				var lightSource = environment.sun;
-				gl.uniformMatrix4fv(unis["lightMat"],false,lightSource.viewmatrix);
+				setUniform(gl,unis["lightMat"],lightSource.viewmatrix);
 
-				gl.activeTexture(gl.TEXTURE1);
-				if(globalParam.shadow){
-					gl.bindTexture(gl.TEXTURE_2D,this.shadowTexture.glTexture);
-				}else{
-					gl.bindTexture(gl.TEXTURE_2D,Rastgl.dummyTexture); //テクスチャ未指定の場合はダミーを設定
-				}
-				gl.uniform1i(unis["uShadowmap"],1);
-				gl.activeTexture(gl.TEXTURE3);
 
 				//反射マップ
-				gl.activeTexture(gl.TEXTURE3);
 				if(environment.envTexture){
-					gl.bindTexture(gl.TEXTURE_2D,environment.envTexture.glTexture);
+					setUniform(gl,unis["uEnvMap"],environment.envTexture,3);
 				}else{
-					if(env.envTexture){
-						gl.bindTexture(gl.TEXTURE_2D,env.envTexture.glTexture);
-					}else{
-						gl.bindTexture(gl.TEXTURE_2D,Rastgl.dummyTexture); //テクスチャ未指定の場合はダミーを設定
-					}
+					setUniform(gl,unis["uEnvMap"],env.envTexture,3);
 				}
-				gl.uniform1i(unis["uEnvMap"],3);
 
-				//透過マップ
-				gl.activeTexture(gl.TEXTURE4);
-				if(transTexture){
-					gl.bindTexture(gl.TEXTURE_2D,transTexture.glTexture);
-				}else{
-					gl.bindTexture(gl.TEXTURE_2D,Rastgl.dummyTexture); //テクスチャ未指定の場合はダミーを設定
-				}
-				gl.uniform1i(unis["uTransMap"],4);
 
 			}
 
+			//同一マテリアルである最後のポリゴンのインデックスを探す
 			var materialIndex = arr[i].materialIndex;
 			for(j=i+1;j<start+size;j++){
 				if(arr[j].materialIndex !== materialIndex){break;}
 			}
 			material = arr[i].material;
 			
-			if(j>i){
-				gl.uniform3f(unis["uBaseCol"],material.baseColor[0],material.baseColor[1],material.baseColor[2]);
-				gl.uniform1f(unis["uOpacity"],material.opacity );
-				gl.uniform1f(unis["uEmi"],material.emt);
-				gl.uniform1f(unis["uMetallic"],material.metallic);
-				//反射強度,反射ラフネス,透過ラフネス,屈折率
-				gl.uniform4f(unis["uPbr"],material.specular,material.roughness,material.subRoughness,material.ior);
+			//マテリアルごとの設定
+			gl.uniform3f(unis["uBaseCol"].location,material.baseColor[0],material.baseColor[1],material.baseColor[2]);
+			setUniform(gl,unis["uOpacity"],material.opacity );
+			setUniform(gl,unis["uEmi"],material.emt);
+			setUniform(gl,unis["uMetallic"],material.metallic);
+			//反射強度,反射ラフネス,透過ラフネス,屈折率
+			gl.uniform4f(unis["uPbr"].location,material.specular,material.roughness,material.subRoughness,material.ior);
 
-				gl.activeTexture(gl.TEXTURE0); //カラーテクスチャ
-				gl.uniform1i(unis["uBaseColMap"],0);
-				if(material.baseColorMap){
-					gl.bindTexture(gl.TEXTURE_2D,material.baseColorMap.glTexture);
-				}else{
-					gl.bindTexture(gl.TEXTURE_2D,Rastgl.dummyTexture); //テクスチャ未指定の場合はダミーを設定
-				}
-
-				gl.activeTexture(gl.TEXTURE2); //ノーマルマップ
-				gl.uniform1i(unis["uNormalMap"],2);
-				if(material.hightMap){
-					gl.bindTexture(gl.TEXTURE_2D,material.hightMap.glTexture);
-					gl.uniform1f(unis["uNormpow"],material.hightMapPower);
-					gl.uniform1f(unis["uHeightBase"],material.hightBase);
-				}else{
-					gl.bindTexture(gl.TEXTURE_2D,Rastgl.dummyTexture); //テクスチャ未指定の場合はダミーを設定
-					gl.uniform1f(unis["uNormpow"],0);
-					gl.uniform1f(unis["uHeightBase"],0.5);
-				}
-
-				gl.activeTexture(gl.TEXTURE5); //そのたマップ
-				gl.uniform1i(unis["uPbrMap"],5);
-				if(material.pbrMap){
-					gl.bindTexture(gl.TEXTURE_2D,material.pbrMap.glTexture);
-					gl.uniform1f(unis["uPbrPow"],1.0);
-				}else{
-					gl.bindTexture(gl.TEXTURE_2D,Rastgl.dummyTexture); //テクスチャ未指定の場合はダミーを設定
-					gl.uniform1f(unis["uPbrPow"],0);
-				}
-
-				if(material.orgMap){
-					gl.activeTexture(gl.TEXTURE6);
-					gl.bindTexture(gl.TEXTURE_2D,material.orgMap.glTexture);
-					gl.uniform1i(unis["orgMap"],6);
-				}else{
-					//ライトマップ
-					gl.activeTexture(gl.TEXTURE6);
-					if(material.lightMap){
-						gl.bindTexture(gl.TEXTURE_2D,material.lightMap.glTexture);
-					}else{
-						//if(!environment.lightProbe){
-						//	i=j;
-						//	continue;
-						//}
-						//gl.bindTexture(gl.TEXTURE_2D,environment.lightProbe.glTexture); 
-						gl.bindTexture(gl.TEXTURE_2D,Rastgl.dummyTexture); //テクスチャ未指定の場合はダミーを設定
-					}
-					gl.uniform1i(unis["uLightMap"],6);
-				}
-
-				var pvMatrix = this.pvMatrix;
-				this.stereoDraw(function(){
-					gl.uniformMatrix4fv(unis["projectionMatrix"],false,pvMatrix);
-					gl.drawElements(gl.TRIANGLES, (j-i)*3, gl.UNSIGNED_SHORT, i*3*2);
-					//gl.drawArrays(gl.TRIANGLES, i*3, (j-i)*3);
-				});
+			gl.activeTexture(gl.TEXTURE0); //カラーテクスチャ
+			gl.uniform1i(unis["uBaseColMap"].location,0);
+			if(material.baseColorMap){
+				gl.bindTexture(gl.TEXTURE_2D,material.baseColorMap.glTexture);
+			}else{
+				gl.bindTexture(gl.TEXTURE_2D,Rastgl.dummyTexture); //テクスチャ未指定の場合はダミーを設定
 			}
+
+			//ハイトマップ
+			setUniform(gl,unis["uNormalMap"],material.hightMap,2);
+			if(material.hightMap){
+				setUniform(gl,unis["uNormpow"],material.hightMapPower);
+				setUniform(gl,unis["uHightBase"],material.hightBase);
+			}else{
+				setUniform(gl,unis["uNormpow"],0);
+				setUniform(gl,unis["uHightBase"],0.5);
+			}
+
+			//表面粗さ、反射率、屈折率、内部粗さ
+			setUniform(gl,unis["uPbrMap"],material.pbrMap,5);
+			if(material.pbrMap){
+				setUniform(gl,unis["uPbrPow"],1.0);
+			}else{
+				setUniform(gl,unis["uPbrPow"],0);
+			}
+
+			if(material.orgMap){
+				//とくしゅ
+				setUniform(gl,unis["orgMap"],material.orgMap,6);
+			}else{
+				//ライトマップ
+				setUniform(gl,unis["uLightMap"],material.lightMap,6);
+			}
+
+			var pvMatrix = this.pvMatrix;
+			this.stereoDraw(function(){
+				gl.uniformMatrix4fv(unis["projectionMatrix"].location,false,pvMatrix);
+				gl.drawElements(gl.TRIANGLES, (j-i)*3, gl.UNSIGNED_SHORT, i*3*2);
+				//gl.drawArrays(gl.TRIANGLES, i*3, (j-i)*3);
+			});
 
 			i=j;
 		}
@@ -756,7 +783,7 @@ export default class Ono3d {
 		material = lines[start].material;
 		Ono3d.encode(a,material.baseColor);
 
-		gl.uniform4f(shader.unis["uColor"],a[0],a[1],a[2],a[3]);
+		gl.uniform4f(shader.unis["uColor"].location,a[0],a[1],a[2],a[3]);
 
 		//if(!globalParam.windows){
 		if(!globalParam.windows){
@@ -764,7 +791,7 @@ export default class Ono3d {
 		}
 
 		ono3d.stereoDraw(function(){
-			gl.uniformMatrix4fv(shader.unis["projectionMatrix"],false,ono3d.pvMatrix);
+			gl.uniformMatrix4fv(shader.unis["projectionMatrix"].location,false,ono3d.pvMatrix);
 			gl.drawArrays(gl.LINES, start*2, size*2);
 		});
 		
@@ -785,7 +812,7 @@ export default class Ono3d {
 		var WIDTH=this.viewport[2];
 		var HEIGHT=this.viewport[3];
 			globalParam.gl.viewport(x,y,WIDTH,HEIGHT);
-			this.calcProjectionMatrix(this.projectionMatrix,this.aov*this.znear,this.aov*HEIGHT/WIDTH*this.znear
+			perspectiveMatrix(this.projectionMatrix,this.aov,this.aov*HEIGHT/WIDTH
 				,this.znear,this.zfar);
 			Mat44.dot(this.pvMatrix,this.projectionMatrix,this.viewMatrix);
 
@@ -799,7 +826,7 @@ export default class Ono3d {
 		Mat44.dot(mat44,this.projectionMatrix,mat44);
 		Mat44.getInv(mat44,mat44);
 		gl.useProgram(shader.program);
-		gl.uniformMatrix4fv(shader.unis["projectionMatrix"],false,new Float32Array(mat44));
+		gl.uniformMatrix4fv(shader.unis["projectionMatrix"].location,false,new Float32Array(mat44));
 
 		Ono3d.postEffect(image,x,y,w,h,shader); 
 	}
@@ -824,7 +851,7 @@ export default class Ono3d {
 
 		gl.useProgram(shader.program);
 		gl.bindBuffer(gl.ARRAY_BUFFER, Rastgl.fullposbuffer);
-		gl.vertexAttribPointer(shader.atts["aPos"], 2,gl.FLOAT, false,0 , 0);
+		gl.vertexAttribPointer(shader.atts["aPos"].location, 2,gl.FLOAT, false,0 , 0);
 		var unis = shader.unis;
 		var max =1;
 		if(rough==0.0){
@@ -835,14 +862,14 @@ export default class Ono3d {
 		}
 
 		gl.activeTexture(gl.TEXTURE1);
-	 	gl.uniform1i(shader.unis["uDst"],1);
+	 	gl.uniform1i(shader.unis["uDst"].location,1);
 	 	gl.bindTexture(gl.TEXTURE_2D,dst.glTexture);
 		
-		gl.uniform1f(shader.unis["uRough"],1.0-Math.cos(rough*Math.PI*0.5));
+		gl.uniform1f(shader.unis["uRough"].location,1.0-Math.cos(rough*Math.PI*0.5));
 		//gl.uniform1f(shader.unis["uRough"],0.0);
 		for(var i=0;i<max;i++){
-			gl.uniform1f(shader.unis["uSeed"],Math.random()*15.7);
-			gl.uniform1f(shader.unis["uPow"],1.0/(i+1.0));
+			gl.uniform1f(shader.unis["uSeed"].location,Math.random()*15.7);
+			gl.uniform1f(shader.unis["uPow"].location,1.0/(i+1.0));
 			//gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
 			Ono3d.postEffect(src,x,y,w,h,shader); 
 
@@ -859,12 +886,13 @@ export default class Ono3d {
 		this.setViewport(0,0,size,size);
 		gl.bindFramebuffer(gl.FRAMEBUFFER,null);
 
-		this.setAov(1.0);
 
-		var WIDTH=this.viewport[2];
-		var HEIGHT=this.viewport[3];
-		this.calcProjectionMatrix(this.projectionMatrix,this.aov*this.znear,this.aov*HEIGHT/WIDTH*this.znear
-				,this.znear,this.zfar);
+//		var WIDTH=this.viewport[2];
+//		var HEIGHT=this.viewport[3];
+//		perspectiveMatrix(this.projectionMatrix,this.aov,this.aov*HEIGHT/WIDTH
+//				,this.znear,this.zfar);
+		perspectiveMatrix(this.projectionMatrix,1,1
+				,0.01,100);
 		//前、右
 		Mat44.set(this.viewMatrix,-1,0,0,0, 0,1,0,0, 0,0,-1,0, x,-y,z,1);
 		func(0,0,size,size);
@@ -966,8 +994,15 @@ export default class Ono3d {
 		
 		init(_canvas,_ctx){
 			gl = Rastgl.gl;
+
 			this.gl = gl;
 			this.clear()
+
+
+			att_types["vec2"]={size:2,type:gl.FLOAT};
+			att_types["vec3"]={size:3,type:gl.FLOAT};
+			att_types["vec4"]={size:4,type:gl.FLOAT};
+			att_types["float"]={size:1,type:gl.FLOAT};
 
 			this.renderTarget=_ctx
 			this.canvasTarget=_canvas
@@ -999,6 +1034,27 @@ export default class Ono3d {
 			}
 
 
+	Ono3d.plainShader=  Ono3d.createShader(" \
+			[vertexshader] \
+			attribute vec2 aPos; \
+			uniform vec2 uPosScale; \
+			uniform vec2 uPosOffset; \
+				uniform vec2 uUvScale; \
+			uniform vec2 uUvOffset; \
+			varying vec2 vUv; \
+			void main(void){ \
+				gl_Position = vec4(aPos * uPosScale + uPosOffset,1.0,1.0); \
+				vUv = (aPos+ 1.0) * 0.5 * uUvScale +  uUvOffset; \
+			} \
+			[fragmentshader] \
+			varying lowp vec2 vUv; \
+			uniform sampler2D uSampler; \
+			void main(void){ \
+				gl_FragColor= texture2D(uSampler,vUv); \
+			} ");
+
+
+
 			Ono3d.loadMainShader();
 
 			for(var i=0;i<6;i++){
@@ -1013,78 +1069,6 @@ export default class Ono3d {
 			this.viewport[2]=width;
 			this.viewport[3]=height;
 			gl.viewport(x,y,width,height);
-		}
-		setNearFar(zn,zf){
-			this.znear=zn;
-			this.zfar=zf;
-		}
-		setAov(aov){
-			this.aov=aov;
-		}
-		calcProjectionMatrix(mat,x,y,zn,zf){
-			Mat44.set(mat
-				,zn/x,0,0,0
-				,0,zn/y,0,0
-				,0,0,-(zn+zf)/(zf-zn),-1.0
-				,0,0,-2*zn*zf/(zf-zn),0);
-
-		}
-		setOrtho(x,y,zn,zf){
-			if(zn != null){
-				this.znear=zn;
-				this.zfar=zf;
-			}
-			
-			Ono3d.calcOrthoMatrix(this.projectionMatrix
-				,x,y
-				,this.znear,this.zfar);
-		}
-		loadIdentity(){
-			var mat = this.targetMatrix
-			mat[0] = 1.0
-			mat[1] = 0
-			mat[2] = 0
-			mat[4] = 0
-			mat[5] = 1.0
-			mat[6] = 0
-			mat[8] = 0
-			mat[9] = 0
-			mat[10] = 1.0
-			mat[12] = 0
-			mat[13] = 0
-			mat[14] = 0
-		}
-		rotate(r,x,y,z){
-			var SIN=Math.sin(r)
-			var COS=Math.cos(r)
-			var a = Mat44.poolAlloc();
-			a[0]=x*x*(1-COS)+COS;a[4]=x*y*(1-COS)-z*SIN;a[8]=z*x*(1-COS)+y*SIN;a[12]=0
-			a[1]=x*y*(1-COS)+z*SIN;a[5]=y*y*(1-COS)+COS;a[9]=y*z*(1-COS)-x*SIN;a[13]=0
-			a[2]=z*x*(1-COS)-y*SIN;a[6]=y*z*(1-COS)+x*SIN;a[10]=z*z*(1-COS)+COS;a[14]=0
-			a[3]=a[7]=a[11]=0;a[15]=1;
-			Mat44.dot(this.targetMatrix,this.targetMatrix,a)
-			Mat44.poolFree(1);
-		}
-		scale(x,y,z){
-			var m = this.targetMatrix;
-			m[0]=m[0]*x;
-			m[1]*=x;
-			m[2]*=x;
-			m[4]*=y;
-			m[5]*=y;
-			m[6]*=y;
-			m[8]*=z;
-			m[9]*=z;
-			m[10]*=z;
-		}
-		translate(x,y,z){
-			var m = this.targetMatrix
-			m[12]=m[0]*x+m[4]*y+m[8]*z+m[12]
-			m[13]=m[1]*x+m[5]*y+m[9]*z+m[13]
-			m[14]=m[2]*x+m[6]*y+m[10]*z+m[14]
-		}
-		transmat(m){
-			Mat44.dot(this.targetMatrix,this.targetMatrix,m);
 		}
 }
 	Ono3d.Material = Material;
@@ -1177,27 +1161,40 @@ export default class Ono3d {
 		var fs = sss[2];
 		fs=(Rastgl.commonFunction + Rastgl.textureRGBE) + "\n" + fs;
 		var unis = txt.match(/uniform .+?;/g)
-		var atts = (vs+fs).match(/attribute .+?;/g)
 		var gl = Rastgl.gl;
 
 		var program = shader.program=Rastgl.setShaderProgram(vs,fs);
 
+		var atts = (vs+fs).match(/attribute .+?;/g)
 		shader.atts={};
 		for(var i=0;i<atts.length;i++){
-			var nam = atts[i].match(/(\S+)\s*;/)[1];
+			var res = atts[i].match(/(\S+)\s+(\S+)\s*;/);
+			var nam = res[2];
 
-			var att=gl.getAttribLocation(program,nam); 
+			var type = att_types[res[1]];
+			var att={
+				location:gl.getAttribLocation(program,nam)
+				,type:type
+			}
 			shader.atts[nam]=att;
-			if(att>=0){
-				gl.enableVertexAttribArray(att);
-				gl.vertexAttribPointer(att, 1,gl.FLOAT, false, 0, 0);
+			if(att.location>=0){
+				gl.enableVertexAttribArray(att.location);
+				gl.vertexAttribPointer(att.location, 1,gl.FLOAT, false, 0, 0);
 			}
 		}
 		shader.unis={};
 		for(var i=0;i<unis.length;i++){
-			var nam = unis[i].match(/(\S+)\s*;/)[1];
-			nam = nam.match(/^([^\[]+)/)[1];
-			shader.unis[nam]=gl.getUniformLocation(shader.program,nam);
+			var res = unis[i].match(/(\S+)\s+([^\[\s]+)\S*\s*;/);
+			var nam = res[2];
+			var uni={}
+			uni.location=gl.getUniformLocation(shader.program,nam);
+			uni.type=res[1];
+			res = unis[i].match(/\[\d+\]/);
+			if(res){
+				uni.type+="[]";
+			}
+			shader.unis[nam]=uni;
+			
 		}
 		return shader;
 	}
@@ -1309,17 +1306,17 @@ Ono3d.calcST = function(s,t,p0,p1,p2,u0,v0,u1,v1,u2,v2){
 		var unis = sh.unis;
 		var atts = sh.atts;
 
-		if(unis["uUvScale"])gl.uniform2f(unis["uUvScale"],w,h);
-		if(unis["uUvOffset"])gl.uniform2f(unis["uUvOffset"],u,v);
-		if(unis["uUnit"])gl.uniform2f(unis["uUnit"],1.0/src.width,1.0/src.height);
+		if(unis["uUvScale"])gl.uniform2f(unis["uUvScale"].location,w,h);
+		if(unis["uUvOffset"])gl.uniform2f(unis["uUvOffset"].location,u,v);
+		if(unis["uUnit"])gl.uniform2f(unis["uUnit"].location,1.0/src.width,1.0/src.height);
 
 		gl.activeTexture(gl.TEXTURE0);
 		gl.bindTexture(gl.TEXTURE_2D,src.glTexture);
-		gl.uniform1i(unis["uSampler"],0);
+		if(unis["uSampler"])gl.uniform1i(unis["uSampler"].location,0);
 
 				
 		gl.bindBuffer(gl.ARRAY_BUFFER, Rastgl.fullposbuffer);
-		gl.vertexAttribPointer(atts["aPos"], 2,gl.FLOAT, false,0 , 0);
+		gl.vertexAttribPointer(atts["aPos"].location, 2,gl.FLOAT, false,0 , 0);
 
 		gl.bindBuffer(gl.ARRAY_BUFFER, Rastgl.fullposbuffer);
 
@@ -1371,12 +1368,12 @@ Ono3d.calcST = function(s,t,p0,p1,p2,u0,v0,u1,v1,u2,v2){
 			sw = dw = dh;
 			dh = sh;
 		}
-		var shader = Rastgl.plainShader;
+		var shader = this.plainShader;
 		var unis = shader.unis;
 
 		gl.useProgram(shader.program);
-		gl.uniform2f(unis["uPosScale"],dw,dh);
-		gl.uniform2f(unis["uPosOffset"],dx,dy);
+		gl.uniform2f(unis["uPosScale"].location,dw,dh);
+		gl.uniform2f(unis["uPosOffset"].location,dx,dy);
 
 		Ono3d.postEffect(image,sx,sy,sw,sh,shader); 
 	}
@@ -1400,18 +1397,18 @@ Ono3d.calcST = function(s,t,p0,p1,p2,u0,v0,u1,v1,u2,v2){
 
 		gl.useProgram(shader.program);
 
-		gl.uniform1fv(args["weight"],weight);
+		gl.uniform1fv(args["weight"].location,weight);
 		gl.bindBuffer(gl.ARRAY_BUFFER, Rastgl.fullposbuffer);
 
 		//横ぼかし
-		gl.uniform2f(args["uAxis"],1/width*w,0);
+		gl.uniform2f(args["uAxis"].location,1/width*w,0);
 		Ono3d.postEffect(src,x,y,w,h,shader); 
 
 		Ono3d.copyImage(src,0,0,0,0,width,height);
 
 
 		//縦ぼかし
-		gl.uniform2f(args["uAxis"],0,1/src.height);
+		gl.uniform2f(args["uAxis"].location,0,1/src.height);
 		Ono3d.postEffect(src,0,0,width/src.width,height/src.height,shader); 
 	}
 
@@ -1437,5 +1434,6 @@ Ono3d.calcST = function(s,t,p0,p1,p2,u0,v0,u1,v1,u2,v2){
 		//Ono3d.copyImage(transTexture,0,0,0,0,512,1024);
 
 	}
-	Ono3d.LightSource = LightSource;
+Ono3d.LightSource = LightSource;
+Ono3d.perspectiveMatrix= perspectiveMatrix;
 

@@ -121,7 +121,7 @@ class Scene1 extends Scene{
 		base_model = AssetManager.o3o("model/base.o3o");
 		this.t=0;
 		globalParam.autoExposure=false;
-		globalParam.exposure_level = 0.3;
+		globalParam.exposure_level = 0.5;
 		globalParam.exposure_upper = 1;
 	}
 
