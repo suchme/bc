@@ -1693,7 +1693,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"ArmMesh [base.blend]"
-    ,"bound_box":[-1.454407, 0.365322,-0.164644, 1.454407, 0.497563, 0.079308]
+    ,"bound_box":[ 0.307769, 0.365322,-0.164644, 1.454407, 0.497563, 0.079308]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -1711,7 +1711,7 @@
     ,"scale":[ 0.098027, 0.098027, 0.098027]
     ,"type":"MESH"
     ,"data":"Cube.003"
-    ,"bound_box":[-2.444295,-1.602167,-0.154562, 2.444295, 1.154803, 0.823962]
+    ,"bound_box":[-0.012700,-1.602167,-0.154562, 2.444295, 1.154803, 0.823962]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2100,7 +2100,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"BodyMesh"
-    ,"bound_box":[-0.298446,-0.577976,-0.226815, 0.298446, 0.647921, 0.194782]
+    ,"bound_box":[-0.000000,-0.577976,-0.226815, 0.298446, 0.647921, 0.194782]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2184,11 +2184,11 @@
     ,"scale":[ 0.276798, 0.276798, 0.276798]
     ,"type":"MESH"
     ,"data":"Cube.005"
-    ,"bound_box":[-1.100477,-3.294880,-1.232863, 1.100477, 0.694945, 0.280853]
+    ,"bound_box":[-1.042738,-3.279649,-1.135092, 1.206914, 0.734604, 0.396513]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
-      ,{"name":"Armature","type":"ARMATURE"}
+      ,{"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
     ]
   }
   ,{
