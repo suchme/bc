@@ -722,7 +722,7 @@ class Main {
 		values.version="code2021/12/04\n"
 			+ "data"+ dt.getFullYear() +"/"+("0"+(dt.getMonth()+1)).slice(-2)
 			+"/" +("0"+dt.getDate()).slice(-2);
-		globalParam.version=20211130;
+		globalParam.version=20211204;
 
 		//初期値セット
 		if(location.search===""){
