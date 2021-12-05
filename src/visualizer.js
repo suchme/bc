@@ -27,7 +27,7 @@ var o3o_head;
 var o3o_tmp;
 
 	var getPath=function(buso){
-		var o3opath = "model/base.o3o";
+		var o3opath = "model/etc.o3o";
 		if(buso.cd === 1){
 		}else if(buso.name.indexOf("[15th]")>=0){
 			o3opath = "model/15th.o3o";
@@ -41,8 +41,10 @@ var o3o_tmp;
 				o3opath = "model/swimsuit.o3o";
 			}else{
 				if(buso.class.length > 0 && buso.class[0]>0){
-					o3opath = DATA.class_shinki[buso.class[0]]
-					o3opath = "model/" + o3opath +".o3o";
+					var scd = DATA.class_shinki[buso.class[0]]
+					if(scd){
+						o3opath = "model/" + scd +".o3o";
+					}
 				}
 			}
 		}
@@ -53,7 +55,11 @@ var o3o_tmp;
 		var cd = buso.cd;
 		var type = cd.substring(0,1);
 		var num = Number(cd.substring(1));
-		var o3opath = getPath(buso);
+		var o3opath = "model/base.o3o";
+
+		if(num>0){
+			o3opath = getPath(buso);
+		}
 
 		if(num>1){
 			cd = type  + ((((num-2)>>2)<<2)+2);
