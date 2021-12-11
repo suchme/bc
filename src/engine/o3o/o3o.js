@@ -879,8 +879,8 @@ O3o.setOno3d = function(a){
 					phyobj.friction=mod.friction;//摩擦
 					phyobj.mass=mod.mass; //質量
 					phyobj.speed=1.0; //スピード
-					phyobj.pull= mod.pull;//ばね定数引き
-					phyobj.push= mod.push; //ばね定数押し
+					phyobj.pull= mod.pull*0.1;//ばね定数引き
+					phyobj.push= mod.push*0.1; //ばね定数押し
 					phyobj.damping= mod.damping;//ダンパ
 					phyobj.bending_stiffness = mod.bend;//構造
 				}	

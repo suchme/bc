@@ -9,6 +9,7 @@ import O3oInstance from "./engine/o3o/o3oinstance.js"
 import SceneObjectInstance from "./engine/o3o/sceneobjectinstance.js"
 import AssetManager from "./engine/assetmanager.js"
 import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "./lib/vector.js"
+import OnoPhy from "./lib/onophy/onophy.js"
 
 var homingCamera=function(angle,target,camera){
 		var dx=target[0]-camera[0]
@@ -28,7 +29,10 @@ var o3o_tmp;
 
 	var getPath=function(buso){
 		var o3opath = "model/etc.o3o";
+		var tsugarubx=DATA.class.indexOf("ツガルBX");
 		if(buso.cd === 1){
+		}else if(buso.class.indexOf(tsugarubx)>=0){
+			o3opath = "model/s2.o3o";
 		}else if(buso.name.indexOf("[15th]")>=0){
 			o3opath = "model/15th.o3o";
 		}else if(buso.name.indexOf("[S]")>=0){
@@ -214,6 +218,13 @@ class Scene1 extends Scene{
 			base_instance = new O3oInstance(null,list);
 			base_instance.objectInstances.forEach((object,idx,arr)=>{
 				object.o3oInstance = base_instance;
+
+				if(object.phyObj){
+					if(object.phyObj.type ==OnoPhy.CLOTH){
+						engine.onoPhy.clothes.push(object.phyObj);
+						object.phyObj.onophy = engine.onoPhy;
+					}
+				}
 			});
 		
 			update_flg=false;
@@ -315,6 +326,7 @@ export default class Visualizer{
 		this.step=0;
 	}
 	main(){
+		globalParam.step=2;
 		if(Util.getLoadingCount()>0){
 			//初期ロードが未完了の場合はメイン処理は開始しない
 			setTimeout(()=>{

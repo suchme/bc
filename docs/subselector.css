@@ -279,6 +279,13 @@ tr .flying{
 }
 
 
+span[content="ツガルBX"]{
+color:#304790;
+}
+span[content="ツガルBX"]::before{
+	content:"";
+	background-image:url("icon/s2bx.png");
+}
 span[content="闇神姫"]::before{
 	content:"";
 	background-image:url("icon/yami.png");

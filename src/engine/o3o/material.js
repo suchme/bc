@@ -23,5 +23,6 @@ export default class Material{
 		this.fresnel=0.0;
 
 		this.shader="";
+		this.uvOffset=[0,0];
 	}
 }

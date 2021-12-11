@@ -1031,7 +1031,7 @@ var OnoPhy = (function(){
 		for(var i = 0;i<this.clothes.length;i++){
 			for(var j = i+1;j<this.clothes.length;j++){
 				//クロス同士の接触処理
-				this.clothes[i].calcCollision(this.clothes[j],this);
+			//	this.clothes[i].calcCollision(this.clothes[j],this);
 			}
 		}
 		

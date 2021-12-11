@@ -67,6 +67,7 @@ export default class SoftBody extends Cloth{
 			edges[i].point1.rotq[0]*=-1;
 		}
 		this.inv_pointMass = 1/(this.mass/this.points.length);
+
 	}
 	calcPre(onophy){
 		Cloth.prototype.calcPre.call(this,onophy);
@@ -102,8 +103,8 @@ class Edge{
 			Vec3.sub(dv,dv,this.point1.location);
 			var l = Vec3.scalar(dv);
 			if(l!==0){
+				l*= this.cloth.push*3000;
 				Vec3.mul(impulse,dv,1/l);
-				l*= this.cloth.push*30;
 				Vec3.sub(dv,this.point2.v,this.point1.v);
 				l += Vec3.dot(dv,impulse)* this.cloth.damping;
 

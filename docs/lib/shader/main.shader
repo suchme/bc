@@ -242,6 +242,7 @@ void main(void){
 /*[lightmap]
 	vColor2+=textureRGBE(uLightMap,vec2(256.0),vUv2).rgb ;
 [lightmap]*/
+	vColor2+=0.2;
 
 	vColor2 = vColor2 * baseCol;
 

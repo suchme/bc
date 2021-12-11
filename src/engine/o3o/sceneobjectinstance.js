@@ -1,5 +1,6 @@
 import Material from "./material.js"
 import Ono3d from "../../lib/ono3d.js"
+import OnoPhy from "../../lib/onophy/onophy.js"
 import SH from "../../lib/spherical_harmonics/sh.js";
 import UvLayer from "./uvlayer.js"
 import RotationMode from "./rotationmode.js"
@@ -240,9 +241,9 @@ export default class SceneObjectInstance{
 				parentInstance.calcMatrix(dt,flg);
 
 				if(obj.parent_bone){
-					var i=this.parent_bone-1;
+					var i=obj.parent_bone-1;
 					this.matrix[11]-=parent.data.bones[i].length;
-					Mat43.dot(matrix,parent.data.bones[i].matrix,mat);
+					Mat43.dot(matrix,parent.data.bones[i].matrix,matrix);
 					Mat43.dot(matrix,parentInstance.boneMatrices[i],matrix);
 				}else{
 					Mat43.dot(matrix,obj.iparentmatrix,matrix);
@@ -1148,8 +1149,8 @@ var setMaterial=function(material,name){
 		renderMaterial.blend_method=0;
 	}
 
-	renderMaterial.offsetx=0;
-	renderMaterial.offsety=0;
+	renderMaterial.offsetx=material.uvOffset[0];
+	renderMaterial.offsety=material.uvOffset[1];
 	renderMaterial.name =name;
 	Vec3.copy(renderMaterial.baseColor,material.baseColor);
 	renderMaterial.opacity = material.opacity;
