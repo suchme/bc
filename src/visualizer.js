@@ -37,8 +37,8 @@ var o3o_tmp;
 			o3opath = "model/15th.o3o";
 		}else if(buso.name.indexOf("[S]")>=0){
 			o3opath = "model/silver.o3o";
-		}else if(buso.name.indexOf("[G]")>=0){
-			o3opath = "model/gold.o3o";
+		//}else if(buso.name.indexOf("[G]")>=0){
+		//	o3opath = "model/gold.o3o";
 		}else{
 			var m=DATA.class.indexOf("水着");
 			if(buso.class.indexOf(m)>=0){
@@ -161,14 +161,15 @@ class Scene1 extends Scene{
 			var list=[];
 			var headlist=getList(values.head.org);
 			if(target_o3o.collections["h1"]){
-				list = target_o3o.collections["h1"];
+
+				list = target_o3o.getCollectionObjectList("h1");
 			}else{
 				list = [target_o3o.objects_name_hash["Head"]];
 			}
 			list = list.filter((e)=>{
 				var name = e.name;
 				var reg=/^([^|]*)/
-				return headlist.findIndex((e)=>{return reg.exec(e.name)[0] ==name}) <0;
+				return headlist.findIndex((e)=>{return reg.exec(e.name)[0] == reg.exec(name)[0]}) <0;
 			});
 			list=list.concat(headlist);
 			var armature=base_model.objects_name_hash["Armature"];
