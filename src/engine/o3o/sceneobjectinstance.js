@@ -459,7 +459,7 @@ export default class SceneObjectInstance{
 				var _k = srcFace.idxnum-k;
 				if(k==0){_k=0};
 
-				if(abs(bufMeshVertices[srcvertices[_k]].pos[mrr])>0.01){
+				if(abs(bufMeshVertices[srcvertices[_k]].pos[mrr])>0.0001){
 					dstvertices[k]= srcvertices[_k] + vertexSize;
 				}else{
 					//座標が中心に近い場合は共有
