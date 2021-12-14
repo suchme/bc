@@ -19,6 +19,7 @@ SubLayout.shinki_html =`
 		<span column="dash" class="dash status  "></span>
 		<span column="extend" class="extend status "></span>
 		<span column="recover" class="recover status "></span>
+		<span column="increase" class="increase status "></span>
 		<span class="sep"></span>
 		<span column="dash_cost" class="dash_cost cost status "></span>
 		<span column="guard_cost" class="guard_cost cost status "></span>
@@ -71,6 +72,7 @@ SubLayout.head_html =`
 			<span column="dash" class="dash status  "></span>
 			<span column="extend" class="extend status "></span>
 			<span column="recover" class="recover status "></span>
+			<span column="increase" class="increase status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="guard_cost" class="guard_cost cost status "></span>
@@ -113,6 +115,7 @@ SubLayout.body_html =`
 			<span column="dash" class="dash status  "></span>
 			<span column="extend" class="extend status "></span>
 			<span column="recover" class="recover status "></span>
+			<span column="increase" class="increase status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="guard_cost" class="guard_cost cost status "></span>
@@ -153,6 +156,7 @@ SubLayout.arm_html =`
 			<span column="dash" class="dash status  "></span>
 			<span column="extend" class="extend status "></span>
 			<span column="recover" class="recover status "></span>
+			<span column="increase" class="increase status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="guard_cost" class="guard_cost cost status "></span>
@@ -194,6 +198,7 @@ SubLayout.leg_html =`
 			<span column="dash" class="dash status  "></span>
 			<span column="extend" class="extend status "></span>
 			<span column="recover" class="recover status "></span>
+			<span column="increase" class="increase status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="guard_cost" class="guard_cost cost status "></span>
@@ -236,6 +241,7 @@ SubLayout.rear_html =`
 			<span column="dash" class="dash status  "></span>
 			<span column="extend" class="extend status "></span>
 			<span column="recover" class="recover status "></span>
+			<span column="increase" class="increase status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="guard_cost" class="guard_cost cost status "></span>
@@ -284,6 +290,7 @@ SubLayout.weapon_html =`
 			<span column="dash" class="dash status  "></span>
 			<span column="extend" class="extend status "></span>
 			<span column="recover" class="recover status "></span>
+			<span column="increase" class="increase status "></span>
 			<span class="sep"></span>
 			<span column="dash_cost" class="dash_cost cost status "></span>
 			<span column="guard_cost" class="guard_cost cost status "></span>

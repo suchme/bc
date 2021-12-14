@@ -446,6 +446,7 @@ class Main {
 					cols.splice(6,0,{class:"status",label:"回復",data:"recover",sort:-1});
 					cols.splice(7,0,{class:"status",label:"走",data:"dash",sort:-1});
 					cols.splice(8,0,{class:"status",label:"展開",data:"extend",sort:-1});
+					cols.splice(8,0,{class:"status",label:"ゲージ増加率",data:"increase",sort:-1});
 					cols.splice(9,0,{class:"status",label:"走費",data:"dash_cost"});
 					cols.splice(10,0,{class:"status",label:"跳費",data:"jump_cost"});
 					cols.splice(11,0,{class:"status",label:"浮費",data:"hover_cost"});

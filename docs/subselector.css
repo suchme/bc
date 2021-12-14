@@ -1,3 +1,6 @@
+.increase{
+display:none;
+}
 tr{
 	white-space:nowrap;
 	display:block;
@@ -106,6 +109,7 @@ tr .biko{
 }
 tr span.name{
 width:inherit;
+	  min-width:350px;
 }
 tr .name{
 	/*width:400px;
