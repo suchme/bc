@@ -7,30 +7,38 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Cache-Control" content="no-cache" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>武装神姫バトルコンダクターtips</title>
+<title>tips</title>
 <style>
 body{
 	padding:0px;
 	margin:0px;
-	background-color:gray;
+	background-color:white;
+}
+p{
+	white-space:pre;
+}
+
+div.container{
+	height:100%;
+		margin:0px;
+	padding:0px;
+	display:flex;
 }
 div.header{
-	padding:10px;
+	background-color:gray;
 }
 div.header2{
-	background-color:gray;
+	background-color:black;
 	color:white;
+	width:200px;
+
 }
 div.header2 div{
 	background-color:black;
-	width:400px;
-	margin:auto;
-	padding:2px;
 }
 div.body{
-	width:400px;
-	margin:auto;
-	background-color:white;
+	margin:2px;
+	flex:1;
 }
 a{
 	color:white;
@@ -51,8 +59,15 @@ var changePage=function(tag){
 		e.style.display="inline-block";
 	});
 }
+history.replaceState(null, document.getElementsByTagName('title')[0].innerHTML, null);
+window.addEventListener('popstate', function(e) {
+	//changePage(e.target.attributes.href.nodeValue);
+	var l=location.href;
+	var i = l.indexOf("#");
+	changePage(l.substring(i));
+});
 var ona=function(e){
-	changePage(e.target.attributes.href.nodeValue);
+//	changePage(e.target.attributes.href.nodeValue);
 }
 var onl=function(){
 	var l=location.href;
@@ -64,40 +79,118 @@ var onl=function(){
 
 </head>
 <body onload="onl()">
-<div class="header">
-	武装神姫バトルコンダクターtips
-</div>
-<div class="header2" onclick="ona(event)">
-	<div>
-<a href="#boostcost">ブースト消費</a>
-<a href="#b"> b </a>
-<a href="#c"> c </a>
-<br>
-<a href="#a"> a </a>
-<a href="#b"> b </a>
-<a href="#c"> c </a>
+<div class="container">
+	<div class="header2" >
+		<div>
+			<a href="#boostcost">ブースト消費</a><br>
+			<a href="#boostcost2">特殊なブースト消費</a><br>
+	<a href="#b"> b </a>
+	<a href="#c"> c </a>
+	<br>
+	<a href="#a"> a </a>
+	<a href="#b"> b </a>
+	<a href="#c"> c </a>
+		</div>
 	</div>
+
+	<div class="body">
+	<div class="body_#boostcost" >
+<h2>ブースト消費</h2>
+ブーストゲージを消費する行動は以下の4種類
+<ul>
+<li>ダッシュ</li>
+<p> 一般的なN神姫の消費は85
+ダッシュ開始時に85消費し、その後継続すると消費1秒あたり85消費する。 </p>
+<li>防御</li>
+<p>一般的なN神姫の消費は70。
+防御継続中1秒あたり70消費する。</p>
+<li>ジャンプ</li>
+一般的なN神姫の消費は50。<br>
+ジャンプ開始時に50消費し、その後継続すると1秒あたり50消費する。<br>
+<li>ホバリング</li>
+一般的なN神姫の消費は20。<br>
+ホバリング中1秒あたり20消費する。<br>
+</ul>
 </div>
 
-<div class="body">
-<div class="body_#boostcost" >
-	<h2>ブースト消費</h2>
-	ブーストゲージを消費する行動は以下の4種類
-	<ul>
-	<li>ダッシュ</li>
-	<p>一般的なN神姫の消費は85。</p>
-	<p>ダッシュ開始時に85消費し、その後継続すると消費1秒あたり85消費する。</p>
-	<li>防御</li>
-	一般的なN神姫の消費は70。
-	防御継続中1秒あたり70消費する。
-	<li>ジャンプ</li>
-	一般的なN神姫の消費は50。
-	ジャンプ開始時に50消費し、その後継続すると1秒あたり50消費する。
-	<li>ホバリング</li>
-	</ul>
+<div class="body_#boostcost2" >
+<h2>特殊なブースト消費</h2>
+<ul>
+<li>地上ダッシュ攻撃中</li>
+ブースト消費はせず、回復する<br>
+<li>空中ダッシュ中</li>
+ダッシュ消費のみ。ホバリング消費はされない<br>
+<li>空中ダッシュ攻撃中</li>
+ホバリング消費のみ<br>
+<li>ホバリング防御</li>
+ホバリング消費と防御消費両方<br>
+<li>ダッシュ防御</li>
+ダッシュと防御を同時に行うとこの状態になる。<br>
+ダッシュと防御消費両方<br>
+</ul>
 </div>
-<div class="body_#b"> {¶b </div>
-<div class="body_#c"> {¶c </div>
+
+<div class="body_#ineriajump">
+<h2>慣性ジャンプ</h2>
+空中でスティックを倒した状態だと減速する
+空中でスティックをニュートラル状態だと減速しない。
+ダッシュを行った直後にスティックを離すことでダッシュを終了してもダッシュ中の速度を維持できる。
+やり方
+<ul>
+	<li>地上ダッシュ→スティックニュートラル→ジャンプ(押しっぱなし)</li>
+	<li>ジャンプ(押しっぱなし)→空中ダッシュ→スティックニュートラル</li>
+空中ダッシュは地上ダッシュより速いためこちらのほうがメリットが大きい。
+最初のジャンプでボタンを離して空中ダッシュ後に再度ジャンプすると、ホバリング解除に化けてしまうため押しっぱなしにする必要がある。
+</ul>
+</div>
+
+<div class="body_#fall">
+<h2>ジャンプ落下と歩き落下</h2>
+落下には2種類ある。
+<ul>
+	<li>ジャンプ落下</li>
+	ジャンプ後、もしくはホバリング解除後に落下している状態。<br>
+	専用のモーションを取り、スティックを入れても変化しない。<br>
+	攻撃、ダッシュ、防御が可能。<br>
+	<li>歩き落下</li>
+	歩いて段差から落ちた場合、もしくはジャンプ落下中に攻撃や防御したあとにこの状態になる。
+	地上の待機モーションと同じで、スティックを入れると歩きモーションになる<br>
+	攻撃、ダッシュ、防御、ジェム回収が可能。<br>
+	ダッシュすると通常より2倍初動消費される。攻撃や防御をキャンセルしてダッシュした場合は通常通りの消費。<br>
+</ul>
+</div>
+
+<div class="body_#skillguage">
+<h2>スキルゲージの溜まり方</h2>
+神姫毎に溜まりやすさが違う。
+一般的なNが45、 レアリティが上がる毎に15ずつ増える。
+最大はアーンヴァルはNが95、URは140。
+
+非ダメージに比例する。また、どんなに小さい攻撃でも1%増える。
+
+上昇量 = 切り捨て(非ダメージ量 * 回収率 * 0.00001) + 1 [%]
+
+回収率45で500食らった場合
+ 45 * 500 * 0.00001 = 2.25 切り捨てで 2  なので 3 %増える
+
+ゲージ回収率は武装によって増減する。
+アンの水着が一番高い ボディリア合わせて80
+アーンヴァル防具がどれも20
+ウェルクストラ防具がどれも15
+回復・補助武器はどれも 20 
+</div>
+
+<div class="body_#dash">
+<h2>ダッシュ</h2>
+神姫やレアリティによってダッシュ速度が異なる
+一般的なNが速度960、レアリティが上がる毎に90ずつ増える。
+最大はフブキ、ミズキ、ラプティアスのNが同率で1230だが固有パッシブを含めると
+通常時 　ミズキ＞フブキ＞ラプティアス
+瀕死時　ミズキ＞フブキ＞アーク
+になる
+
+</div>
+
 </div>
 
 </body>
