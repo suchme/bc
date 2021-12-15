@@ -320,33 +320,29 @@ class Main {
 				break;
 		}
 
-//		//レアリティ色
-//		DATA.part_cd.forEach(function(e,idx){
-//			document.querySelectorAll("span."+e+" select.rarelity").forEach(function(node){
-//				node.classList.remove("N","R","SR","UR");
-//				node.classList.add(DATA.rarelity[values[e].rarelity]);
-//			});
-//		});
 
-
+		//その他補正
+		values.total.guard_cost  =Math.max( values.total.guard_cost,20);
+		values.total.increase  =Math.max( values.total.increase,25);
+		
 
 		//エクスポートテキスト
 		var export_text_data="";
-		export_text_data += "攻"+values.total.atk 
-			+" 防" +values.total.def
-			+" 速" +values.total.spd
-			+" 体" +values.total.lp
-			+" ブ" +values.total.bst+"\n";
-		DATA.part_cd.forEach(function(e,idx){
-			var data = values[e];
-			export_text_data += "Lv" + data.lv + DATA.rarelity[data.rarelity];
-			export_text_data +=  data.org.name;
-			if(idx==0){
-				export_text_data +="("+ DATA.individuals[data.individual].name+")";
-			}
-			
-			export_text_data +=  "\n";
-		});
+		//export_text_data += "攻"+values.total.atk 
+		//	+" 防" +values.total.def
+		//	+" 速" +values.total.spd
+		//	+" 体" +values.total.lp
+		//	+" ブ" +values.total.bst+"\n";
+		//DATA.part_cd.forEach(function(e,idx){
+		//	var data = values[e];
+		//	export_text_data += "Lv" + data.lv + DATA.rarelity[data.rarelity];
+		//	export_text_data +=  data.org.name;
+		//	if(idx==0){
+		//		export_text_data +="("+ DATA.individuals[data.individual].name+")";
+		//	}
+		//	
+		//	export_text_data +=  "\n";
+		//});
 
 		var param = new Uint8Array(25);
 		var dv = new DataView(param.buffer);
@@ -446,7 +442,7 @@ class Main {
 					cols.splice(6,0,{class:"status",label:"回復",data:"recover",sort:-1});
 					cols.splice(7,0,{class:"status",label:"走",data:"dash",sort:-1});
 					cols.splice(8,0,{class:"status",label:"展開",data:"extend",sort:-1});
-					cols.splice(8,0,{class:"status",label:"ゲージ増加率",data:"increase",sort:-1});
+					cols.splice(8,0,{class:"status",label:"ｽｷﾙ",data:"increase",sort:-1});
 					cols.splice(9,0,{class:"status",label:"走費",data:"dash_cost"});
 					cols.splice(10,0,{class:"status",label:"跳費",data:"jump_cost"});
 					cols.splice(11,0,{class:"status",label:"浮費",data:"hover_cost"});

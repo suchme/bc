@@ -108,8 +108,7 @@ tr .biko{
 	/*width:200px;*/
 }
 tr span.name{
-width:inherit;
-	  min-width:350px;
+	  width:350px;
 }
 tr .name{
 	/*width:400px;

@@ -3,7 +3,7 @@ import DATA from "./data.js";
 import Rastgl from "./lib/rastgl.js"
 import Util from "./lib/util.js"
 import Engine from "./engine/engine.js"
-import Scene from "./engine/scene.js"
+import Obj from "./engine/obj.js"
 import O3o from "./engine/o3o/o3o.js"
 import O3oInstance from "./engine/o3o/o3oinstance.js"
 import SceneObjectInstance from "./engine/o3o/sceneobjectinstance.js"
@@ -117,9 +117,8 @@ var o3o_tmp;
 		return list;
 	}
 
-var update=null;
 var update_flg = true;
-class Scene1 extends Scene{
+class Scene1 extends Obj{
 	constructor(){
 		super();
 		this.a=new Vec2();
@@ -142,11 +141,7 @@ class Scene1 extends Scene{
 		if(!update_flg){
 			return;
 		}
-//		if(!update){
-//			update = this.update;
-//		}
 		if(base_model.objects.length===0){
-//			setTimeout(update,1000);
 			return;
 		}
 
@@ -317,7 +312,6 @@ class Scene1 extends Scene{
 			base_instance.calcMatrix(1.0/globalParam.fps);
 		}
 
-		this.t++;
 	}
 };
 
@@ -349,7 +343,7 @@ export default class Visualizer{
 			palette =Ono3d.createTexture(4,4);
 
 			var scene1 = new Scene1();
-			this.engine.scenes.push(scene1);
+			this.engine.objMan.addObj(scene1);
 			window.engine = this.engine;
 			window.ono3d = this.engine.ono3d;
 

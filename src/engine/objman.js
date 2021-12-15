@@ -4,11 +4,23 @@
 		,STAT_ENABLE=1
 		,STAT_CREATE=2
 	;
+
 var objPool=[];
 export default class ObjMan{
 	constructor(){
 		this.objs= []; 
 		this.id=0;
+	}
+	addObj(obj){
+		//オブジェクト追加
+		this.objs.push(obj);
+	}
+	rmObj(obj){
+		//オブジェクト削除
+		var idx = this.objs.indexOf(obj);
+		if(idx>=0){
+			this.objs.splice(idx,1);
+		}
 	}
 
 	createObj(c){
@@ -99,11 +111,24 @@ export default class ObjMan{
 	}
 	
 	move(){
+		this.update();
 		var objs = this.objs;
-		for(i=0;i<objs.length;i++){
-			if(objs[i].stat!==STAT_ENABLE)continue;
-			objs[i].move();
-		}
+		objs.forEach((e)=>{
+			if(e.stat!==STAT_ENABLE)return;
+			e.move();
+		});
+	}
+	draw(){
+		var objs = this.objs;
+		objs.forEach((e)=>{
+			if(e.stat!==STAT_ENABLE)return;
+			e.draw();
+		});
 	}
 
+
 };
+
+ObjMan.STAT_EMPTY=STAT_EMPTY;
+ObjMan.STAT_ENABLE=STAT_ENABLE;
+ObjMan.STAT_CREATE=STAT_CREATE;

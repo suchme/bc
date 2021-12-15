@@ -6,6 +6,7 @@ import PhyFace from "./phyface.js"
 import Cloth from "./cloth.js"
 import SoftBody from "./softbody.js"
 import {Vec2,Vec3,Vec4,Mat33,Mat43} from "../vector.js"
+
 var OnoPhy = (function(){
 	var MIN = Math.min;
 	var MAX = Math.max;

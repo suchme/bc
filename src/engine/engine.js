@@ -20,7 +20,8 @@ var ono3d;
 export default class Engine{
 	constructor(){
 		this.camera = new Camera();
-		this.scenes=[];
+		this.objMan = new ObjMan();
+		//this.scenes=[];
 	}
 
 	init(parentnode,WIDTH,HEIGHT){
@@ -165,9 +166,12 @@ export default class Engine{
 		performance.mark("drawStart");
 
 		performance.mark("drawGeometryStart");
-		for(var si=0;si<this.scenes.length;si++){
-			this.scenes[si].draw();
-		}
+
+		this.calcMatrix();
+		this.objMan.draw();
+		//for(var si=0;si<this.scenes.length;si++){
+		//	this.scenes[si].draw();
+		//}
 		performance.mark("drawGeometryEnd");
 
 		performance.mark("drawRasteriseStart");
@@ -218,9 +222,10 @@ export default class Engine{
 
 		//gl.getParameter(gl.VIEWPORT);
 		performance.mark("drawRasteriseEnd");
-		for(var si=0;si<this.scenes.length;si++){
-			this.scenes[si].hudDraw();
-		}
+		//this.objMan.hudDraw();
+		//for(var si=0;si<this.scenes.length;si++){
+		//	this.scenes[si].hudDraw();
+		//}
 		performance.mark("drawEnd");
 
 
@@ -245,9 +250,10 @@ export default class Engine{
 	}
 	
 
-	for(var si=0;si<this.scenes.length;si++){
-		this.scenes[si].move();
-	}
+	this.objMan.move();
+	//for(var si=0;si<this.scenes.length;si++){
+	//	this.scenes[si].move();
+	//}
 
 	if(globalParam.physics){
 		performance.mark("physicsStart");
