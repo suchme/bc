@@ -5,7 +5,7 @@ import Binder from "./lib/binder.js";
 import Subselector from "./subselector.js";
 import SubLayout from "./sub_layout.js";
 import Visualizer from "./visualizer.js";
-var v = new Visualizer();
+var v;
 
 var values={total:{},subtotal:{},extra_passives:[],bonus:{},selected_tab:"main",extension:{}};
 window.values = values;
@@ -322,8 +322,9 @@ class Main {
 
 
 		//その他補正
-		values.total.guard_cost  =Math.max( values.total.guard_cost,20);
-		values.total.increase  =Math.max( values.total.increase,25);
+		values.total.extend =Math.max( values.total.extend,650);//展開速度
+		values.total.increase  =Math.max( values.total.increase,25);//ゲージ増加率
+		values.total.guard_cost  =Math.max( values.total.guard_cost,20);//防御消費
 		
 
 		//エクスポートテキスト
@@ -374,8 +375,10 @@ class Main {
 
 //		binder.refresh();
 
-		if(v.scene){
-			v.scene.update();
+		if(v){
+			if(v.scene){
+				v.scene.update();
+			}
 		}
 	}
 
@@ -864,7 +867,6 @@ DATA.param_cd.forEach((e,idx)=>{
 	
 
 });
-v.main();
 
 
 document.querySelector("#shinki div.skill").appendChild(
@@ -874,6 +876,9 @@ document.querySelector("#shinki div.skill").appendChild(
 	binder.init(values);
 //	binder.refresh();
 	main.reCalc();
+
+	v = new Visualizer();
+	v.main();
 
 	}
 

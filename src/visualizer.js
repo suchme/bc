@@ -129,18 +129,14 @@ class Scene1 extends Obj{
 
 		base_model = AssetManager.o3o("model/base.o3o");
 		this.t=0;
-		globalParam.autoExposure=false;
-		globalParam.exposure_level = 0.5;
-		globalParam.exposure_upper = 1;
+
+		this.update_flg=true;
 	}
 
 	update(){
 		update_flg=true;
 	}
 	update_(){
-		if(!update_flg){
-			return;
-		}
 		if(base_model.objects.length===0){
 			return;
 		}
@@ -239,35 +235,40 @@ class Scene1 extends Obj{
 
 		ono3d.clear();
 
+		//環境マップ作成
 		engine.calcEnvironment();
-		this.a[1]=Math.PI;
 
+		//カメラ初期位置セット
+		this.a[1]=Math.PI;
 		var camera = engine.camera;
 		camera.p[0]=0;
 		camera.p[1]=0;
 		camera.p[2]=this.cameralen;
 
-		update_flg=true;
-		this.update_();
 	}
 	draw(){
-		if((!this.hoge) && Util.getLoadingCount()===0){
-			this.create();
-			this.hoge=true;
-		}
-//		if(values.selected_tab!=="visualize"){
-//			return;
-//		}
+
 		if(!base_instance)return;
 
 
+		//行列リセット
 		Mat44.setInit(ono3d.worldMatrix);
+
+		//インスタンス描画
 		base_instance.draw();
 		
 	}
 
 	move(){
-		this.update_();
+
+		if((!this.hoge) && Util.getLoadingCount()===0){
+			this.create();
+			this.hoge=true;
+		}
+
+		if(update_flg){
+			this.update_();
+		}
 
 		if(Util.pressOn){
 			//クリックされていた場合は視点変更
@@ -292,6 +293,7 @@ class Scene1 extends Obj{
 		//ターゲット注目
 		homingCamera(camera.a,this.target,camera.p);
 
+		//ライト角度とかセット
 		var light = engine.ono3d.environments[0].sun;
 		Vec3.set(light.color,1,1,1);
 		var jiku = new Vec3();
@@ -302,13 +304,13 @@ class Scene1 extends Obj{
 
 		Mat44.dot(light.viewmatrix2,engine.ono3d.projectionMatrix,engine.ono3d.viewMatrix);
 
-		//this.instance = primitives[values.shinki.cd];
 		if(base_model.scenes[0]){
+			//ベースモデルが読み込まれているならアニメーションさせる
 			var scene= base_model.scenes[0];
 			scene.setFrame(this.t*60/globalParam.fps);
 		}
-		//naked_instance.calcMatrix(1.0/globalParam.fps);
 		if(base_instance){
+			//ベースモデルインスタンスがあるならアニメーションを反映させる
 			base_instance.calcMatrix(1.0/globalParam.fps);
 		}
 
@@ -319,9 +321,12 @@ export default class Visualizer{
 	constructor(){
 		this.engine = new Engine();
 		this.step=0;
+		globalParam.step=2;
+		globalParam.autoExposure=false;
+		globalParam.exposure_level = 0.5;
+		globalParam.exposure_upper = 1;
 	}
 	main(){
-		globalParam.step=2;
 		if(Util.getLoadingCount()>0){
 			//初期ロードが未完了の場合はメイン処理は開始しない
 			setTimeout(()=>{
