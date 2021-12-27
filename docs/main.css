@@ -127,9 +127,14 @@ opacity:40%;
 .status.dash{
 	background-image:url('icon/dash.svg');
 }
+.status.increase{
+	background-image:url('icon/increase.svg');
+	width:24px;
+}
 .status.recover{
 	background-image:url('icon/recover.svg');
 	background-color:#66c;
+	width:24px;
 }
 .status.dash_cost{
 	background-image:url('icon/dash.svg');

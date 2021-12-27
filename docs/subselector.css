@@ -1,6 +1,3 @@
-.increase{
-display:none;
-}
 tr{
 	white-space:nowrap;
 	display:block;
@@ -292,10 +289,6 @@ span[content="ツガルBX"]::before{
 span[content="闇神姫"]::before{
 	content:"";
 	background-image:url("icon/yami.png");
-}
-span[content="テンペスタ"]::before{
-	content:"";
-	background-image:url("icon/tempesta.png");
 }
 
 span.flying .enable{

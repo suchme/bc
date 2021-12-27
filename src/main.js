@@ -1,7 +1,7 @@
 "use strict";
 
 import DATA from "./data.js";
-import Binder from "./lib/binder.js";
+import Binder from "../../lib/lib/binder.js";
 import Subselector from "./subselector.js";
 import SubLayout from "./sub_layout.js";
 import Visualizer from "./visualizer.js";
@@ -14,6 +14,7 @@ var subselector= new Subselector();
 
 function getPassiveSpan(skill){
 	var span = document.createElement("span");
+	if(!skill.skill)return span;
 	span.textContent = getSkillName(skill.skill,skill.effect);
 	span.title = skill.skill.biko;
 	span.className = "passive icon";
@@ -27,6 +28,7 @@ function getSkillSpan(skill){
 	return span;
 }
 function getSkillName(skill,effect){
+	if(!skill)return "";
 	return skill.name +(effect>0?"[" + DATA.effect[effect]+"]":"");
 }
 
@@ -81,8 +83,14 @@ class Main {
 
 		values.total.cost=0;
 
+		//レアリティ
+		var rare = values.shinki.rarelity;
+
 		//神姫
 		values.shinki.org = DATA.shinkis.find(function(elem){return elem.cd === values.shinki.cd});
+		var idx = DATA.shinkis.findIndex(function(elem){return elem.cd === values.shinki.cd});
+		values.shinki.org = DATA.shinkis[idx+Number(rare)];
+
 		var shinki = values.shinki.org;
 		if(!values.shinki.org){return;}
 		reset(values.shinki);
@@ -95,26 +103,13 @@ class Main {
 			"name shinki " + values.shinki.org.cd;
 
 
-		//レアリティ
-		var rare = values.shinki.rarelity;
-		add(values.shinki,DATA.shinki_rarelity_bonus[rare]);
+
 
 		values.shinki.apts=[];
 		values.shinki.org.apts.forEach(function(effect,idx){
 			var apt={};
 			if(effect!==0){
 				apt.category = idx;
-				if(effect===100){
-					effect-=20*rare;
-				}else if(effect>=50){
-					effect-=10*rare;
-				}else if(effect<=-50){
-					effect+=10*rare;
-				}else if(effect<0){
-					effect+=5*rare;
-				}else{
-					effect-=5*rare;
-				}
 				apt.effect = effect;
 				values.shinki.apts.push(apt);
 			}
@@ -436,7 +431,12 @@ class Main {
 					var cols;
 
 					cols=[
-						{data:"atk",label:"攻",class:"status",sort:-1}
+						{data:"rarelity",filter:1,label:"レアリティ"
+							,disp:function(e,parent){
+								parent.classList.add(DATA.rarelity[e[this.data]]);
+								return DATA.rarelity[e[this.data]];
+							}}
+						,{data:"atk",label:"攻",class:"status",sort:-1}
 						,{data:"def",label:"防",class:"status",sort:-1}
 						,{data:"spd",label:"速",class:"status",sort:-1}
 						,{data:"lp", label:"体",class:"status",sort:-1}
@@ -532,11 +532,6 @@ class Main {
 									return getSkillName(DATA.passives[e.passive],e.passive_effect); }}); 
 
 						cols.push({label:"備考",data:"biko"});
-						cols.splice(0,0,{data:"rarelity",filter:1,label:"レアリティ"
-							,disp:function(e,parent){
-								parent.classList.add(DATA.rarelity[e[this.data]]);
-								return DATA.rarelity[e[this.data]];
-							}});
 						cols.unshift({data:"class",label:"分類",filter:1
 							,disp:function(e,node,data){
 								node.classList.add(DATA.class_shinki[data]);
@@ -545,9 +540,10 @@ class Main {
 						cols.unshift({data:"part",label:"部位",filter:1
 							,disp:function(e){return DATA.part_name[e.part]}});
 					subselector.rowhtml = SubLayout.arr[part_idx];
+						subselector.filter={};
 					if(part_idx===0){
 						//神姫の場合
-						subselector.filter={};
+						subselector.filter={rarelity:[rarelity]};
 						var datalist = [];
 						DATA.shinkis.forEach(function(e2){
 							var data={};
@@ -596,6 +592,7 @@ class Main {
 							}
 						}else{
 							values[part_cd].cd = e.cd;
+							values[part_cd].rarelity= e.rarelity;
 						}
 						//binder.refresh();
 						main.reCalc();
@@ -719,10 +716,10 @@ class Main {
 
 
 		var dt=new Date(DATA.date);
-		values.version="code2021/12/11\n"
+		values.version="code2021/12/27\n"
 			+ "data"+ dt.getFullYear() +"/"+("0"+(dt.getMonth()+1)).slice(-2)
 			+"/" +("0"+dt.getDate()).slice(-2);
-		globalParam.version=20211212;
+		globalParam.version=20211227;
 
 		//初期値セット
 		if(location.search===""){
@@ -806,14 +803,7 @@ var newStyle = document.createElement('style');newStyle.type = "text/css";
 document.getElementsByTagName('head').item(0).appendChild(newStyle);
 var stylesheet = document.styleSheets.item(document.styleSheets.length-1);
 DATA.shinkis.forEach((e)=>{
-	//	if(e.cd=='s0' || e.cd=='s1' || e.cd=='s2'){
-	//		stylesheet.insertRule(` 
-	//			.${e.cd}::before{
-	//	content:'';
-	//			background-image:url(icon/${e.cd}.svg);
-	//		}
-	//		`, stylesheet.cssRules.length);
-	//		}else{
+		if(e.cd=='')return;
 			stylesheet.insertRule(` 
 				.part_icon.${e.cd}{
 				content:'';

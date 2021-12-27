@@ -1,15 +1,15 @@
-import Ono3d from "./lib/ono3d.js"
+import Ono3d from "../../lib/lib/ono3d.js"
 import DATA from "./data.js";
-import Rastgl from "./lib/rastgl.js"
-import Util from "./lib/util.js"
-import Engine from "./engine/engine.js"
-import Obj from "./engine/obj.js"
-import O3o from "./engine/o3o/o3o.js"
-import O3oInstance from "./engine/o3o/o3oinstance.js"
-import SceneObjectInstance from "./engine/o3o/sceneobjectinstance.js"
-import AssetManager from "./engine/assetmanager.js"
-import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "./lib/vector.js"
-import OnoPhy from "./lib/onophy/onophy.js"
+import Rastgl from "../../lib/lib/rastgl.js"
+import Util from "../../lib/lib/util.js"
+import Engine from "../../lib/engine/engine.js"
+import Obj from "../../lib/engine/obj.js"
+import O3o from "../../lib/engine/o3o/o3o.js"
+import O3oInstance from "../../lib/engine/o3o/o3oinstance.js"
+import SceneObjectInstance from "../../lib/engine/o3o/sceneobjectinstance.js"
+import AssetManager from "../../lib/engine/assetmanager.js"
+import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "../../lib/lib/vector.js"
+import OnoPhy from "../../lib/lib/onophy/onophy.js"
 
 var homingCamera=function(angle,target,camera){
 		var dx=target[0]-camera[0]
@@ -46,6 +46,10 @@ var o3o_tmp;
 			}else{
 				if(buso.class.length > 0 && buso.class[0]>0){
 					var scd = DATA.class_shinki[buso.class[0]]
+					if(scd==="s32"){
+						scd="s0";
+					}
+					
 					if(scd){
 						o3opath = "model/" + scd +".o3o";
 					}
@@ -159,7 +163,7 @@ class Scene1 extends Obj{
 			}
 			list = list.filter((e)=>{
 				var name = e.name;
-				var reg=/^([^|]*)/
+				var reg=/^([^|.]*)/
 				return headlist.findIndex((e)=>{return reg.exec(e.name)[0] == reg.exec(name)[0]}) <0;
 			});
 			list=list.concat(headlist);
