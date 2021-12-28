@@ -50,9 +50,7 @@
 			<div style="position:relative;" class="totalhead">
 	最終値
 
-				<span>総コスト</span><span bind:="total.cost">
-				
-				</span>
+				<span>(総武装コスト</span><span bind:="total.cost"></span>)
 
 				<span class="name" style="display:none;" style="text-align:right;">武器適正とパッシブ適用後</span>
 			</div>
@@ -60,7 +58,7 @@
 				<span class="param" bind:="subtotal"></span>
 			</div>
 			<div>
-				常在固有パッシブ適用
+				常在固有パッシブ・補正適用後
 			</div>
 			<div>
 				<span class="param" bind:="total"></span>
@@ -109,6 +107,11 @@
 		- <span class="status dash_cost cost " bind:="total.dash_cost"></span>
 		) / <span class="status jump_cost cost" bind:="total.jump_cost"></span>
 		= <span class="result" bind:="extension.jump_time"></span>[s]
+	</li>
+	<li>
+		<div>スキルゲージ100%に必要な最大ダメージ</div>
+		 1000000 / <span class="status increase" bind:="total.increase"></span>
+		 = <span class="result" bind:="extension.skill_lp"></span>
 	</li>
 </div>
 
@@ -195,6 +198,7 @@
 </div>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 
+<!--
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRLV13DDXX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -203,6 +207,7 @@
 
   gtag('config', 'G-GRLV13DDXX');
 </script>
+-->
 
 </body>
 <script type="module" src="./index.js"></script>

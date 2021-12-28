@@ -367,6 +367,7 @@ class Main {
 		   / values.total.hover_cost).toFixed(2);
 		values.extension.jump_time=((values.total.bst -values.total.jump_cost - values.total.dash_cost)
 		   / values.total.jump_cost).toFixed(2);
+		values.extension.skill_lp= (1000000 / values.total.increase).toFixed(0);
 
 //		binder.refresh();
 

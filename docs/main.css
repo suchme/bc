@@ -1,9 +1,10 @@
 html{
-	height:100%;
 
 	font-size:14px;
 	line-height:100%;
 	font-family:sans-serif;
+	height:100%;
+	width:100%;
 }
 body{
 	text-align:center;
@@ -11,6 +12,7 @@ body{
 	background-color:#333;
 	margin:0;
 	height:100%;
+	width:100%;
 
 }
 
@@ -19,7 +21,7 @@ div.skill{
 }
 div.main{
 padding:4px;
-	/*width:400px;*/
+	width:420px;
 	
 	display:inline-block;
 	text-align:left;
