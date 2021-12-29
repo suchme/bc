@@ -57,13 +57,15 @@ table{
 	text-align:left;
 border:1px solid #666;
 }
-thead th{
+thead{
 	position:sticky;
 	top:0;
 	z-index:100;
 	background-color:#333;
 }
 th.pick{
+	position:sticky;
+	z-index:99;
 	left: calc(100% - 32px);
 	width:0px;
 	overflow:inherit;
