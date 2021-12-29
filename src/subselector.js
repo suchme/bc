@@ -303,12 +303,12 @@ export default class Subselector{
 					}
 					datas.forEach((data)=>{
 						var span = document.createElement("span");
+							td.appendChild(span);
 						var content =  typeof col.disp == "function"?col.disp(rowdata,span,data):rowdata[col.data];
 						if(content === null){
-							//td.removeChild(span);
+							td.removeChild(span);
 							return;
 						}
-							td.appendChild(span);
 						if(content instanceof HTMLElement
 							   //|| content.nodeName
 								){
