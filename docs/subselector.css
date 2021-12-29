@@ -7,6 +7,7 @@ tbody tr{
 }
 tr.header_filter span{
 	background-color:inherit !important;
+	border:inherit !important;
 }
 thead span{
 	vertical-align:bottom;
@@ -77,8 +78,12 @@ button.pick{
 	border:1px solid black;
 }
 tbody{
-	font-size:smaller;
 	height:90%;
+	font-size:smaller;
+}
+
+tbody .status span{
+	font-size:medium;
 }
 
 th,td{
@@ -92,8 +97,6 @@ table tbody tr:nth-child(even) {
 	background-color: rgba(64,64,64,0.9);
 }
 
-tr .category{
-}
 tr .active{
 	/*width:200px;*/
 }
@@ -145,6 +148,7 @@ table .part{
 }
 .class{
 	color:#999;
+	font-size:smaller;
 }
 
 thead .name button{
@@ -185,23 +189,27 @@ text-decoration: underline;
     color: #fff;
 padding:0px;
 }
-table .cat.short{
+span.short.cat{
 	background-color:#911;
 }
-table .cat.long{
+span.long.cat{
 	background-color:#04c;
 }
-table .cat.bougu{
+span.bougu.cat{
 	background-color:#616;
 }
 
-tr .cat{
+.cat .status{
 	width:20px;
 	text-align:right;
 }
+
+.cost{
+	background-color:#600;
+
+}
 tr .shinki{
 	width:200px !important;
-	font-size:initial;
 
 }
 tr .recover
@@ -233,17 +241,6 @@ tbody .distance span.short{
 }
 tbody .distance span.long{
 	background-color:#039;
-}
-
-
-tr .category .short{
-color:#f66;
-}
-tr .category .long{
-color:#0cf;
-}
-tr .category .bougu{
-color:#939;
 }
 
 span.guarge{
@@ -353,8 +350,8 @@ background-color:black;
 }
 
 .class:before{
-	margin-top:-10px;
-	margin-bottom:-10px;
+	margin-top:-30px;
+	margin-bottom:-30px;
 }
 span.filtertarget.class{
 width:initial;
@@ -363,7 +360,7 @@ span.status span[content^='-']
 {
 	color:#c33;
 }
-span.status.cost span[content^='-']{
+span.cost span[content^='-']{
 	color:#3ee;
 }
 span[content='0']{

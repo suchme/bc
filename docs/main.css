@@ -89,10 +89,14 @@ span.setting{
 	text-align:right;
 	width:32px;
 	position:relative;
-	background-color:rgba(0,0,0,0.4);
+	background-color:rgba(0,0,0,0.3);
 	margin:1px;
 	z-index:1;
 	/*font-weight:bold; */
+/*	border-bottom:1px solid black;*/
+}
+.status span{
+	background-color:rgba(0,0,0,0.5);
 }
 .status::before{
 	position:absolute;
@@ -309,7 +313,7 @@ div#armor>div{
 
 
 div#armor>div:nth-child(odd){
-	background-color:rgba(0,0,0,0.2);
+	background-color:rgba(0,0,0,0.4);
 }
 
 
@@ -413,13 +417,18 @@ display:none;
 }
 */
 
-.status[content='0']
-,.status.cost[content='0']
-{
-	color:#888;
-	font-weight:normal;
+.cost span{
+	color:#c33;
+
 }
-.status[content^='-']
+
+.status span[content='0']
+{
+/*	color:#888;*/
+	color:rgba(255,255,255,0.3);
+	background-color:transparent;
+}
+.cost .status[content^='-']
 ,.status.cost
 ,.minus{
 	color:#c33;
@@ -431,9 +440,9 @@ display:none;
 [content="+"]{
 	color:#3ee;
 }
-.status.cost{
+.cost .status {
 	width:28px;
-	background-color:#111;
+	/*background-color:#111;*/
 }
 
 span.armor{
