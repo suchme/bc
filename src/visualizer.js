@@ -242,6 +242,7 @@ class Scene1 extends Obj{
 		//環境マップ作成
 		engine.calcEnvironment();
 
+		engine.skyTexture=null
 		//カメラ初期位置セット
 		this.a[1]=Math.PI;
 		var camera = engine.camera;
