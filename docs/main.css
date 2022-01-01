@@ -398,6 +398,12 @@ color:white;
 		,url('icon/atk.svg')
 	;
 }
+.individual_10{
+	background-image:
+		url('icon/bst.svg')
+		,url('icon/spd.svg')
+	;
+}
 
 #shinki .name::before{
 	margin-right:4px;
