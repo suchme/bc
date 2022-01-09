@@ -1,7 +1,7 @@
 {"format":"Ono3dObject Version 0.2"
 ,"materials":[
-    {"name": "gold", "name_full": "gold", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.8454545736312866, "specular": 0.0, "roughness": 0.13636364042758942, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0g.png"}
-  ,  {"name": "maintex", "name_full": "maintex", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.05, "roughness": 0.11363636702299118, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
+    {"name": "0maintex", "name_full": "0maintex", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.05, "roughness": 0.11363636702299118, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
+  ,  {"name": "gold", "name_full": "gold", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.8454545736312866, "specular": 0.0, "roughness": 0.13636364042758942, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0g.png"}
   ,  {"name": "tempesta", "name_full": "tempesta", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.05, "roughness": 0.11363636702299118, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s32.png"}
   ,  {"name": "maintex", "name_full": "maintex [base.blend]", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
 ]
@@ -2925,7 +2925,7 @@
     "name":"ashi"
     ,"name_full":"ashi"
     ,"groups":["Leg1.L","Leg2.L","Leg1.R","Leg2.R","Foot.R","Foot.L"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000, 0.000000, 0.000000]
     ,"rotation":[ 0.000000, 0.000000, 0.000000]
     ,"scale":[ 0.176116, 0.176116, 0.176116]
@@ -3048,7 +3048,7 @@
     "name":"BackHair|long"
     ,"name_full":"BackHair|long"
     ,"groups":[]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[-0.000000,-0.278012, 0.211512]
     ,"rotation":[-1.566463, 0.000000, 0.000000]
     ,"scale":[ 0.159914, 0.159914, 0.159914]
@@ -3087,7 +3087,7 @@
     "name":"Body.001"
     ,"name_full":"Body.001"
     ,"groups":["Hip","Arm1.L","Body","Leg1.L","Arm1.R","Leg1.R","Head"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000, 0.000000, 0.000000]
     ,"rotation":[ 0.000000, 0.000000, 0.000000]
     ,"scale":[ 1.000000, 1.000000, 1.000000]
@@ -3141,7 +3141,7 @@
     "name":"FrontHair"
     ,"name_full":"FrontHair"
     ,"groups":[]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000, 0.043482, 0.229912]
     ,"rotation":[-1.570796, 0.000000, 0.000000]
     ,"scale":[ 0.130043, 0.130043, 0.130043]
@@ -3219,7 +3219,7 @@
     "name":"Headset"
     ,"name_full":"Headset"
     ,"groups":["Head"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000,-0.017552, 0.132684]
     ,"rotation":[-1.565360, 0.000000, 0.000000]
     ,"scale":[ 0.131831, 0.131831, 0.041150]
@@ -3276,7 +3276,7 @@
     "name":"kibu"
     ,"name_full":"kibu"
     ,"groups":["Rear"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000,-0.058587,-0.399387]
     ,"rotation":[-0.508822, 0.000000, 0.000000]
     ,"scale":[ 0.088248, 0.088248, 0.221489]
@@ -3329,7 +3329,7 @@
     "name":"knife"
     ,"name_full":"knife"
     ,"groups":["Leg2.L","Leg2.R"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000, 0.000000,-0.000000]
     ,"rotation":[ 0.000000, 0.000000, 0.000000]
     ,"scale":[ 0.097919, 0.097919, 0.097919]
@@ -3346,7 +3346,7 @@
     "name":"knife.001"
     ,"name_full":"knife.001"
     ,"groups":["Leg2.L","Leg2.R"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000, 0.000000,-0.000000]
     ,"rotation":[ 0.000000, 0.000000, 0.000000]
     ,"scale":[ 0.097919, 0.097919, 0.097919]
@@ -3414,7 +3414,7 @@
     "name":"Leg.L"
     ,"name_full":"Leg.L"
     ,"groups":["Leg1.L","Leg2.L","Foot.L","Leg1.R","Leg2.R","Foot.R"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000, 0.000000, 0.000000]
     ,"rotation":[ 0.000000, 0.000000, 0.000000]
     ,"scale":[ 1.000000, 1.000000, 1.000000]
@@ -3488,7 +3488,7 @@
     "name":"ponytail"
     ,"name_full":"ponytail"
     ,"groups":["Head"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000, 0.883339,-0.485583]
     ,"rotation":[ 0.000000, 0.000000, 0.000000]
     ,"scale":[ 0.287844, 0.287844, 0.287844]
@@ -3522,7 +3522,7 @@
     "name":"shield"
     ,"name_full":"shield"
     ,"groups":["Arm2.L"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.971178, 0.650486, 0.000000]
     ,"rotation":[ 0.000000, 0.000000, 0.000000]
     ,"scale":[ 0.070744, 0.070744, 0.070744]
@@ -3538,7 +3538,7 @@
     "name":"shield.001"
     ,"name_full":"shield.001"
     ,"groups":["Arm2.L"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.971178, 0.650486, 0.000000]
     ,"rotation":[ 0.000000, 0.000000, 0.000000]
     ,"scale":[-0.070744, 0.070744, 0.070744]
@@ -3554,7 +3554,7 @@
     "name":"shield.002"
     ,"name_full":"shield.002"
     ,"groups":["Rear"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[-0.383135,-0.088951,-0.258003]
     ,"rotation":[ 1.570796,-1.570796, 0.753801]
     ,"scale":[-0.070744, 0.070744, 0.070744]
@@ -3570,7 +3570,7 @@
     "name":"shield.003"
     ,"name_full":"shield.003"
     ,"groups":["Rear"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.383135,-0.088951,-0.258003]
     ,"rotation":[ 1.570796, 1.570796,-0.753801]
     ,"scale":[ 0.070744, 0.070744, 0.070744]
@@ -3684,7 +3684,7 @@
     "name":"sune"
     ,"name_full":"sune"
     ,"groups":["Leg2.L","Leg2.R"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000, 0.000000, 0.000000]
     ,"rotation":[ 0.000000, 0.000000, 0.000000]
     ,"scale":[ 0.176116, 0.176116, 0.176116]
@@ -3701,7 +3701,7 @@
     "name":"sune.001"
     ,"name_full":"sune.001"
     ,"groups":["Leg2.L","Leg2.R"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000,-1.080591, 0.000000]
     ,"rotation":[ 0.000000, 0.000000, 0.000000]
     ,"scale":[ 0.176116, 0.176116, 0.176116]
@@ -3769,7 +3769,7 @@
     "name":"unicorn"
     ,"name_full":"unicorn"
     ,"groups":["Head"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000, 1.120420,-0.000000]
     ,"rotation":[ 0.000000, 0.000000, 0.000000]
     ,"scale":[ 0.212909, 0.072066, 0.212909]
@@ -3829,7 +3829,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"立方体.018"
-    ,"bound_box":[-1.300774,-6.813994,-1.219453, 1.300774, 3.323613, 1.360029]
+    ,"bound_box":[-0.016462,-6.813994,-1.219453, 1.300774, 3.323613, 1.360029]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -3839,7 +3839,7 @@
     "name":"wing"
     ,"name_full":"wing"
     ,"groups":["Rear"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000,-0.235866,-0.880282]
     ,"rotation":[ 0.000000, 0.000000, 0.000000]
     ,"scale":[ 0.109298, 0.109298, 0.109298]
@@ -3856,7 +3856,7 @@
     "name":"wing.001"
     ,"name_full":"wing.001"
     ,"groups":["Rear"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[-0.451840,-0.080128,-0.412450]
     ,"rotation":[ 0.000000, 2.388867, 0.943548]
     ,"scale":[-0.109298, 0.109298, 0.109298]
@@ -3872,7 +3872,7 @@
     "name":"wing.002"
     ,"name_full":"wing.002"
     ,"groups":["Rear"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.451840,-0.080128,-0.412450]
     ,"rotation":[ 0.000000,-2.388873,-0.943548]
     ,"scale":[-0.109298, 0.109298, 0.109298]
@@ -4008,7 +4008,7 @@
     "name":"立方体.003"
     ,"name_full":"立方体.003"
     ,"groups":["Body"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000, 0.373944, 0.152113]
     ,"rotation":[ 0.000000, 0.000000, 0.000000]
     ,"scale":[ 0.102084, 0.102084, 0.102084]
@@ -4025,7 +4025,7 @@
     "name":"立方体.004"
     ,"name_full":"立方体.004"
     ,"groups":["Arm2.L","Arm2.R"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000, 0.000000, 0.000000]
     ,"rotation":[ 0.000000, 0.000000, 0.000000]
     ,"scale":[ 0.165521, 0.165521, 0.165521]
@@ -4042,7 +4042,7 @@
     "name":"立方体.005"
     ,"name_full":"立方体.005"
     ,"groups":["Rear"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000, 0.272008,-0.576585]
     ,"rotation":[-1.256068, 0.000000, 0.000000]
     ,"scale":[ 0.119935, 0.119935, 0.119935]
@@ -4059,7 +4059,7 @@
     "name":"立方体.006"
     ,"name_full":"立方体.006"
     ,"groups":["Foot.L","Foot.R"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000,-1.000000, 0.000000]
     ,"rotation":[ 0.000000, 0.000000, 0.000000]
     ,"scale":[ 0.099246, 0.099246, 0.099246]
@@ -4076,7 +4076,7 @@
     "name":"立方体.007"
     ,"name_full":"立方体.007"
     ,"groups":["Rear"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000, 0.076894,-0.334220]
     ,"rotation":[-0.797395, 0.000000, 0.000000]
     ,"scale":[ 0.090944, 0.090944, 0.090944]
@@ -4129,7 +4129,7 @@
     "name":"立方体.010"
     ,"name_full":"立方体.010"
     ,"groups":["Rear"]
-    ,"material_slots":["maintex"]
+    ,"material_slots":["0maintex"]
     ,"location":[ 0.000000, 0.045204,-0.632107]
     ,"rotation":[ 1.320881, 3.141593,-0.000000]
     ,"scale":[ 0.090944, 0.090944, 0.090944]
