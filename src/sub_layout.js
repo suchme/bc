@@ -56,15 +56,11 @@ SubLayout.shinki_html =`
 `;
 
 SubLayout.head_html =`
-	<span class="rowheader">
-		<div>
+	<span class="namearea">
+		<div class="info">
 			<span class="part" column="part"></span>
-		</div>
-		<div>
 			<span class="class" column="class"></span>
 		</div>
-	</span>
-	<span class="namearea">
 		<div class="divname">
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
@@ -100,15 +96,11 @@ SubLayout.head_html =`
 
 `;
 SubLayout.body_html =`
-	<span class="rowheader">
-		<div>
+	<span class="namearea">
+		<div class="info">
 			<span class="part" column="part"></span>
-		</div>
-		<div>
 			<span class="class" column="class"></span>
 		</div>
-	</span>
-	<span class="namearea">
 		<div class="divname">
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
@@ -143,15 +135,11 @@ SubLayout.body_html =`
 `;
 
 SubLayout.arm_html =`
-	<span class="rowheader">
-		<div>
+	<span class="namearea">
+		<div class="info">
 			<span class="part" column="part"></span>
-		</div>
-		<div>
 			<span class="class" column="class"></span>
 		</div>
-	</span>
-	<span class="namearea">
 		<div class="divname">
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
@@ -187,15 +175,11 @@ SubLayout.arm_html =`
 `;
 
 SubLayout.leg_html =`
-	<span class="rowheader">
-		<div>
+	<span class="namearea">
+		<div class="info">
 			<span class="part" column="part"></span>
-		</div>
-		<div>
 			<span class="class" column="class"></span>
 		</div>
-	</span>
-	<span class="namearea">
 		<div class="divname">
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
@@ -231,16 +215,12 @@ SubLayout.leg_html =`
 `;
 
 SubLayout.rear_html =`
-	<span class="rowheader">
-		<div>
+	<span class="namearea">
+		<div class="info">
 			<span class="part" column="part"></span>
 			<span column="flying" class="flying"></span>
-		</div>
-		<div>
 			<span class="class" column="class"></span>
 		</div>
-	</span>
-	<span class="namearea">
 		<div class="divname">
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
@@ -276,20 +256,13 @@ SubLayout.rear_html =`
 `;
 
 SubLayout.weapon_html =`
-	<span class="rowheader">
-		<div>
+	<span>
+		<div class="info">
 			<span class="part" column="part"></span>
 			<span class="category" column="category"></span>
-			<span class="distance" column="distance">
-			</span>
-		</div>
-		<div>
+			<span class="distance" column="distance"></span>
 			<span class="class" column="class"></span>
 		</div>
-		<div>
-		</div>
-	</span>
-	<span>
 		<div class="divname">
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>

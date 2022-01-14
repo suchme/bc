@@ -16,6 +16,11 @@ body{
 
 }
 
+select#individual{
+top:-20px;
+margin:2px;
+}
+
 div.skill{
 	text-align:right;
 }

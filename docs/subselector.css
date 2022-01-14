@@ -79,12 +79,8 @@ button.pick{
 }
 tbody{
 	height:90%;
-	font-size:smaller;
 }
 
-tbody .status span{
-	font-size:medium;
-}
 
 th,td{
 	overflow:hidden;
@@ -99,10 +95,12 @@ table tbody tr:nth-child(even) {
 
 tr .active{
 	/*width:200px;*/
+	font-size:small;
 }
 
 tr .passive{
 	width:200px;
+	font-size:small;
 }
 tr .biko{
 	/*width:200px;*/
@@ -148,7 +146,6 @@ table .part{
 }
 .class{
 	color:#999;
-	font-size:smaller;
 }
 
 thead .name button{
@@ -197,6 +194,15 @@ span.long.cat{
 }
 span.bougu.cat{
 	background-color:#616;
+}
+.category span.short{
+	color:#c11;
+}
+.category span.long{
+	color:#37f;
+}
+.category span.bougu{
+	color:#a3a;
 }
 
 .cat .status{
@@ -368,3 +374,6 @@ span[content='0']{
 	font-weight:normal;
 }
 	
+div.info{
+	font-size:small;
+}
