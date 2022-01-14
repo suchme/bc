@@ -11,15 +11,6 @@ import AssetManager from "../../lib/engine/assetmanager.js"
 import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "../../lib/lib/vector.js"
 import OnoPhy from "../../lib/lib/onophy/onophy.js"
 
-var homingCamera=function(angle,target,camera){
-		var dx=target[0]-camera[0]
-		var dy=target[1]-camera[1]
-		var dz=target[2]-camera[2]
-		angle[0]=Math.atan2(dy,Math.sqrt(dz*dz+dx*dx));
-		angle[1]=Math.atan2(dx,dz);
-		angle[2]=0;
-		
-	}
 var palette=null;
 var primitives={};
 var base_model;
@@ -296,7 +287,7 @@ class Scene1 extends Obj{
 		camera.p[2]+=(this.p[2]-camera.p[2])*0.3
 
 		//ターゲット注目
-		homingCamera(camera.a,this.target,camera.p);
+		Engine.Camera.homing(camera.a,this.target,camera.p);
 
 		//ライト角度とかセット
 		var light = engine.ono3d.environments[0].sun;
@@ -332,24 +323,8 @@ export default class Visualizer{
 		globalParam.exposure_upper = 1;
 	}
 	main(){
-		if(Util.getLoadingCount()>0){
-			//初期ロードが未完了の場合はメイン処理は開始しない
-			setTimeout(()=>{
-				this.main();
-			},1000);
-			return;
-		}
+		this.engine.userInit=()=>{
 
-		switch(this.step){
-		case 0:
-			this.engine.init(document.getElementById("aaa"),400,460);
-			setTimeout(()=>{
-				this.main();
-			},1000);
-			this.step++;
-			break;
-		case 1:
-			this.engine.start();
 			palette =Ono3d.createTexture(4,4);
 
 			var scene1 = new Scene1();
@@ -358,9 +333,8 @@ export default class Visualizer{
 			window.ono3d = this.engine.ono3d;
 
 			this.scene=scene1;
-			this.step++;
-			break;
 		}
+		this.engine.init(document.getElementById("aaa"),400,460);
 		
 	}
 }
