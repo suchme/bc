@@ -12,10 +12,12 @@ path:  __dirname + "/docs"
   // ローカル開発用環境を立ち上げる
   // 実行時にブラウザが自動的に localhost を開く
   devServer: {
-    contentBase: "docs",
     open: true,
 	port:8081,
-	host: '0.0.0.0'
+	host: '0.0.0.0',
+	static: {
+		directory: "docs",
+	}
   },
   module: {
     rules: [
