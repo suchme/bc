@@ -8,6 +8,7 @@ tbody tr{
 tr.header_filter span{
 	background-color:inherit !important;
 	border:inherit !important;
+
 }
 thead span{
 	vertical-align:bottom;
@@ -33,13 +34,7 @@ div.subwindow{
 	left:0px;
 	top:0px;
 	text-align:center;
-}
-div.back{
-	position:absolute;
-	width:100%;
-	height:100%;
-	background-color:#000;
-	opacity:0.3;
+	background-color:#666;
 }
 div.submain{
 	text-align:left;
@@ -62,6 +57,7 @@ thead{
 	top:0;
 	z-index:100;
 	background-color:#333;
+	border-bottom:1px solid white;
 }
 th.pick{
 	position:sticky;
@@ -86,11 +82,11 @@ th,td{
 	overflow:hidden;
 	display:inline-block;
 }
-table tbody tr:nth-child(odd) {
-	background-color: rgba(32,32,32,0.9);
-}
+/*table tbody tr:nth-child(odd) {
+	background-color: #333;
+}*/
 table tbody tr:nth-child(even) {
-	background-color: rgba(64,64,64,0.9);
+	background-color: #333;
 }
 
 tr .active{
@@ -107,12 +103,6 @@ tr .biko{
 }
 tr span.name{
 	  width:350px;
-}
-tr .name{
-	/*width:400px;
-	font-size:larger;
-	font-weight:bold;
-	*/
 	white-space: nowrap;
 }
 tr span.rowheader{
@@ -195,14 +185,14 @@ span.long.cat{
 span.bougu.cat{
 	background-color:#616;
 }
-.category span.short{
-	color:#c11;
+span.category.short{
+	color:#e33;
 }
-.category span.long{
-	color:#37f;
+span.category.long{
+	color:#39f;
 }
-.category span.bougu{
-	color:#a3a;
+span.category.bougu{
+	color:#d3d;
 }
 
 .cat .status{
@@ -227,25 +217,14 @@ tr .recover
 {
 	width:30px !important;
 }
-td.N
-,td.R
-,td.SR
-,td.UR{
-color:#000;
-}
-span.N
-,span.R
-,span.SR
-,span.UR{
-width:100%;
-}
 tbody .distance span{
 padding:1px;
+color:white;
 }
-tbody .distance span.short{
+tbody span.distance.short{
 	background-color:#c00;
 }
-tbody .distance span.long{
+tbody span.distance.long{
 	background-color:#039;
 }
 

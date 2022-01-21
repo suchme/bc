@@ -2,8 +2,6 @@
 //
 var html = `
 	<div class="subwindow" id="subwindow" style="display:none;">
-		<div  class="back" >
-		</div>
 		<div style="" class="submain">
 			<table>
 				<thead id="sub_head">
@@ -302,16 +300,15 @@ export default class Subselector{
 						datas= [datas];
 					}
 					datas.forEach((data)=>{
-						var span = document.createElement("span");
-							td.appendChild(span);
-						var content =  typeof col.disp == "function"?col.disp(rowdata,span,data):rowdata[col.data];
+						//var span = document.createElement("span");
+						//	td.appendChild(span);
+						var content =  typeof col.disp == "function"?col.disp(rowdata,td,data):rowdata[col.data];
 						if(content === null){
-							td.removeChild(span);
+						//	td.removeChild(span);
 							return;
 						}
-						if(content instanceof HTMLElement
-							   //|| content.nodeName
-								){
+						var span = td;
+						if(content instanceof HTMLElement ){
 							span.appendChild(content);
 						}else{
 							span.setAttribute("content",content);

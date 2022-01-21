@@ -809,6 +809,7 @@ DATA.shinkis.forEach((e)=>{
 				.part_icon.${e.cd}{
 				content:'';
 				background-image:url(icon/${e.cd}.png);
+				filter:drop-shadow(0px 0px 1px pink);
 			}
 			`, stylesheet.cssRules.length);
 
@@ -817,6 +818,7 @@ DATA.shinkis.forEach((e)=>{
 				,.class.${e.cd}::before{
 				content:'';
 				background-image:url(icon/${e.cd}.png);
+				filter:drop-shadow(0px 0px 1px pink);
 			}
 			`, stylesheet.cssRules.length);
 	//		}
