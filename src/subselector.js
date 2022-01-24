@@ -300,15 +300,15 @@ export default class Subselector{
 
 				//var td = document.createElement("td");
 				//td.insertAdjacentHTML('beforeend',this.rowhtml);
-				var td = template.cloneNode(true);
-				tr.appendChild(td);
+				var _td = template.cloneNode(true);
+				tr.appendChild(_td);
 
 				cols.forEach(function(col){
-					var td = tr.querySelector("[column='"+col.data+"']");
+					var td = _td.querySelector("[column='"+col.data+"']");
 					if(!td)return;
-					if(col.class){
-						td.classList.add(col.class);
-					}
+					//if(col.class){
+					//	td.classList.add(col.class);
+					//}
 					var datas = rowdata[col.data];
 					if(!Array.isArray(datas)){
 						datas= [datas];
