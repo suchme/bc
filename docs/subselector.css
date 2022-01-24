@@ -1,4 +1,9 @@
+div.back{
+	background-color:rgba(0,0,0,0.5);
+	height:100%;
+}
 tr{
+	
 	white-space:nowrap;
 	display:block;
 }
@@ -82,9 +87,9 @@ th,td{
 	overflow:hidden;
 	display:inline-block;
 }
-/*table tbody tr:nth-child(odd) {
-	background-color: #333;
-}*/
+table tbody tr:nth-child(odd) {
+	background-color: #555;
+}
 table tbody tr:nth-child(even) {
 	background-color: #333;
 }

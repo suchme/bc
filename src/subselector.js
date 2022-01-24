@@ -2,6 +2,7 @@
 //
 var html = `
 	<div class="subwindow" id="subwindow" style="display:none;">
+		<div style="" class="back">
 		<div style="" class="submain">
 			<table>
 				<thead id="sub_head">
@@ -10,6 +11,7 @@ var html = `
 				</thead>
 				<tbody id="sub_body"> <tr> </tr> </tbody>
 			</table>
+		</div>
 		</div>
 	</div>
 `;
