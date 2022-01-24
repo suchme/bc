@@ -6,7 +6,9 @@ button.closebutton{
 }
 div.back{
 	background-color:rgba(0,0,0,0.5);
+	position:absolute;
 	height:100%;
+	width:100%;
 }
 tr{
 	
