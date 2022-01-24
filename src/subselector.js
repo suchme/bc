@@ -4,6 +4,7 @@ var html = `
 	<div class="subwindow" id="subwindow" style="display:none;">
 		<div style="" class="back">
 		<div style="" class="submain">
+			<button class="closebutton">close</button>
 			<table>
 				<thead id="sub_head">
 					<tr class="header_filter"></tr>
@@ -25,7 +26,11 @@ export default class Subselector{
 		this.rowhtml="";
 
 		document.body.insertAdjacentHTML('beforeend',html);
-		this.back = document.body.querySelector("#subwindow .back");
+		var back = document.body.querySelector("#subwindow .back");
+		back.addEventListener("click",(e)=>{this.close();});
+		back = document.body.querySelector("#subwindow .closebutton");
+		back.addEventListener("click",(e)=>{this.close();});
+
 		this.dom = document.querySelector(".submain");
 	}
 
@@ -133,7 +138,6 @@ export default class Subselector{
 		var subwindow= document.querySelector("#subwindow");
 		subwindow.style.display="block";
 		
-		this.back.addEventListener("click",(e)=>{this.close();});
 
 
 	}
@@ -161,12 +165,17 @@ export default class Subselector{
 			var flg=true;
 			keys.forEach(function(key){
 				var data = e[key];
-				if(!Array.isArray(data)){
-					data=[data];
+				if(Array.isArray(data)){
+					filters[key].forEach((fil)=>{
+						flg &= (data.indexOf(fil)>=0);
+					});
+				}else{
+					filters[key].forEach((fil)=>{
+						flg &= (data == fil);
+					});
 				}
-				filters[key].forEach((fil)=>{
-					flg &= (data.indexOf(fil)>=0);
-				});
+				return flg;
+				
 			});
 			return flg;
 		});
@@ -260,7 +269,7 @@ export default class Subselector{
 						span.addChild(content);
 					}else{
 						td.setAttribute("content",content);
-						span.innerHTML= content;
+						span.textContent = content;
 					}
 					//td.appendChild(span);
 					if(col.filter){
@@ -274,6 +283,8 @@ export default class Subselector{
 				tbody.appendChild(tr);
 			}
 		}else{
+			var template = document.createElement("td");
+			template.insertAdjacentHTML('beforeend',this.rowhtml);
 			for(var i=0;i<data.length;i++){
 				var rowdata = data[i];
 				tr = document.createElement("tr");
@@ -287,8 +298,9 @@ export default class Subselector{
 				th.appendChild(span);
 				tr.appendChild(th);
 
-				var td = document.createElement("td");
-				td.insertAdjacentHTML('beforeend',this.rowhtml);
+				//var td = document.createElement("td");
+				//td.insertAdjacentHTML('beforeend',this.rowhtml);
+				var td = template.cloneNode(true);
 				tr.appendChild(td);
 
 				cols.forEach(function(col){
@@ -314,7 +326,7 @@ export default class Subselector{
 							span.appendChild(content);
 						}else{
 							span.setAttribute("content",content);
-							span.innerHTML= content;
+							span.textContent = content;
 						}
 						//td.appendChild(span);
 						if(col.filter){
