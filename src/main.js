@@ -809,16 +809,14 @@ DATA.shinkis.forEach((e)=>{
 				.part_icon.${e.cd}{
 				content:'';
 				background-image:url(icon/${e.cd}.png);
-				filter:drop-shadow(0px 0px 1px pink);
 			}
 			`, stylesheet.cssRules.length);
 
 			stylesheet.insertRule(` 
-				.shinki .${e.cd}::before
+				.shinki.${e.cd}::before
 				,.class.${e.cd}::before{
 				content:'';
 				background-image:url(icon/${e.cd}.png);
-				filter:drop-shadow(0px 0px 1px pink);
 			}
 			`, stylesheet.cssRules.length);
 	//		}

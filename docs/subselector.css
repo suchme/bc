@@ -264,7 +264,6 @@ div.guarge_child{
 
 tr .guarge
 {
-	margin:2px;
 	padding:0px;
 	color:#999;
 }
@@ -286,7 +285,7 @@ span[content="闇神姫"]::before{
 	background-image:url("icon/yami.png");
 }
 
-span.flying .enable{
+span.flying.enable{
 	background-image:url("icon/flying.svg");
 	background-size:16px;
 	background-repeat:no-repeat;
@@ -319,7 +318,7 @@ thead span
 margin:1px;
 }
 
-.shinki span::before{
+span.shinki::before{
 	display:inline-block;
 	background-size:contain;
 	width:24px;
@@ -354,7 +353,7 @@ background-color:black;
 span.filtertarget.class{
 width:initial;
 }
-span.status span[content^='-']
+span.status[content^='-']
 {
 	color:#c33;
 }
