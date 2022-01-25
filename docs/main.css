@@ -442,19 +442,18 @@ display:none;
 	color:rgba(255,255,255,0.3);
 	/*background-color:transparent;*/
 }
-.cost .status[content^='-']
-,.status.cost
+.status[content^='-']
 ,.minus{
 	color:#c33;
 }
-.status.cost[content^='-']
+.cost[content^='-']
 ,.status[content^='+']{
 	color:#3ee;
 }
 [content="+"]{
 	color:#3ee;
 }
-.cost .status {
+.cost.status {
 	width:28px;
 	/*background-color:#111;*/
 }
