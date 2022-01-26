@@ -429,12 +429,15 @@ display:none;
 }
 */
 
-span.cost{
-	color:#c33;
-	margin-left:4px;
-
+span.increase{
+	width:24px;
 }
+span.recover{
+	width:24px;
+}
+
 span.cost span{
+	color:#c33;
 width:24px;
 }
 
