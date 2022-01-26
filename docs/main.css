@@ -447,7 +447,7 @@ width:24px;
 	color:rgba(255,255,255,0.3);
 	/*background-color:transparent;*/
 }
-.status[content^='-']
+.status span[content^='-']
 ,.minus{
 	color:#c33;
 }

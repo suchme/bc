@@ -813,7 +813,7 @@ DATA.shinkis.forEach((e)=>{
 			`, stylesheet.cssRules.length);
 
 			stylesheet.insertRule(` 
-				.shinki.${e.cd}::before
+				.shinki .${e.cd}::before
 				,.class.${e.cd}::before{
 				content:'';
 				background-image:url(icon/${e.cd}.png);

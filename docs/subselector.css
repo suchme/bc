@@ -319,7 +319,7 @@ thead span
 margin:1px;
 }
 
-span.shinki::before{
+span.shinki span::before{
 	display:inline-block;
 	background-size:contain;
 	width:24px;
