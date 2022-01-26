@@ -198,13 +198,13 @@ span.long.cat{
 span.bougu.cat{
 	background-color:#616;
 }
-span.category.short{
-	color:#e33;
+span.category .short{
+	color:#c00;
 }
-span.category.long{
+span.category .long{
 	color:#39f;
 }
-span.category.bougu{
+span.category .bougu{
 	color:#d3d;
 }
 
@@ -234,10 +234,10 @@ tbody .distance span{
 padding:1px;
 color:white;
 }
-tbody span.distance.short{
+span.distance span.short{
 	background-color:#c00;
 }
-tbody span.distance.long{
+span.distance span.long{
 	background-color:#039;
 }
 
@@ -286,7 +286,7 @@ span[content="闇神姫"]::before{
 	background-image:url("icon/yami.png");
 }
 
-span.flying.enable{
+span.flying .enable{
 	background-image:url("icon/flying.svg");
 	background-size:16px;
 	background-repeat:no-repeat;
