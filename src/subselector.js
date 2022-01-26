@@ -251,8 +251,8 @@ export default class Subselector{
 		th.className="dummy_pick";
 		template.appendChild(th);
 
-		for(var i=0;i<data.length;i++){
-			var rowdata = data[i];
+		data.forEach((e)=>{
+			var rowdata = e;
 
 			var clone = template.cloneNode(true);
 			var span = clone.querySelector("button.pick");
@@ -292,7 +292,7 @@ export default class Subselector{
 					}
 				});
 			});
-		}
+		});
 		
 
 
