@@ -289,19 +289,16 @@ SubLayout.weapon_html =`
 			</span>
 			<span class="sep"></span>
 				<span column="recast" class="guarge">
-					<div class="value" ></div>
 					<span class="guarge_parent">
 						<div class="guarge_child" ></div>
 					</span>
 				</span>
 				<span column="reload" class="guarge">
-					<div class="value" ></div>
 					<span class="guarge_parent">
 						<div class="guarge_child" ></div>
 					</span>
 				</span>
 				<span column="range" class="guarge">
-					<div class="value" ></div>
 					<span class="guarge_parent">
 						<div class="guarge_child" ></div>
 					</span>
@@ -325,28 +322,28 @@ SubLayout.arr=[
 ]
 
 
-SubLayout.guarge = function(e,parent){
+SubLayout.guarge = function(e,node){
 	var data=e[this.data];
-	parent= parent.parentNode;
+	parent= node.parentNode;
 	if(data<0){
-		parent.querySelector("div.guarge_child").style.width="0";
+		parent.children[0].children[0].style.width="0";
 	}else{
-		parent.querySelector("div.guarge_child").style.width=data +"%";
+		parent.children[0].children[0].style.width=data +"%";
 	}
 	parent.title=data*0.01;
 	if(data===100){
-		parent.querySelector("div.value").innerText="";
+		node.innerText="";
 	}else{
-		parent.querySelector("div.value").innerText=((1-data*0.01)*3).toFixed(2) +"[s]";
+		node.innerText=((1-data*0.01)*3).toFixed(2) +"[s]";
 	}
 	return null;
 };
 
-SubLayout.guarge_range = function(e,parent){
-	parent= parent.parentNode;
-	parent.querySelector("div.guarge_child").style.width=e[this.data] +"%";
+SubLayout.guarge_range = function(e,node){
+	parent= node.parentNode;
+	parent.children[0].children[0].style.width=e[this.data] +"%";
 	parent.title=e[this.data];
-	parent.querySelector("div.value").innerText=(e[this.data]*0.01).toFixed(3);
+	node.innerText=(e[this.data]).toFixed(1);
 	return null;
 };
 export default SubLayout ;

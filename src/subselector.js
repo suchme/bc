@@ -235,114 +235,65 @@ export default class Subselector{
 		var tbody = document.querySelector("#sub_body");
 		tbody.innerHTML="";
 
-		if(this.rowhtml ===""){
+		var template = document.createElement("tr");
+		var th = document.createElement("th");
+		th.className="pick";
+		var span = document.createElement("button");
+		span.textContent = "選択";
+		span.className="pick";
+		th.appendChild(span);
+		template.appendChild(th);
+		var td = document.createElement("td");
+		td.insertAdjacentHTML('beforeend',this.rowhtml);
+		template.appendChild(td);
 
-			for(var i=0;i<data.length;i++){
-				var rowdata = data[i];
-				var tr;
-				tr = document.createElement("tr");
+		var th = document.createElement("td");
+		th.className="dummy_pick";
+		template.appendChild(th);
 
-				var th = document.createElement("th");
-				th.className="pick";
-				var span = document.createElement("button");
-				span.textContent = "選択";
-				span.className="pick";
-				span.onclick=(function(r){return function(e){tmp.close(r);}})(rowdata);
-				th.appendChild(span);
-				tr.appendChild(th);
+		for(var i=0;i<data.length;i++){
+			var rowdata = data[i];
 
-				cols.forEach(function(col){
-					var td = document.createElement("td");
-					var content =  typeof col.disp == "function"?col.disp(rowdata,td):rowdata[col.data];
+			var clone = template.cloneNode(true);
+			var span = clone.querySelector("button.pick");
+			span.onclick=(function(r){return function(e){tmp.close(r);}})(rowdata);
+
+			var template_columns ={};
+			clone.querySelectorAll("[column]").forEach((e)=>{
+				var column_name = e.getAttribute("column");
+				template_columns[column_name]=e;
+			});
+
+			tbody.appendChild(clone);
+
+			cols.forEach(function(col){
+				var span= template_columns[col.data];
+				if(!span)return;
+
+				var datas = rowdata[col.data];
+				if(!Array.isArray(datas)){
+					datas= [datas];
+				}
+				datas.forEach((data)=>{
+					var node = document.createElement("span");
+					span.appendChild(node);
+					var content =  typeof col.disp == "function"?col.disp(rowdata,node,data):rowdata[col.data];
 					if(content === null){
 						return;
-						}
-					td.classList.add(col.data);
-					if(col.class){
-						td.classList.add(col.class);
 					}
-					var span = td;//document.createElement("span");
-					if(content === null){
-						return;
-						}
-					if(content instanceof HTMLElement || content.nodeName){
-						span.addChild(content);
+					if(content instanceof HTMLElement ){
 					}else{
-						td.setAttribute("content",content);
-						span.textContent = content;
+						node.setAttribute("content",content);
+						node.textContent = content;
 					}
-					//td.appendChild(span);
 					if(col.filter){
-						span.classList.add("filtertarget");
-						span.onclick=(function(cd,value){return function(e){tmp.setFilter(cd,[value]);}})(col.data,content);
+						node.classList.add("filtertarget");
+						node.onclick=(function(cd,value){return function(e){tmp.setFilter(cd,[value]);}})(col.data,data);
 					}
-					tr.appendChild(td);
 				});
-
-
-				tbody.appendChild(tr);
-			}
-		}else{
-			var template = document.createElement("td");
-			template.insertAdjacentHTML('beforeend',this.rowhtml);
-			for(var i=0;i<data.length;i++){
-				var rowdata = data[i];
-				tr = document.createElement("tr");
-
-				var th = document.createElement("th");
-				th.className="pick";
-				var span = document.createElement("button");
-				span.textContent = "選択";
-				span.className="pick";
-				span.onclick=(function(r){return function(e){tmp.close(r);}})(rowdata);
-				th.appendChild(span);
-				tr.appendChild(th);
-
-				//var td = document.createElement("td");
-				//td.insertAdjacentHTML('beforeend',this.rowhtml);
-				var _td = template.cloneNode(true);
-				tr.appendChild(_td);
-
-				cols.forEach(function(col){
-					var td = _td.querySelector("[column='"+col.data+"']");
-					if(!td)return;
-					//if(col.class){
-					//	td.classList.add(col.class);
-					//}
-					var datas = rowdata[col.data];
-					if(!Array.isArray(datas)){
-						datas= [datas];
-					}
-					datas.forEach((data)=>{
-						//var span = document.createElement("span");
-						//	td.appendChild(span);
-						var content =  typeof col.disp == "function"?col.disp(rowdata,td,data):rowdata[col.data];
-						if(content === null){
-						//	td.removeChild(span);
-							return;
-						}
-						var span = td;
-						if(content instanceof HTMLElement ){
-							span.appendChild(content);
-						}else{
-							span.setAttribute("content",content);
-							span.textContent = content;
-						}
-						//td.appendChild(span);
-						if(col.filter){
-							span.classList.add("filtertarget");
-							span.onclick=(function(cd,value){return function(e){tmp.setFilter(cd,[value]);}})(col.data,data);
-						}
-					});
-				});
-
-				th = document.createElement("td");
-				th.className="dummy_pick";
-				tr.appendChild(th);
-
-				tbody.appendChild(tr);
-			}
+			});
 		}
+		
 
 
 	}
