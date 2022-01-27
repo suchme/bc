@@ -96,10 +96,10 @@ th,td{
 	display:inline-block;
 }
 table tbody tr:nth-child(odd) {
-	background-color: #555;
+	background-color: #222;
 }
 table tbody tr:nth-child(even) {
-	background-color: #333;
+	background-color: #444;
 }
 
 tr .active{
@@ -198,13 +198,13 @@ span.long.cat{
 span.bougu.cat{
 	background-color:#616;
 }
-span.category .short{
+span.category.short{
 	color:#c00;
 }
-span.category .long{
+span.category.long{
 	color:#39f;
 }
-span.category .bougu{
+span.category.bougu{
 	color:#d3d;
 }
 
@@ -230,14 +230,14 @@ tr .recover
 {
 	width:30px !important;
 }
-tbody .distance span{
+tbody .distance{
 padding:1px;
 color:white;
 }
-span.distance span.short{
+span.distance.short{
 	background-color:#c00;
 }
-span.distance span.long{
+span.distance.long{
 	background-color:#039;
 }
 
@@ -286,7 +286,7 @@ span[content="闇神姫"]::before{
 	background-image:url("icon/yami.png");
 }
 
-span.flying .enable{
+span.flying.enable{
 	background-image:url("icon/flying.svg");
 	background-size:16px;
 	background-repeat:no-repeat;

@@ -275,17 +275,19 @@ export default class Subselector{
 					datas= [datas];
 				}
 				datas.forEach((data)=>{
-					var node = document.createElement("span");
-					span.appendChild(node);
-					var content =  typeof col.disp == "function"?col.disp(rowdata,node,data):rowdata[col.data];
+					var content =  typeof col.disp === "function"?col.disp(rowdata,span,data):data;
 					if(content === null){
 						return;
 					}
+					var node;
 					if(content instanceof HTMLElement ){
+						node=content;
 					}else{
+						node = document.createElement("span");
 						node.setAttribute("content",content);
 						node.textContent = content;
 					}
+					span.appendChild(node);
 					if(col.filter){
 						node.classList.add("filtertarget");
 						node.onclick=(function(cd,value){return function(e){tmp.setFilter(cd,[value]);}})(col.data,data);

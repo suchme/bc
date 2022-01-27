@@ -317,10 +317,10 @@ export default class Visualizer{
 	constructor(){
 		this.engine = new Engine();
 		this.step=0;
-		globalParam.step=2;
-		globalParam.autoExposure=false;
-		globalParam.exposure_level = 0.5;
-		globalParam.exposure_upper = 1;
+		this.engine.step=2;
+		this.engine.autoExposure=false;
+		this.engine.exposure_level = 0.5;
+		this.engine.exposure_upper = 1;
 	}
 	main(){
 		this.engine.userInit=()=>{
