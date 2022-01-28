@@ -16,6 +16,7 @@ var html = `
 		</div>
 	</div>
 `;
+
 export default class Subselector{
 	constructor(){
 		this.cols=[];
@@ -153,6 +154,16 @@ export default class Subselector{
 
 	createTable(){
 		var tmp = this;
+		
+	var filRemoveFunc=function(e){
+		var t = e.target;
+		var cd = t.getAttribute("column");
+		var value = t.getAttribute("content");
+		if(!Number.isNaN(parseInt(value))){
+			value = parseInt(value);
+		}
+		tmp.removeFilter(cd,value);
+	};
 
 		var filters = this.filter;
 		var sort = this.sort;
@@ -189,25 +200,24 @@ export default class Subselector{
 			if(filter){
 				filter.forEach(function(e,idx){
 					var button = document.createElement("button");
+					th.appendChild(button);
 					var obj={};
 					obj[cols.data]=e;
 					var content = cols.disp?cols.disp(obj,button,e):e;
 
+					button.setAttribute("column",cols.data);
+					button.setAttribute("content",content);
+					button.onclick=filRemoveFunc;
+
 					if(content === null){
 						return;
 						}
-					if(content instanceof HTMLElement 
-						//|| content.nodeName
-							){
+					if(content instanceof HTMLElement ){
 						button.appendChild(content);
 					}else{
 						button.textContent=content;
 					}
 					var target = filter[idx];
-					button.onclick=function(){
-						tmp.removeFilter(cols.data,target);
-					};
-					th.appendChild(button);
 				});
 				
 			}
@@ -231,6 +241,15 @@ export default class Subselector{
 		});
 
 
+		var filFunc=function(e){
+			var t = e.target;
+			var cd = t.getAttribute("column");
+			var value = t.getAttribute("content");
+			if(!Number.isNaN(parseInt(value))){
+				value = parseInt(value);
+			}
+			tmp.setFilter(cd,[value]);
+		};
 	//ボディ作る
 		var tbody = document.querySelector("#sub_body");
 		tbody.innerHTML="";
@@ -270,29 +289,24 @@ export default class Subselector{
 				var span= template_columns[col.data];
 				if(!span)return;
 
-				var datas = rowdata[col.data];
-				if(!Array.isArray(datas)){
-					datas= [datas];
-				}
-				datas.forEach((data)=>{
+				var data = rowdata[col.data];
 					var content =  typeof col.disp === "function"?col.disp(rowdata,span,data):data;
+
+					if(col.filter){
+						span.classList.add("filtertarget");
+						span.addEventListener("click",filFunc);
+					}
 					if(content === null){
 						return;
 					}
-					var node;
+					var node = span;
 					if(content instanceof HTMLElement ){
-						node=content;
+						span.appendChild(content);
 					}else{
-						node = document.createElement("span");
-						node.setAttribute("content",content);
+						node = span;
+						node.setAttribute("content",data);
 						node.textContent = content;
 					}
-					span.appendChild(node);
-					if(col.filter){
-						node.classList.add("filtertarget");
-						node.onclick=(function(cd,value){return function(e){tmp.setFilter(cd,[value]);}})(col.data,data);
-					}
-				});
 			});
 		});
 		

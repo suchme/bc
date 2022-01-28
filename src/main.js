@@ -534,10 +534,21 @@ class Main {
 
 						cols.push({label:"備考",data:"biko"});
 						cols.unshift({data:"class",label:"分類",filter:1
-							,disp:function(e,node,data){
-								node.classList.add(DATA.class_shinki[data]);
-								node.classList.add("class");
-								return DATA.class[data];}});
+							,disp:function(e,parent,data){
+								if(!Array.isArray(data)){
+									data = [data];
+								}
+								data.forEach((e)=>{
+									var node = document.createElement("span");
+									node.classList.add(DATA.class_shinki[e]);
+									node.setAttribute("column","class");
+									node.setAttribute("content",e);
+									node.setAttribute("content2",DATA.class[e]);
+									node.classList.add("class");
+									node.textContent = DATA.class[e];
+									parent.appendChild(node);
+								});
+								return null;}});
 						cols.unshift({data:"part",label:"部位",filter:1
 							,disp:function(e){return DATA.part_name[e.part]}});
 					subselector.rowhtml = SubLayout.arr[part_idx];
@@ -813,7 +824,7 @@ DATA.shinkis.forEach((e)=>{
 			`, stylesheet.cssRules.length);
 
 			stylesheet.insertRule(` 
-				.shinki .${e.cd}::before
+				.shinki.${e.cd}::before
 				,.class.${e.cd}::before{
 				content:'';
 				background-image:url(icon/${e.cd}.png);

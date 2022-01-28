@@ -289,7 +289,7 @@ display:inline-block;
 
 
 .class::before
-,.name::before{
+,.shinki::before{
 	display:inline-block;
 	width:24px;
 	height:24px;

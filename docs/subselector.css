@@ -10,14 +10,6 @@ div.back{
 	height:100%;
 	width:100%;
 }
-tr{
-	
-	white-space:nowrap;
-	display:block;
-}
-tbody tr{
-	padding: 0px 0;
-}
 tr.header_filter span{
 	background-color:inherit !important;
 	border:inherit !important;
@@ -68,9 +60,8 @@ border:1px solid #666;
 thead{
 	position:sticky;
 	top:0;
-	z-index:100;
+	z-index:110;
 	background-color:#333;
-	border-bottom:1px solid white;
 }
 th.pick{
 	position:sticky;
@@ -118,12 +109,6 @@ tr span.name{
 	  width:350px;
 	white-space: nowrap;
 }
-tr span.rowheader{
-width:140px;
-}
-tr .class{
-	white-space:pre-wrap;
-}
 tbody span{
 	vertical-align:bottom;
 }
@@ -131,7 +116,8 @@ tr .status{
 	width:30px;
 }
 
-.filtertarget{
+.filtertarget
+,.filtertarget *{
 	cursor:cell;
 	text-decoration:underline dotted ;
 }
@@ -151,10 +137,6 @@ table .part{
 	color:#999;
 }
 
-thead .name button{
-	
-
-}
 .rarelity button{
 	white-space:nowrap;
 	
@@ -242,7 +224,7 @@ span.distance.long{
 }
 
 span.guarge{
-	width: 60px;
+	width: 80px;
 }
 span.bullet_spd
 ,span.bullet_num{
@@ -274,14 +256,14 @@ tr .flying{
 }
 
 
-span[content="ツガルBX"]{
+span[content2="ツガルBX"]{
 color:#7d9cff;
 }
-span[content="ツガルBX"]::before{
+span[content2="ツガルBX"]::before{
 	content:"";
 	background-image:url("icon/s2bx.png");
 }
-span[content="闇神姫"]::before{
+span[content2="闇神姫"]::before{
 	content:"";
 	background-image:url("icon/yami.png");
 }
@@ -301,19 +283,10 @@ thead .guarge_parent
 	display:none;
 }
 
-.status.height{
-	font-weight:normal;
-}
 span.sep{
 	width:6px;
 }
-.armor .pick{
-width:32px;
-}
 
-table .height{
-width:40px;
-}
 thead span
 ,tr span{
 margin:1px;
@@ -325,11 +298,6 @@ span.shinki span::before{
 	width:24px;
 	height:24px;
 	vertical-align:middle;
-}
-div.value{
-	color:white;
-	bottom:2px;
-	
 }
 span.guarge{
 	position:relative;
@@ -361,7 +329,7 @@ span.status[content^='-']
 span.cost span[content^='-']{
 	color:#3ee;
 }
-span[content='0']{
+span.status[content='0']{
 	color:#888;
 	font-weight:normal;
 }
