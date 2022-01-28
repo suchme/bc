@@ -1,3 +1,8 @@
+tr{
+
+	white-space:nowrap;
+	display:block;
+}
 button.closebutton{
 	position:absolute;
 	right:0px;
