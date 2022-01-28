@@ -51,8 +51,8 @@ path:  __dirname + "/docs"
         ]
       }
       ,{
-        test: /\.svg/,
-        type: "asset/inline"
+        test: /\.(png|jpg|gif|svg)$/
+        ,type: "asset/inline"
       }
     ],
   },
