@@ -816,20 +816,7 @@ document.getElementsByTagName('head').item(0).appendChild(newStyle);
 var stylesheet = document.styleSheets.item(document.styleSheets.length-1);
 DATA.shinkis.forEach((e)=>{
 		if(e.cd=='')return;
-			stylesheet.insertRule(` 
-				.part_icon.${e.cd}{
-				content:'';
-				background-image:url(icon/${e.cd}.png);
-			}
-			`, stylesheet.cssRules.length);
 
-			stylesheet.insertRule(` 
-				.shinki.${e.cd}::before
-				,.class.${e.cd}::before{
-				content:'';
-				background-image:url(icon/${e.cd}.png);
-			}
-			`, stylesheet.cssRules.length);
 	//		}
 
 	stylesheet.insertRule(` 
@@ -837,29 +824,10 @@ DATA.shinkis.forEach((e)=>{
 		color:${e.color};
 	}
 	`, stylesheet.cssRules.length);
+
+	document.body.style.display="block";
 });
 
-DATA.part_cd.forEach(function(e,i){
-
-	stylesheet.insertRule(` 
-		span.part_icon.${e}{
-			background-image:url(icon/${e}.svg);
-			background-size:100%;
-		}
-	`, stylesheet.cssRules.length);
-
-	stylesheet.insertRule(` 
-		span.armor.${e}{
-			background-image:url(icon/${e}_back.svg);
-		}
-	`, stylesheet.cssRules.length);
-			//background-position-x:${(i&1)*10}px;
-	//stylesheet.insertRule(` 
-	//	.part.${e}::before{
-	//		content:url(icon/${e}.svg);
-	//	}
-	//`, stylesheet.cssRules.length);
-});
 
 //パラメータ説明追加
 DATA.param_cd.forEach((e,idx)=>{

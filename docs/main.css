@@ -546,3 +546,157 @@ bottom:0px;
 	   z-index:100;
 
 }
+
+.shinki.s0::before, .class.s0::before {
+    content: "";
+    background-image: url(icon/s0.png);
+}
+.shinki.s1::before, .class.s1::before {
+    content: "";
+    background-image: url(icon/s1.png);
+}
+.shinki.s2::before, .class.s2::before {
+    content: "";
+    background-image: url(icon/s2.png);
+}
+.shinki.s3::before, .class.s3::before {
+    content: "";
+    background-image: url(icon/s3.png);
+}
+.shinki.s4::before, .class.s4::before {
+    content: "";
+    background-image: url(icon/s4.png);
+}
+.shinki.s5::before, .class.s5::before {
+    content: "";
+    background-image: url(icon/s5.png);
+}
+.shinki.s6::before, .class.s6::before {
+    content: "";
+    background-image: url(icon/s6.png);
+}
+.shinki.s7::before, .class.s7::before {
+    content: "";
+    background-image: url(icon/s7.png);
+}
+.shinki.s8::before, .class.s8::before {
+    content: "";
+    background-image: url(icon/s8.png);
+}
+.shinki.s9::before, .class.s9::before {
+    content: "";
+    background-image: url(icon/s9.png);
+}
+.shinki.s10::before, .class.s10::before {
+    content: "";
+    background-image: url(icon/s10.png);
+}
+.shinki.s11::before, .class.s11::before {
+    content: "";
+    background-image: url(icon/s11.png);
+}
+.shinki.s12::before, .class.s12::before {
+    content: "";
+    background-image: url(icon/s12.png);
+}
+.shinki.s13::before, .class.s13::before {
+    content: "";
+    background-image: url(icon/s13.png);
+}
+.shinki.s14::before, .class.s14::before {
+    content: "";
+    background-image: url(icon/s14.png);
+}
+.shinki.s15::before, .class.s15::before {
+    content: "";
+    background-image: url(icon/s15.png);
+}
+.shinki.s16::before, .class.s16::before {
+    content: "";
+    background-image: url(icon/s16.png);
+}
+.shinki.s17::before, .class.s17::before {
+    content: "";
+    background-image: url(icon/s17.png);
+}
+.shinki.s18::before, .class.s18::before {
+    content: "";
+    background-image: url(icon/s18.png);
+}
+.shinki.s19::before, .class.s19::before {
+    content: "";
+    background-image: url(icon/s19.png);
+}
+.shinki.s20::before, .class.s20::before {
+    content: "";
+    background-image: url(icon/s20.png);
+}
+.shinki.s21::before, .class.s21::before {
+    content: "";
+    background-image: url(icon/s21.png);
+}
+.shinki.s22::before, .class.s22::before {
+    content: "";
+    background-image: url(icon/s22.png);
+}
+.shinki.s23::before, .class.s23::before {
+    content: "";
+    background-image: url(icon/s23.png);
+}
+.shinki.s24::before, .class.s24::before {
+    content: "";
+    background-image: url(icon/s24.png);
+}
+.shinki.s25::before, .class.s25::before {
+    content: "";
+    background-image: url(icon/s25.png);
+}
+.shinki.s26::before, .class.s26::before {
+    content: "";
+    background-image: url(icon/s26.png);
+}
+.shinki.s27::before, .class.s27::before {
+    content: "";
+    background-image: url(icon/s27.png);
+}
+.shinki.s28::before, .class.s28::before {
+    content: "";
+    background-image: url(icon/s28.png);
+}
+.shinki.s29::before, .class.s29::before {
+    content: "";
+    background-image: url(icon/s29.png);
+}
+.shinki.s30::before, .class.s30::before {
+    content: "";
+    background-image: url(icon/s30.png);
+}
+.shinki.s31::before, .class.s31::before {
+    content: "";
+    background-image: url(icon/s31.png);
+}
+.shinki.s32::before, .class.s32::before {
+    content: "";
+    background-image: url(icon/s32.png);
+}
+span.armor.head {
+    background-image: url(icon/head_back.svg);
+}
+span.armor.body{
+    background-image: url(icon/body_back.svg);
+}
+span.armor.arm{
+    background-image: url(icon/arm_back.svg);
+}
+span.armor.leg{
+    background-image: url(icon/leg_back.svg);
+}
+span.armor.rear{
+    background-image: url(icon/rear_back.svg);
+}
+span.armor.weapon{
+    background-image: url(icon/weapon_back.svg);
+}
+span.armor.weapon2{
+    background-image: url(icon/weapon2_back.svg);
+}

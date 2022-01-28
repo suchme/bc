@@ -40,7 +40,20 @@ path:  __dirname + "/docs"
             },
           },
         ],
-      },
+      }
+	,{
+        test: /\.css/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+          }
+        ]
+      }
+      ,{
+        test: /\.svg/,
+        type: "asset/inline"
+      }
     ],
   },
   // ES5(IE11等)向けの指定
