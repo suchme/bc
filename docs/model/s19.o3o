@@ -89,7 +89,7 @@
   ,{
     "name":"BodyMesh"
     ,"name_full":"BodyMesh [base.blend]"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[ 0.107427,-0.197932,-0.180614],"groups":[3,0],"groupWeights":[ 0.000000, 1.000000]}
@@ -202,7 +202,7 @@
   ,{
     "name":"Head"
     ,"name_full":"Head [base.blend]"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[-0.000000,-0.301251, 0.165918],"groups":[1]}
@@ -317,7 +317,7 @@
   ,{
     "name":"LegMesh"
     ,"name_full":"LegMesh [base.blend]"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[ 0.028782,-0.571591, 0.123381],"groups":[0]}
@@ -384,7 +384,7 @@
   ,{
     "name":"ArmMesh"
     ,"name_full":"ArmMesh [base.blend]"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[ 0.307769, 0.365322, 0.066121],"groups":[0]}
@@ -917,10 +917,6 @@
     "children":[]
     ,"objects":["Headset"]
   }
-  ,"maindata":{
-    "children":[]
-    ,"objects":["Body [base.blend]","Head [base.blend]","Leg.L [base.blend]","Arm.L [base.blend]","Armature [base.blend]","mount [base.blend]"]
-  }
 }
 ,"objects":[
   {
@@ -935,7 +931,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"ArmMesh [base.blend]"
-    ,"bound_box":[-1.454407, 0.365322,-0.164644, 1.454407, 0.497563, 0.079308]
+    ,"bound_box":[-0.737006,-0.712767,-0.157531, 0.687688, 0.384774, 0.127344]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -949,16 +945,16 @@
     ,"groups":[]
     ,"material_slots":[]
     ,"poseBones":[
-      {"name":"Hip","target":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      {"name":"Hip","target":"Hip","location":[-0.000000, 0.028264, 0.024589],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Body","target":"Body","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Body","target":"Body","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.998249,-0.000000, 0.000000,-0.057033],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
       ,{"name":"Head","target":"Head","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Arm1.L","target":"Arm1.L","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Arm1.L","target":"Arm1.L","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.821680, 0.016221,-0.568324, 0.017287],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
       ,{"name":"Arm2.L","target":"Arm2.L","parent":"Arm1.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
@@ -967,7 +963,7 @@
       ,{"name":"Hand.L","target":"Hand.L","parent":"Arm2.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Arm1.R","target":"Arm1.R","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Arm1.R","target":"Arm1.R","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.833292,-0.015888, 0.551311, 0.019897],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
       ,{"name":"Arm2.R","target":"Arm2.R","parent":"Arm1.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
@@ -976,25 +972,25 @@
       ,{"name":"Hand.R","target":"Hand.R","parent":"Arm2.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Leg1.L","target":"Leg1.L","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Leg1.L","target":"Leg1.L","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.998902,-0.027665,-0.001353, 0.002131],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Leg2.L","target":"Leg2.L","parent":"Leg1.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Leg2.L","target":"Leg2.L","parent":"Leg1.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.995264, 0.057311, 0.002803,-0.004415],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Foot.L","target":"Foot.L","parent":"Leg2.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Foot.L","target":"Foot.L","parent":"Leg2.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.998023, 0.011991, 0.000036,-0.000389],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Leg1.R","target":"Leg1.R","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Leg1.R","target":"Leg1.R","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.998576,-0.031636,-0.000000,-0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Leg2.R","target":"Leg2.R","parent":"Leg1.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Leg2.R","target":"Leg2.R","parent":"Leg1.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.992869, 0.070492, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Foot.R","target":"Foot.R","parent":"Leg2.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Foot.R","target":"Foot.R","parent":"Leg2.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.997168, 0.002061, 0.000000,-0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Rear","target":"Rear","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Rear","target":"Rear","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.993539,-0.000000,-0.000370,-0.035840],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
     ]
@@ -1004,7 +1000,7 @@
     ,"type":"ARMATURE"
     ,"data":"Armature"
     ,"action":"standard"
-    ,"bound_box":[-1.439246,-1.834577,-0.281812, 1.439246, 1.200000, 0.263460]
+    ,"bound_box":[-0.682112,-1.830590,-0.251558, 0.634193, 1.224589, 0.291724]
     ,"bound_type":"BOX"
     ,"modifiers":[
     ]
@@ -1022,7 +1018,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"BodyMesh [base.blend]"
-    ,"bound_box":[-0.298446,-0.577976,-0.226815, 0.298446, 0.647921, 0.194782]
+    ,"bound_box":[-0.272258,-0.560344,-0.197067, 0.274158, 0.672511, 0.223046]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -1042,7 +1038,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"Head [base.blend]"
-    ,"bound_box":[-0.259811,-0.301251,-0.254042, 0.259811, 0.269778, 0.254042]
+    ,"bound_box":[-0.275128,-0.276662,-0.224125, 0.241111, 0.294368, 0.280652]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -1060,7 +1056,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"立方体"
-    ,"bound_box":[-0.257312,-0.144906,-0.062137, 0.257312, 0.145104, 0.071351]
+    ,"bound_box":[-0.241872,-0.120317,-0.032490, 0.269403, 0.169693, 0.127795]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -1079,7 +1075,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"LegMesh [base.blend]"
-    ,"bound_box":[-0.275543,-1.872160,-0.375289, 0.275543,-0.571591, 0.133211]
+    ,"bound_box":[-0.275543,-1.872334,-0.342148, 0.276754,-0.538883, 0.169850]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -1097,7 +1093,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"Cube.006 [base.blend]"
-    ,"bound_box":[-0.202202,-0.111930,-0.039802, 0.202202, 0.470923, 0.115921]
+    ,"bound_box":[-0.198498,-0.087384,-0.018408, 0.204855, 0.495562, 0.155186]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}

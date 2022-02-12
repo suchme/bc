@@ -679,6 +679,10 @@ bottom:0px;
     content: "";
     background-image: url(icon/s32.png);
 }
+.shinki.s33::before, .class.s33::before {
+    content: "";
+    background-image: url(icon/s33.png);
+}
 span.armor.head {
     background-image: url(icon/head_back.svg);
 }

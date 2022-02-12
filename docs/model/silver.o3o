@@ -601,7 +601,7 @@
   ,{
     "name":"ArmMesh"
     ,"name_full":"ArmMesh [base.blend]"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[ 0.307769, 0.365322, 0.066121],"groups":[0]}
@@ -710,7 +710,7 @@
   ,{
     "name":"BodyMesh"
     ,"name_full":"BodyMesh [base.blend]"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[ 0.107427,-0.197932,-0.180614],"groups":[3,0],"groupWeights":[ 0.000000, 1.000000]}
@@ -823,7 +823,7 @@
   ,{
     "name":"LegMesh"
     ,"name_full":"LegMesh [base.blend]"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[ 0.028782,-0.571591, 0.123381],"groups":[0]}
@@ -890,7 +890,7 @@
   ,{
     "name":"Head"
     ,"name_full":"Head [base.blend]"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[-0.000000,-0.301251, 0.165918],"groups":[1]}
@@ -3060,7 +3060,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"ArmMesh [base.blend]"
-    ,"bound_box":[-0.749134,-0.687894,-0.248695, 0.708047, 0.399535, 0.237684]
+    ,"bound_box":[ 0.307769, 0.365322,-0.164644, 1.454407, 0.497563, 0.079308]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -3091,16 +3091,16 @@
     ,"groups":[]
     ,"material_slots":[]
     ,"poseBones":[
-      {"name":"Hip","target":"Hip","location":[-0.000000, 0.028264, 0.037067],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      {"name":"Hip","target":"Hip","location":[-0.000000, 0.028264, 0.017659],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Body","target":"Body","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.998635,-0.000000,-0.000000, 0.052544],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Body","target":"Body","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.999090,-0.000000,-0.000000, 0.043034],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
       ,{"name":"Head","target":"Head","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Arm1.L","target":"Arm1.L","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.829348, 0.016453,-0.557498, 0.017074],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Arm1.L","target":"Arm1.L","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.817422, 0.016092,-0.574336, 0.017405],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
       ,{"name":"Arm2.L","target":"Arm2.L","parent":"Arm1.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
@@ -3109,7 +3109,7 @@
       ,{"name":"Hand.L","target":"Hand.L","parent":"Arm2.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Arm1.R","target":"Arm1.R","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.839799,-0.018115, 0.541649, 0.019294],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Arm1.R","target":"Arm1.R","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.829679,-0.014652, 0.556677, 0.020233],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
       ,{"name":"Arm2.R","target":"Arm2.R","parent":"Arm1.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
@@ -3118,25 +3118,25 @@
       ,{"name":"Hand.R","target":"Hand.R","parent":"Arm2.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Leg1.L","target":"Leg1.L","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.999453,-0.013786,-0.000674, 0.001062],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Leg1.L","target":"Leg1.L","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.998596,-0.035373,-0.001730, 0.002725],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Leg2.L","target":"Leg2.L","parent":"Leg1.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.997640, 0.028559, 0.001397,-0.002200],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Leg2.L","target":"Leg2.L","parent":"Leg1.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.993944, 0.073279, 0.003584,-0.005645],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Foot.L","target":"Foot.L","parent":"Leg2.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.998186, 0.034801, 0.000018,-0.000194],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Foot.L","target":"Foot.L","parent":"Leg2.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.997933,-0.000677, 0.000047,-0.000497],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Leg1.R","target":"Leg1.R","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.999290,-0.015765,-0.000000,-0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Leg1.R","target":"Leg1.R","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.998179,-0.040450, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Leg2.R","target":"Leg2.R","parent":"Leg1.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.996447, 0.035127, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Leg2.R","target":"Leg2.R","parent":"Leg1.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.990883, 0.090132, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Foot.R","target":"Foot.R","parent":"Leg2.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.997760, 0.029853, 0.000000,-0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Foot.R","target":"Foot.R","parent":"Leg2.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.996839,-0.013374,-0.000000,-0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Rear","target":"Rear","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.999650,-0.000000,-0.000020,-0.001944],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Rear","target":"Rear","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.999005,-0.000000,-0.000057,-0.005517],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
     ]
@@ -3146,7 +3146,7 @@
     ,"type":"ARMATURE"
     ,"data":"Armature"
     ,"action":"standard"
-    ,"bound_box":[-0.695487,-1.824029,-0.245170, 0.652807, 1.237067, 0.291724]
+    ,"bound_box":[-0.657237,-1.833721,-0.255053, 0.607126, 1.217659, 0.291724]
     ,"bound_type":"BOX"
     ,"modifiers":[
     ]
@@ -3164,7 +3164,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"BodyMesh [base.blend]"
-    ,"bound_box":[-0.279724,-0.544505,-0.197301, 0.271737, 0.684989, 0.223046]
+    ,"bound_box":[-0.000000,-0.577976,-0.226815, 0.298446, 0.647921, 0.194782]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -3199,7 +3199,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"BodyMesh"
-    ,"bound_box":[-0.279724,-0.544505,-0.197301, 0.271737, 0.684989, 0.223046]
+    ,"bound_box":[-0.000000,-0.577976,-0.226815, 0.298446, 0.647921, 0.194782]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -3216,7 +3216,7 @@
     ,"scale":[ 0.190379, 0.190379, 0.060018]
     ,"type":"MESH"
     ,"data":"Cube.002 [s15.blend]"
-    ,"bound_box":[-1.363782,-1.168466,-0.936738, 1.126940, 1.637465, 2.587767]
+    ,"bound_box":[ 0.000000,-1.363168,-1.144355, 1.212372, 1.442763, 1.745869]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -3301,7 +3301,7 @@
     ,"scale":[ 0.808169, 0.808169, 0.808169]
     ,"type":"MESH"
     ,"data":"Cylinder [s15.blend]"
-    ,"bound_box":[-0.331310,-0.490039,-0.314465, 0.333971, 0.583776, 0.409621]
+    ,"bound_box":[-0.000000,-0.535905,-0.351377, 0.315279, 0.537910, 0.376729]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -3374,7 +3374,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"LegMesh [base.blend]"
-    ,"bound_box":[-0.275543,-1.867113,-0.334960, 0.276141,-0.530604, 0.173842]
+    ,"bound_box":[ 0.028782,-1.872160,-0.375289, 0.275543,-0.571591, 0.133212]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -3428,7 +3428,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"Cube.006 [base.blend]"
-    ,"bound_box":[-0.202029,-0.074865,-0.011926, 0.202372, 0.507992, 0.144782]
+    ,"bound_box":[-0.000000,-0.111930,-0.039802, 0.202202, 0.470923, 0.115921]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -3498,7 +3498,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"Head [base.blend]"
-    ,"bound_box":[-0.242705,-0.264184,-0.224376, 0.274047, 0.306846, 0.280903]
+    ,"bound_box":[-0.000000,-0.301251,-0.254042, 0.259811, 0.269778, 0.254042]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}

@@ -1552,7 +1552,7 @@
   ,{
     "name":"BodyMesh"
     ,"name_full":"BodyMesh [base.blend]"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[ 0.107427,-0.197932,-0.180614],"groups":[3,0],"groupWeights":[ 0.000000, 1.000000]}
@@ -1665,7 +1665,7 @@
   ,{
     "name":"Head"
     ,"name_full":"Head [base.blend]"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[-0.000000,-0.301251, 0.165918],"groups":[1]}
@@ -1780,7 +1780,7 @@
   ,{
     "name":"ArmMesh"
     ,"name_full":"ArmMesh [base.blend]"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[ 0.307769, 0.365322, 0.066121],"groups":[0]}
@@ -1964,7 +1964,7 @@
   ,{
     "name":"LegMesh"
     ,"name_full":"LegMesh [base.blend]"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[ 0.028782,-0.571591, 0.123381],"groups":[0]}
@@ -2597,7 +2597,7 @@
     ,"scale":[ 0.203853, 0.203853, 0.203853]
     ,"type":"MESH"
     ,"data":"立方体.011"
-    ,"bound_box":[-16.038380,-3.583423, 3.016358,15.598450, 6.227318, 5.869846]
+    ,"bound_box":[ 2.068026,-3.761378, 3.204992,15.856609, 6.039825, 4.528326]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2726,7 +2726,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"Cube.006 [base.blend]"
-    ,"bound_box":[-0.198234,-0.074909,-0.018813, 0.204985, 0.508043, 0.155864]
+    ,"bound_box":[-0.000000,-0.111930,-0.039802, 0.202202, 0.470923, 0.115921]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2744,7 +2744,7 @@
     ,"scale":[ 1.137802, 1.137802, 1.137802]
     ,"type":"MESH"
     ,"data":"立方体.001"
-    ,"bound_box":[-0.225337,-0.349485,-0.063876, 0.426298, 0.461586, 0.077525]
+    ,"bound_box":[ 0.000000,-0.381543,-0.054177, 0.326776, 0.429525, 0.054177]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2761,7 +2761,7 @@
     ,"scale":[ 0.203853, 0.203853, 0.203853]
     ,"type":"MESH"
     ,"data":"立方体.012"
-    ,"bound_box":[-5.413761,-12.135947,-2.911418, 5.625187,-3.351748, 6.083720]
+    ,"bound_box":[ 0.544489,-12.316256,-2.851306, 5.526550,-3.534714, 5.862196]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2778,7 +2778,7 @@
     ,"scale":[ 0.203853, 0.203853, 0.203853]
     ,"type":"MESH"
     ,"data":"立方体.006"
-    ,"bound_box":[-5.390877,-7.129793, 0.370409, 5.299438, 1.904285, 7.093643]
+    ,"bound_box":[-0.078128,-7.309307, 0.563637, 5.360879, 1.720723, 6.965737]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}

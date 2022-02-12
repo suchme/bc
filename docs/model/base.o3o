@@ -7,7 +7,7 @@
   {
     "name":"ArmMesh"
     ,"name_full":"ArmMesh"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[ 0.307769, 0.365322, 0.066121],"groups":[0]}
@@ -116,7 +116,7 @@
   ,{
     "name":"BodyMesh"
     ,"name_full":"BodyMesh"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[ 0.107427,-0.197932,-0.180614],"groups":[3,0],"groupWeights":[ 0.000000, 1.000000]}
@@ -304,7 +304,7 @@
   ,{
     "name":"Head"
     ,"name_full":"Head"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[-0.000000,-0.301251, 0.165918],"groups":[1]}
@@ -456,7 +456,7 @@
   ,{
     "name":"LegMesh"
     ,"name_full":"LegMesh"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[ 0.028782,-0.571591, 0.123381],"groups":[0]}
@@ -522,7 +522,6 @@
   }
 ]
 ,"lights":[
-    {"name": "Light", "type": "SUN", "color": [1.0, 1.0, 1.0]}
   ]
 ,"reflectionProbes":[
   ]
@@ -877,10 +876,6 @@
     "children":[]
     ,"objects":["kari.006"]
   }
-  ,"Collection 2":{
-    "children":[]
-    ,"objects":["Camera","Light"]
-  }
   ,"h0":{
     "children":[]
     ,"objects":["kari.005"]
@@ -1004,21 +999,6 @@
     ]
   }
   ,{
-    "name":"Camera"
-    ,"name_full":"Camera"
-    ,"groups":[]
-    ,"material_slots":[]
-    ,"location":[ 7.358891, 4.958310, 6.925791]
-    ,"rotation":[ 1.109319, 0.814928,-0.000000]
-    ,"scale":[ 1.000000, 1.000000, 1.000000]
-    ,"type":"CAMERA"
-    ,"data":"Camera"
-    ,"bound_box":[ 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000]
-    ,"bound_type":"BOX"
-    ,"modifiers":[
-    ]
-  }
-  ,{
     "name":"Head"
     ,"name_full":"Head"
     ,"groups":["Hip","Head","Arm1.L","Arm2.L","Hand.L","Body","Leg1.L","Leg2.L","Foot.L","Leg1.R","Leg2.R","Foot.R","Rear","Arm1.R","Arm2.R","Hand.R"]
@@ -1047,7 +1027,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"karimesh"
-    ,"bound_box":[-0.483189,-1.063403,-0.107747,-0.184926,-0.523919,-0.004398]
+    ,"bound_box":[-0.263070,-0.062708,-0.027520, 0.263070, 0.062708, 0.027520]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
@@ -1063,7 +1043,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"karimesh"
-    ,"bound_box":[ 0.167237,-1.058813, 0.063170, 0.484477,-0.522327, 0.167579]
+    ,"bound_box":[-0.263070,-0.062708,-0.027520, 0.263070, 0.062708, 0.027520]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
@@ -1079,7 +1059,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"karimesh"
-    ,"bound_box":[-0.264651,-0.045069,-0.002201, 0.262074, 0.080388, 0.058648]
+    ,"bound_box":[-0.263070,-0.062708,-0.027520, 0.263070, 0.062708, 0.027520]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
@@ -1143,7 +1123,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"karimesh"
-    ,"bound_box":[-0.292816,-0.045049,-0.017158, 0.236108, 0.080368, 0.082920]
+    ,"bound_box":[-0.263070,-0.062708,-0.027520, 0.263070, 0.062708, 0.027520]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Armature","type":"ARMATURE","object":"Armature","vertex_group":""}
@@ -1169,21 +1149,6 @@
     ]
   }
   ,{
-    "name":"Light"
-    ,"name_full":"Light"
-    ,"groups":[]
-    ,"material_slots":[]
-    ,"location":[-1.462102, 2.533174, 1.243812]
-    ,"rotation":[ 0.650328,-1.196519,-0.055217]
-    ,"scale":[ 1.000000, 1.000000, 1.000000]
-    ,"type":"LIGHT"
-    ,"data":"Light"
-    ,"bound_box":[ 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000]
-    ,"bound_type":"BOX"
-    ,"modifiers":[
-    ]
-  }
-  ,{
     "name":"mount"
     ,"name_full":"mount"
     ,"groups":["Rear"]
@@ -1206,7 +1171,7 @@
     "name":"Scene"
     ,"frame_start":1
     ,"frame_end":120
-    ,"objects":["Body","Head","Leg.L","Arm.L","Armature","mount","Camera","Light","kari","kari.001","kari.002","kari.003","kari.004","kari.006","kari.005"]
+    ,"objects":["Body","Head","Leg.L","Arm.L","Armature","mount","kari","kari.001","kari.002","kari.003","kari.004","kari.006","kari.005"]
     ,"world":{
       "name":"World"
     }

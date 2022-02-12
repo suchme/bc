@@ -2,7 +2,7 @@
 ,"materials":[
     {"name": "Dots Stroke", "name_full": "Dots Stroke", "blend_method": "OPAQUE"}
   ,  {"name": "swimsuit", "name_full": "swimsuit", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//swimsuit.png"}
-  ,  {"name": "tshirt", "name_full": "tshirt", "blend_method": "BLEND", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 0.9900000002235174, "metallic": 0.0, "specular": 0.0004999999888241291, "roughness": 0.0, "ior": 1.0, "subRoughness": 0.0, "baseColorMap": "//tshiat.png"}
+  ,  {"name": "tshirt", "name_full": "tshirt", "blend_method": "BLEND", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0004999999888241291, "roughness": 0.0, "ior": 1.0, "subRoughness": 0.0, "baseColorMap": "//tshiat.png"}
   ,  {"name": "maintex", "name_full": "maintex [base.blend]", "blend_method": "OPAQUE", "baseColor": [0.800000011920929, 0.800000011920929, 0.800000011920929], "opacity": 1.0, "metallic": 0.0, "specular": 0.0, "roughness": 0.0, "ior": 1.4500000476837158, "subRoughness": 0.0, "baseColorMap": "//s0_.png"}
 ]
 ,"meshes":[
@@ -2119,7 +2119,7 @@
   ,{
     "name":"BodyMesh"
     ,"name_full":"BodyMesh [base.blend]"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[ 0.107427,-0.197932,-0.180614],"groups":[3,0],"groupWeights":[ 0.000000, 1.000000]}
@@ -2232,7 +2232,7 @@
   ,{
     "name":"Head"
     ,"name_full":"Head [base.blend]"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[-0.000000,-0.301251, 0.165918],"groups":[1]}
@@ -2347,7 +2347,7 @@
   ,{
     "name":"LegMesh"
     ,"name_full":"LegMesh [base.blend]"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[ 0.028782,-0.571591, 0.123381],"groups":[0]}
@@ -2414,7 +2414,7 @@
   ,{
     "name":"ArmMesh"
     ,"name_full":"ArmMesh [base.blend]"
-    ,"use_auto_smooth":0
+    ,"use_auto_smooth":1
     ,"auto_smooth_angle":0.523599
     ,"vertices":[
       {"pos":[ 0.307769, 0.365322, 0.066121],"groups":[0]}
