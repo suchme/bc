@@ -316,7 +316,7 @@ span.short_regist[content=',']
 ,span.long_regist[content=',']{
 	visibility:hidden;
 }
-button.class{
+.class button{
 background-color:black;
 }
 

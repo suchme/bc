@@ -206,12 +206,13 @@ export default class Subselector{
 					var content = cols.disp?cols.disp(obj,button,e):e;
 
 					button.setAttribute("column",cols.data);
-					button.setAttribute("content",content);
+					button.setAttribute("content",e);
 					button.onclick=filRemoveFunc;
 
 					if(content === null){
 						return;
-						}
+					}
+					
 					if(content instanceof HTMLElement ){
 						button.appendChild(content);
 					}else{
