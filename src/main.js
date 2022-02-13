@@ -814,10 +814,11 @@ class Main {
 var newStyle = document.createElement('style');newStyle.type = "text/css";
 document.getElementsByTagName('head').item(0).appendChild(newStyle);
 var stylesheet = document.styleSheets.item(document.styleSheets.length-1);
+var old_shinki = -1;
 DATA.shinkis.forEach((e)=>{
-		if(e.cd=='')return;
-
-	//		}
+	if(e.cd=='')return;
+	if(e.cd==old_shinki)return;
+	old_shinki=e.cd;
 
 	stylesheet.insertRule(` 
 		.class.${e.cd}{
@@ -825,8 +826,8 @@ DATA.shinkis.forEach((e)=>{
 	}
 	`, stylesheet.cssRules.length);
 
-	document.body.style.display="block";
 });
+document.body.style.display="block";
 
 
 //パラメータ説明追加
