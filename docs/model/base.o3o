@@ -8,7 +8,7 @@
     "name":"ArmMesh"
     ,"name_full":"ArmMesh"
     ,"use_auto_smooth":1
-    ,"auto_smooth_angle":0.523599
+    ,"auto_smooth_angle":3.141593
     ,"vertices":[
       {"pos":[ 0.307769, 0.365322, 0.066121],"groups":[0]}
       ,{"pos":[ 0.307769, 0.497563, 0.066121],"groups":[0]}
@@ -117,7 +117,7 @@
     "name":"BodyMesh"
     ,"name_full":"BodyMesh"
     ,"use_auto_smooth":1
-    ,"auto_smooth_angle":0.523599
+    ,"auto_smooth_angle":3.141593
     ,"vertices":[
       {"pos":[ 0.107427,-0.197932,-0.180614],"groups":[3,0],"groupWeights":[ 0.000000, 1.000000]}
       ,{"pos":[ 0.164739, 0.503933, 0.129862],"groups":[1,2],"groupWeights":[ 0.045874, 0.954126]}
@@ -305,7 +305,7 @@
     "name":"Head"
     ,"name_full":"Head"
     ,"use_auto_smooth":1
-    ,"auto_smooth_angle":0.523599
+    ,"auto_smooth_angle":3.141593
     ,"vertices":[
       {"pos":[-0.000000,-0.301251, 0.165918],"groups":[1]}
       ,{"pos":[-0.000000, 0.172212, 0.184802],"groups":[1]}
@@ -457,7 +457,7 @@
     "name":"LegMesh"
     ,"name_full":"LegMesh"
     ,"use_auto_smooth":1
-    ,"auto_smooth_angle":0.523599
+    ,"auto_smooth_angle":3.141593
     ,"vertices":[
       {"pos":[ 0.028782,-0.571591, 0.123381],"groups":[0]}
       ,{"pos":[ 0.028782,-0.571591,-0.123380],"groups":[0]}
