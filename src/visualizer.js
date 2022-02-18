@@ -24,6 +24,10 @@ var o3o_tmp;
 		if(buso.cd === 1){
 		}else if(buso.class.indexOf(tsugarubx)>=0){
 			o3opath = "model/s2.o3o";
+		}else if(buso.name.indexOf("バレンタイン")>=0){
+			o3opath = "model/valentine.o3o";
+		}else if(buso.name.indexOf("サンタ")>=0){
+			o3opath = "model/xmas.o3o";
 		}else if(buso.name.indexOf("[15th]")>=0){
 			o3opath = "model/15th.o3o";
 		}else if(buso.name.indexOf("[S]")>=0){
@@ -203,16 +207,7 @@ class Scene1 extends Obj{
 
 			});
 			base_instance = new O3oInstance(null,list);
-			base_instance.objectInstances.forEach((object,idx,arr)=>{
-				object.o3oInstance = base_instance;
-
-				if(object.phyObj){
-					if(object.phyObj.type ==OnoPhy.CLOTH){
-						engine.onoPhy.clothes.push(object.phyObj);
-						object.phyObj.onophy = engine.onoPhy;
-					}
-				}
-			});
+			base_instance.joinPhyObj(engine.onoPhy);
 		
 			update_flg=false;
 

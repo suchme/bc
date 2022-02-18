@@ -5,7 +5,7 @@ import Binder from "../../lib/lib/binder.js";
 import Subselector from "./subselector.js";
 import SubLayout from "./sub_layout.js";
 import Visualizer from "./visualizer.js";
-var v;
+var visualizer;
 
 var values={total:{},subtotal:{},extra_passives:[],bonus:{},selected_tab:"main",extension:{}};
 window.values = values;
@@ -371,9 +371,9 @@ class Main {
 
 //		binder.refresh();
 
-		if(v){
-			if(v.scene){
-				v.scene.update();
+		if(visualizer && values.visualize){
+			if(visualizer.scene){
+				visualizer.scene.update();
 			}
 		}
 	}
@@ -848,8 +848,8 @@ document.querySelector("#shinki div.skill").appendChild(
 //	binder.refresh();
 	main.reCalc();
 
-	v = new Visualizer();
-	v.main();
+	visualizer = new Visualizer();
+	visualizer.main();
 
 	}
 

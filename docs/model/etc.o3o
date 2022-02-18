@@ -342,6 +342,55 @@
     ]
   }
   ,{
+    "name":"Cube.005"
+    ,"name_full":"Cube.005"
+    ,"use_auto_smooth":0
+    ,"auto_smooth_angle":0.523599
+    ,"vertices":[
+      {"pos":[ 1.788436, 0.322652, 2.894475]}
+      ,{"pos":[ 0.831348, 0.566302,-1.188027],"groups":[0]}
+      ,{"pos":[ 1.660327,-0.616466, 2.674425]}
+      ,{"pos":[ 0.703239,-0.372816,-1.408076],"groups":[0]}
+      ,{"pos":[ 3.732219, 0.287644, 2.429458]}
+      ,{"pos":[ 2.775131, 0.531295,-1.653043],"groups":[0]}
+      ,{"pos":[ 3.604110,-0.651474, 2.209409]}
+      ,{"pos":[ 2.647022,-0.407823,-1.873093],"groups":[0]}
+      ,{"pos":[ 1.318964, 0.442167, 0.891924]}
+      ,{"pos":[ 1.190856,-0.496951, 0.671875]}
+      ,{"pos":[ 3.134638,-0.531958, 0.206859]}
+      ,{"pos":[ 3.262747, 0.407160, 0.426908]}
+    ]
+    ,"faces":[
+      {"idx":[8,1,3,9]}
+      ,{"idx":[9,3,7,10]}
+      ,{"idx":[10,7,5,11]}
+      ,{"idx":[11,5,1,8]}
+      ,{"idx":[2,6,4,0]}
+      ,{"idx":[7,3,1,5]}
+      ,{"idx":[4,11,8,0]}
+      ,{"idx":[6,10,11,4]}
+      ,{"idx":[2,9,10,6]}
+      ,{"idx":[0,8,9,2]}
+    ]
+    ,"uv_layers":[
+      {
+        "name":"UVMap"
+        ,"data":[
+          [ 0.497630, 1.000000, 0.625000, 1.000000, 0.625000, 0.750000, 0.497630, 0.750000]
+          ,[ 0.497630, 0.750000, 0.625000, 0.750000, 0.625000, 0.500000, 0.497630, 0.500000]
+          ,[ 0.497630, 0.500000, 0.625000, 0.500000, 0.625000, 0.250000, 0.497630, 0.250000]
+          ,[ 0.497630, 0.250000, 0.625000, 0.250000, 0.625000, 0.000000, 0.497630, 0.000000]
+          ,[ 0.125000, 0.500000, 0.375000, 0.500000, 0.375000, 0.250000, 0.125000, 0.250000]
+          ,[ 0.625000, 0.500000, 0.875000, 0.500000, 0.875000, 0.250000, 0.625000, 0.250000]
+          ,[ 0.375000, 0.250000, 0.497630, 0.250000, 0.497630, 0.000000, 0.375000, 0.000000]
+          ,[ 0.375000, 0.500000, 0.497630, 0.500000, 0.497630, 0.250000, 0.375000, 0.250000]
+          ,[ 0.375000, 0.750000, 0.497630, 0.750000, 0.497630, 0.500000, 0.375000, 0.500000]
+          ,[ 0.375000, 1.000000, 0.497630, 1.000000, 0.497630, 0.750000, 0.375000, 0.750000]
+        ]
+      }
+    ]
+  }
+  ,{
     "name":"Sphere"
     ,"name_full":"Sphere"
     ,"use_auto_smooth":0
@@ -733,8 +782,8 @@
   ,{
     "name":"立方体.003"
     ,"name_full":"立方体.003"
-    ,"use_auto_smooth":0
-    ,"auto_smooth_angle":0.523599
+    ,"use_auto_smooth":1
+    ,"auto_smooth_angle":3.141593
     ,"vertices":[
       {"pos":[ 0.275023,-0.384956,-0.272268],"groups":[0]}
       ,{"pos":[ 0.275453,-0.299273,-0.271124],"groups":[0]}
@@ -797,13 +846,13 @@
       ,{"pos":[ 0.361297,-0.051387,-0.176784],"groups":[0]}
       ,{"pos":[ 0.330596, 0.060022,-0.142507],"groups":[0]}
       ,{"pos":[ 0.412751, 0.014261,-0.249163],"groups":[0]}
-      ,{"pos":[ 0.382050, 0.125670,-0.214885],"groups":[0]}
+      ,{"pos":[ 0.382050, 0.125670,-0.214885],"groups":[0,1],"groupWeights":[ 0.500000, 0.500000]}
       ,{"pos":[ 0.387177, 0.007823,-0.251144],"groups":[0]}
-      ,{"pos":[ 0.356476, 0.119233,-0.216866],"groups":[0]}
-      ,{"pos":[ 0.335366, 0.049826,-0.339162],"groups":[0]}
-      ,{"pos":[ 0.304665, 0.161236,-0.304884],"groups":[0]}
+      ,{"pos":[ 0.356476, 0.119233,-0.216866],"groups":[0,1],"groupWeights":[ 0.500000, 0.500000]}
+      ,{"pos":[ 0.335366, 0.049826,-0.339162],"groups":[0,1],"groupWeights":[ 0.500000, 0.500000]}
+      ,{"pos":[ 0.304665, 0.161236,-0.304884],"groups":[0,1],"groupWeights":[ 0.500000, 0.500000]}
       ,{"pos":[ 0.322579, 0.039872,-0.318262],"groups":[0]}
-      ,{"pos":[ 0.291878, 0.151282,-0.283984],"groups":[0]}
+      ,{"pos":[ 0.291878, 0.151282,-0.283984],"groups":[0,1],"groupWeights":[ 0.500000, 0.500000]}
       ,{"pos":[ 0.219766,-0.039420,-0.326227],"groups":[0,1],"groupWeights":[ 0.500000, 0.500000]}
       ,{"pos":[ 0.189065, 0.071990,-0.291949],"groups":[0,1],"groupWeights":[ 0.500000, 0.500000]}
       ,{"pos":[ 0.232553,-0.042936,-0.303346],"groups":[0,1],"groupWeights":[ 0.500000, 0.500000]}
@@ -958,8 +1007,8 @@
   ,{
     "name":"立方体.004"
     ,"name_full":"立方体.004"
-    ,"use_auto_smooth":0
-    ,"auto_smooth_angle":0.523599
+    ,"use_auto_smooth":1
+    ,"auto_smooth_angle":3.141593
     ,"vertices":[
       {"pos":[-0.109570,-0.067726, 0.085739],"groups":[0]}
       ,{"pos":[-0.109570,-0.012450, 0.085739],"groups":[0]}
@@ -1224,7 +1273,7 @@
     "name":"BodyMesh"
     ,"name_full":"BodyMesh [base.blend]"
     ,"use_auto_smooth":1
-    ,"auto_smooth_angle":0.523599
+    ,"auto_smooth_angle":3.141593
     ,"vertices":[
       {"pos":[ 0.107427,-0.197932,-0.180614],"groups":[3,0],"groupWeights":[ 0.000000, 1.000000]}
       ,{"pos":[ 0.164739, 0.503933, 0.129862],"groups":[1,2],"groupWeights":[ 0.045874, 0.954126]}
@@ -1337,7 +1386,7 @@
     "name":"Head"
     ,"name_full":"Head [base.blend]"
     ,"use_auto_smooth":1
-    ,"auto_smooth_angle":0.523599
+    ,"auto_smooth_angle":3.141593
     ,"vertices":[
       {"pos":[-0.000000,-0.301251, 0.165918],"groups":[1]}
       ,{"pos":[-0.000000, 0.172212, 0.184802],"groups":[1]}
@@ -1452,7 +1501,7 @@
     "name":"LegMesh"
     ,"name_full":"LegMesh [base.blend]"
     ,"use_auto_smooth":1
-    ,"auto_smooth_angle":0.523599
+    ,"auto_smooth_angle":3.141593
     ,"vertices":[
       {"pos":[ 0.028782,-0.571591, 0.123381],"groups":[0]}
       ,{"pos":[ 0.028782,-0.571591,-0.123380],"groups":[0]}
@@ -1519,7 +1568,7 @@
     "name":"ArmMesh"
     ,"name_full":"ArmMesh [base.blend]"
     ,"use_auto_smooth":1
-    ,"auto_smooth_angle":0.523599
+    ,"auto_smooth_angle":3.141593
     ,"vertices":[
       {"pos":[ 0.307769, 0.365322, 0.066121],"groups":[0]}
       ,{"pos":[ 0.307769, 0.497563, 0.066121],"groups":[0]}
@@ -1731,7 +1780,7 @@
     ]
   }
 ]
-,"framerate":30
+,"framerate":60
 ,"actions":[
   {
     "name":"standard"
@@ -1853,121 +1902,98 @@
     ]
   }
   ,{
-    "name":"walk"
-    ,"endframe":64
-    ,"id_root":"OBJECT"
-    ,"fcurves":[
-      {"target":"Hip","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Body","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Leg1.L","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 0.906826,-0.421505, 0.000000, 0.000000]},{"f":32,"p":[ 0.919912, 0.392124,-0.000000,-0.000000]},{"f":64,"p":[ 0.906826,-0.421505, 0.000000, 0.000000]}]}
-      ,{"target":"Leg2.L","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Foot.L","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Head","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Arm1.L","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 0.857871, 0.000000,-0.513865,-0.000000]},{"f":43,"p":[ 0.909286,-0.128660, 0.381135,-0.106687]},{"f":64,"p":[ 0.857871, 0.000000,-0.513865,-0.000000]}]}
-      ,{"target":"Arm2.L","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]},{"f":43,"p":[ 0.887690, 0.450573, 0.093814, 0.013782]}]}
-      ,{"target":"Hand.L","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Leg1.R","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 0.942235, 0.334953, 0.000000, 0.000000]},{"f":32,"p":[ 0.913633,-0.406541,-0.000000,-0.000000]},{"f":64,"p":[ 0.942235, 0.334953, 0.000000, 0.000000]}]}
-      ,{"target":"Leg2.R","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Foot.R","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Arm1.R","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 0.870504, 0.000000, 0.492161, 0.000000]}]}
-      ,{"target":"Arm2.R","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Hand.R","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Rear","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-    ]
-  }
-  ,{
     "name":"default"
-    ,"endframe":2
+    ,"endframe":3
     ,"id_root":"OBJECT"
     ,"fcurves":[
-      {"target":"Hip","type":"location","idx":0,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Hip","type":"location","idx":2,"keys":[{"f":1,"p":-0.000000}]}
-      ,{"target":"Hip","type":"location","idx":1,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Hip","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Hip","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Hip","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Hip","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Body","type":"location","idx":0,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Body","type":"location","idx":2,"keys":[{"f":1,"p":-0.000000}]}
-      ,{"target":"Body","type":"location","idx":1,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Body","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Body","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Body","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Body","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg1.L","type":"location","idx":0,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Leg1.L","type":"location","idx":2,"keys":[{"f":1,"p":-0.000000}]}
-      ,{"target":"Leg1.L","type":"location","idx":1,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Leg1.L","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Leg1.L","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg1.L","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg1.L","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg2.L","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Leg2.L","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg2.L","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg2.L","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Foot.L","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Foot.L","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Foot.L","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Foot.L","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Head","type":"location","idx":0,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Head","type":"location","idx":2,"keys":[{"f":1,"p":-0.000000}]}
-      ,{"target":"Head","type":"location","idx":1,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Head","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Head","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Head","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Head","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm1.L","type":"location","idx":0,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Arm1.L","type":"location","idx":2,"keys":[{"f":1,"p":-0.000000}]}
-      ,{"target":"Arm1.L","type":"location","idx":1,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Arm1.L","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Arm1.L","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm1.L","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm1.L","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm2.L","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Arm2.L","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm2.L","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm2.L","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Hand.L","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Hand.L","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Hand.L","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Hand.L","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg1.R","type":"location","idx":0,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Leg1.R","type":"location","idx":2,"keys":[{"f":1,"p":-0.000000}]}
-      ,{"target":"Leg1.R","type":"location","idx":1,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Leg1.R","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Leg1.R","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg1.R","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg1.R","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg2.R","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Leg2.R","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg2.R","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg2.R","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Foot.R","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Foot.R","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Foot.R","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Foot.R","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm1.R","type":"location","idx":0,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Arm1.R","type":"location","idx":2,"keys":[{"f":1,"p":-0.000000}]}
-      ,{"target":"Arm1.R","type":"location","idx":1,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Arm1.R","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Arm1.R","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm1.R","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm1.R","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm2.R","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Arm2.R","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm2.R","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm2.R","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Hand.R","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Hand.R","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Hand.R","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Hand.R","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Rear","type":"location","idx":0,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Rear","type":"location","idx":2,"keys":[{"f":1,"p":-0.000000}]}
-      ,{"target":"Rear","type":"location","idx":1,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Rear","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Rear","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Rear","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Rear","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
+      {"target":"Hip","type":"location","idx":0,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Hip","type":"location","idx":2,"keys":[{"f":2,"p":-0.000000}]}
+      ,{"target":"Hip","type":"location","idx":1,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Hip","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Hip","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Hip","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Hip","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Body","type":"location","idx":0,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Body","type":"location","idx":2,"keys":[{"f":2,"p":-0.000000}]}
+      ,{"target":"Body","type":"location","idx":1,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Body","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Body","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Body","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Body","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg1.L","type":"location","idx":0,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Leg1.L","type":"location","idx":2,"keys":[{"f":2,"p":-0.000000}]}
+      ,{"target":"Leg1.L","type":"location","idx":1,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Leg1.L","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Leg1.L","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg1.L","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg1.L","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg2.L","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Leg2.L","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg2.L","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg2.L","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Foot.L","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Foot.L","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Foot.L","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Foot.L","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Head","type":"location","idx":0,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Head","type":"location","idx":2,"keys":[{"f":2,"p":-0.000000}]}
+      ,{"target":"Head","type":"location","idx":1,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Head","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Head","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Head","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Head","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm1.L","type":"location","idx":0,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Arm1.L","type":"location","idx":2,"keys":[{"f":2,"p":-0.000000}]}
+      ,{"target":"Arm1.L","type":"location","idx":1,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Arm1.L","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Arm1.L","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm1.L","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm1.L","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm2.L","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Arm2.L","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm2.L","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm2.L","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Hand.L","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Hand.L","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Hand.L","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Hand.L","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg1.R","type":"location","idx":0,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Leg1.R","type":"location","idx":2,"keys":[{"f":2,"p":-0.000000}]}
+      ,{"target":"Leg1.R","type":"location","idx":1,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Leg1.R","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Leg1.R","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg1.R","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg1.R","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg2.R","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Leg2.R","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg2.R","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg2.R","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Foot.R","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Foot.R","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Foot.R","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Foot.R","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm1.R","type":"location","idx":0,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Arm1.R","type":"location","idx":2,"keys":[{"f":2,"p":-0.000000}]}
+      ,{"target":"Arm1.R","type":"location","idx":1,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Arm1.R","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Arm1.R","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm1.R","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm1.R","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm2.R","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Arm2.R","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm2.R","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm2.R","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Hand.R","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Hand.R","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Hand.R","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Hand.R","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Rear","type":"location","idx":0,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Rear","type":"location","idx":2,"keys":[{"f":2,"p":-0.000000}]}
+      ,{"target":"Rear","type":"location","idx":1,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Rear","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Rear","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Rear","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Rear","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
     ]
   }
 ]
@@ -1979,18 +2005,6 @@
   ,"h126":{
     "children":[]
     ,"objects":["Headset|grimmtuno"]
-  }
-  ,"h130":{
-    "children":[]
-    ,"objects":["BackHair|drill","hat"]
-  }
-  ,"h158":{
-    "children":[]
-    ,"objects":["BackHair|drill","hat.002"]
-  }
-  ,"h162":{
-    "children":[]
-    ,"objects":["BackHair|drill","hat.001"]
   }
   ,"h166":{
     "children":[]
@@ -2034,7 +2048,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"ArmMesh [base.blend]"
-    ,"bound_box":[-1.454407, 0.365322,-0.164644, 1.454407, 0.497563, 0.079308]
+    ,"bound_box":[-0.632299,-0.793427,-0.194377, 0.569716, 0.333298, 0.162085]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2048,16 +2062,16 @@
     ,"groups":[]
     ,"material_slots":[]
     ,"poseBones":[
-      {"name":"Hip","target":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      {"name":"Hip","target":"Hip","location":[-0.000000, 0.028264,-0.019219],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Body","target":"Body","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Body","target":"Body","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.999954,-0.000000,-0.000000, 0.009567],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
       ,{"name":"Head","target":"Head","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Arm1.L","target":"Arm1.L","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Arm1.L","target":"Arm1.L","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.794760, 0.015407,-0.606334, 0.018034],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
       ,{"name":"Arm2.L","target":"Arm2.L","parent":"Arm1.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
@@ -2066,7 +2080,7 @@
       ,{"name":"Hand.L","target":"Hand.L","parent":"Arm2.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Arm1.R","target":"Arm1.R","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Arm1.R","target":"Arm1.R","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.810450,-0.008072, 0.585233, 0.022017],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
       ,{"name":"Arm2.R","target":"Arm2.R","parent":"Arm1.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
@@ -2075,25 +2089,25 @@
       ,{"name":"Hand.R","target":"Hand.R","parent":"Arm2.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Leg1.L","target":"Leg1.L","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Leg1.L","target":"Leg1.L","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.996968,-0.076393,-0.003736, 0.005885],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Leg2.L","target":"Leg2.L","parent":"Leg1.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Leg2.L","target":"Leg2.L","parent":"Leg1.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.986921, 0.158257, 0.007740,-0.012192],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Foot.L","target":"Foot.L","parent":"Leg2.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Foot.L","target":"Foot.L","parent":"Leg2.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.997451,-0.068093, 0.000101,-0.001074],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Leg1.R","target":"Leg1.R","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Leg1.R","target":"Leg1.R","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.996066,-0.087358,-0.000000,-0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Leg2.R","target":"Leg2.R","parent":"Leg1.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Leg2.R","target":"Leg2.R","parent":"Leg1.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.980310, 0.194654, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Foot.R","target":"Foot.R","parent":"Leg2.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Foot.R","target":"Foot.R","parent":"Leg2.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.995089,-0.095515,-0.000000,-0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Rear","target":"Rear","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Rear","target":"Rear","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.996933,-0.000000,-0.000176,-0.017010],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
     ]
@@ -2102,8 +2116,8 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"ARMATURE"
     ,"data":"Armature"
-    ,"action":"default"
-    ,"bound_box":[-1.439246,-1.834577,-0.281812, 1.439246, 1.200000, 0.263460]
+    ,"action":"standard"
+    ,"bound_box":[-0.583285,-1.844198,-0.273391, 0.519743, 1.180781, 0.291724]
     ,"bound_type":"BOX"
     ,"modifiers":[
     ]
@@ -2129,23 +2143,6 @@
     ]
   }
   ,{
-    "name":"BackHair|drill"
-    ,"name_full":"BackHair|drill"
-    ,"groups":["Head","fix"]
-    ,"material_slots":["event"]
-    ,"location":[ 0.000000, 1.000000, 0.241670]
-    ,"rotation":[ 0.000000, 0.000000, 0.000000]
-    ,"scale":[ 1.000000, 1.000000, 1.000000]
-    ,"type":"MESH"
-    ,"data":"立方体.003"
-    ,"bound_box":[ 0.170567,-0.385051, 0.119626, 0.446446, 0.161236, 0.384703]
-    ,"bound_type":"BOX"
-    ,"modifiers":[
-      {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
-      ,{"name":"アーマチュア","type":"ARMATURE","object":"Armature","vertex_group":""}
-    ]
-  }
-  ,{
     "name":"Body"
     ,"name_full":"Body"
     ,"groups":["Hip","Arm1.L","Body","Leg1.L","Arm1.R","Leg1.R","Head"]
@@ -2157,7 +2154,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"BodyMesh [base.blend]"
-    ,"bound_box":[-0.298446,-0.577976,-0.226815, 0.298446, 0.647921, 0.194782]
+    ,"bound_box":[-0.271096,-0.613820,-0.198483, 0.274754, 0.628702, 0.223046]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2178,7 +2175,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"Cube"
-    ,"bound_box":[-0.225782,-0.037852,-0.005642, 0.225782, 0.171583, 0.120428]
+    ,"bound_box":[ 0.000000,-0.037852,-0.005642, 0.225782, 0.171583, 0.120428]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2220,54 +2217,6 @@
     ]
   }
   ,{
-    "name":"hat"
-    ,"name_full":"hat"
-    ,"groups":["Head"]
-    ,"material_slots":["event"]
-    ,"location":[ 0.170147, 1.182789,-0.056037]
-    ,"rotation":[-0.121713,-0.038277,-0.318437]
-    ,"scale":[ 1.000000, 1.000000, 1.000000]
-    ,"type":"MESH"
-    ,"data":"立方体.004"
-    ,"bound_box":[-0.145820,-0.085246,-0.143135, 0.106150, 0.180204, 0.126974]
-    ,"bound_type":"BOX"
-    ,"modifiers":[
-      {"name":"アーマチュア","type":"ARMATURE","object":"Armature","vertex_group":""}
-    ]
-  }
-  ,{
-    "name":"hat.001"
-    ,"name_full":"hat.001"
-    ,"groups":["Head"]
-    ,"material_slots":["event.002"]
-    ,"location":[ 0.170147, 1.182789,-0.056037]
-    ,"rotation":[-0.121713,-0.038277,-0.318437]
-    ,"scale":[ 1.000000, 1.000000, 1.000000]
-    ,"type":"MESH"
-    ,"data":"立方体.004"
-    ,"bound_box":[-0.145820,-0.085246,-0.143135, 0.106150, 0.180204, 0.126974]
-    ,"bound_type":"BOX"
-    ,"modifiers":[
-      {"name":"アーマチュア","type":"ARMATURE","object":"Armature","vertex_group":""}
-    ]
-  }
-  ,{
-    "name":"hat.002"
-    ,"name_full":"hat.002"
-    ,"groups":["Head"]
-    ,"material_slots":["event.001"]
-    ,"location":[ 0.170147, 1.182789,-0.056037]
-    ,"rotation":[-0.121713,-0.038277,-0.318437]
-    ,"scale":[ 1.000000, 1.000000, 1.000000]
-    ,"type":"MESH"
-    ,"data":"立方体.004"
-    ,"bound_box":[-0.145820,-0.085246,-0.143135, 0.106150, 0.180204, 0.126974]
-    ,"bound_type":"BOX"
-    ,"modifiers":[
-      {"name":"アーマチュア","type":"ARMATURE","object":"Armature","vertex_group":""}
-    ]
-  }
-  ,{
     "name":"Head"
     ,"name_full":"Head"
     ,"groups":["Hip","Head","Arm1.L","Arm2.L","Hand.L","Body","Leg1.L","Leg2.L","Foot.L","Leg1.R","Leg2.R","Foot.R","Rear","Arm1.R","Arm2.R","Hand.R"]
@@ -2279,7 +2228,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"Head [base.blend]"
-    ,"bound_box":[-0.259811,-0.301251,-0.254042, 0.259811, 0.269778, 0.254042]
+    ,"bound_box":[-0.256906,-0.320471,-0.225732, 0.262620, 0.250559, 0.282259]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2297,7 +2246,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"立方体"
-    ,"bound_box":[ 0.166089,-0.353282,-0.049561, 0.294292,-0.129752, 0.049561]
+    ,"bound_box":[-0.294292,-0.353282,-0.049561, 0.294292,-0.129753, 0.049561]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2410,7 +2359,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"LegMesh [base.blend]"
-    ,"bound_box":[-0.275543,-1.872160,-0.375289, 0.275543,-0.571591, 0.133211]
+    ,"bound_box":[-0.275543,-1.881185,-0.366587, 0.278968,-0.566038, 0.155285]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2428,7 +2377,7 @@
     ,"scale":[ 1.000000, 1.000000, 1.000000]
     ,"type":"MESH"
     ,"data":"Cube.006 [base.blend]"
-    ,"bound_box":[-0.202202,-0.111930,-0.039802, 0.202202, 0.470923, 0.115921]
+    ,"bound_box":[-0.200580,-0.131169,-0.014875, 0.203590, 0.451727, 0.149410]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -2550,16 +2499,16 @@
     ,"groups":[]
     ,"material_slots":[]
     ,"poseBones":[
-      {"name":"Hip","target":"Hip","location":[-0.000000, 0.028264, 0.017659],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      {"name":"Hip","target":"Hip","location":[-0.000000, 0.028264, 0.010604],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Body","target":"Body","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.999090,-0.000000,-0.000000, 0.043034],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Body","target":"Body","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.998784,-0.000000, 0.000000,-0.046102],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
       ,{"name":"Head","target":"Head","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Arm1.L","target":"Arm1.L","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.817422, 0.016092,-0.574336, 0.017405],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Arm1.L","target":"Arm1.L","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.813086, 0.015961,-0.580458, 0.017525],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
       ,{"name":"Arm2.L","target":"Arm2.L","parent":"Arm1.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
@@ -2568,7 +2517,7 @@
       ,{"name":"Hand.L","target":"Hand.L","parent":"Arm2.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Arm1.R","target":"Arm1.R","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.829679,-0.014652, 0.556677, 0.020233],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Arm1.R","target":"Arm1.R","parent":"Body","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.826000,-0.013393, 0.562140, 0.020574],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
       ,{"name":"Arm2.R","target":"Arm2.R","parent":"Arm1.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
@@ -2577,25 +2526,25 @@
       ,{"name":"Hand.R","target":"Hand.R","parent":"Arm2.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 1.000000,-0.000000, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Leg1.L","target":"Leg1.L","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.998596,-0.035373,-0.001730, 0.002725],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Leg1.L","target":"Leg1.L","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.998285,-0.043221,-0.002114, 0.003330],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Leg2.L","target":"Leg2.L","parent":"Leg1.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.993944, 0.073279, 0.003584,-0.005645],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Leg2.L","target":"Leg2.L","parent":"Leg1.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.992601, 0.089537, 0.004379,-0.006898],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Foot.L","target":"Foot.L","parent":"Leg2.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.997933,-0.000677, 0.000047,-0.000497],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Foot.L","target":"Foot.L","parent":"Leg2.L","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.997840,-0.013574, 0.000057,-0.000607],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Leg1.R","target":"Leg1.R","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.998179,-0.040450, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Leg1.R","target":"Leg1.R","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.997775,-0.049424,-0.000000,-0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Leg2.R","target":"Leg2.R","parent":"Leg1.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.990883, 0.090132, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Leg2.R","target":"Leg2.R","parent":"Leg1.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.988860, 0.110129, 0.000000, 0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Foot.R","target":"Foot.R","parent":"Leg2.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.996839,-0.013374,-0.000000,-0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Foot.R","target":"Foot.R","parent":"Leg2.R","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.996504,-0.029089,-0.000000,-0.000000],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
-      ,{"name":"Rear","target":"Rear","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.999005,-0.000000,-0.000057,-0.005517],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
+      ,{"name":"Rear","target":"Rear","parent":"Hip","location":[ 0.000000, 0.000000, 0.000000],"rotation":[ 0.994054,-0.000000,-0.000340,-0.032984],"scale":[ 1.000000, 1.000000, 1.000000],"constraints":[
       ]
 }
     ]
@@ -2605,7 +2554,7 @@
     ,"type":"ARMATURE"
     ,"data":"Armature"
     ,"action":"standard"
-    ,"bound_box":[-0.657237,-1.833721,-0.255053, 0.607126, 1.217659, 0.291724]
+    ,"bound_box":[-0.652011,-1.836530,-0.258584, 0.599514, 1.210604, 0.291724]
     ,"bound_type":"BOX"
     ,"modifiers":[
     ]
@@ -2697,7 +2646,7 @@
     "name":"Scene"
     ,"frame_start":1
     ,"frame_end":120
-    ,"objects":["Body","Head","Leg.L","Arm.L","Armature","mount","Headset|grimmtuno","Headset|h122","tama","BackHair|drill","hat","hat.002","hat.001","円","Cube","Glass","BackHair","Cube.002","Head|pumpkin","hwhat","ribbon","ribbon.001","Head|pumpkin.001","ribbon.002","Head|pumpkin.002"]
+    ,"objects":["Body","Head","Leg.L","Arm.L","Armature","mount","Headset|grimmtuno","Headset|h122","tama","円","Cube","Glass","BackHair","Cube.002","Head|pumpkin","hwhat","ribbon","ribbon.001","Head|pumpkin.001","ribbon.002","Head|pumpkin.002"]
     ,"world":{
       "name":"World"
     }

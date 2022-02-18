@@ -122,8 +122,8 @@
   ,{
     "name":"Cube"
     ,"name_full":"Cube"
-    ,"use_auto_smooth":0
-    ,"auto_smooth_angle":0.523599
+    ,"use_auto_smooth":1
+    ,"auto_smooth_angle":3.141593
     ,"vertices":[
       {"pos":[ 1.743005, 0.524605,-0.066600]}
       ,{"pos":[ 1.834043,-0.666112,-0.066599]}
@@ -420,7 +420,7 @@
       ,{"pos":[ 1.000000, 0.216342,-0.178115]}
       ,{"pos":[ 0.417758,-6.413756,-1.059901]}
       ,{"pos":[-0.000000, 0.216342,-0.178115]}
-      ,{"pos":[ 0.417758,-2.909666,-0.649144]}
+      ,{"pos":[ 0.470689,-2.980566,-0.190258]}
       ,{"pos":[-0.000000, 0.082547, 0.273683]}
       ,{"pos":[ 1.207822, 0.054747, 0.134335]}
       ,{"pos":[ 1.059397, 0.564266, 0.314085]}
@@ -1775,7 +1775,7 @@
     "name":"BodyMesh"
     ,"name_full":"BodyMesh [base.blend]"
     ,"use_auto_smooth":1
-    ,"auto_smooth_angle":0.523599
+    ,"auto_smooth_angle":3.141593
     ,"vertices":[
       {"pos":[ 0.107427,-0.197932,-0.180614],"groups":[3,0],"groupWeights":[ 0.000000, 1.000000]}
       ,{"pos":[ 0.164739, 0.503933, 0.129862],"groups":[1,2],"groupWeights":[ 0.045874, 0.954126]}
@@ -1888,7 +1888,7 @@
     "name":"Head"
     ,"name_full":"Head [base.blend]"
     ,"use_auto_smooth":1
-    ,"auto_smooth_angle":0.523599
+    ,"auto_smooth_angle":3.141593
     ,"vertices":[
       {"pos":[-0.000000,-0.301251, 0.165918],"groups":[1]}
       ,{"pos":[-0.000000, 0.172212, 0.184802],"groups":[1]}
@@ -2003,7 +2003,7 @@
     "name":"LegMesh"
     ,"name_full":"LegMesh [base.blend]"
     ,"use_auto_smooth":1
-    ,"auto_smooth_angle":0.523599
+    ,"auto_smooth_angle":3.141593
     ,"vertices":[
       {"pos":[ 0.028782,-0.571591, 0.123381],"groups":[0]}
       ,{"pos":[ 0.028782,-0.571591,-0.123380],"groups":[0]}
@@ -2070,7 +2070,7 @@
     "name":"ArmMesh"
     ,"name_full":"ArmMesh [base.blend]"
     ,"use_auto_smooth":1
-    ,"auto_smooth_angle":0.523599
+    ,"auto_smooth_angle":3.141593
     ,"vertices":[
       {"pos":[ 0.307769, 0.365322, 0.066121],"groups":[0]}
       ,{"pos":[ 0.307769, 0.497563, 0.066121],"groups":[0]}
@@ -2480,120 +2480,104 @@
   }
   ,{
     "name":"walk"
-    ,"endframe":64
-    ,"id_root":"OBJECT"
+    ,"endframe":1
+    ,"id_root":""
     ,"fcurves":[
-      {"target":"Hip","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Body","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Leg1.L","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 0.906826,-0.421505, 0.000000, 0.000000]},{"f":32,"p":[ 0.919912, 0.392124,-0.000000,-0.000000]},{"f":64,"p":[ 0.906826,-0.421505, 0.000000, 0.000000]}]}
-      ,{"target":"Leg2.L","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Foot.L","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Head","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Arm1.L","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 0.857871, 0.000000,-0.513865,-0.000000]},{"f":43,"p":[ 0.909286,-0.128660, 0.381135,-0.106687]},{"f":64,"p":[ 0.857871, 0.000000,-0.513865,-0.000000]}]}
-      ,{"target":"Arm2.L","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]},{"f":43,"p":[ 0.887690, 0.450573, 0.093814, 0.013782]}]}
-      ,{"target":"Hand.L","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Leg1.R","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 0.942235, 0.334953, 0.000000, 0.000000]},{"f":32,"p":[ 0.913633,-0.406541,-0.000000,-0.000000]},{"f":64,"p":[ 0.942235, 0.334953, 0.000000, 0.000000]}]}
-      ,{"target":"Leg2.R","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Foot.R","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Arm1.R","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 0.870504, 0.000000, 0.492161, 0.000000]}]}
-      ,{"target":"Arm2.R","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Hand.R","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Rear","type":"rotation_quaternion","idx":0,"keys":[{"f":0,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
     ]
   }
   ,{
     "name":"default"
-    ,"endframe":2
+    ,"endframe":3
     ,"id_root":"OBJECT"
     ,"fcurves":[
-      {"target":"Hip","type":"location","idx":0,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Hip","type":"location","idx":2,"keys":[{"f":1,"p":-0.000000}]}
-      ,{"target":"Hip","type":"location","idx":1,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Hip","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Hip","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Hip","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Hip","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Body","type":"location","idx":0,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Body","type":"location","idx":2,"keys":[{"f":1,"p":-0.000000}]}
-      ,{"target":"Body","type":"location","idx":1,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Body","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Body","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Body","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Body","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg1.L","type":"location","idx":0,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Leg1.L","type":"location","idx":2,"keys":[{"f":1,"p":-0.000000}]}
-      ,{"target":"Leg1.L","type":"location","idx":1,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Leg1.L","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Leg1.L","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg1.L","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg1.L","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg2.L","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Leg2.L","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg2.L","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg2.L","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Foot.L","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Foot.L","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Foot.L","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Foot.L","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Head","type":"location","idx":0,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Head","type":"location","idx":2,"keys":[{"f":1,"p":-0.000000}]}
-      ,{"target":"Head","type":"location","idx":1,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Head","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Head","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Head","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Head","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm1.L","type":"location","idx":0,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Arm1.L","type":"location","idx":2,"keys":[{"f":1,"p":-0.000000}]}
-      ,{"target":"Arm1.L","type":"location","idx":1,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Arm1.L","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Arm1.L","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm1.L","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm1.L","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm2.L","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Arm2.L","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm2.L","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm2.L","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Hand.L","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Hand.L","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Hand.L","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Hand.L","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg1.R","type":"location","idx":0,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Leg1.R","type":"location","idx":2,"keys":[{"f":1,"p":-0.000000}]}
-      ,{"target":"Leg1.R","type":"location","idx":1,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Leg1.R","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Leg1.R","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg1.R","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg1.R","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg2.R","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Leg2.R","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg2.R","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Leg2.R","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Foot.R","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Foot.R","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Foot.R","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Foot.R","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm1.R","type":"location","idx":0,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Arm1.R","type":"location","idx":2,"keys":[{"f":1,"p":-0.000000}]}
-      ,{"target":"Arm1.R","type":"location","idx":1,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Arm1.R","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Arm1.R","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm1.R","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm1.R","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm2.R","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Arm2.R","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm2.R","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Arm2.R","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Hand.R","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Hand.R","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Hand.R","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Hand.R","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Rear","type":"location","idx":0,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Rear","type":"location","idx":2,"keys":[{"f":1,"p":-0.000000}]}
-      ,{"target":"Rear","type":"location","idx":1,"keys":[{"f":1,"p": 0.000000}]}
-      ,{"target":"Rear","type":"rotation_quaternion","idx":0,"keys":[{"f":1,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
-      ,{"target":"Rear","type":"scale","idx":0,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Rear","type":"scale","idx":2,"keys":[{"f":1,"p": 1.000000}]}
-      ,{"target":"Rear","type":"scale","idx":1,"keys":[{"f":1,"p": 1.000000}]}
+      {"target":"Hip","type":"location","idx":0,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Hip","type":"location","idx":2,"keys":[{"f":2,"p":-0.000000}]}
+      ,{"target":"Hip","type":"location","idx":1,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Hip","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Hip","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Hip","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Hip","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Body","type":"location","idx":0,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Body","type":"location","idx":2,"keys":[{"f":2,"p":-0.000000}]}
+      ,{"target":"Body","type":"location","idx":1,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Body","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Body","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Body","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Body","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg1.L","type":"location","idx":0,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Leg1.L","type":"location","idx":2,"keys":[{"f":2,"p":-0.000000}]}
+      ,{"target":"Leg1.L","type":"location","idx":1,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Leg1.L","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Leg1.L","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg1.L","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg1.L","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg2.L","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Leg2.L","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg2.L","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg2.L","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Foot.L","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Foot.L","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Foot.L","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Foot.L","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Head","type":"location","idx":0,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Head","type":"location","idx":2,"keys":[{"f":2,"p":-0.000000}]}
+      ,{"target":"Head","type":"location","idx":1,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Head","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Head","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Head","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Head","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm1.L","type":"location","idx":0,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Arm1.L","type":"location","idx":2,"keys":[{"f":2,"p":-0.000000}]}
+      ,{"target":"Arm1.L","type":"location","idx":1,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Arm1.L","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Arm1.L","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm1.L","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm1.L","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm2.L","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Arm2.L","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm2.L","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm2.L","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Hand.L","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Hand.L","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Hand.L","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Hand.L","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg1.R","type":"location","idx":0,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Leg1.R","type":"location","idx":2,"keys":[{"f":2,"p":-0.000000}]}
+      ,{"target":"Leg1.R","type":"location","idx":1,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Leg1.R","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Leg1.R","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg1.R","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg1.R","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg2.R","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Leg2.R","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg2.R","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Leg2.R","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Foot.R","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Foot.R","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Foot.R","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Foot.R","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm1.R","type":"location","idx":0,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Arm1.R","type":"location","idx":2,"keys":[{"f":2,"p":-0.000000}]}
+      ,{"target":"Arm1.R","type":"location","idx":1,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Arm1.R","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Arm1.R","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm1.R","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm1.R","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm2.R","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Arm2.R","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm2.R","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Arm2.R","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Hand.R","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Hand.R","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Hand.R","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Hand.R","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Rear","type":"location","idx":0,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Rear","type":"location","idx":2,"keys":[{"f":2,"p":-0.000000}]}
+      ,{"target":"Rear","type":"location","idx":1,"keys":[{"f":2,"p": 0.000000}]}
+      ,{"target":"Rear","type":"rotation_quaternion","idx":0,"keys":[{"f":2,"p":[ 1.000000,-0.000000, 0.000000, 0.000000]}]}
+      ,{"target":"Rear","type":"scale","idx":0,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Rear","type":"scale","idx":2,"keys":[{"f":2,"p": 1.000000}]}
+      ,{"target":"Rear","type":"scale","idx":1,"keys":[{"f":2,"p": 1.000000}]}
     ]
   }
 ]
@@ -3057,7 +3041,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"立方体.002"
-    ,"bound_box":[-0.000000,-7.887068,-0.387983, 3.017486, 0.945592, 1.626676]
+    ,"bound_box":[-3.017486,-7.887068,-0.387983, 3.017486, 0.945592, 1.626676]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -3150,7 +3134,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"Cube"
-    ,"bound_box":[-0.000000,-3.168594,-1.594943, 2.306621, 1.419054, 0.066599]
+    ,"bound_box":[-2.306621,-3.168594,-1.594943, 2.306621, 1.419054, 0.066599]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -3228,7 +3212,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"立方体.014"
-    ,"bound_box":[ 0.000000,-2.013346,-1.653000, 2.084953, 0.946415, 1.653548]
+    ,"bound_box":[-2.084953,-2.013346,-1.653000, 2.084953, 0.946415, 1.653548]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
