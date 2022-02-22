@@ -272,6 +272,10 @@ span[content2="闇神姫"]::before{
 	content:"";
 	background-image:url("icon/yami.png");
 }
+span[content2="ジュビジーB"]::before{
+	content:"";
+	background-image:url("icon/s4b.png");
+}
 
 span.flying.enable{
 	background-image:url("icon/flying.svg");

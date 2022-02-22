@@ -21,9 +21,12 @@ var o3o_tmp;
 	var getPath=function(buso){
 		var o3opath = "model/etc.o3o";
 		var tsugarubx=DATA.class.indexOf("ツガルBX");
+		var juvib=DATA.class.indexOf("ジュビジーB");
 		if(buso.cd === 1){
 		}else if(buso.class.indexOf(tsugarubx)>=0){
 			o3opath = "model/s2.o3o";
+		}else if(buso.class.indexOf(juvib)>=0){
+			o3opath = "model/s4.o3o";
 		}else if(buso.name.indexOf("バレンタイン")>=0){
 			o3opath = "model/valentine.o3o";
 		}else if(buso.name.indexOf("サンタ")>=0){
@@ -43,6 +46,9 @@ var o3o_tmp;
 					var scd = DATA.class_shinki[buso.class[0]]
 					if(scd==="s32"){
 						scd="s0";
+					}
+					if(scd==="s33"){
+						scd="s1";
 					}
 					
 					if(scd){
