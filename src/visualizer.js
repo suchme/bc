@@ -292,9 +292,9 @@ class Scene1 extends Obj{
 
 		//ライト角度とかセット
 		var light = engine.ono3d.environments[0].sun;
-		Vec3.set(light.color,1,1,1);
+		Vec3.setValue(light.color,1,1,1);
 		var jiku = new Vec3();
-		Vec3.set(jiku,1,1,0);
+		Vec3.setValue(jiku,1,1,0);
 		Vec3.norm(jiku);
 		Mat44.fromRotVector(light.matrix,Math.PI*0.7,jiku[0],jiku[1],jiku[2]);
 		engine.calcLightMatrix();
