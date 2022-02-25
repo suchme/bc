@@ -3523,7 +3523,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"立方体"
-    ,"bound_box":[-2.404722,-0.733363,-0.649654, 2.404722, 0.674833, 0.649654]
+    ,"bound_box":[ 0.000000,-0.733363,-0.649654, 2.404722, 0.674833, 0.649654]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
@@ -3546,7 +3546,7 @@
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
-      ,{"name":"Cloth","type":"CLOTH","pin":"fit","mass":0.30000001192092896,"tension_stiffness":1.0,"tension_damping":1.0,"bending_stiffness":1.0,"bending_damping":1.0,"air_damping":1.0,"use_collision":true}
+      ,{"name":"Cloth","type":"CLOTH","pin":"fit","mass":0.30000001192092896,"tension_stiffness":1.0,"tension_damping":1.0,"bending_stiffness":1.0,"bending_damping":1.0,"air_damping":1.0,"use_collision":false}
     ]
   }
   ,{
@@ -3711,7 +3711,7 @@
     ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
     ,"type":"MESH"
     ,"data":"Cube.001"
-    ,"bound_box":[-3.382162,-2.108410, 0.083180, 3.382162, 1.687676, 2.035419]
+    ,"bound_box":[ 0.291203,-2.108410, 0.083180, 3.382162, 1.687676, 2.035419]
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"Mirror","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}

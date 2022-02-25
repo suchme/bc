@@ -2849,7 +2849,7 @@
   }
   ,"h1":{
     "children":[]
-    ,"objects":["BackHair|long","Headset","FrontHair","Head","hairkibu.001"]
+    ,"objects":["BackHair|long","Headset","FrontHair","Head","BackHair|kibu"]
   }
   ,"h202":{
     "children":[]
@@ -2933,11 +2933,11 @@
   }
   ,"h66":{
     "children":[]
-    ,"objects":["unicorn","BackHair|long","Headset","hairkibu.001"]
+    ,"objects":["unicorn","BackHair|long","Headset","BackHair|kibu"]
   }
   ,"h70":{
     "children":[]
-    ,"objects":["BackHair|long","Headset","unicorn","hairkibu.001"]
+    ,"objects":["BackHair|long","Headset","unicorn","BackHair|kibu"]
   }
   ,"h74":{
     "children":[]
@@ -3260,7 +3260,7 @@
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
-      ,{"name":"Cloth","type":"CLOTH","pin":"fix","mass":0.009999999776482582,"tension_stiffness":0.10000000149011612,"tension_damping":1.0,"bending_stiffness":0.10000000149011612,"bending_damping":1.0,"air_damping":1.0,"use_collision":true}
+      ,{"name":"Cloth","type":"CLOTH","pin":"fix","mass":0.009999999776482582,"tension_stiffness":0.10000000149011612,"tension_damping":1.0,"bending_stiffness":0.10000000149011612,"bending_damping":1.0,"air_damping":1.0,"use_collision":false}
     ]
   }
   ,{
@@ -3284,6 +3284,25 @@
     ]
   }
   ,{
+    "name":"BackHair|kibu"
+    ,"name_full":"BackHair|kibu"
+    ,"groups":[]
+    ,"material_slots":["0maintex"]
+    ,"location":[-0.000000,-0.278012, 0.211512]
+    ,"rotation":[-1.566463, 0.000000, 0.000000]
+    ,"scale":[ 0.159914, 0.159914, 0.159914]
+    ,"parent":"Armature"
+    ,"parent_bone":"Head"
+    ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
+    ,"type":"MESH"
+    ,"data":"立方体.020"
+    ,"bound_box":[-1.207822,-0.410575,-0.387983, 1.207822, 0.945592, 0.383146]
+    ,"bound_type":"BOX"
+    ,"modifiers":[
+      {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
+    ]
+  }
+  ,{
     "name":"BackHair|long"
     ,"name_full":"BackHair|long"
     ,"groups":["fix"]
@@ -3300,7 +3319,7 @@
     ,"bound_type":"BOX"
     ,"modifiers":[
       {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
-      ,{"name":"Cloth","type":"CLOTH","pin":"fix","mass":0.10000000149011612,"tension_stiffness":1.0,"tension_damping":0.10000000149011612,"bending_stiffness":0.5,"bending_damping":0.5,"air_damping":1.0,"use_collision":true}
+      ,{"name":"Cloth","type":"CLOTH","pin":"fix","mass":0.10000000149011612,"tension_stiffness":1.0,"tension_damping":0.10000000149011612,"bending_stiffness":0.5,"bending_damping":0.5,"air_damping":1.0,"use_collision":false}
     ]
   }
   ,{
@@ -3420,25 +3439,6 @@
     ,"name_full":"hairkibu"
     ,"groups":[]
     ,"material_slots":["tempesta"]
-    ,"location":[-0.000000,-0.278012, 0.211512]
-    ,"rotation":[-1.566463, 0.000000, 0.000000]
-    ,"scale":[ 0.159914, 0.159914, 0.159914]
-    ,"parent":"Armature"
-    ,"parent_bone":"Head"
-    ,"iparentmatrix":[ 1.000000, 0.000000, 0.000000, 0.000000, 1.000000,-0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000]
-    ,"type":"MESH"
-    ,"data":"立方体.020"
-    ,"bound_box":[-1.207822,-0.410575,-0.387983, 1.207822, 0.945592, 0.383146]
-    ,"bound_type":"BOX"
-    ,"modifiers":[
-      {"name":"ミラー","type":"MIRROR","use_x":1,"use_y":0,"use_z":0}
-    ]
-  }
-  ,{
-    "name":"hairkibu.001"
-    ,"name_full":"hairkibu.001"
-    ,"groups":[]
-    ,"material_slots":["0maintex"]
     ,"location":[-0.000000,-0.278012, 0.211512]
     ,"rotation":[-1.566463, 0.000000, 0.000000]
     ,"scale":[ 0.159914, 0.159914, 0.159914]
@@ -4769,7 +4769,7 @@
     "name":"Scene"
     ,"frame_start":1
     ,"frame_end":120
-    ,"objects":["Body","Head","Leg.L","Arm.L","Armature","mount","BackHair|long","Headset","FrontHair","hairkibu.001","unicorn","ponytail","Body.001","立方体.003","立方体.004","Arm.L.001","shield","shield.001","ashi","knife.001","sune.001","ashi.004","sune","knife","立方体.006","Leg.L.001","立方体.007","kibu","wing","立方体.010","shield.002","wing.001","shield.003","wing.002","立方体.005","BackHair.long.001","Headset.001","FrontHair.001","Head.001","hairkibu","unicorn.002","ponytail.001","unicorn.003","Headset.002","wakka","rasyunu","Body.003","立方体.001","立方体.009","Arm.L.003","shield.006","shield.007","ashi.002","knife.003","sune.003","ashi.003","sune.004","knife.004","立方体.013","Leg.L.002","立方体.014","kibu.002","wing.005","立方体.015","shield.008","wing.006","shield.009","wing.007","立方体.016","BackHair|gold","Headset|gold","unicorn.001","hairkibu.002","kibu.001","shield.004","shield.005","wing.003","wing.004","立方体.002","立方体.008","Body.002","立方体.011","Arm.L.002","立方体.012","ashi.001","knife.002","sune.002"]
+    ,"objects":["Body","Head","Leg.L","Arm.L","Armature","mount","BackHair|long","Headset","FrontHair","BackHair|kibu","unicorn","ponytail","Body.001","立方体.003","立方体.004","Arm.L.001","shield","shield.001","ashi","knife.001","sune.001","ashi.004","sune","knife","立方体.006","Leg.L.001","立方体.007","kibu","wing","立方体.010","shield.002","wing.001","shield.003","wing.002","立方体.005","BackHair.long.001","Headset.001","FrontHair.001","Head.001","hairkibu","unicorn.002","ponytail.001","unicorn.003","Headset.002","wakka","rasyunu","Body.003","立方体.001","立方体.009","Arm.L.003","shield.006","shield.007","ashi.002","knife.003","sune.003","ashi.003","sune.004","knife.004","立方体.013","Leg.L.002","立方体.014","kibu.002","wing.005","立方体.015","shield.008","wing.006","shield.009","wing.007","立方体.016","BackHair|gold","Headset|gold","unicorn.001","hairkibu.002","kibu.001","shield.004","shield.005","wing.003","wing.004","立方体.002","立方体.008","Body.002","立方体.011","Arm.L.002","立方体.012","ashi.001","knife.002","sune.002"]
     ,"world":{
       "name":"World"
     }
