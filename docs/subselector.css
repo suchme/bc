@@ -3,6 +3,9 @@ tr{
 	white-space:nowrap;
 	display:block;
 }
+.header_filter .param{
+display:none;
+}
 button.closebutton{
 	position:absolute;
 	right:0px;
@@ -50,9 +53,9 @@ div.submain{
 	text-align:left;
 	display:inline-block;
 	position:relative;
-	height:90%;
-	max-width:90%;
-	margin:20px;
+	height:95%;
+	max-width:95%;
+	margin:10px;
 }
 table{
 	height:100%;
@@ -74,6 +77,7 @@ th.pick{
 	left: calc(100% - 32px);
 	width:0px;
 	overflow:inherit;
+	vertical-align:top;
 }
 button.pick{
 	background-color:#c00;
@@ -157,7 +161,8 @@ overflow:hidden;
 }
 
 tr .distance{
-	width:20px;
+	width:24px;
+	height:16px;
 	position:relative;
 }
 tr .distance button{
@@ -217,19 +222,9 @@ tr .recover
 {
 	width:30px !important;
 }
-tbody .distance{
-padding:1px;
-color:white;
-}
-span.distance.short{
-	background-color:#c00;
-}
-span.distance.long{
-	background-color:#039;
-}
 
 span.guarge{
-	width: 80px;
+	width: 60px;
 }
 span.bullet_spd
 ,span.bullet_num{

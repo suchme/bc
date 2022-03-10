@@ -16,6 +16,18 @@ body{
 
 }
 
+.distance{
+	background-size:16px;
+	background-repeat:no-repeat;
+	text-indent:32px;
+overflow:hidden;
+}
+.distance.long{
+	background-image:url('icon/long.png');
+}
+.distance.short{
+	background-image:url('icon/short.png');
+}
 select#individual{
 top:-20px;
 margin:2px;
@@ -25,7 +37,7 @@ div.skill{
 	text-align:right;
 }
 div.main{
-padding:4px;
+	padding:0px;
 	width:420px;
 	
 	display:inline-block;

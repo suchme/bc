@@ -226,11 +226,18 @@ class Scene1 extends Obj{
 			
 		}
 
+//			var img = document.createElement("img");
+//			document.body.appendChild(img);
+//			img.src = engine.canvasgl.toDataURL();
+
 	}
 	create(){
 
 		ono3d.clear();
 
+		engine.camera.znear=0.01;
+		engine.camera.zfar=100;
+		engine.calcMatrix();
 		//環境マップ作成
 		engine.calcEnvironment();
 
@@ -339,3 +346,4 @@ export default class Visualizer{
 		
 	}
 }
+		Ono3d.mainshader_path ="main.shader";

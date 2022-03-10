@@ -10,7 +10,7 @@ SubLayout.shinki_html =`
 		<span column="height" class="height status"></span>
 		<span column="expassive" class=""></span>
 	</div>
-	<div>
+	<div class="param">
 		<span column="atk" class="atk status "></span>
 		<span column="def" class="def status "></span>
 		<span column="spd" class="spd status "></span>
@@ -65,7 +65,7 @@ SubLayout.head_html =`
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
 		</div>
-		<div>
+		<div class="param">
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>
@@ -105,7 +105,7 @@ SubLayout.body_html =`
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
 		</div>
-		<div>
+		<div class="param">
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>
@@ -144,7 +144,7 @@ SubLayout.arm_html =`
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
 		</div>
-		<div>
+		<div class="param">
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>
@@ -184,7 +184,7 @@ SubLayout.leg_html =`
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
 		</div>
-		<div>
+		<div class="param">
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>
@@ -225,7 +225,7 @@ SubLayout.rear_html =`
 			<span class="rarelity" column="rarelity"></span>
 			<span class="name" column="name"></span>
 		</div>
-		<div>
+		<div class="param">
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>
@@ -269,7 +269,7 @@ SubLayout.weapon_html =`
 		<span class="active" column="active"></span>
 		<span class="biko" column="biko"></span>
 		</div>
-		<div>
+		<div class="param">
 			<span column="atk" class="atk status "></span>
 			<span column="def" class="def status "></span>
 			<span column="spd" class="spd status "></span>
