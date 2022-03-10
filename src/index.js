@@ -1,3 +1,3 @@
-import "../docs/css/main.css"
-import "../docs/css/subselector.css"
+import "../docs/main.css"
+import "../docs/subselector.css"
 import Main from "./main.js";
