@@ -20,7 +20,7 @@ body{
 	background-size:16px;
 	background-repeat:no-repeat;
 	text-indent:32px;
-overflow:hidden;
+	overflow:hidden;
 }
 .distance.long{
 	background-image:url('icon/long.png');
