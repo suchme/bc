@@ -8,6 +8,7 @@ import Visualizer from "./visualizer.js";
 var visualizer;
 
 var values={total:{},subtotal:{},extra_passives:[],bonus:{},selected_tab:"main",extension:{}};
+//values.debug="true";
 window.values = values;
 var binder = new Binder();
 var subselector= new Subselector();
@@ -297,22 +298,24 @@ class Main {
 		
 		//固有パッシブ補正
 		var skill = DATA.passives[values.shinki.org.expassive];
-		switch(skill.name){
-			case "カーテンコール":
-				values.total.bst += Math.trunc(values.total.bst *0.2)
-				break;
-			case "クイックドローガード":
-				values.total.guard_cost -= Math.trunc(values.total.guard_cost *0.6)
-				break;
-			case "グライドオンプレステイル":
-				values.total.hover_cost -= Math.trunc(values.total.hover_cost *0.5)
-				break;
-			case "忍びの技術":
-				values.total.dash += Math.trunc(values.total.dash*0.15)
-				break;
-			case "忍びの忍術":
-				values.total.dash += Math.trunc(values.total.dash*0.20)
-				break;
+		if(skill){
+			switch(skill.name){
+				case "カーテンコール":
+					values.total.bst += Math.trunc(values.total.bst *0.2)
+					break;
+				case "クイックドローガード":
+					values.total.guard_cost -= Math.trunc(values.total.guard_cost *0.6)
+					break;
+				case "グライドオンプレステイル":
+					values.total.hover_cost -= Math.trunc(values.total.hover_cost *0.5)
+					break;
+				case "忍びの技術":
+					values.total.dash += Math.trunc(values.total.dash*0.15)
+					break;
+				case "忍びの忍術":
+					values.total.dash += Math.trunc(values.total.dash*0.20)
+					break;
+			}
 		}
 
 
@@ -432,7 +435,24 @@ class Main {
 					var cols;
 
 					cols=[
-						{data:"rarelity",filter:1,label:"レアリティ"
+						{data:"icon",label:"",sort:-1
+						,disp:function(e,parent,data){
+							
+							var parent_node = parent.parentNode;
+							var spanclass = parent_node.querySelector("span.class");
+							var classes =e.class;
+								if(!Array.isArray(classes)){
+									classes= [classes];
+								}
+								classes.forEach((e)=>{
+									parent_node.classList.add(DATA.class_shinki[e]);
+									spanclass.classList.add(DATA.class_shinki[e]);
+								});
+							parent_node.classList.add("r"+e.rarelity);
+							parent.src="busou/"+data;
+							return null;
+						}}
+						,{data:"rarelity",filter:1,label:"レアリティ"
 							,disp:function(e,parent){
 								parent.classList.add(DATA.rarelity[e[this.data]]);
 								return DATA.rarelity[e[this.data]];
@@ -825,6 +845,11 @@ DATA.shinkis.forEach((e)=>{
 		color:${e.color};
 	}
 	`, stylesheet.cssRules.length);
+	stylesheet.insertRule(` 
+	span.iconarea.${e.cd}{
+		border-color:${e.color};
+	}
+	`, stylesheet.cssRules.length);
 
 });
 document.body.style.display="block";
@@ -888,5 +913,7 @@ window.lvmax=function(){
 }
 
 var main = new Main();
+
+window.main = main;
 
 main.onloadfunc();

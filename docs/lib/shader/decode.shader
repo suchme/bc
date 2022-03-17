@@ -23,7 +23,7 @@ mediump vec2 decode2(vec4 src){
 void main(void){
 	vec4 src = texture2D(uSampler,vUv);
 	highp vec3 a = decode(src);
-	if(src == vec4(1.0)){
+	if(a.r==1.0 && a.g==1.0 && a.b==1.0){
 		gl_FragColor= vec4(0,0,0,0);
 		return;
 	}

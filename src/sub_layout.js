@@ -56,6 +56,10 @@ SubLayout.shinki_html =`
 `;
 
 SubLayout.head_html =`
+	<span class="iconarea">
+		<img column="icon">
+		<span class="class" ></span>
+	</span>
 	<span class="namearea">
 		<div class="info">
 			<span class="part" column="part"></span>
@@ -96,6 +100,10 @@ SubLayout.head_html =`
 
 `;
 SubLayout.body_html =`
+	<span class="iconarea">
+		<img column="icon">
+		<span class="class" ></span>
+	</span>
 	<span class="namearea">
 		<div class="info">
 			<span class="part" column="part"></span>
@@ -135,6 +143,10 @@ SubLayout.body_html =`
 `;
 
 SubLayout.arm_html =`
+	<span class="iconarea">
+		<img column="icon">
+		<span class="class" ></span>
+	</span>
 	<span class="namearea">
 		<div class="info">
 			<span class="part" column="part"></span>
@@ -175,6 +187,10 @@ SubLayout.arm_html =`
 `;
 
 SubLayout.leg_html =`
+	<span class="iconarea">
+		<img column="icon">
+		<span class="class" ></span>
+	</span>
 	<span class="namearea">
 		<div class="info">
 			<span class="part" column="part"></span>
@@ -215,6 +231,10 @@ SubLayout.leg_html =`
 `;
 
 SubLayout.rear_html =`
+	<span class="iconarea">
+		<img column="icon">
+		<span class="class" ></span>
+	</span>
 	<span class="namearea">
 		<div class="info">
 			<span class="part" column="part"></span>

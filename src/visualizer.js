@@ -10,6 +10,8 @@ import SceneObjectInstance from "../../lib/engine/o3o/sceneobjectinstance.js"
 import AssetManager from "../../lib/engine/assetmanager.js"
 import {Vec2,Vec3,Vec4,Mat33,Mat43,Mat44} from "../../lib/lib/vector.js"
 import OnoPhy from "../../lib/lib/onophy/onophy.js"
+import Base64Util from "../../lib/lib/base64.js"
+import Zip from "../../lib/lib/zip.js"
 
 var palette=null;
 var primitives={};
@@ -17,6 +19,9 @@ var base_model;
 var base_instance;
 var o3o_head;
 var o3o_tmp;
+	var files=[];
+
+var render_flg=false;
 
 	var getPath=function(buso){
 		var o3opath = "model/etc.o3o";
@@ -31,8 +36,6 @@ var o3o_tmp;
 			o3opath = "model/valentine.o3o";
 		}else if(buso.name.indexOf("サンタ")>=0){
 			o3opath = "model/xmas.o3o";
-		}else if(buso.name.indexOf("[15th]")>=0){
-			o3opath = "model/15th.o3o";
 		}else if(buso.name.indexOf("[S]")>=0){
 			o3opath = "model/silver.o3o";
 		//}else if(buso.name.indexOf("[G]")>=0){
@@ -61,11 +64,17 @@ var o3o_tmp;
 		return o3opath;
 	}
 	var getList=function(buso){
+		if(buso === null){
+			return [];
+		}
 		var cd = buso.cd;
 		var type = cd.substring(0,1);
 		var num = Number(cd.substring(1));
 		var o3opath = "model/base.o3o";
 
+		if(num === 0){
+			return [];
+		}
 		if(num>0){
 			o3opath = getPath(buso);
 		}
@@ -156,8 +165,9 @@ class Scene1 extends Obj{
 
 			var list=[];
 			var headlist=getList(values.head.org);
-			if(target_o3o.collections["h1"]){
-
+			if(values.shinki.cd === "s999"){
+				list = [];
+			}else if(target_o3o.collections["h1"]){
 				list = target_o3o.getCollectionObjectList("h1");
 			}else{
 				list = [target_o3o.objects_name_hash["Head"]];
@@ -217,6 +227,7 @@ class Scene1 extends Obj{
 		
 			update_flg=false;
 
+
 		}catch(e){
 			if(e==="loading"){
 	//			setTimeout(update,1000);
@@ -226,9 +237,6 @@ class Scene1 extends Obj{
 			
 		}
 
-//			var img = document.createElement("img");
-//			document.body.appendChild(img);
-//			img.src = engine.canvasgl.toDataURL();
 
 	}
 	create(){
@@ -255,6 +263,7 @@ class Scene1 extends Obj{
 		if(!base_instance)return;
 
 
+
 		//行列リセット
 		Mat44.setInit(ono3d.worldMatrix);
 
@@ -268,6 +277,9 @@ class Scene1 extends Obj{
 		if((!this.hoge) && Util.getLoadingCount()===0){
 			this.create();
 			this.hoge=true;
+		}
+		if(render_flg && !update_flg && Util.getLoadingCount()===0){
+			render2();
 		}
 
 		if(update_flg){
@@ -327,8 +339,8 @@ export default class Visualizer{
 		this.step=0;
 		this.engine.step=2;
 		this.engine.autoExposure=false;
-		this.engine.exposure_level = 0.5;
-		this.engine.exposure_upper = 1;
+		this.engine.exposure_level = 0.3;
+		this.engine.exposure_upper = 1.0;
 	}
 	main(){
 		this.engine.userInit=()=>{
@@ -346,4 +358,112 @@ export default class Visualizer{
 		
 	}
 }
-		Ono3d.mainshader_path ="main.shader";
+Ono3d.mainshader_path ="main.shader";
+
+
+var render2=function(){
+	if(base_model.scenes[0]){
+		//ベースモデルが読み込まれているならアニメーションさせる
+		var scene= base_model.scenes[0];
+		scene.setFrame(0);
+	}
+	if(base_instance){
+		//ベースモデルインスタンスがあるならアニメーションを反映させる
+		base_instance.calcMatrix(1.0/globalParam.fps);
+	}
+	engine.ono3d.clear();
+	//行列リセット
+	Mat44.setInit(ono3d.worldMatrix);
+
+	var camera = engine.camera;
+	camera.aov=0.2;
+	var target = new Vec3();
+	//body
+	//Vec3.setValue(camera.p,1.2,1,2);
+	//Vec3.setValue(target,0,0,0); /
+	//leg
+//	Vec3.setValue(target,0,-1.0,0);
+//	Vec3.setValue(camera.p,1.2,0.5,2);
+//	Vec3.madd(camera.p,target,camera.p,2);
+	//head
+	Vec3.setValue(target,0,1.0,0);
+	Vec3.setValue(camera.p,1.2,0.5,1);
+	Vec3.madd(camera.p,target,camera.p,1.5);
+	//ターゲット注目
+	Engine.Camera.homing(camera.a,target,camera.p);
+
+	//インスタンス描画
+	base_instance.draw();
+
+	engine.drawFunc();
+
+	var src =  engine.canvasgl.toDataURL();
+	//var img = document.createElement("img");
+	//img.src = src;
+	//document.body.appendChild(img);
+	src = src.substring(src.indexOf(",")+1);
+	var arr = Base64Util.base64ToArray(src);
+
+
+	//ドキュメント情報をdoc.txtとして書き込む
+	var file = {}
+	file.data = arr;
+	//file.name=values.head.cd +".png"
+	file.name=values.head.cd +".png"
+	files.push(file);
+
+
+
+	render_count++;
+	if(render_count>=render_cds.length){
+		//doc.txtと画像ファイルを無圧縮zipにする
+		var buffer = Zip.create(files,0);
+		var a= document.querySelector("a#download");
+		var blob = new Blob([buffer], {type: "application/octet-stream"});
+
+		a.textContent="hoeg";
+		a.href =  window.URL.createObjectURL(blob);
+		a.target = '_blank';
+		a.download = "test.zip";
+		render_flg = false;
+	}else{
+	//	values.head.cd=render_cds[render_count];
+	//	main.reCalc();
+		render();
+	}
+
+
+}
+
+
+var bui =["head","body","arm","leg","rear"];
+var findArmor = function(a){
+	a.org = DATA.armors.find(function(elem){return elem.cd === a.cd;});
+}
+
+var render_count=0;
+var render_cds=[];
+for(var i=1;i<=473;i+=4){
+	render_cds.push("h"+i);
+}
+
+window.render=function(){
+	values.shinki.cd="s999";
+	values.head.cd="a0";
+	values.body.cd="b0";
+	values.arm.cd="a0";
+	values.leg.cd="l0";
+	values.rear.cd="r0";
+
+	//values.body.cd=render_cds[render_count];
+	values.head.cd=render_cds[render_count];
+
+
+	main.reCalc();
+		
+	if(render_count===0){
+		files=[];
+		render_flg = true;
+	}
+
+}

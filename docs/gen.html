@@ -159,6 +159,15 @@ var prepareData=function(source){
 			});
 			if(armor.cd==="" || armor.cd == null)return;
 
+			var type = armor.cd.substring(0,1);
+			var num = Number(armor.cd.substring(1));
+
+			if(num>1){
+				armor.icon  = type  + ((((num-2)>>2)<<2)+2)+".png";
+			}else{
+				armor.icon  =armor.cd+".png";
+			}
+
 			output.armors.push(armor);
 
 		});
