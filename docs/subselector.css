@@ -1,0 +1,343 @@
+tr{
+
+	white-space:nowrap;
+	display:block;
+}
+.header_filter .param{
+display:none;
+}
+button.closebutton{
+	position:absolute;
+	right:0px;
+	top:0px;
+	z-index:200;
+}
+div.back{
+	background-color:rgba(0,0,0,0.5);
+	position:absolute;
+	height:100%;
+	width:100%;
+}
+tr.header_filter span{
+	background-color:inherit !important;
+	border:inherit !important;
+
+}
+thead span{
+	vertical-align:bottom;
+}
+
+thead *{
+	background-image:none !important;
+	
+}
+thead ::before,
+thead ::after{
+display:none !important;
+;
+	
+}
+/*サブウィンド*/
+div.subwindow{
+	position:fixed;
+	z-index:100;
+	width:100%;
+	height:100%;
+	padding:0px;
+	left:0px;
+	top:0px;
+	text-align:center;
+	background-color:#666;
+}
+div.submain{
+	text-align:left;
+	display:inline-block;
+	position:relative;
+	height:95%;
+	max-width:95%;
+	margin:10px;
+}
+table{
+	height:100%;
+	width:100%;
+	overflow:auto;
+	display:block;
+	text-align:left;
+border:1px solid #666;
+}
+thead{
+	position:sticky;
+	top:0;
+	z-index:110;
+	background-color:#333;
+}
+th.pick{
+	position:sticky;
+	z-index:99;
+	left: calc(100% - 32px);
+	width:0px;
+	overflow:inherit;
+	vertical-align:top;
+}
+button.pick{
+	background-color:#c00;
+	color:#fff;
+	height:32px;
+	width:32px;
+	border:1px solid black;
+}
+tbody{
+	height:90%;
+}
+
+
+th,td{
+	overflow:hidden;
+	display:inline-block;
+}
+table tbody tr:nth-child(odd) {
+	background-color: #222;
+}
+table tbody tr:nth-child(even) {
+	background-color: #444;
+}
+
+tr .active{
+	/*width:200px;*/
+	font-size:small;
+}
+
+tr .passive{
+	width:200px;
+	font-size:small;
+}
+tr .biko{
+	/*width:200px;*/
+}
+tr span.name{
+	  width:350px;
+	white-space: nowrap;
+}
+tbody span{
+	vertical-align:bottom;
+}
+tr .status{
+	width:30px;
+}
+
+.filtertarget
+,.filtertarget *{
+	cursor:cell;
+	text-decoration:underline dotted ;
+}
+.category::before{
+	content:"[";
+}
+.category::after{
+	content:"]";
+}
+table .part{
+	width:80px;
+	display:inline-block;
+	text-align:inherit;
+	color:#999;
+}
+.class{
+	color:#999;
+}
+
+.rarelity button{
+	white-space:nowrap;
+	
+}
+tr .rarelity{
+	width:20px;
+	color:#000;
+	text-align:center;
+	margin-right:4px;
+}
+tr .divname{
+overflow:hidden;
+}
+
+tr .distance{
+	width:24px;
+	height:16px;
+	position:relative;
+}
+tr .distance button{
+	position:absolute;
+	white-space:nowrap;
+right:0px;
+bottom:0px;
+}
+
+tr .dummy_pick{
+	width:30px;
+}
+tr.header_sort button{
+text-decoration: underline;
+    background: none;
+    color: #fff;
+padding:0px;
+}
+span.short.cat{
+	background-color:#911;
+}
+span.long.cat{
+	background-color:#04c;
+}
+span.bougu.cat{
+	background-color:#616;
+}
+span.category.short{
+	color:#c00;
+}
+span.category.long{
+	color:#39f;
+}
+span.category.bougu{
+	color:#d3d;
+}
+
+.cat .status{
+	width:20px;
+	text-align:right;
+}
+
+.cost{
+	background-color:#600;
+
+}
+tr .shinki{
+	width:200px !important;
+
+}
+tr .recover
+,tr .dash
+,tr .dash_cost
+,tr .jump_cost
+,tr .guard_cost
+,tr .hover_cost
+{
+	width:30px !important;
+}
+
+span.guarge{
+	width: 60px;
+}
+span.bullet_spd
+,span.bullet_num{
+width:30px;
+text-align:right;
+}
+
+span.guarge_parent{
+	height: 3px;
+	display: block;
+	background-color: #000;
+	width: 48px;
+	position:absolute;
+	bottom:-2px;
+}
+div.guarge_child{
+	width:20%;
+	height:100%;
+	background-color: #ccc;
+}
+
+tr .guarge
+{
+	padding:0px;
+}
+tr .flying{
+	width:40px;
+	text-align:center;
+}
+
+
+span[content2="ツガルBX"]{
+color:#7d9cff;
+}
+span[content2="ツガルBX"]::before{
+	content:"";
+	background-image:url("icon/s2bx.png");
+}
+span[content2="闇神姫"]::before{
+	content:"";
+	background-image:url("icon/yami.png");
+}
+span[content2="ジュビジーB"]::before{
+	content:"";
+	background-image:url("icon/s4b.png");
+}
+
+span.flying.enable{
+	background-image:url("icon/flying.svg");
+	background-size:16px;
+	background-repeat:no-repeat;
+	background-position:center;
+color:rgba(0,0,0,0);
+}
+tbody .guarge_title{
+	font-size:8px;
+}
+thead .guarge_parent
+,thead .guarge_title{
+	display:none;
+}
+
+span.sep{
+	width:6px;
+}
+
+thead span
+,tr span{
+margin:1px;
+}
+
+span.shinki span::before{
+	display:inline-block;
+	background-size:contain;
+	width:24px;
+	height:24px;
+	vertical-align:middle;
+}
+span.guarge{
+	position:relative;
+}
+
+span.rarelity{
+	position:relative;
+}
+
+span.short_regist[content=',']
+,span.long_regist[content=',']{
+	visibility:hidden;
+}
+.class button{
+background-color:black;
+}
+
+.class:before{
+	margin-top:-30px;
+	margin-bottom:-30px;
+}
+span.filtertarget.class{
+width:initial;
+}
+span.status[content^='-']
+{
+	color:#c33;
+}
+span.cost span[content^='-']{
+	color:#3ee;
+}
+span.status[content='0']{
+	color:#888;
+	font-weight:normal;
+}
+	
+div.info{
+	font-size:small;
+}
