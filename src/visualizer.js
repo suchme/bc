@@ -265,7 +265,7 @@ class Scene1 extends Obj{
 
 
 		//行列リセット
-		Mat44.setInit(ono3d.worldMatrix);
+		Mat43.setInit(ono3d.worldMatrix);
 
 		//インスタンス描画
 		base_instance.draw();

@@ -1,0 +1,211 @@
+<!-- ごくろうさまです -->
+
+
+<!DOCTYPE html>
+<html style="background-color:black;">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="ja" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta name="viewport" content="width=420">
+<title>bcassembly</title>
+</head>
+
+<body style="display:none;">
+
+<div class="main">
+		<div style="position:fixed;bottom:2px;right:2px;font-size:8pt;white-space:pre-wrap;" bind:="version"></div>
+<div class="tabmain">
+
+<div class="tab_body tab_main" bind:hoge="selected_tab" style="position:relative;">
+	<div id="aaa" style="position:absolute;display:none;">
+		<div id="bbb" style="position:absolute;z-index:20;width:100%;height:100%;touch-action:none;"> </div>
+	</div>
+<div id="form" >
+
+		<div><span class="shinki template_part" id="shinki" ></span>
+		
+				<select id="individual" bind:="shinki.individual">
+				</select>
+			<span class="addpassive">
+			<button id="add_extra_passive">パッシブ追加</button>
+			</span>
+			<span id="extra_passive" class="biko"></span>
+		</div>
+
+		<div id="armor"></div>
+
+		<div id="total">
+			<div style="position:relative;" class="totalhead">
+	最終値
+
+				<span>(総武装コスト</span><span bind:="total.cost"></span>)
+
+				<span class="name" style="display:none;" style="text-align:right;">武器適正とパッシブ適用後</span>
+			</div>
+			<div>
+				<span class="param" bind:="subtotal"></span>
+			</div>
+			<div>
+				常在固有パッシブ・補正適用後
+			</div>
+			<div>
+				<span class="param" bind:="total"></span>
+			</div>
+		</div>
+
+	</div>
+				<button onclick="lvmax()" style="position:absolute;bottom:0px;" >LvSw</button>
+				<label style="position:absolute;bottom:0px;right:0px;color:black;" >
+				<input type="checkbox" bind:="visualize" onclick="values.visualize = this.checked;visualizesw(event)" >visualize(WIP)
+				</label>
+</div>
+
+<div class="tab_body tab_extension" bind:hoge="selected_tab">
+	<div>
+		<span class="param" bind:="total"></span>
+		
+		</span>
+	</div>
+	<ul>
+	<li>
+		<div>オーバーヒート復帰時間</div>
+		<span class="status bst" bind:="total.bst"></span>
+		/ <span class="status recover" bind:="total.recover"></span>
+		= <span class="result" bind:="extension.recover_overheat"></span>[s]
+	</li>
+	<li>
+		<div>最大ダッシュ継続時間</div>
+		(<span class="status bst" bind:="total.bst"></span>
+		- <span class="status dash_cost cost" bind:="total.dash_cost"></span>
+		) / <span class="status dash_cost cost" bind:="total.dash_cost"></span>
+		= <span class="result" bind:="extension.dash_time"></span>[s]
+	</li>
+	<li>
+		<div>最大ホバリング継続時間</div>
+		( <span class="status bst" bind:="total.bst"></span>
+		- <span class="status jump_cost cost " bind:="total.jump_cost"></span>
+		- <span class="status dash_cost cost " bind:="total.dash_cost"></span>
+		) / <span class="status hover_cost cost" bind:="total.hover_cost"></span>
+		= <span class="result" bind:="extension.hover_time"></span>[s]
+	</li>
+	<li>
+		<div>最大慣性ジャンプ継続時間</div>
+		( <span class="status bst" bind:="total.bst"></span>
+		- <span class="status jump_cost cost " bind:="total.jump_cost"></span>
+		- <span class="status dash_cost cost " bind:="total.dash_cost"></span>
+		) / <span class="status jump_cost cost" bind:="total.jump_cost"></span>
+		= <span class="result" bind:="extension.jump_time"></span>[s]
+	</li>
+	<li>
+		<div>スキルゲージ100%に必要な最大ダメージ</div>
+		 1000000 / <span class="status increase" bind:="total.increase"></span>
+		 = <span class="result" bind:="extension.skill_lp"></span>
+	</li>
+</div>
+
+
+<div class="tab_body tab_export" bind:hoge="selected_tab">
+	<textarea class="export" wrap="off" bind:="export_text">aaa</textarea>
+</div>
+
+<div class="tab_body tab_about" bind:hoge="selected_tab">
+	<div class="info">
+		・最新版ぽくないときはスーパーリロードしてください。<br>
+		・各種データ・計算式が正しいか分かりません。間違ってたら正しい値を教えてくれれば直します。<br>
+		数値の算出式および算出ツール<a href="https://suchme.github.io/calc/">https://suchme.github.io/calc/</a><br>
+	</div>
+</div>
+
+
+</div>
+
+<div class="tabbuttons">
+
+<label class="tabbutton"><input type="radio" name="tab" value="main" bind:="selected_tab" feedback><span>main</span></label>
+<label class="tabbutton"><input type="radio" name="tab" value="extension" bind:="selected_tab" feedback><span>ext</span></label>
+<label class="tabbutton"><input type="radio" name="tab" value="export" bind:="selected_tab" feedback><span>export</span></label>
+
+
+<label class="tabbutton"><input type="radio" name="tab" value="about" bind:="selected_tab" feedback><span>about</span></label>
+
+</div>
+
+</div>
+
+
+<div class="subwindow" id="export_window" style="display:none;">
+	<div  class="back"  onclick="this.parentNode.style.display='none';">
+	</div>
+</div>
+
+<div style="display:none;" id="template">
+
+	<span id="template_armor">
+		<div class="setting">
+			<span class="part"></span>
+			<span bind:=".name" class="name"></span>
+			<span class="henko">
+				Lv<select class="lv" bind:=".lv">
+					<option value="1">1</option>
+					<option value="60">60</option>
+				</select>
+				<select  class="rarelity" bind:=".rarelity">
+				</select>
+				<button  class="armor change">変更</button>
+			</span>
+		</div>
+		<div class="detail">
+			<div>
+				<span class="param" bind:=""></span>
+			</div>
+			<div class="skill">
+			<span class="skill" bind:=".skill"></span>
+			</div>
+		</div>
+	</span>
+	<select id="rarelity" class="rarelity" > </select>
+	<span id="param">
+	</span>
+	<span id="template_param">
+		<span class="status atk" bind:=".atk" >
+		</span><span class="status def"  bind:=".def" >
+		</span><span class="status spd "  bind:=".spd" >
+		</span><span class="status lp"  bind:=".lp" >
+		</span><span class="status bst"  bind:=".bst" >
+		</span> <span class="status dash"  bind:=".dash" >
+		</span><span class="status extend "  bind:=".extend" >
+		</span><span class="status increase"  bind:=".increase" >
+		</span> <span class="status recover"  bind:=".recover" >
+		</span><span class="cost"><span class="status dash_cost "  bind:=".dash_cost" >
+		</span><span class="status guard_cost "  bind:=".guard_cost" >
+		</span><span class="status jump_cost "  bind:=".jump_cost" >
+		</span><span class="status hover_cost "  bind:=".hover_cost" >
+		</span></span>
+	</span>
+
+</div>
+<div id="debug" bind:debug="debug">
+<button onclick="render()">render</button>
+<a id="download">download</a>
+</div>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GRLV13DDXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GRLV13DDXX');
+</script>
+
+</body>
+<script type="module" src="./index.js"></script>
+
+
+</html>
+
+

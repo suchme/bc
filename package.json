@@ -34,6 +34,7 @@
     "webpack-dev-server": "^4.7.3"
   },
   "dependencies": {
-    "@babel/core": "^7.13.16"
+    "@babel/core": "^7.13.16",
+    "copy-webpack-plugin": "^10.2.4"
   }
 }

@@ -1,7 +1,9 @@
+const CopyPlugin = require("copy-webpack-plugin");
+
 module.exports = {
 entry: "./src/index.js",
 output:{
-path:  __dirname + "/docs"
+path:  __dirname + "/docs/test"
 ,filename:  	"index.js",
 },
   // モード値を production に設定すると最適化された状態で、
@@ -16,7 +18,7 @@ path:  __dirname + "/docs"
 	port:8081,
 	host: '0.0.0.0',
 	static: {
-		directory: "docs",
+		directory: "docs/test",
 	}
   },
   module: {
@@ -58,4 +60,12 @@ path:  __dirname + "/docs"
   },
   // ES5(IE11等)向けの指定
   target: ["web", "es5"],
+  plugins:[
+  new CopyPlugin({
+      patterns: [
+        { from: "../lib/lib/shader/", to: "./lib/shader/" },
+        { from: "../lib/engine/shader/", to: "./engine/shader/" },
+        { from: "../lib/lib/spherical_harmonics/", to: "./lib/spherical_harmonics/" },
+      ]})
+  ]
 };

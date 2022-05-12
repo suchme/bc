@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="ja" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<title>datagen</title>
+</head>
+
+<body>
+<div>ちょっとまって</div>
+</body>
+
+<script type="text/javascript">
+"usestrict";
+var output={shinkis:[],armors:[],individuals:[]};
+
+
+//データ整形ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+var Param = function(){
+	var obj={};
+	mem.forEach(function(e){
+		obj[e] = 0;
+	});
+	return obj;
+}
+
+var mem=[ "cd","set","class","name","rarelity"
+	,"atk","def","spd","lp","bst"
+	,"dash","extend","recover","increase"
+	,"dash_cost","jump_cost","hover_cost","guard_cost"
+	,"passive","effect","active","active_effect"
+	,"biko"];
+class Armor{
+	constructor(){
+		mem.forEach(function(e,index){
+			this[e]=0;
+		});
+	}
+}
+var shinki_mem=[
+	"cd","rarelity","name","atk","def","spd","lp","bst"
+	,"dash","extend","recover","increase"
+	,"dash_cost","jump_cost","hover_cost","guard_cost"
+	,"expassive","biko"];
+class Shinki{
+	constructor(){
+		var shinki={};
+		shinki_mem.forEach(function(e,index){
+			shinki[e]=0;
+		});
+		shinki.apts=[0];
+		shinki.rarelity=0;
+		return shinki;
+	}
+}
+var conv=function(){
+	var armor = {};
+	mem.forEach(function(e,index){
+		armor[e]=0;
+	});
+	return armor;
+}
+
+var prepareData=function(source){
+	//省略セルデータ補間
+	var keys = Object.keys(source);
+	for(var i=0;i < keys.length;i++){
+		if(keys[i]==="lists"){ continue; }
+		var list = source[keys[i]];
+		for(var j=1;j<list.length;j++){
+			var row = list[j];
+			for(var k=0;k<row.length;k++){
+				if(k==0 && keys[i] !="shinki")continue;
+				if(row[k]==="" || row[k]==="#N/A"){
+					row[k]=list[j-1][k];
+				}
+			}
+		}
+		
+	}
+
+
+	//名称リスト
+	var lists = source.lists;
+	for(var i=0;i<lists[0].length;i++){
+		var list=[];
+		for(var j=1;j<lists.length;j++){
+			if(lists[j][i] ==="")break;
+			list.push(lists[j][i]);
+		}
+		output[lists[0][i]]=list;
+	}
+
+	//パッシブ
+	output.passives= source.passive.map(function(e){return {name:e[0],effect_type:e[1],biko:e[2] + "\n" + e[3]};});
+
+
+	//神姫
+	var mems=source.shinki[0];
+	source.shinki.forEach((row,idx)=>{
+		if(idx<=1)return;
+		var shinki = new Shinki();
+		row.forEach((col,idx)=>{
+			if(source.shinki[0][idx]=="apts"){
+				//適正
+				shinki.apts.push(col);
+			}else{
+				shinki[mems[idx]] = col;
+			}
+		});
+
+		if(shinki.short_regist==0){
+			shinki.short_regist=".";
+		}
+		if(shinki.long_regist==0){
+			shinki.long_regist=".";
+		}
+
+
+		shinki.rarelity = output.rarelity.indexOf(shinki.rarelity);
+		shinki.expassive = output.passives.findIndex((e)=>{return e.name == shinki.expassive;});
+		output.shinkis.push(shinki);
+
+	});
+
+	//アイコン補正
+	for(var i=0;i<source.individuals.length;i++){
+		var row = source.individuals[i];
+		var individual= new Param();
+		individual.name=row[0];
+		individual.atk=Number(row[1]);
+		individual.def=Number(row[2]);
+		individual.spd=Number(row[3]);
+		individual.lp=Number(row[4]);
+		individual.bst=Number(row[5]);
+		output.individuals.push(individual);
+	}
+
+
+	//アクティブ
+	output.actives = source.active.map(function(e){return {name:e[0],effect_type:e[1],biko:e[2]};});
+
+	//武装
+	for(var j=1;j<7;j++){
+		var part=output.part_cd[j];
+		var part_data= source[part];
+		var mems=part_data[0];
+		if(!part_data)continue;
+		part_data.forEach((row,idx)=>{
+			if(!idx)return;
+			var armor = conv();
+			armor.part=j;
+			row.forEach((col,idx)=>{
+				armor[mems[idx]] = col;
+			});
+			if(armor.cd==="" || armor.cd == null)return;
+
+			var type = armor.cd.substring(0,1);
+			var num = Number(armor.cd.substring(1));
+
+			if(num>1){
+				armor.icon  = type  + ((((num-2)>>2)<<2)+2)+".png";
+			}else{
+				armor.icon  =armor.cd+".png";
+			}
+
+			output.armors.push(armor);
+
+		});
+	}
+
+
+
+	output.armors.forEach(function(e){
+		if(output.actives[e.active].effect_type===1 && e.active_effect===0){
+			e.active_effect=e.rarelity+1;
+		}
+		var classes = e.class.split('|');
+		classes = classes.map((e)=>{
+			var idx = output.class.indexOf(e)
+			if(idx<0){
+				//ない場合は追加
+				output.class.push(e);
+				idx = output.class.indexOf(e)
+			}
+			return idx;
+			
+		});
+		e.class=classes;
+	});
+
+	output.armors.forEach(function(e){
+		if(e.set ===""){ e.set="-"}
+		if(e.set.indexOf("M")===0){
+			e.set = e.set.substr(1);
+			e.parent="-";
+		}else{
+			e.parent=e.set;
+			e.set="";
+		}
+
+	});
+
+	//レベル増加値
+	output.lv_bonus={};
+	var sheet_data = source.lv_bonus;
+	var mems=sheet_data[0];
+	for(var i=1;i < sheet_data.length;i++){
+		var bonuses=[];
+		var row = sheet_data[i];
+		var part = row[0];
+		var bonus=new Param();
+		var row = sheet_data[i];
+		var part = row[0];
+		row.forEach((a,idx)=>{
+			if(!idx)return;
+			bonus[mems[idx]]=a;
+
+		});
+			if(!output.lv_bonus[part]){
+				output.lv_bonus[part]={};
+			}
+			if(!output.lv_bonus[part][bonus.rarelity]){
+				output.lv_bonus[part][bonus.rarelity]={};
+			}
+		output.lv_bonus[part][bonus.rarelity][bonus.lv] = bonus;
+	}
+
+	;
+
+
+	//分類と神姫紐づけ
+	output.class_shinki={};
+	output.class.forEach((elem,idx)=>{
+		var target = elem;
+		var shinki = output.shinkis.find((a)=>{return a.name === target});
+		if(shinki){
+			output.class_shinki[idx]=shinki.cd;
+		}
+	});
+
+
+	output.date= Date.now();
+
+
+    let blob = new Blob(["const DATA=",JSON.stringify(output),";export default DATA;"],{type:"text/plan"});
+	var a =document.createElement('a');
+	a.href=URL.createObjectURL(blob);
+	a.innerText="data.js";
+	a.download="data.js";
+	document.body.appendChild(a);
+	var span =document.querySelector('div');
+	span.textContent="できた";
+	document.body.appendChild(span);
+}
+</script>
+<script type="text/javascript" src="https://script.google.com/macros/s/AKfycbylNdsZzSXS8ZCutVVfJdoL7666frsuTpVDjdi5uJt50Wvp1wzmw_vcnQe-mjCFR_IM/exec"></script>
+</html>
+
+
