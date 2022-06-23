@@ -219,23 +219,7 @@ SubLayout.weapon_html =`
 		<span class="biko" column="biko"></span>
 		</div>
 		<div class="param">
-			<span column="atk" class="atk status "></span>
-			<span column="def" class="def status "></span>
-			<span column="spd" class="spd status "></span>
-			<span column="dash" class="dash status  "></span>
-			<span column="lp" class="lp status  "></span>
-			<span column="bst" class="bst status "></span>
-			<span class="sep"></span>
-			<span column="extend" class="extend status "></span>
-			<span column="increase" class="increase status "></span>
-			<span column="recover" class="recover status "></span>
-			<span class="sep"></span>
-			<span class="cost">
-				<span column="dash_cost" class="dash_cost status "></span>
-				<span column="guard_cost" class="guard_cost status "></span>
-				<span column="jump_cost" class="jump_cost status "></span>
-				<span column="hover_cost" class="hover_cost status "></span>
-			</span>
+${pub}
 			<span class="sep"></span>
 				<span column="recast" class="guarge">
 					<span></span>
