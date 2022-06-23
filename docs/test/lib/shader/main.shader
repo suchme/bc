@@ -82,6 +82,7 @@ uniform lowp vec3 uLight;
 uniform lowp vec3 uLightColor; 
 uniform sampler2D uShadowmap; 
 uniform sampler2D uEnvMap;  
+uniform highp vec2 uResolution;
 
  
 /*[reflect]
@@ -256,7 +257,8 @@ void main(void){
 	refa = (transparent_roughness-refx*0.2)/0.2; 
 	refa = min(refa,1.0); 
 	angle = nrm;//normalize(uViewMat * nrm); 
-	refV = gl_FragCoord.xy/1024.0+angle.xy*(1.0-refractPower)*0.2; 
+	vec2 reso = vec2(1.0,0.5);
+	refV = gl_FragCoord.xy/uResolution * reso+ angle.xy*(1.0-refractPower)*0.2; 
 	highp vec3 transCol = textureTri(uTransMap,vec2(1024.0),refV,refx+refa); 
 	vColor2 = mix(vColor2, transCol * baseCol,1.0 - opacity); 
 [transmission]*/

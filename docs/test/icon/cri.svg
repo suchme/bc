@@ -9,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="256"
-   height="256"
-   viewBox="0 0 67.733331 67.733335"
+   width="967.55908"
+   height="967.55908"
+   viewBox="0 0 256 256"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   sodipodi:docname="increase.svg">
+   sodipodi:docname="cri.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -25,13 +25,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="116.21805"
-     inkscape:cy="110.90535"
+     inkscape:zoom="0.35"
+     inkscape:cx="-933.92712"
+     inkscape:cy="297.69852"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
+     inkscape:snap-global="false"
      inkscape:window-width="1918"
      inkscape:window-height="1044"
      inkscape:window-x="0"
@@ -45,7 +46,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -53,11 +54,11 @@
      inkscape:label="レイヤー 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-229.26665)">
+     transform="translate(0,-41)">
     <path
-       style="display:inline;fill:#962f2f;fill-opacity:1;stroke:none;stroke-width:15.11811066;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 9.0917969 10.027344 L 9.0917969 249.43359 L 248.49805 249.43359 L 248.49805 10.027344 L 9.0917969 10.027344 z M 218.91211 36.357422 L 233.88672 51.330078 C 215.39713 83.968968 191.39475 111.8776 161.88086 135.05469 L 146.38672 120.08008 C 170.60547 102.54536 190.52734 81.105035 206.15234 55.757812 L 29.849609 59.013672 L 29.849609 38.701172 L 218.91211 36.357422 z M 110.9707 75.029297 L 132.45508 75.029297 C 132.19466 120.77583 128.67904 152.32834 121.9082 169.68945 C 111.83876 195.3839 91.482206 216.34744 60.839844 232.58008 L 45.083984 215.52344 C 75.726346 200.07205 95.171441 180.19423 103.41797 155.88867 C 108.45269 141.73937 110.9707 114.78624 110.9707 75.029297 z "
-       transform="matrix(0.26458333,0,0,0.26458333,0,229.26665)"
-       id="rect822" />
+       style="fill:#e0aa63;fill-opacity:1;stroke:none;stroke-width:3.7618053;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;image-rendering:auto"
+       d="M 29.075387,194.42682 48.222829,215.47037 5.3626241,254.4687 35.148011,287.20363 78.008217,248.20529 99.283386,271.58727 123.88108,249.20591 53.673088,172.04546 Z M 77.737459,180.06766 119.22394,225.6624 247.8867,108.59265 245.53238,67.994651 206.40021,62.997907 Z"
+       id="rect819"
+       inkscape:connector-curvature="0" />
   </g>
 </svg>
