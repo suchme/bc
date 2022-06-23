@@ -153,6 +153,22 @@ opacity:40%;
 .status.dash{
 	background-image:url('icon/dash.svg');
 }
+.status.cri{
+	background-image:url('icon/cri.svg');
+
+}
+.status.cdef{
+	background-image:url('icon/cdef.svg');
+
+}
+.status.sdef{
+	background-image:url('icon/sdef.svg');
+
+}
+.status.ldef{
+	background-image:url('icon/ldef.svg');
+
+}
 .status.increase{
 	background-image:url('icon/increase.svg');
 }
