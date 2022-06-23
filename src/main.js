@@ -471,8 +471,10 @@ class Main {
 					cols.splice(10,0,{class:"status",label:"跳費",data:"jump_cost"});
 					cols.splice(11,0,{class:"status",label:"浮費",data:"hover_cost"});
 					cols.splice(11,0,{class:"status",label:"防費",data:"guard_cost"});
-					cols.splice(11,0,{label:"近耐",data:"short_regist",sort:1,filter:1});
-					cols.splice(11,0,{label:"遠耐",data:"long_regist",sort:1,filter:1});
+					cols.splice(11,0,{label:"ｸﾘ",data:"cri",sort:-1});
+					cols.splice(11,0,{label:"ｸﾘ防",data:"cdef",sort:-1});
+					cols.splice(11,0,{label:"近耐",data:"sdef",sort:-1});
+					cols.splice(11,0,{label:"遠耐",data:"ldef",sort:-1});
 					cols.splice(11,0,{label:"身長",data:"height",sort:1,filter:1});
 
 						cols.push({data:"expassive",label:"固有パッシブスキル",filter:1,disp:function(e,parent){

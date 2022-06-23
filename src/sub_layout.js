@@ -1,5 +1,29 @@
 var SubLayout={};
 
+var pub=`
+		<span column="atk" class="atk status "></span>
+		<span column="def" class="def status "></span>
+		<span column="spd" class="spd status "></span>
+		<span column="dash" class="dash status  "></span>
+		<span column="lp" class="lp status  "></span>
+		<span column="bst" class="bst status "></span>
+		<span class="sep"></span>
+		<span column="extend" class="extend status "></span>
+		<span column="increase" class="increase status "></span>
+		<span column="cri" class="cri status "></span>
+		<span column="cdef" class="cdef status "></span>
+		<span column="sdef" class="sdef status "></span>
+		<span column="ldef" class="ldef status "></span>
+		<span column="recover" class="recover status "></span>
+		<span class="sep"></span>
+	<span class="cost">
+		<span column="dash_cost" class="dash_cost status "></span>
+		<span column="guard_cost" class="guard_cost status "></span>
+		<span column="jump_cost" class="jump_cost status "></span>
+		<span column="hover_cost" class="hover_cost status "></span>
+	</span>
+`
+
 SubLayout.shinki_html =`
 	<span>
 	<div>
@@ -11,23 +35,7 @@ SubLayout.shinki_html =`
 		<span column="expassive" class=""></span>
 	</div>
 	<div class="param">
-		<span column="atk" class="atk status "></span>
-		<span column="def" class="def status "></span>
-		<span column="spd" class="spd status "></span>
-		<span column="dash" class="dash status  "></span>
-		<span column="lp" class="lp status  "></span>
-		<span column="bst" class="bst status "></span>
-		<span class="sep"></span>
-		<span column="extend" class="extend status "></span>
-		<span column="increase" class="increase status "></span>
-		<span column="recover" class="recover status "></span>
-		<span class="sep"></span>
-	<span class="cost">
-		<span column="dash_cost" class="dash_cost status "></span>
-		<span column="guard_cost" class="guard_cost status "></span>
-		<span column="jump_cost" class="jump_cost status "></span>
-		<span column="hover_cost" class="hover_cost status "></span>
-	</span>
+${pub}
 	<span class="short cat" >
 		<span column="cat1" class=" status "></span>
 		<span column="cat2" class=" status "></span>
@@ -70,22 +78,7 @@ SubLayout.head_html =`
 			<span class="name" column="name"></span>
 		</div>
 		<div class="param">
-			<span column="atk" class="atk status "></span>
-			<span column="def" class="def status "></span>
-			<span column="spd" class="spd status "></span>
-			<span column="dash" class="dash status  "></span>
-			<span column="lp" class="lp status  "></span>
-			<span column="bst" class="bst status "></span>
-			<span class="sep"></span>
-			<span column="extend" class="extend status "></span>
-			<span column="increase" class="increase status "></span>
-			<span column="recover" class="recover status "></span>
-			<span class="cost">
-			<span column="dash_cost" class="dash_cost status "></span>
-			<span column="guard_cost" class="guard_cost status "></span>
-			<span column="jump_cost" class="jump_cost status "></span>
-			<span column="hover_cost" class="hover_cost status "></span>
-	</span>
+${pub}
 		</div>
 	</span>
 	<span>
@@ -114,23 +107,7 @@ SubLayout.body_html =`
 			<span class="name" column="name"></span>
 		</div>
 		<div class="param">
-			<span column="atk" class="atk status "></span>
-			<span column="def" class="def status "></span>
-			<span column="spd" class="spd status "></span>
-			<span column="dash" class="dash status  "></span>
-			<span column="lp" class="lp status  "></span>
-			<span column="bst" class="bst status "></span>
-			<span class="sep"></span>
-			<span column="extend" class="extend status "></span>
-			<span column="increase" class="increase status "></span>
-			<span column="recover" class="recover status "></span>
-			<span class="sep"></span>
-			<span class="cost">
-				<span column="dash_cost" class="dash_cost status "></span>
-				<span column="guard_cost" class="guard_cost status "></span>
-				<span column="jump_cost" class="jump_cost status "></span>
-				<span column="hover_cost" class="hover_cost status "></span>
-			</span>
+${pub}
 		</div>
 	</span>
 	<span class="sep"></span>
@@ -157,23 +134,7 @@ SubLayout.arm_html =`
 			<span class="name" column="name"></span>
 		</div>
 		<div class="param">
-			<span column="atk" class="atk status "></span>
-			<span column="def" class="def status "></span>
-			<span column="spd" class="spd status "></span>
-			<span column="dash" class="dash status  "></span>
-			<span column="lp" class="lp status  "></span>
-			<span column="bst" class="bst status "></span>
-			<span class="sep"></span>
-			<span column="extend" class="extend status "></span>
-			<span column="increase" class="increase status "></span>
-			<span column="recover" class="recover status "></span>
-			<span class="sep"></span>
-			<span class="cost">
-				<span column="dash_cost" class="dash_cost status "></span>
-				<span column="guard_cost" class="guard_cost status "></span>
-				<span column="jump_cost" class="jump_cost status "></span>
-				<span column="hover_cost" class="hover_cost status "></span>
-			</span>
+${pub}
 		</div>
 	</span>
 	<span class="sep"></span>
@@ -201,23 +162,7 @@ SubLayout.leg_html =`
 			<span class="name" column="name"></span>
 		</div>
 		<div class="param">
-			<span column="atk" class="atk status "></span>
-			<span column="def" class="def status "></span>
-			<span column="spd" class="spd status "></span>
-			<span column="dash" class="dash status  "></span>
-			<span column="lp" class="lp status  "></span>
-			<span column="bst" class="bst status "></span>
-			<span class="sep"></span>
-			<span column="extend" class="extend status "></span>
-			<span column="increase" class="increase status "></span>
-			<span column="recover" class="recover status "></span>
-			<span class="sep"></span>
-			<span class="cost">
-				<span column="dash_cost" class="dash_cost status "></span>
-				<span column="guard_cost" class="guard_cost status "></span>
-				<span column="jump_cost" class="jump_cost status "></span>
-				<span column="hover_cost" class="hover_cost status "></span>
-			</span>
+${pub}
 		</div>
 	</span>
 	<span class="sep"></span>
@@ -246,23 +191,7 @@ SubLayout.rear_html =`
 			<span class="name" column="name"></span>
 		</div>
 		<div class="param">
-			<span column="atk" class="atk status "></span>
-			<span column="def" class="def status "></span>
-			<span column="spd" class="spd status "></span>
-			<span column="dash" class="dash status  "></span>
-			<span column="lp" class="lp status  "></span>
-			<span column="bst" class="bst status "></span>
-			<span class="sep"></span>
-			<span column="extend" class="extend status "></span>
-			<span column="increase" class="increase status "></span>
-			<span column="recover" class="recover status "></span>
-			<span class="sep"></span>
-			<span class="cost">
-				<span column="dash_cost" class="dash_cost status "></span>
-				<span column="guard_cost" class="guard_cost status "></span>
-				<span column="jump_cost" class="jump_cost status "></span>
-				<span column="hover_cost" class="hover_cost status "></span>
-			</span>
+		${pub}
 		</div>
 	</span>
 	<span class="sep"></span>
